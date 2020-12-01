@@ -1,0 +1,51 @@
+h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 400;
+  text-align: center;
+}
+
+#birthdate {
+  font-size: 18px;
+  width: 100%;
+  margin-bottom: 2em;
+  border: 1px solid #dee2e6;
+}
+
+.form-container {
+  max-width: 40%;
+  text-align: center;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding-bottom: 3rem;
+  background-color: black;
+  border-radius: 10px;
+  border-bottom: 12px solid #8d6968;
+  border-top: 12px solid #8d6968;
+}
+.form-group {
+  max-width: 70%;
+  margin: auto;
+}
+input {
+  margin-bottom: 20px;
+}
+label {
+  color: white;
+  font-size: 20px;
+}
+.btn {
+  background-color: rgb(20, 182, 20);
+  margin-top: 20px;
+  color: white;
+}
+.btn:hover {
+  color: #ff7a59;
+  border: #ff7a59 solid 2px;
+  background: #fff;
+}
+form {
+  padding: 3rem;
+  padding-bottom: 0;
+}

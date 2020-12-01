@@ -1,0 +1,38 @@
+.detaliiIssue {
+  margin-left: 50px;
+}
+.issueTitle {
+  display: flex;
+  flex-direction: row;
+}
+#organizer {
+  margin-left: 50px;
+}
+.view {
+  margin-top: 50px;
+  margin-left: 50px;
+  width: 90%;
+  background-color: rgb(230, 236, 240);
+}
+h2 {
+  margin-left: 50px;
+  margin-top: 50px;
+}
+#searchBar {
+  border-radius: 10px;
+  background-image: url("./searchicon.png");
+  background-size: 50px;
+  background-position: left;
+  background-repeat: no-repeat;
+  margin-left: 50px;
+  padding-left: 100px;
+  height: 50px;
+  margin-top: 50px;
+}
+.searchHeader {
+  display: flex;
+  flex-direction: row;
+}
+#title:hover {
+  text-decoration: underline;
+}

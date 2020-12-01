@@ -1,0 +1,14 @@
+<ng-sidebar-container>
+    <ng-sidebar [opened]="open">
+        <p id="exit" (click)="exit()">X</p>
+        <ul class="menu">
+            <img id="issuePhoto" src={{issue.photoPath}}>
+            <p style="font-weight: bold;">Title:</p>
+            <p>{{issue.title}}</p>
+            <p style="font-weight: bold;">Description:</p>
+            <p>{{issue.description}}</p>
+            <p style="font-weight: bold;">Organizer:</p>               
+               <p>{{issue.organizer.firstName}} {{issue.organizer.lastName}}</p>
+        </ul>
+    </ng-sidebar>
+</ng-sidebar-container>

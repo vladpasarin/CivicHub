@@ -1,0 +1,36 @@
+ng-sidebar-container {
+  height: 732px;
+}
+::ng-deep .ng-sidebar {
+  background-color: black;
+  color: white;
+  width: 400px;
+  padding-right: 1em;
+  box-shadow: 0 0 2.5em rgba(85, 85, 85, 0.5);
+}
+.menu {
+  margin-top: 2em;
+  display: block;
+}
+.menu li {
+  margin-bottom: 15px;
+}
+.menu li a {
+  display: block;
+  width: 100%;
+}
+#exit {
+  display: flex;
+  justify-content: flex-end;
+}
+#exit:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+#issuePhoto {
+  object-fit: cover;
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  margin-bottom: 30px;
+}

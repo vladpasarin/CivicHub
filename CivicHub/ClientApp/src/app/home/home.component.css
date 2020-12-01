@@ -1,0 +1,9 @@
+agm-map {
+  height: 732px;
+}
+.div1 {
+  height: 700px;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
