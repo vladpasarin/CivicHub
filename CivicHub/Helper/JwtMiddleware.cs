@@ -48,7 +48,7 @@ namespace CivicHub.Helpers
                 }, out SecurityToken securityToken);
 
                 var jwtToken = (JwtSecurityToken)securityToken;
-                var userId = int.Parse(jwtToken.Claims.FirstOrDefault(x => x.Type == "id").Value);
+                var userId = Guid.Parse(jwtToken.Claims.FirstOrDefault(x => x.Type == "id").Value);
 
                 context.Items["User"] = userService.GetById(userId);
             }

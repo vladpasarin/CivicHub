@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CivicHub.Entities;
 using CivicHub.Interfaces;
 using CivicHub.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CivicHub.Repositories
 {
@@ -13,6 +14,23 @@ namespace CivicHub.Repositories
         public IssueRepository(Context context) : base(context)
         {
 
+        }
+
+        public Issue GetAllDetails(Guid id)
+        {
+            return _table.Where(x => x.Id == id)
+                 .Include(x => x.User)
+                 .Include(x => x.IssueStates)
+                 .FirstOrDefault();
+        }
+
+       
+        public List<Issue> GetAllWithDetails()
+        {
+            return _table
+                 .Include(x => x.User)
+                 .Include(x => x.IssueStates)
+                 .ToList();
         }
     }
 }

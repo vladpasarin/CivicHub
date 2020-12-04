@@ -8,5 +8,7 @@ namespace CivicHub.Interfaces
 {
     public interface IIssueRepository : IGenericRepository<Issue>
     {
+        Issue GetAllDetails(Guid id);
+        public List<Issue> GetAllWithDetails();
     }
 }

@@ -39,7 +39,7 @@ namespace CivicHub.Services
             return _userRepostiory.GetAll();
         }
 
-        public User GetById(int id)
+        public User GetById(Guid id)
         {
             return _userRepostiory.FindById(id);
         }
