@@ -70,18 +70,18 @@ namespace CivicHub
                 app.UseHsts();
             }
 
+            app.UseRouting();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
             }
-
+            
             app.UseAuthorization();
 
-            app.UseMiddleware<JwtMiddleware>();
-
-            app.UseRouting();
+            app.UseMiddleware<JwtMiddleware>(); 
 
             app.UseEndpoints(endpoints =>
             {

@@ -20,13 +20,13 @@ namespace CivicHub.Controllers
         }
 
         [HttpGet("all")]
-        public IActionResult getAll()
+        public IActionResult GetAll()
         {
             return Ok(_issueService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public IActionResult get(Guid id)
+        public IActionResult Get(Guid id)
         {
             Issue issue = _issueService.GetById(id);
             //issue == null ? return NotFound() : return Ok(issue);
@@ -37,7 +37,7 @@ namespace CivicHub.Controllers
         }
 
         [HttpPost]
-        public IActionResult create(Issue issueDTO)
+        public IActionResult Create(Issue issueDTO)
         {
             Issue createdIssue = _issueService.Create(issueDTO);
 
@@ -48,7 +48,7 @@ namespace CivicHub.Controllers
         }
 
         [HttpPut]
-        public IActionResult update(Issue issueDTO)
+        public IActionResult Update(Issue issueDTO)
         {
             Issue updatedIssue = _issueService.Update(issueDTO);
 
@@ -56,6 +56,12 @@ namespace CivicHub.Controllers
                 return StatusCode(500);
 
             return Ok(updatedIssue);
+        }
+
+        [HttpGet("getAllByUser/{id}")]
+        public async Task<IActionResult> GetAllByUserId(Guid id)
+        {
+            return Ok(await _issueService.GetAllByUserId(id));
         }
     }
 }

@@ -11,16 +11,21 @@ namespace CivicHub.Repositories
 {
     public class IssueRepository : GenericRepository<Issue>, IIssueRepository
     {
+       
         public IssueRepository(Context context) : base(context)
         {
 
+        }
+
+        public async Task<List<Issue>>FindByUserIdAsync(Guid userId)
+        {
+           return await _context.Issues.Where(x => x.UserId == userId).ToListAsync();
         }
 
         public Issue GetAllDetails(Guid id)
         {
             return _table.Where(x => x.Id == id)
                  .Include(x => x.User)
-                 .Include(x => x.IssueStates)
                  .FirstOrDefault();
         }
 
@@ -29,7 +34,6 @@ namespace CivicHub.Repositories
         {
             return _table
                  .Include(x => x.User)
-                 .Include(x => x.IssueStates)
                  .ToList();
         }
     }

@@ -10,5 +10,6 @@ namespace CivicHub.Interfaces
     {
         Issue GetAllDetails(Guid id);
         public List<Issue> GetAllWithDetails();
+        Task<List<Issue>> FindByUserIdAsync(Guid userId);
     }
 }

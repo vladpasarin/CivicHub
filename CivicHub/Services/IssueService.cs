@@ -26,6 +26,11 @@ namespace CivicHub.Services
             return _issueRepository.FindById(id);
         }
 
+        public async Task<List<Issue>> GetAllByUserId(Guid userId)
+        {
+            return await _issueRepository.FindByUserIdAsync(userId);
+        }
+
         //TO DO de modificat cu dto
         public Issue Create(Issue issueDTO)
         {

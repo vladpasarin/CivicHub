@@ -36,14 +36,15 @@ namespace CivicHub.Services
 
         public List<User> GetAll()
         {
-            return _userRepostiory.GetAll();
+            var registeredUsers = _userRepostiory.GetAll();
+            return registeredUsers;
         }
 
         public User GetById(Guid id)
         {
             return _userRepostiory.FindById(id);
         }
-
+        
         public AuthenticationResponse Login(AuthenticationRequest request)
         {
             // find user
