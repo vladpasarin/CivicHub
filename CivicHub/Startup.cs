@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
+using CivicHub.Mapper;
 
 namespace CivicHub
 {
@@ -33,6 +35,13 @@ namespace CivicHub
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MapperSetup());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             services.AddTransient<IIssueRepository, IssueRepository>();
             services.AddTransient<IIssueStateCommentPhotoRepository, IssueStateCommentPhotoRepository>();
@@ -41,10 +50,11 @@ namespace CivicHub
             services.AddTransient<IIssueStateReactionRepository, IssueStateReactionRepository>();
             services.AddTransient<IIssueStateRepository, IssueStateRepository>();
             services.AddTransient<IIssueStateVideoRepository, IssueStateVideoRepository>();
-            services.AddTransient<IStateRepository, StateRepository>();
+            //services.AddTransient<IStateRepository, StateRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IIssueService, IssueService>();
+            services.AddTransient<IIssueStateService, IssueStateService>();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
             options.SerializerSettings

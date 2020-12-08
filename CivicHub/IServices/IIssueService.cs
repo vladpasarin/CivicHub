@@ -1,4 +1,5 @@
-﻿using CivicHub.Entities;
+﻿using CivicHub.Dtos;
+using CivicHub.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,10 @@ namespace CivicHub.IServices
 {
     public interface IIssueService
     {
-        Issue GetById(Guid id);
-        List<Issue> GetAll();
-        Issue Create(Issue issueDTO);
-        Issue Update(Issue issueDTO);
-        Task<List<Issue>> GetAllByUserId(Guid userId);
+        IssueDto GetById(Guid id);
+        List<IssueDto> GetAll();
+        IssueDto Create(IssueDto issueDTO);
+        IssueDto Update(IssueDto issueDTO);
+        Task<List<IssueDto>> GetAllByUserIdAsync(Guid userId);
     }
 }

@@ -28,7 +28,13 @@ namespace CivicHub.Services
 
         public bool Register(RegisterRequest request)
         {
-            var entity = request.ToUserExtension();
+            var entity = new User
+            {
+                Mail = request.Mail,
+                Password = request.Password,
+                FirstName = request.FirstName,
+                LastName = request.LastName
+            };
 
             _userRepostiory.Create(entity);
             return _userRepostiory.SaveChanges();

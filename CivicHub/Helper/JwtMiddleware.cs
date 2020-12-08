@@ -52,7 +52,7 @@ namespace CivicHub.Helpers
 
                 context.Items["User"] = userService.GetById(userId);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
