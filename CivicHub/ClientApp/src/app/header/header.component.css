@@ -1,60 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
-
 .navbar {
   background-color: black;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
-  padding: 0%;
-  height: 20%;
-  max-width: 100%;
-  padding: 0em;
+  border-bottom: 8px solid rgb(87, 37, 37);
 }
-
 .logo {
-  color: white;
-  padding: 5px;
-  font-weight: bold;
+  padding: 10px;
+  font-family: "Arial Black", Gadget, sans-serif;
   font-size: 30px;
   display: flex;
   justify-content: flex-start;
-  margin-left: 1em;
-  margin-bottom: 0em;
+  margin-left: 100px;
+  border-bottom: 5px solid rgb(87, 37, 37);
+  border-radius: 10px;
 }
-
 .logo:hover {
-  color:lightblue;
+  color: #ff7a59;
+  border: #ff7a59 solid 1px;
 }
-
-.nav {
-  margin-left: auto;
-  padding: 0em;
-}
-
 .btn {
   color: white;
-  padding: 5px;
-  margin: 0em;
+  font-size: 26px;
+  border-radius: 10px;
+  border-bottom: 5px solid rgb(87, 37, 37);
 }
-
-.btn:after{
-  content: '';
-	display: block;
-	margin-left: 0;
-	height: 3px;
-	width: 0px;
-	background: transparent;
-	transition: width .5s ease, background-color .5s ease;
+.btn:hover {
+  color: #ff7a59;
+  border: #ff7a59 solid 1px;
 }
-
-.btn:hover{
-  color: lightblue;
+.icons {
+  object-fit: cover;
+  height: 40px;
+  width: 40px;
 }
-
-.btn:hover:after {
-  width: 100%;
-	background: lightblue;
-}
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -69,7 +45,6 @@
 #dropdown:hover .dropdown-content {
   display: block;
 }
-
 .content:hover {
   background-color: gray;
 }

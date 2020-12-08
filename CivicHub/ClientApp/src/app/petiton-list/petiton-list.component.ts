@@ -11,11 +11,11 @@ import { User } from '../shared/user.model';
 })
 export class PetitonListComponent implements OnInit {
 
-  users:User[]=[
-    {id:1,firstName:"Vlad",lastName:"Pasarin",password:"vlad98"},
-    {id:2,firstName:"Florin",lastName:"Stan",password:"florinel99"},
-    {id:3,firstName:"Eusebiu",lastName:"Timofte",password:"eusebi98"}
-];
+    users: User[] = [
+        { id: 1, firstName: "Vlad", lastName: "Pasarin", mail: "vlad@gmail.com", password: "vlad1998" },
+        { id: 2, firstName: "Florin", lastName: "Stan", mail: "florin@yahoo.com", password: "florinel99" },
+        { id: 3, firstName: "Eusebiu", lastName: "Timofte", mail: "sebi@yahoo.com", password: "eusebi98" }
+    ];
 issues: Issue[] = 
 [
 {id: 1,title:"Gropi pe Soseaua Oltenitei", latitude: 44.439663, longitude: 26.096306,description:"issue foarte rau", organizer:this.users[0],photoPath:"https://lh3.googleusercontent.com/proxy/wmG9QJyX2j3aFI08xVreuFmhG517CubIM1t_NOdQoanlLuyQKIaf8Wkad6xndBE8vJQ38IQjFs5boMJLyFzJcNT7nk3Ywp9KFW5LYW8TAPh0pengwd_JWzq9R3pDnV7K-E3tK_Y"},

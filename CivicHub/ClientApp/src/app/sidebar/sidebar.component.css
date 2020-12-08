@@ -34,3 +34,10 @@ ng-sidebar-container {
   width: 300px;
   margin-bottom: 30px;
 }
+.followup {
+    color: red
+}
+
+.unfollow {
+    color: green
+}

@@ -16,11 +16,11 @@ export class HomeComponent implements OnInit{
   zoom = 13.0;
   opened = false;
   activeIssue:Issue;
-  users:User[]=[
-    {id:1,firstName:"Vlad",lastName:"Pasarin",password:"vlad98"},
-    {id:2,firstName:"Florin",lastName:"Stan",password:"florinel99"},
-    {id:3,firstName:"Eusebiu",lastName:"Timofte",password:"eusebi98"}
-];
+    users: User[] = [
+        { id: 1, firstName: "Vlad", lastName: "Pasarin", mail: "vlad@gmail.com", password: "vlad1998" },
+        { id: 2, firstName: "Florin", lastName: "Stan", mail: "florin@yahoo.com", password: "florinel99" },
+        { id: 3, firstName: "Eusebiu", lastName: "Timofte", mail: "sebi@yahoo.com", password: "eusebi98" }
+    ];
   issues: Issue[] = 
 [
 {id: 1,title:"Gropi pe Soseaua Oltenitei", latitude: 44.439663, longitude: 26.096306,description:"issue foarte rau", organizer:this.users[0],photoPath:"https://renasterea.ro/ro/wp-content/uploads/gropi_in_asfalt.jpg"},

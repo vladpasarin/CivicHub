@@ -10,7 +10,8 @@ import { User } from '../shared/user.model';
 })
 export class SidebarComponent implements OnInit {
   constructor(private home:HomeComponent) {
-   }
+  }
+    isFollow: boolean = false;
   opened = false;
   open=true;
   issue:Issue;
@@ -18,6 +19,10 @@ export class SidebarComponent implements OnInit {
     const side=new SidebarComponent(this.home);
     this.issue=side.home.activeIssue;
   }
+    onClick() {
+        this.isFollow = !this.isFollow;
+
+    }
   exit(){
     this.open=false;
   }
