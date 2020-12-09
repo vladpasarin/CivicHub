@@ -12,9 +12,7 @@ namespace CivicHub.Interfaces
         void Update(T entity);
         void Delete(T entity);
         void CreateRange(List<T> entities);
-
-        T FindById(int id);
-
+        T FindById(Guid id);
         bool SaveChanges();
     }
 }

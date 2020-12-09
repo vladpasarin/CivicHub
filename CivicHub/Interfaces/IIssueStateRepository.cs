@@ -8,5 +8,6 @@ namespace CivicHub.Interfaces
 {
     public interface IIssueStateRepository : IGenericRepository<IssueState>
     {
+        Task<List<IssueState>> GetAllByIssueIdAsync(Guid IssueId);
     }
 }
