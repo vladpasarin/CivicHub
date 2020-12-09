@@ -43,14 +43,14 @@
         <label for="email" class="control-label required">Email</label>
         <input
           type="email"
-          id="email"
+          id="mail"
           class="form-control"
-          formControlName="email"
+          formControlName="mail"
           autocomplete="off"
           pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
         />
         <app-field-error-display
-          [displayError]="isFieldValid('email')"
+          [displayError]="isFieldValid('mail')"
           errorMsg="Please inform your email"
         >
         </app-field-error-display>
@@ -81,41 +81,6 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="col-sm-12">
-        <label for="birthDate" class="control-label required">Birth Date</label>
-        <input
-          id="birthdate"
-          type="datetime"
-          bsDatepicker
-          autocomplete="off"
-          [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
-          formControlName="birthDate"
-          autocomplete="off"
-        />
-        <app-field-error-display
-          [displayError]="isFieldValid('birthDate')"
-          errorMsg="Please inform your birth date"
-        >
-        </app-field-error-display>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="col-sm-12">
-        <label for="sex" class="control-label">Sex</label>
-        <select formControlName="sex">
-          <option value="" disabled selected>Sex</option>
-          <option value="man">Man</option>
-          <option value="woman">Woman</option>
-        </select>
-        <app-field-error-display
-          [displayError]="isFieldValid('sex')"
-          errorMsg="Please inform your sex"
-        >
-        </app-field-error-display>
-      </div>
-    </div>
     <div class="form-group">
       <div class="col-sm-12">
     <button class="btn" (click)="onSubmit()">Submit</button>

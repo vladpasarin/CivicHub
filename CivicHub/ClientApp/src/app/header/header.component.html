@@ -1,30 +1,28 @@
-<nav class="navbar navbar-dk">
+<nav class="navbar navbar-dark">
   <a routerLink="/home" class="navbar-brand">
-    <p class="logo"><fa-icon [icon]="faCity"></fa-icon> &nbsp;CivicHub</p>
+    <p class="logo">CivicHub <img class="icons" src="assets/images/city.png" /></p>
   </a>
 
     <div>
       <ul class="nav">
         <a class="nav-link" routerLink="/home">
-          <p class="btn"><fa-icon [icon]="faHome"></fa-icon> Home</p>
+          <p class="btn">Home <img class="icons" src="assets/images/home.png" /></p>
         </a>
-        <a class="nav-link" routerLink="/petition-list">
-          <p class="btn"><fa-icon [icon]="faFileContract"></fa-icon> Petitions </p>
-        </a>
-        <a class="nav-link" routerLink="/contact">
-          <p class="btn"><fa-icon [icon]="faPhone"></fa-icon> Contact </p>
-        </a>
-        <a class="nav-link" routerLink="/petition-form">
-          <p class="btn"><fa-icon [icon]="faEdit"> Petitie noua</fa-icon> Deschide o petitie noua</p>
-        </a>
-        <a class="nav-link" id="dropdown">
-          <p class="btn"><fa-icon [icon]="faUser"></fa-icon> Profile</p>
-            <div class="dropdown-content">
-            <div class="content" (click)="checkLoggedIn()">{{firstName}}</div>
-            <div *ngIf="logged == 'true'" class="content" (click)="logout()">Logout</div>
-            <div *ngIf="logged == 'false'" class="content" routerLink="/login">Login</div>
-            </div>
-        </a> 
+          <a class="nav-link" routerLink="/petition-list">
+            <p class="btn">Petitions <img class="icons" src="assets/images/petition.png" /></p>
+          </a>
+          <a class="nav-link" routerLink="/contact">
+            <p class="btn">Contact <img class="icons" src="assets/images/phone.png" /></p>
+          </a>
+          <a class="nav-link" id="dropdown">
+            <p class="btn">Profile <img class="icons" src="assets/images/profile.png" /></p>
+              <div class="dropdown-content">
+              <div class="content" (click)="checkLoggedIn()">{{firstName}}</div>
+              <div *ngIf="logged == 'true'" class="content" (click)="logout()">Logout</div>
+              <div *ngIf="logged == 'false' || logged==null" class="content" routerLink="/login">Login</div>
+              </div>
+          </a>
+          
       </ul>
     </div>
 </nav>

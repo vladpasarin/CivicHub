@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
-import { faHome , faFileContract, faPhone, faUser, faCity, faEdit} from '@fortawesome/free-solid-svg-icons';
-
 
 @Component({
   selector: "app-header",
@@ -10,16 +8,10 @@ import { faHome , faFileContract, faPhone, faUser, faCity, faEdit} from '@fortaw
   styleUrls: ["./header.component.css"],
 })
 export class HeaderComponent implements OnInit {
-  storage = localStorage.getItem("isLoggedIn");
-  firstName: string;
+
+    firstName: string;
   logged:string;
   userId:number;
-  faHome = faHome;
-  faFileContract = faFileContract;
-  faPhone = faPhone;
-  faUser = faUser;
-  faCity = faCity;
-  faEdit = faEdit;
 
   logout(): void {
     this.authService.logout();
@@ -28,10 +20,11 @@ export class HeaderComponent implements OnInit {
 
   constructor(public authService: AuthService, private router: Router) {}
 
-  ngOnInit() {
-    this.firstName = localStorage.getItem("firstName");
-    this.logged = localStorage.getItem("isLogged");
-    this.userId = parseInt(localStorage.getItem("userId"));
+    ngOnInit() {
+        this.firstName = sessionStorage.getItem('firstName');
+        this.logged = sessionStorage.getItem('isLogged');
+        console.log(this.logged);
+        this.userId = parseInt(sessionStorage.getItem('userId'));
   }
   checkLoggedIn(){
     if (this.logged == 'true'){

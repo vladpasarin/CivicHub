@@ -7,8 +7,13 @@
             <p>{{issue.title}}</p>
             <p style="font-weight: bold;">Description:</p>
             <p>{{issue.description}}</p>
-            <p style="font-weight: bold;">Organizer:</p>               
-               <p>{{issue.organizer.firstName}} {{issue.organizer.lastName}}</p>
+            <p style="font-weight: bold;">Organizer:</p>
+            <p>{{issue.organizer.firstName}} {{issue.organizer.lastName}}</p>
+            <button [ngClass]="{'followup' : isFollow == true,
+    'unfollow' : isFollow== false }"
+                    (click)="onClick()">
+                {{isFollow == true ? 'Unfollow' : (isFollow == false ? 'Follow' : '')}}
+            </button>
         </ul>
     </ng-sidebar>
 </ng-sidebar-container>

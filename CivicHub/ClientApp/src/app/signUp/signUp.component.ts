@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-
+import { ApiService } from "../shared/api.service";
 import {
   FormBuilder,
   FormGroup,
@@ -14,25 +14,22 @@ import {
   styleUrls: ["./signUp.component.css"],
 })
 export class SignUpComponent implements OnInit {
-  selectedOption = "User";
   addUserForm: FormGroup;
   success: boolean;
   birthDate: string;
-  returnUrl = "/home";
 
   constructor(
     public fb: FormBuilder,
-    private router: Router
+      private router: Router,
+      private api: ApiService
   ) {}
 
   ngOnInit() {
     this.addUserForm = this.fb.group({
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
-      email: [null, Validators.required],
-      password: [null, Validators.required],
-      birthDate: [null, Validators.required],
-      sex: [null, Validators.required],
+      mail: [null, Validators.required],
+      password: [null, Validators.required]
     });
   }
 
@@ -58,11 +55,13 @@ export class SignUpComponent implements OnInit {
       setTimeout(() => {
         this.success = null;
       }, 3000);
-      console.log("addUserForm submitted");
-      //this.api["add" + this.selectedOption](this.addUserForm.value).subscribe();
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("token", this.f.firstName.value);
-      this.router.navigate([this.returnUrl]);
+        console.log("addUserForm submitted");
+        this.api.addUser(this.addUserForm.value).subscribe();
+        console.log(this.addUserForm.value);
+        sessionStorage.setItem('isLoggedIn', 'true');
+        sessionStorage.setItem('firstName', this.f.firstName.value);
+
+        this.router.navigate(["/home"]);
     } else {
       this.success = false;
       setTimeout(() => {

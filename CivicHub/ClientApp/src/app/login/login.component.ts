@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
+import { ApiService } from "../shared/api.service";
+import { Request } from "../shared/request";
+import { RequestResponse } from "../shared/requestResponse";
 
 import {
   FormBuilder,
@@ -18,24 +21,28 @@ export class LoginComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public fb: FormBuilder,
-    private router: Router
+      private router: Router,
+      private api: ApiService
   ) {}
 
   selectedOption = "User";
   loginForm: FormGroup;
-  success: boolean;
+    success: boolean;
+    request = new Request();
+    requestResponse = new RequestResponse();
+    token: string;
+    //users: User[] = [];
   users:User[]=[
-    {id:1,firstName:"Vlad",lastName:"Pasarin",password:"vlad1998"},
-    {id:2,firstName:"Florin",lastName:"Stan",password:"florinel99"},
-    {id:3,firstName:"Eusebiu",lastName:"Timofte",password:"eusebi98"}
+    {id:1,firstName:"Vlad",lastName:"Pasarin",mail:"vlad@gmail.com",password:"vlad1998"},
+      { id: 2, firstName: "Florin", lastName: "Stan", mail: "florin@yahoo.com",password:"florinel99"},
+      { id: 3, firstName: "Eusebiu", lastName: "Timofte", mail: "sebi@yahoo.com",password:"eusebi98"}
 ];
-
   ngOnInit() {
     this.loginForm = this.fb.group({
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
+      mail: [null, Validators.required],
       password: [null, Validators.required],
     });
+      
   }
 
   isFieldValid(field: string) {
@@ -66,24 +73,38 @@ export class LoginComponent implements OnInit {
         this.success = null;
       }, 3000);
       this.validateAllFormFields(this.loginForm);
-    }
-    const user = this.users.find(
-      (x) =>
-        x.firstName === this.f.firstName.value &&
-        x.lastName === this.f.lastName.value &&
-        x.password === this.f.password.value
-    );
-    if (!user) this.success = false;
-    else {
-      localStorage.setItem("isLogged", "true");
-      localStorage.setItem("firstName", this.f.firstName.value);
-      //localStorage.setItem("userId", this.f.id.value);
-      setTimeout(() => {
-        this.router.navigate(["/profile"],
-        {queryParams:{firstName:this.f.firstName.value,lastName:this.f.lastName.value}});
-      }, 2000);
-    }
-    console.log(user);
+      }
+      //console.log(this.users);
+      this.request.mail = this.f.mail.value;
+      this.request.password = this.f.password.value;
+      this.api.getLoginToken(this.request).subscribe((data) => {
+          this.requestResponse = data.body as RequestResponse;
+          console.log(this.requestResponse.token)
+      }, error => {
+          console.log("Error while validating token");
+
+      },
+          () => {
+              console.log(this.requestResponse.token);
+
+              if (!this.requestResponse.token) this.success = false;
+              else {
+
+                  sessionStorage.setItem('isLogged', 'true');
+                  //localStorage.setItem("firstName", user.firstName);
+
+                  setTimeout(() => {
+                      this.router.navigate(["/profile"],
+                          { queryParams: { /*firstName: user.firstName*/ } });
+                  }, 1000);
+
+              }
+              
+
+          }
+);
+      
+    
   }
   validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach((field) => {
