@@ -28,7 +28,13 @@ namespace CivicHub.Services
 
         public bool Register(RegisterRequest request)
         {
-            var entity = request.ToUserExtension();
+            var entity = new User
+            {
+                Mail = request.Mail,
+                Password = request.Password,
+                FirstName = request.FirstName,
+                LastName = request.LastName
+            };
 
             _userRepostiory.Create(entity);
             return _userRepostiory.SaveChanges();
@@ -36,14 +42,15 @@ namespace CivicHub.Services
 
         public List<User> GetAll()
         {
-            return _userRepostiory.GetAll();
+            var registeredUsers = _userRepostiory.GetAll();
+            return registeredUsers;
         }
 
-        public User GetById(int id)
+        public User GetById(Guid id)
         {
             return _userRepostiory.FindById(id);
         }
-
+        
         public AuthenticationResponse Login(AuthenticationRequest request)
         {
             // find user

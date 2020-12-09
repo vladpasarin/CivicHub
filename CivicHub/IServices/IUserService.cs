@@ -9,7 +9,7 @@ namespace CivicHub.IServices
 {
     public interface IUserService
     {
-        User GetById(int id);
+        User GetById(Guid id);
         List<User> GetAll();
         bool Register(RegisterRequest request);
         AuthenticationResponse Login(AuthenticationRequest request);

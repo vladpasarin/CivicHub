@@ -39,7 +39,7 @@ namespace CivicHub.Controllers
         public IActionResult GetAll()
         {
             var user = (User)HttpContext.Items["User"];
-            return Ok(_userService.GetAll().Where(x => x.Id == user.Id).ToList());
+            return Ok(_userService.GetAll());
         }
     }
 }

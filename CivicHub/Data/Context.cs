@@ -18,7 +18,7 @@ namespace CivicHub.Data
         public DbSet<IssueStatePhoto> IssueStatePhotos { get; set; }
         public DbSet<IssueStateReaction> IssueStateReactions { get; set; }
         public DbSet<IssueStateVideo> IssueStateVideos { get; set; }
-        public DbSet<State> States { get; set; }
+        //public DbSet<State> States { get; set; }
         public DbSet<User> Users { get; set; }
 
         //declar relatiile dintre tabele
@@ -38,21 +38,12 @@ namespace CivicHub.Data
                 .WithOne(y => y.User)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            // issue 1 M issue states
 
-
-            // issue M M state
-
-            builder.Entity<IssueState>()
-                .HasOne<Issue>(x => x.Issue)
-                .WithMany(y => y.IssueStates)
-                .HasForeignKey(z => z.IssueId)
+            builder.Entity<Issue>()
+                .HasMany<IssueState>(x => x.IssueStates)
+                .WithOne(y => y.Issue)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<IssueState>()
-                .HasOne<State>(x => x.State)
-                .WithMany(y => y.IssueStates)
-                .HasForeignKey(z => z.StateId)
-                .OnDelete(DeleteBehavior.NoAction);
 
             /* 
              builder.Entity<IssueStateComment>()

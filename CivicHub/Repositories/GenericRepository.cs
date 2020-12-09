@@ -34,7 +34,7 @@ namespace CivicHub.Repositories
             _table.Remove(entity);
         }
 
-        public T FindById(int id)
+        public T FindById(Guid id)
         {
             return _table.Find(id);
         }
