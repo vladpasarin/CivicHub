@@ -14,11 +14,13 @@ namespace CivicHub.Services
     public class IssueService : IIssueService
     {
         private readonly IIssueRepository _issueRepository;
+        private readonly IIssueStateRepository _issueStateRepository;
         private readonly IMapper _mapper;
 
-        public IssueService(IIssueRepository issueRepository, IMapper mapper)
+        public IssueService(IIssueRepository issueRepository, IIssueStateRepository issueStateRepository, IMapper mapper)
         {
             _issueRepository = issueRepository;
+            _issueStateRepository = issueStateRepository;
             _mapper = mapper;
         }
         public List<IssueDto> GetAll()
@@ -33,8 +35,12 @@ namespace CivicHub.Services
 
         public async Task<List<IssueDto>> GetAllByUserIdAsync(Guid userId)
         {
-            var userIssues = await _issueRepository.FindByUserIdAsync(userId);
-            return _mapper.Map<List<IssueDto>>(userIssues);
+            var userIssuesDtos = _mapper.Map<List<IssueDto>>(await _issueRepository.FindByUserIdAsync(userId));
+            foreach(var userIssueDto in userIssuesDtos)
+            {
+                userIssueDto.IssueStates = _mapper.Map<List<IssueStateDto>>(await _issueStateRepository.GetAllByIssueIdAsync(userIssueDto.Id));
+            }
+            return userIssuesDtos;
         }
 
         public IssueDto Create(IssueDto issueDTO)

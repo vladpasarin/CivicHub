@@ -12,6 +12,6 @@ namespace CivicHub.Dtos
         public double Longitude { get; set; }
         public string Description { get; set; }
         public Guid UserId { get; set; }
-        //public ICollection<IssueState> IssueStates { get; set; }
+        public List<IssueStateDto> IssueStates { get; set; }
     }
 }
