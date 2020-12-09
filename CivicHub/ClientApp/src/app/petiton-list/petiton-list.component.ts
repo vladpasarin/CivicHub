@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Issue } from '../shared/issue.model';
 import { User } from '../shared/user.model';
+import { faUser, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'petition-list',
@@ -10,7 +11,9 @@ import { User } from '../shared/user.model';
   styleUrls: ['./petiton-list.component.css']
 })
 export class PetitonListComponent implements OnInit {
-
+    faUser = faUser;
+    faCaretUp = faCaretUp;
+    faCaretDown = faCaretDown;
     users: User[] = [
         { id: 1, firstName: "Vlad", lastName: "Pasarin", mail: "vlad@gmail.com", password: "vlad1998" },
         { id: 2, firstName: "Florin", lastName: "Stan", mail: "florin@yahoo.com", password: "florinel99" },

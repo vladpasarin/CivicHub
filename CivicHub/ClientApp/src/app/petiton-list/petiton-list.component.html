@@ -1,50 +1,52 @@
 <app-header></app-header>
 <div class="searchHeader">
-<h2>All issues:</h2>
-<input
-    id="searchBar"
-    type="text"
-    name="search"
-    placeholder="Search an issue..."
-    autocomplete="off"
-    [(ngModel)]="searchText"
-  />
+    <h2>All issues:</h2>
+    <input id="searchBar"
+           type="text"
+           name="search"
+           placeholder="Search an issue..."
+           autocomplete="off"
+           [(ngModel)]="searchText" />
+    <div class="sortbar">
+        <p>
+            Sort by: Number of signatures &nbsp;<fa-icon [icon]="faCaretUp"></fa-icon><fa-icon [icon]="faCaretDown"></fa-icon>
+            Number of reactions &nbsp;<fa-icon [icon]="faCaretUp"></fa-icon><fa-icon [icon]="faCaretDown"></fa-icon>
+        </p>
+    </div>
 </div>
 <div class="container">
-<ng-container
-        *ngFor="
+    <ng-container *ngFor="
           let issue of issues
             | searchFilter
               : {
                   title: searchText
                 };
           let ind = index
-        "
-      >
-      <div class="view col mb-3 mr-3 p-0 hoverable" (click)="accessPetition(issue)">
-        <div class="detaliiIssue">
-            <div class="issueTitle">
-          <p id="title">{{issue.title}}</p>
-          <p id="organizer">Opened by: {{issue.organizer.firstName}}</p>
-          </div>
-          <p>{{issue.description}}</p>
-            
-      </div>
+        ">
+        <div class="view col mb-3 mr-3 p-0 hoverable" (click)="accessPetition(issue)">
+            <div class="detaliiIssue">
+                <div class="issueTitle">
+                    <p id="title">{{issue.title}}</p>
+                    <p id="organizer">Opened by: <fa-icon [icon]="faUser"></fa-icon> &nbsp;{{issue.organizer.firstName}}</p>
+                </div>
+                <p>{{issue.description}}</p>
+
+            </div>
         </div>
-</ng-container>
+    </ng-container>
 </div>
 <div *ngIf="searchText.length == null" class="container">
-      <ng-container *ngFor="let issue of issues" >
+    <ng-container *ngFor="let issue of issues">
         <div class="view col mb-3 mr-3 p-0 hoverable">
-          <div class="detaliiIssue">
-              <div class="issueTitle">
-            <p>{{issue.title}}</p>
-            <p id="organizer">Opened by: {{issue.organizer.firstName}}</p>
+            <div class="detaliiIssue">
+                <div class="issueTitle">
+                    <p>{{issue.title}}</p>
+                    <p id="organizer">Opened by: {{issue.organizer.firstName}}</p>
+                </div>
+                <p>{{issue.description}}</p>
+
             </div>
-            <p>{{issue.description}}</p>
-              
         </div>
-          </div>
-        
-      </ng-container>
-  </div>
+
+    </ng-container>
+</div>

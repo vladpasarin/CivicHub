@@ -24,6 +24,7 @@ import {SidebarModule} from "ng-sidebar";
 import { PetitonListComponent } from './petiton-list/petiton-list.component'
 import { SearchPipe } from "./shared/search.pipe";
 import { PetitionProfileComponent } from './petition-profile/petition-profile.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { PetitionProfileComponent } from './petition-profile/petition-profile.co
     AgmCoreModule.forRoot({
        apiKey: 'AIzaSyA9ue3Q6fk7aQGRym6lVpZ2LiFy-GItiMk'
      }),
-     SidebarModule.forRoot(),
+      SidebarModule.forRoot(),
+      FontAwesomeModule,
   ],
   exports: [],
     bootstrap: [AppComponent],

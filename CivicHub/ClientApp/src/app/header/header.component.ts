@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
+import { faHome, faFileContract, faPhone, faUser, faCity, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: "app-header",
@@ -11,7 +12,13 @@ export class HeaderComponent implements OnInit {
 
     firstName: string;
   logged:string;
-  userId:number;
+    userId: number;
+    faHome = faHome;
+    faFileContract = faFileContract;
+    faPhone = faPhone;
+    faUser = faUser;
+    faCity = faCity;
+    faEdit = faEdit;
 
   logout(): void {
     this.authService.logout();
