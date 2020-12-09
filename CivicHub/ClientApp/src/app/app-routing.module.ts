@@ -7,6 +7,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ContactComponent } from './contact/contact.component';
 import { PetitonListComponent } from './petiton-list/petiton-list.component';
 import { PetitionProfileComponent } from './petition-profile/petition-profile.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -17,7 +19,7 @@ const routes: Routes = [
   { path: "contact", component: ContactComponent },
   { path: "petition-list", component: PetitonListComponent },
   { path: "petition-profile", component: PetitionProfileComponent },
-
+    { path: "user-profile", component: UserProfileComponent },
 
 ];
 

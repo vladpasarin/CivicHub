@@ -1,0 +1,59 @@
+.issueHeader {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    margin-left: 80px;
+}
+
+#organizer {
+    font-size: 22px;
+    margin-left: 50px;
+}
+
+.description {
+    display: flex;
+    flex-direction: row;
+    margin-top: 80px;
+}
+
+.issueDescription {
+    background-color: rgb(230, 236, 240);
+    min-height: 200px;
+    width: 70%;
+    margin: auto;
+    border-bottom: 5px solid rgb(87, 37, 37);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.labels {
+    margin-top: 80px;
+    margin-left: 100px;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+#organizer:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.photos {
+    display: flex;
+    flex-direction: row;
+    margin-top: 80px;
+}
+
+#issuePhoto {
+    margin: auto;
+    object-fit: cover;
+    border-radius: 10%;
+    height: 250px;
+    width: 250px;
+    margin-bottom: 30px;
+}
+
+    #issuePhoto:hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }

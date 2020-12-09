@@ -1,0 +1,53 @@
+.profilePhoto {
+    object-fit: cover;
+    height: 300px;
+    width: 300px;
+}
+
+.profile {
+    margin-top: 70px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#firstName {
+    font-size: 26px;
+}
+
+.profileDetails {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.rank {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.options {
+    margin-top: 50px;
+    background-color: rgb(230, 236, 240);
+    border-bottom: 8px solid rgb(87, 37, 37);
+    border-top: 8px solid rgb(87, 37, 37);
+    border-radius: 15px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.opt {
+    color: black;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+    .opt:hover {
+        color: #ff7a59;
+    }
