@@ -1,4 +1,5 @@
-﻿using CivicHub.Entities;
+﻿using CivicHub.Dtos;
+using CivicHub.Entities;
 using CivicHub.Models;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ namespace CivicHub.IServices
 {
     public interface IUserService
     {
-        User GetById(Guid id);
-        List<User> GetAll();
+        UserDto GetById(Guid id);
+        List<UserDto> GetAll();
         bool Register(RegisterRequest request);
         AuthenticationResponse Login(AuthenticationRequest request);
     }

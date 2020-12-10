@@ -23,14 +23,22 @@ namespace CivicHub.Services
             _issueStateRepository = issueStateRepository;
             _mapper = mapper;
         }
+
         public List<IssueDto> GetAll()
         {
-            return _mapper.Map<List<IssueDto>>(_issueRepository.GetAllWithDetails());
+            var allIssues = _mapper.Map<List<IssueDto>>(_issueRepository.GetAllWithDetails());
+            foreach(IssueDto issue in allIssues){
+
+                issue.IssueStates = _mapper.Map<List<IssueStateDto>>(_issueStateRepository.GetAllByIssueIdAsync(issue.Id).Result);
+            }
+            return allIssues;
         }
 
         public IssueDto GetById(Guid id)
         {
-            return _mapper.Map<IssueDto>(_issueRepository.FindById(id));
+            var issueDto = _mapper.Map<IssueDto>(_issueRepository.FindById(id));
+            issueDto.IssueStates = _mapper.Map<List<IssueStateDto>>(_issueStateRepository.GetAllByIssueIdAsync(issueDto.Id).Result);
+            return issueDto;
         }
 
         public async Task<List<IssueDto>> GetAllByUserIdAsync(Guid userId)
@@ -40,6 +48,7 @@ namespace CivicHub.Services
             {
                 userIssueDto.IssueStates = _mapper.Map<List<IssueStateDto>>(await _issueStateRepository.GetAllByIssueIdAsync(userIssueDto.Id));
             }
+
             return userIssuesDtos;
         }
 

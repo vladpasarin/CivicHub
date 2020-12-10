@@ -1,4 +1,6 @@
-﻿using CivicHub.Entities;
+﻿using AutoMapper;
+using CivicHub.Dtos;
+using CivicHub.Entities;
 using CivicHub.Interfaces;
 using CivicHub.IServices;
 using CivicHub.Mapper;
@@ -18,12 +20,16 @@ namespace CivicHub.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepostiory;
+        private readonly IIssueRepository _issueRepository;
         private readonly AppSettings _appSettings;
+        private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, IOptions<AppSettings> appSettings)
+        public UserService(IUserRepository userRepository, IOptions<AppSettings> appSettings, IMapper mapper, IIssueRepository issueRepository)
         {
             this._userRepostiory = userRepository;
             this._appSettings = appSettings.Value;
+            this._issueRepository = issueRepository;
+            _mapper = mapper;
         }
 
         public bool Register(RegisterRequest request)
@@ -40,15 +46,25 @@ namespace CivicHub.Services
             return _userRepostiory.SaveChanges();
         }
 
-        public List<User> GetAll()
+        public List<UserDto> GetAll()
         {
-            var registeredUsers = _userRepostiory.GetAll();
-            return registeredUsers;
+            var registeredUsersDtos = _mapper.Map<List<UserDto>>(_userRepostiory.GetAll());
+
+            foreach (UserDto user in registeredUsersDtos)
+            {
+                user.Issues = _mapper.Map<List<IssueDto>>(_issueRepository.FindByUserIdAsync(user.Id).Result);
+            }
+
+            return registeredUsersDtos;
         }
 
-        public User GetById(Guid id)
+        public UserDto GetById(Guid id)
         {
-            return _userRepostiory.FindById(id);
+            var userDto = _mapper.Map<UserDto>(_userRepostiory.FindById(id));
+
+            userDto.Issues = _mapper.Map<List<IssueDto>>(_issueRepository.FindByUserIdAsync(userDto.Id).Result);
+
+            return userDto;
         }
         
         public AuthenticationResponse Login(AuthenticationRequest request)

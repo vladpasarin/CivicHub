@@ -12,8 +12,7 @@ namespace CivicHub.Repositories
     public class IssueStateRepository : GenericRepository<IssueState>, IIssueStateRepository
     {
         public IssueStateRepository(Context context) : base(context)
-        {
-
+        { 
         }
 
         public async Task<List<IssueState>> GetAllByIssueIdAsync(Guid IssueId)

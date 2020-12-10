@@ -35,11 +35,26 @@ namespace CivicHub.Controllers
         }
 
         [HttpGet("all")]
-        [Authorize]
+        //[Authorize]
         public IActionResult GetAll()
         {
             var user = (User)HttpContext.Items["User"];
-            return Ok(_userService.GetAll());
+            var users = _userService.GetAll();
+            if (users == null)
+                return StatusCode(500);
+
+            return Ok(users);
+        }
+
+        [HttpGet("GetUser/{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            var user = (User)HttpContext.Items["User"];
+            var users = _userService.GetById(id);
+            if (users == null)
+                return StatusCode(500);
+
+            return Ok(users);
         }
     }
 }
