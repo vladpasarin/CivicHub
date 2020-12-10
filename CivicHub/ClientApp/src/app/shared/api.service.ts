@@ -14,12 +14,17 @@ export class ApiService {
   });
   baseUrl = "https://localhost:44397/api";
 
+    /*
   getUser(id: number) {
     return this.http.get(this.baseUrl + "/User/" + id.toString(), {
       headers: this.header,
     });
   }
-  
+  */
+    getIssues() {
+        return this.http.get(this.baseUrl + "/Issue/all", { headers: this.header });
+    }
+
   getUsers() {
     return this.http.get(this.baseUrl + "/auth/all", { headers: this.header });
   }
