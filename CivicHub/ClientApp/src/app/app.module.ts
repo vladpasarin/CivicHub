@@ -25,7 +25,8 @@ import { PetitonListComponent } from './petiton-list/petiton-list.component'
 import { SearchPipe } from "./shared/search.pipe";
 import { PetitionProfileComponent } from './petition-profile/petition-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { PhotoModalComponent } from './petition-profile/photo-modal/photo-modal.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ProfileComponent,
     SidebarComponent,
     PetitonListComponent,
-    PetitionProfileComponent,
+        PetitionProfileComponent,
+        UserProfileComponent,
+        PhotoModalComponent,
+
   ],
   imports: [
     CommonModule,
