@@ -18,6 +18,7 @@ namespace CivicHub.Mapper
             CreateMap<IssueDto, Issue>();
             CreateMap<IssueState, IssueStateDto>();
             CreateMap<IssueStateDto, IssueState>();
+            CreateMap<IssueStateCommentDto, IssueStateDto>();
         }
 
         //public static User ToUser(AuthenticationRequest request)
