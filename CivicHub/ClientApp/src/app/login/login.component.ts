@@ -32,11 +32,7 @@ export class LoginComponent implements OnInit {
     requestResponse = new RequestResponse();
     token: string;
     //users: User[] = [];
-  users:User[]=[
-    {id:1,firstName:"Vlad",lastName:"Pasarin",mail:"vlad@gmail.com",password:"vlad1998"},
-      { id: 2, firstName: "Florin", lastName: "Stan", mail: "florin@yahoo.com",password:"florinel99"},
-      { id: 3, firstName: "Eusebiu", lastName: "Timofte", mail: "sebi@yahoo.com",password:"eusebi98"}
-];
+  
   ngOnInit() {
     this.loginForm = this.fb.group({
       mail: [null, Validators.required],

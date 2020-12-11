@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="issueHeader">
     <h2 style="font-weight:bold">{{selectedIssue.title}}</h2>
-    <p id="organizer" (click)="openProfile()">Opened by {{selectedIssue.organizer.firstName}} {{selectedIssue.organizer.lastName}}</p>
+    <p id="organizer" (click)="openProfile()">Opened by User</p>
 </div>
 <div class="description">
     <p class="labels">Description:</p>
@@ -12,6 +12,6 @@
 
 <div class="photos">
     <p class="labels">Photos:</p>
-    <img id="issuePhoto" src={{selectedIssue.photoPath}} (click)="showDM(selectedIssue.photoPath)">
+    <!-- <img id="issuePhoto" src={{selectedIssue.photoPath}} (click)="showDM(selectedIssue.photoPath)"> -->
 </div>
 <photo-modal #photoModal></photo-modal>

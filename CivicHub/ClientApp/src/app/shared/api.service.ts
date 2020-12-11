@@ -24,9 +24,19 @@ export class ApiService {
     getIssues() {
         return this.http.get(this.baseUrl + "/Issue/all", { headers: this.header });
     }
-
+    getIssueById(issueId: string) {
+      return this.http.get(this.baseUrl + "/Issue/" + issueId, {
+        headers: this.header,
+      });
+    }
   getUsers() {
     return this.http.get(this.baseUrl + "/auth/all", { headers: this.header });
+  }
+
+  getUserById(userId: string) {
+    return this.http.get(this.baseUrl + "/auth/GetUser/" + userId, {
+      headers: this.header,
+    });
   }
 
     getLoginToken(request: Request) {
