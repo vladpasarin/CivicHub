@@ -1,2 +1,36 @@
-<app-header></app-header>
-<agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng"></agm-map>
+﻿<app-header></app-header>
+<div class="container">
+    <div class="row mr-0">
+        <h1>Sesizări și reclamații</h1>
+    </div>
+</div>
+<div class="mapContainer">
+    <agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude" (mapClick)="location($event)">
+        <agm-marker [latitude]="latitude" [longitude]="longitude">
+        </agm-marker>
+    </agm-map>
+</div>
+<form id="petitionForm" action="">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputAddress">Adresă:</label>
+            <input type="text" name="Address" class="form-control" id="inputAddress" placeholder="Adresă">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputPhoneNr">Telefon:</label>
+            <input type="text" name="PhoneNr" class="form-control" id="inputPhoneNr" placeholder="Telefon">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="inputIssueTitle">Subiectul petitiei:</label>
+            <input type="text" name="IssueTitle" class="form-control" id="inputIssueTitle" placeholder="">
+        </div>
+    </div>
+    <div class="form-row">
+        <span>Descriere: &nbsp;</span>
+        <textarea id="issueDescription" name="issueDescription" rows="4" cols="50"></textarea>
+    </div>
+</form>

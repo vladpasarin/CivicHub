@@ -8,6 +8,7 @@ import { ContactComponent } from './contact/contact.component';
 import { PetitonListComponent } from './petiton-list/petiton-list.component';
 import { PetitionProfileComponent } from './petition-profile/petition-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { PetitionFormComponent } from './petition-form/petition-form.component';
 
 
 const routes: Routes = [
@@ -19,8 +20,8 @@ const routes: Routes = [
   { path: "contact", component: ContactComponent },
   { path: "petition-list", component: PetitonListComponent },
   { path: "petition-profile", component: PetitionProfileComponent },
-    { path: "user-profile", component: UserProfileComponent },
-
+  { path: "user-profile", component: UserProfileComponent },
+  { path: "petition-form", component: PetitionFormComponent },
 ];
 
 @NgModule({
