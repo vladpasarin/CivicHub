@@ -10,9 +10,6 @@ namespace CivicHub.Entities
     {
         public Guid IssueId { get; set; }
         public Issue Issue { get; set; }
-
-        //public Guid StateId { get; set; }
-        //public State State { get; set; }
         public int Type { get; set; }
         public string Message { get; set; }
         public DateTime DateStart { get; set; }
