@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-petition-form',
@@ -10,8 +11,9 @@ export class PetitionFormComponent implements OnInit {
   longitude = 26.096306;
   zoom = 13.0;
   urls = [];
-  markers = [];
-  selectedMarker: { lat: any; lng: any; };
+  marker: { lat: number; lng: number; alpha: number; };
+  map: google.maps.Map<Element>;
+  mapClickListener: google.maps.MapsEventListener;
 
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
@@ -30,25 +32,22 @@ export class PetitionFormComponent implements OnInit {
   }
 
   addMarker(lat: number, lng: number) {
-    this.markers.push({ lat, lng, alpha: 1 });
+    this.marker = ({ lat, lng, alpha: 1 });
   }
 
-  max(coordType: 'latitude' | 'longitude'): number {
-    return Math.max(...this.markers.map(marker => marker[coordType]));
+  public mapReadyHandler(map: google.maps.Map): void {
+    this.map = map;
+    this.mapClickListener = this.map.addListener('click', (e: google.maps.MouseEvent) => {
+      this.zone.run(() => {
+        // Here we can get correct event
+        console.log(e.latLng.lat(), e.latLng.lng());
+        this.marker.lat = e.latLng.lat();
+        this.marker.lng = e.latLng.lng();
+      });
+    });
   }
 
-  min(coordType: 'latitude' | 'longitude'): number {
-    return Math.min(...this.markers.map(marker => marker[coordType]));
-  }
-
-  selectMarker(event) {
-    this.selectedMarker = {
-      lat: event.latitude,
-      lng: event.longitude
-    };
-  }
-
-  constructor() { }
+  constructor(private zone: NgZone) { }
 
   ngOnInit(): void {
   }
