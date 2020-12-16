@@ -13,7 +13,7 @@ export class PetitionFormComponent implements OnInit {
   urls = [];
     markerLat: number;
     markerLng: number;
-    markerAplha = 1;
+    markerAlpha = 1;
    
   map: google.maps.Map<Element>;
   mapClickListener: google.maps.MapsEventListener;
