@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgZone } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ApiService } from '../shared/api.service';
+import { Issue } from '../shared/issue.model';
 
 @Component({
   selector: 'app-petition-form',
@@ -13,7 +17,11 @@ export class PetitionFormComponent implements OnInit {
   urls = [];
     markerLat: number;
     markerLng: number;
-    markerAplha = 1;
+    markerAlpha = 1;
+    addIssueForm: FormGroup;
+    success: boolean;
+    issue = new Issue();
+    userId = sessionStorage.getItem('userId');
    
   map: google.maps.Map<Element>;
   mapClickListener: google.maps.MapsEventListener;
@@ -50,9 +58,60 @@ export class PetitionFormComponent implements OnInit {
     });
   }
 
-  constructor(private zone: NgZone) { }
+    addIssue() {
+        if (this.addIssueForm.valid) {
+            this.success = true;
+            setTimeout(() => {
+                this.success = null;
+            }, 3000);
+            console.log("loginForm submitted");
+            this.issue.description = this.f.description.value;
+            this.issue.latitude = this.markerLat;
+            this.issue.longitude = this.markerLng;
+            this.issue.userId = this.userId;
+            console.log(this.userId);
+            //si titlu
+            console.log(this.issue);
+            this.api.addIssue(this.issue).subscribe(() => {
+             
+                this.router.navigate(["/home"]);
+            },
+                (error: Error) => {
+                    console.log('err', error);
+                });
+        } else {
+            this.success = false;
+            setTimeout(() => {
+                this.success = null;
+            }, 3000);
+            this.validateAllFormFields(this.addIssueForm);
+        }
+        
+    }
 
-  ngOnInit(): void {
+    validateAllFormFields(formGroup: FormGroup) {
+        Object.keys(formGroup.controls).forEach((field) => {
+            console.log(field);
+            const control = formGroup.get(field);
+            if (control instanceof FormControl) {
+                control.markAsTouched({ onlySelf: true });
+            } else if (control instanceof FormGroup) {
+                this.validateAllFormFields(control);
+            }
+        });
+    }
+
+    get f() {
+        return this.addIssueForm.controls;
+    }
+
+    constructor(private zone: NgZone, public fb: FormBuilder, private api: ApiService, private router: Router) { }
+
+    ngOnInit(): void {
+        this.addIssueForm = this.fb.group({
+            description: [null, Validators.required],
+            
+        });
   }
 
 }

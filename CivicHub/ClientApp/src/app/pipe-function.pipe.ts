@@ -20,6 +20,7 @@ export class PipeFunctionPipe implements PipeTransform {
         this.api.getUserById(id).subscribe((user: User) => {
             console.log("Executing function searchUserById...");
             this.organizer = user;
+            console.log(this.organizer.firstName)
             return this.organizer.firstName;
         });
     }
