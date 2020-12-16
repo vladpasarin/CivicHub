@@ -22,5 +22,6 @@ namespace CivicHub.Entities
         public ICollection<IssueStatePhoto> IssueStatePhotos { get; set; }
         public ICollection<IssueStateVideo> IssueStateVideos { get; set; }
         public ICollection<IssueStateReaction> IssueStateReactions { get; set; }
+        public ICollection<IssueStateSignature> IssueStateSignatures { get; set; }
     }
 }

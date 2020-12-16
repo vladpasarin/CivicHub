@@ -18,6 +18,7 @@ namespace CivicHub.Data
         public DbSet<IssueStatePhoto> IssueStatePhotos { get; set; }
         public DbSet<IssueStateReaction> IssueStateReactions { get; set; }
         public DbSet<IssueStateVideo> IssueStateVideos { get; set; }
+        public DbSet<IssueStateSignature> IssueSignatures { get; set; }
         //public DbSet<State> States { get; set; }
         public DbSet<User> Users { get; set; }
 
@@ -102,14 +103,32 @@ namespace CivicHub.Data
                .WithMany(y => y.IssueStateReactions)
                .OnDelete(DeleteBehavior.NoAction)
                .HasForeignKey(z => z.UserId);
+            //unique reaction of a user to a issue state
+            builder.Entity<IssueStateReaction>()
+                .HasAlternateKey(x => new { x.UserId, x.IssueStateId });
+
+            //issue state M M user (signature)
+
+            builder.Entity<IssueStateSignature>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.IssueStateSignatures)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(x => x.UserId);
+
+            builder.Entity<IssueStateSignature>()
+                .HasOne(x => x.IssueState)
+                .WithMany(x => x.IssueStateSignatures)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasForeignKey(x => x.IssueStateId);
+            //unique signature
+            builder.Entity<IssueStateSignature>()
+                .HasAlternateKey(x => new { x.UserId, x.IssueStateId });
 
             //user mail unique
             builder.Entity<User>()
                 .HasAlternateKey(x => x.Mail);
 
-            //unique reaction of a user to a issue state
-            builder.Entity<IssueStateReaction>()
-                .HasAlternateKey(x => new { x.UserId, x.IssueStateId });
+            
 
             //din proieect DAW laborator
             /*
