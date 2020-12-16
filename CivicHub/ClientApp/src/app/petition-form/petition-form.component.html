@@ -5,13 +5,13 @@
     </div>
 </div>
 <div class="mapContainer">
-    <agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude" (mapClick)="addMarker($event.coords.latitude, $event.coords.longitude)">
+    <agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude"  (mapReady)="mapReadyHandler($event)">
         <agm-marker
-				*ngFor='let marker of markers'
-				[latitude]='marker.lat'
-				[longitude]='marker.lng'
-				[opacity]='marker.alpha'
-                [markerDraggable]='true'
+                [(ngModel)] = "marker"
+                [latitude]="marker.lat"
+				[longitude]="marker.lng"
+				[opacity]="marker.alpha"
+                [markerDraggable]="true"
                 (markerClick)="selectMarker($event)"
 		>
 		</agm-marker>
