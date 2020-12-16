@@ -7,10 +7,9 @@
 <div class="mapContainer">
     <agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude"  (mapReady)="mapReadyHandler($event)">
         <agm-marker
-                [(ngModel)] = "marker"
-                [latitude]="marker.lat"
-				[longitude]="marker.lng"
-				[opacity]="marker.alpha"
+                [latitude]="markerLat"
+				[longitude]="markerLng"
+				[opacity]="markerAlpha"
                 [markerDraggable]="true"
                 (markerClick)="selectMarker($event)"
 		>

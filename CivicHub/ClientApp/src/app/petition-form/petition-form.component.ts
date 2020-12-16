@@ -11,7 +11,10 @@ export class PetitionFormComponent implements OnInit {
   longitude = 26.096306;
   zoom = 13.0;
   urls = [];
-  marker: { lat: number; lng: number; alpha: number; };
+    markerLat: number;
+    markerLng: number;
+    markerAplha = 1;
+   
   map: google.maps.Map<Element>;
   mapClickListener: google.maps.MapsEventListener;
 
@@ -32,17 +35,17 @@ export class PetitionFormComponent implements OnInit {
   }
 
   addMarker(lat: number, lng: number) {
-    this.marker = ({ lat, lng, alpha: 1 });
+      this.markerLat = lat;
+      this.markerLng = lng;
   }
 
   public mapReadyHandler(map: google.maps.Map): void {
     this.map = map;
     this.mapClickListener = this.map.addListener('click', (e: google.maps.MouseEvent) => {
       this.zone.run(() => {
-        // Here we can get correct event
-        console.log(e.latLng.lat(), e.latLng.lng());
-        this.marker.lat = e.latLng.lat();
-        this.marker.lng = e.latLng.lng();
+
+          console.log(e.latLng.lat(), e.latLng.lng());
+          this.addMarker(e.latLng.lat(), e.latLng.lng());
       });
     });
   }
