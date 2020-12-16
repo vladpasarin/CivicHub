@@ -18,7 +18,7 @@ export class PetitionProfileComponent implements OnInit {
     issueId = this.route.snapshot.queryParamMap.get('id');
     selectedIssue: Issue;
 
-
+    loaded:boolean;
     issues:Issue[]=[];
 
     ngOnInit(): void {
@@ -33,7 +33,9 @@ export class PetitionProfileComponent implements OnInit {
           setTimeout(() => {
             console.log(this.selectedIssue);
         }, 1000);
-
+        setTimeout(() => {
+            this.loaded=true;
+        }, 2000);
     }
 
     openProfile() {
