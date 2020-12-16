@@ -15,7 +15,7 @@
 		</agm-marker>
     </agm-map>
 </div>
-<form id="petitionForm" action="">
+<form id="petitionForm" action="" [formGroup]="addIssueForm">
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputAddress">Address:</label>
@@ -36,11 +36,11 @@
     </div>
     <div class="form-row">
         <span>Description: &nbsp;</span>
-        <textarea id="issueDescription" name="issueDescription" rows="4" cols="50"></textarea>
+        <textarea id="issueDescription" name="issueDescription" formControlName="description" rows="4" cols="50"></textarea>
     </div>
     <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
     <input type='file' (change)="onSelectFile($event)" multiple>
     <div class="text-center">
-        <button type="button" id="submit" class="btn btn-primary">Submit</button>
+        <button type="button" id="submit" class="btn btn-primary" (click)="addIssue()">Submit</button>
     </div>
 </form>
