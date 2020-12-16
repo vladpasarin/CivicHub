@@ -39,6 +39,8 @@ namespace CivicHub.Controllers
         [HttpPut]
         public IActionResult Update(IssueStateDto issueStateDTO)
         {
+
+            var issiogjewoij = issueStateDTO;
             var updatedIssueState = _issueStateService.Update(issueStateDTO);
 
             if (updatedIssueState == null)

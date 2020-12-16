@@ -14,5 +14,6 @@ namespace CivicHub.IServices
         IssueDto Create(IssueDto issueDTO);
         IssueDto Update(IssueDto issueDTO);
         Task<List<IssueDto>> GetAllByUserIdAsync(Guid userId);
+        List<IssueResponseDto> GetAllWithUsersDetails();
     }
 }

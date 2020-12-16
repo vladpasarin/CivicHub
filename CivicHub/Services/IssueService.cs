@@ -34,6 +34,32 @@ namespace CivicHub.Services
             return allIssues;
         }
 
+        public List<IssueResponseDto> GetAllWithUsersDetails()
+        {
+            List<IssueResponseDto> issuesWithUserDetails = new List<IssueResponseDto>();
+            var allIssues = _issueRepository.GetAllWithDetails();
+            foreach(var issue in allIssues)
+            {
+
+                issuesWithUserDetails.Add(new IssueResponseDto { 
+                    Id = issue.Id,
+                    Description = issue.Description,
+                    FirstName = issue.User.FirstName,
+                    LastName = issue.User.LastName,
+                    Title = issue.Title,
+                    Latitude = issue.Latitude,
+                    Longitude = issue.Longitude,
+                    UserId = issue.UserId,
+                    Mail = issue.User.Mail,
+                    Avatar = issue.User.Avatar,
+                    Points = issue.User.Points,
+                    IssueStates = _mapper.Map<List<IssueStateDto>>(issue.IssueStates)
+                  });
+            }
+
+            return issuesWithUserDetails;
+        }
+
         public IssueDto GetById(Guid id)
         {
             var issueDto = _mapper.Map<IssueDto>(_issueRepository.FindById(id));
