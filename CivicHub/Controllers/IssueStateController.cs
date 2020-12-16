@@ -35,5 +35,18 @@ namespace CivicHub.Controllers
         {
             return Ok(await _issueStateService.GetAllByIssueIdAsync(id));
         }
+
+        [HttpPut]
+        public IActionResult Update(IssueStateDto issueStateDTO)
+        {
+
+            var issiogjewoij = issueStateDTO;
+            var updatedIssueState = _issueStateService.Update(issueStateDTO);
+
+            if (updatedIssueState == null)
+                return StatusCode(500);
+
+            return Ok(updatedIssueState);
+        }
     }
 }

@@ -39,9 +39,11 @@ namespace CivicHub.Services
             return _mapper.Map<List<IssueStateDto>>(IssueStates);
         }
 
-        public IssueStateDto Update(IssueStateDto IssueDTO)
+        public IssueStateDto Update(IssueStateDto IssueStateDTO)
         {
-            throw new NotImplementedException();
+            _issueStateRepository.Update(_mapper.Map<IssueState>(IssueStateDTO));
+            _issueStateRepository.SaveChanges();
+            return _mapper.Map<IssueStateDto>(_issueStateRepository.FindById(IssueStateDTO.Id));
         }
     }
 }

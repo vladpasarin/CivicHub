@@ -5,14 +5,19 @@ using System.Threading.Tasks;
 
 namespace CivicHub.Dtos
 {
-    public class IssueDto
+    public class IssueResponseDto
     {
-        public String Title { get; set; }
+        public string Title { get; set; }
         public Guid Id { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
         public string Description { get; set; }
         public Guid UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Mail { get; set; }
+        public byte[] Avatar { get; set; }
+        public int Points { get; set; }
         public List<IssueStateDto> IssueStates { get; set; }
     }
 }
