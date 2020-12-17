@@ -46,5 +46,16 @@ namespace CivicHub.Controllers
 
             return Ok(updatedIssueState);
         }
+
+        [HttpGet("latestState/{id}")]
+        public IActionResult GetLatestIssueState(Guid id)
+        {
+            var latestIssueState = _issueStateService.GetLatestIssueState(id);
+
+            if (latestIssueState == null)
+                return StatusCode(500, "rahat");
+
+            return Ok(latestIssueState);
+        }
     }
 }

@@ -54,5 +54,10 @@ namespace CivicHub.Services
             }
             return _issueStateRepository.SaveChanges();
         }
+
+        public IssueStateDto GetLatestIssueState(Guid IssueId)
+        {
+            return _mapper.Map<IssueStateDto>(_issueStateRepository.GetLatestIssueState(IssueId));
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace CivicHub.IServices
         bool Create(IssueStateDto IssueStateDTO);
         bool Update(IssueStateDto IssueDTO);
         Task<List<IssueStateDto>> GetAllByIssueIdAsync(Guid IssueId);
+        IssueStateDto GetLatestIssueState(Guid IssueId);
+
     }
 }
