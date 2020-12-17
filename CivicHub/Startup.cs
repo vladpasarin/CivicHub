@@ -50,6 +50,11 @@ namespace CivicHub
             services.AddTransient<IIssueStateReactionRepository, IssueStateReactionRepository>();
             services.AddTransient<IIssueStateRepository, IssueStateRepository>();
             services.AddTransient<IIssueStateVideoRepository, IssueStateVideoRepository>();
+            services.AddTransient<IIssueStateCommentRepository, IssueStateCommentRepository>();
+            services.AddTransient<IIssueStateSignatureRepository, IssueStateSignatureRepository>();
+            services.AddTransient<IIssueStateCommentLikeRepository, IssueStateCommentLikeRepository>();
+            //services.AddTransient<>
+            //services.AddTransient<IStateRepository, StateRepository>();
             services.AddTransient<IIssueStateSignatureRepository, IssueStateSignatureRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             //services.AddTransient<IStateRepository, StateRepository>();
@@ -59,6 +64,7 @@ namespace CivicHub
             services.AddTransient<IIssueService, IssueService>();
             services.AddTransient<IIssueStateService, IssueStateService>();
             services.AddTransient<IIssueStateCommentService, IssueStateCommentService>();
+            services.AddTransient<IIssueStateCommentLikeService, IssueStateCommentLikeService>();
             services.AddTransient<IIssueStateReactionService, IssueStateReactionService>();
             services.AddTransient<IIssueStateSignatureService, IssueStateSignatureService>();
 
