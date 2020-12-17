@@ -38,7 +38,17 @@ namespace CivicHub.Services
 
         public bool Update(IssueStateReactionDto issueStateReactionDto)
         {
-            throw new NotImplementedException();
+            var issueStateReaction = _issueStateReactionRepository.FindById(issueStateReactionDto.Id);
+            if (issueStateReaction == null)
+            {
+                _issueStateReactionRepository.Create(_mapper.Map<IssueStateReaction>(issueStateReactionDto));
+            }
+            else
+            {
+                _mapper.Map(issueStateReactionDto, issueStateReaction);
+                _issueStateReactionRepository.Update(issueStateReaction);
+            }
+            return _issueStateReactionRepository.SaveChanges();
         }
     }
 }

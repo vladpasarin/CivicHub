@@ -33,7 +33,8 @@ namespace CivicHub.Services
             if (_issueStateCommentRepository.FindById(issueDTO.Id) == null)
             {
                 return 404;
-            }else
+            }
+            else
             {
                 _issueStateCommentRepository.Delete(_mapper.Map<IssueStateComment>(issueDTO));
                 _issueStateCommentRepository.SaveChanges();
@@ -41,7 +42,8 @@ namespace CivicHub.Services
                 if (_issueStateCommentRepository.FindById(issueDTO.Id) == null)
                 {
                     return 200;
-                }else
+                }
+                else
                 {
                     return 500;
                 }
@@ -55,7 +57,17 @@ namespace CivicHub.Services
 
         public bool Update(IssueStateCommentDto issueDTO)
         {
-            _issueStateCommentRepository.Update(_mapper.Map<IssueStateComment>(issueDTO));
+            var issue = _issueStateCommentRepository.FindById(issueDTO.Id);
+            if (issue == null)
+            {
+                _issueStateCommentRepository.Create(_mapper.Map<IssueStateComment>(issueDTO));
+            }
+            else
+            {
+                _mapper.Map(issueDTO, issue);
+                _issueStateCommentRepository.Update(issue);
+            }
             return _issueStateCommentRepository.SaveChanges();
         }
+    }
 }

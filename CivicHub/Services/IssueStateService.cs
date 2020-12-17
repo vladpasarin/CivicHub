@@ -41,7 +41,16 @@ namespace CivicHub.Services
 
         public bool Update(IssueStateDto IssueStateDTO)
         {
-            _issueStateRepository.Update(_mapper.Map<IssueState>(IssueStateDTO));
+            var issue = _issueStateRepository.FindById(IssueStateDTO.Id);
+            if (issue == null)
+            {
+                _issueStateRepository.Create(_mapper.Map<IssueState>(IssueStateDTO));
+            }
+            else
+            {
+                _mapper.Map(IssueStateDTO, issue);
+                _issueStateRepository.Update(issue);
+            }
             return _issueStateRepository.SaveChanges();
         }
     }
