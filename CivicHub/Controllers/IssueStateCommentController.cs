@@ -33,27 +33,26 @@ namespace CivicHub.Controllers
             }
         }
 
-
         [HttpPost]
         public IActionResult Create(IssueStateCommentDto issueDTO)
         {
-            var createdIssueComment = _issueStateCommentService.Create(issueDTO);
+            var created = _issueStateCommentService.Create(issueDTO);
 
-            if (createdIssueComment == null)
+            if (!created)
                 return StatusCode(500);
 
-            return Ok(createdIssueComment);
+            return Ok(created);
         }
 
         [HttpPut]
         public IActionResult Update(IssueStateCommentDto issueDTO)
         {
-            var updatedIssue = _issueStateCommentService.Update(issueDTO);
+            var updated = _issueStateCommentService.Update(issueDTO);
 
-            if (updatedIssue == null)
+            if (!updated)
                 return StatusCode(500);
 
-            return Ok(updatedIssue);
+            return Ok(updated);
         }
 
         [HttpDelete]
@@ -64,13 +63,10 @@ namespace CivicHub.Controllers
             {
                 case 200:
                     return Ok();
-                    break;
                 case 404:
                     return NotFound("Nu este niciun issue state comment cu id -ul dat");
-                    break;
                 case 500:
                     return StatusCode(500, "Issue state comment-ul se afla in bd, dar nu a putut fi sters");
-                    break;
                 default:
                     return StatusCode(500, null);
             }

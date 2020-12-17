@@ -78,20 +78,18 @@ namespace CivicHub.Services
             return userIssuesDtos;
         }
 
-        public IssueDto Create(IssueDto issueDTO)
+        public bool Create(IssueDto issueDTO)
         {
             var issue = _mapper.Map<Issue>(issueDTO);
             _issueRepository.Create(issue);
-            _issueRepository.SaveChanges();
-            return _mapper.Map<IssueDto>(_issueRepository.GetAllDetails(issue.Id));
+            return _issueRepository.SaveChanges();
         }
 
-        public IssueDto Update(IssueDto issueDTO)
+        public bool Update(IssueDto issueDTO)
         {
             var issue = _mapper.Map<Issue>(issueDTO);
             _issueRepository.Update(issue);
-            _issueRepository.SaveChanges();
-            return _mapper.Map<IssueDto>(_issueRepository.GetAllDetails(issue.Id));
+            return _issueRepository.SaveChanges();
         }
     }
 }

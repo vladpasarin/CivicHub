@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CivicHub.Entities
+namespace CivicHub.Dtos
 {
-    public class IssueStateReaction : BaseEntity
+    public class IssueStateReactionDto
     {
         public Guid IssueStateId { get; set; }
-        public IssueState IssueState { get; set; }
         public Guid UserId { get; set; }
-        public User User { get; set; }
         public int Vote { get; set; }
         public DateTime dateGiven { get; set; }
     }
