@@ -64,5 +64,16 @@ namespace CivicHub.Controllers
         {
             return Ok(await _issueService.GetAllByUserIdAsync(id));
         }
+
+        [HttpGet("getAllWithUserDetails")]
+        public IActionResult GetAllWithUserDetails()
+        {
+            var issues = _issueService.GetAllWithUsersDetails();
+
+            if (issues == null)
+                return StatusCode(500);
+
+            return Ok(issues);
+        }
     }
 }
