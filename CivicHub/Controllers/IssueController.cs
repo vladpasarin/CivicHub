@@ -30,7 +30,6 @@ namespace CivicHub.Controllers
         public IActionResult Get(Guid id)
         {
             IssueDto issue = _issueService.GetById(id);
-            //issue == null ? return NotFound() : return Ok(issue);
             if (issue == null)
                 return NotFound();
 
@@ -42,7 +41,7 @@ namespace CivicHub.Controllers
         {
             var createdIssue = _issueService.Create(issueDTO);
 
-            if (createdIssue == null)
+            if (!createdIssue)
                 return StatusCode(500);
 
             return Ok(createdIssue);
@@ -53,7 +52,7 @@ namespace CivicHub.Controllers
         {
             var updatedIssue = _issueService.Update(issueDTO);
 
-            if (updatedIssue == null)
+            if (!updatedIssue)
                 return StatusCode(500);
 
             return Ok(updatedIssue);

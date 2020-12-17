@@ -42,7 +42,6 @@ namespace CivicHub
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
-
             services.AddTransient<IIssueRepository, IssueRepository>();
             services.AddTransient<IIssueStateCommentPhotoRepository, IssueStateCommentPhotoRepository>();
             services.AddTransient<IIssueStateCommentRepository, IssueStateCommentRepository>();
@@ -50,6 +49,7 @@ namespace CivicHub
             services.AddTransient<IIssueStateReactionRepository, IssueStateReactionRepository>();
             services.AddTransient<IIssueStateRepository, IssueStateRepository>();
             services.AddTransient<IIssueStateVideoRepository, IssueStateVideoRepository>();
+            //services.AddTransient<>
             //services.AddTransient<IStateRepository, StateRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
