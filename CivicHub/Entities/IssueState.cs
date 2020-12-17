@@ -10,9 +10,6 @@ namespace CivicHub.Entities
     {
         public Guid IssueId { get; set; }
         public Issue Issue { get; set; }
-
-        //public Guid StateId { get; set; }
-        //public State State { get; set; }
         public int Type { get; set; }
         public string Message { get; set; }
         public DateTime DateStart { get; set; }
@@ -22,5 +19,6 @@ namespace CivicHub.Entities
         public ICollection<IssueStatePhoto> IssueStatePhotos { get; set; }
         public ICollection<IssueStateVideo> IssueStateVideos { get; set; }
         public ICollection<IssueStateReaction> IssueStateReactions { get; set; }
+        public ICollection<IssueStateSignature> IssueStateSignatures { get; set; }
     }
 }
