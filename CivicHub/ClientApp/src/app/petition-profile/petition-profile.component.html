@@ -13,7 +13,7 @@
           <li><a href="#">3. Solved</a></li>
         </ul>
     </div>
-    <button class="btn btn-primary" id="sign" type="button">Sign</button>
+    <button class="btn btn-primary" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
 </div>
 <div class="description">
     <p class="labels">Description:</p>
@@ -26,6 +26,8 @@
     <!-- <img id="issuePhoto" src={{selectedIssue.photoPath}} (click)="showDM(selectedIssue.photoPath)"> -->
 </div>
 <photo-modal #photoModal></photo-modal>
+<sign-form #signForm></sign-form>
+
 <div class="comments">
     <p class="labels">Comments:</p>
     <div class="issueComments">

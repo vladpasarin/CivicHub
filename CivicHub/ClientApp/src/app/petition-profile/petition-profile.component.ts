@@ -5,6 +5,7 @@ import { Issue } from '../shared/issue.model';
 import { User } from '../shared/user.model';
 import { PhotoModalComponent } from './photo-modal/photo-modal.component';
 import { faUser, faArrowAltCircleUp, faArrowAltCircleDown, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { SignFormComponent } from './sign-form/sign-form.component';
 
 @Component({
     selector: 'petition-profile',
@@ -16,6 +17,8 @@ export class PetitionProfileComponent implements OnInit {
     constructor(private route: ActivatedRoute, private router: Router,private api:ApiService) { }
 
     @ViewChild("photoModal") photoModal: PhotoModalComponent;
+    @ViewChild("signForm") signForm: SignFormComponent;
+
     issueId = this.route.snapshot.queryParamMap.get('id');
     selectedIssue: Issue;
 
@@ -52,5 +55,8 @@ export class PetitionProfileComponent implements OnInit {
 
     showDM(photoPath): void {
         this.photoModal.initialize(photoPath);
+    }
+    showSignForm() :void{
+        this.signForm.initialize();
     }
 }

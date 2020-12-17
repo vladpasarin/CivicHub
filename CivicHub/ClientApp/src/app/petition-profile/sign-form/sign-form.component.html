@@ -1,0 +1,56 @@
+<div
+  bsModal
+  class="row modal fade"
+  #signForm="bs-modal"
+>
+  <div id="modal">      
+    <form action="" [formGroup]="">
+        <div class="form-flex">
+            <h2 style="margin-bottom: 1em; font-weight: bold;">Petition sign</h2>
+            <div class="form-row">
+                
+                <div class="form-group col-md-12">
+                    <label for="inputAddress">First name:</label>
+                    <input type="text" class="form-control" placeholder="Your first name">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputPhoneNr">Last name:</label>
+                    <input type="text" class="form-control" placeholder="Your last name">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputIssueTitle">CNP:</label>
+                    <input type="text" class="form-control" formControlName="title" placeholder="Your CNP">
+                </div>
+            </div>
+        </div>
+        <div class="form-flex">
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputPhoneNr">Address:</label>
+                    <input type="text" class="form-control" placeholder="Your address">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputPhoneNr">ID card series:</label>
+                    <input type="text" class="form-control" placeholder="Your ID card series">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputPhoneNr">ID card number:</label>
+                    <input type="text" class="form-control" placeholder="Your ID card number">
+                </div>
+            </div>
+            <div class="">
+                <button type="button" id="submit" class="btn btn-primary">Sign</button>
+            </div>
+        </div>
+    </form>
+        
+  </div>
+</div>
