@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from "./user.model";
 import { Request } from "./request";
+import { Issue } from './issue.model';
 
 @Injectable({
   providedIn: "root",
@@ -24,9 +25,19 @@ export class ApiService {
     getIssues() {
         return this.http.get(this.baseUrl + "/Issue/all", { headers: this.header });
     }
-
+    getIssueById(issueId: string) {
+      return this.http.get(this.baseUrl + "/Issue/" + issueId, {
+        headers: this.header,
+      });
+    }
   getUsers() {
     return this.http.get(this.baseUrl + "/auth/all", { headers: this.header });
+  }
+
+  getUserById(userId: string) {
+    return this.http.get(this.baseUrl + "/auth/GetUser/" + userId, {
+      headers: this.header,
+    });
   }
 
     getLoginToken(request: Request) {
@@ -39,6 +50,11 @@ export class ApiService {
     return this.http.post(this.baseUrl + "/auth/register", user, {
       headers: this.header,
     });
-  }
+    }
+    addIssue(issue: Issue) {
+        return this.http.post(this.baseUrl + "/Issue", issue, {
+            headers: this.header,
+        });
+    }
   
 }

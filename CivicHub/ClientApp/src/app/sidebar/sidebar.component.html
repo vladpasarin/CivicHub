@@ -2,13 +2,13 @@
     <ng-sidebar [opened]="open">
         <p id="exit" (click)="exit()">X</p>
         <ul class="menu">
-            <img id="issuePhoto" src={{issue.photoPath}}>
+            <!-- <img id="issuePhoto" src={{issue.photoPath}}> -->
             <p style="font-weight: bold;">Title:</p>
             <p>{{issue.title}}</p>
             <p style="font-weight: bold;">Description:</p>
             <p>{{issue.description}}</p>
             <p style="font-weight: bold;">Organizer:</p>
-            <p>{{issue.organizer.firstName}} {{issue.organizer.lastName}}</p>
+            <!-- <p>{{issue.organizer.firstName}} {{issue.organizer.lastName}}</p> -->
             <button [ngClass]="{'followup' : isFollow == true,
     'unfollow' : isFollow== false }"
                     (click)="onClick()">

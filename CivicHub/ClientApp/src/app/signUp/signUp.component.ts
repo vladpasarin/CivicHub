@@ -60,6 +60,7 @@ export class SignUpComponent implements OnInit {
         console.log(this.addUserForm.value);
         sessionStorage.setItem('isLoggedIn', 'true');
         sessionStorage.setItem('firstName', this.f.firstName.value);
+        //sessionStorage.setItem('userId', this.requestResponse.userId);
 
         this.router.navigate(["/home"]);
     } else {
