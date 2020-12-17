@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
     firstName: string;
   logged:string;
-    userId: number;
+    userId: string;
     faHome = faHome;
     faFileContract = faFileContract;
     faPhone = faPhone;
@@ -31,15 +31,11 @@ export class HeaderComponent implements OnInit {
         this.firstName = sessionStorage.getItem('firstName');
         this.logged = sessionStorage.getItem('isLogged');
         console.log(this.logged);
-        this.userId = parseInt(sessionStorage.getItem('userId'));
+        console.log(this.firstName);
+        this.userId = sessionStorage.getItem('userId');
   }
-  checkLoggedIn(){
-    if (this.logged == 'true'){
-      this.router.navigate(["/profile"]);
-      console.log("se executa")
-    }
-    else{
-      this.router.navigate(["/login"]);
-    }
+  toProfile(){
+    this.router.navigate(["profile", this.userId]);
+
   }
 }

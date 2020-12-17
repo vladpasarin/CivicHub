@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { Issue } from '../shared/issue.model';
 import { User } from '../shared/user.model';
 import { PhotoModalComponent } from './photo-modal/photo-modal.component';
 import { faUser, faArrowAltCircleUp, faArrowAltCircleDown, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { SignFormComponent } from './sign-form/sign-form.component';
-
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
@@ -19,7 +18,7 @@ export class PetitionProfileComponent implements OnInit {
     @ViewChild("photoModal") photoModal: PhotoModalComponent;
     @ViewChild("signForm") signForm: SignFormComponent;
 
-    issueId = this.route.snapshot.queryParamMap.get('id');
+    issueId:string;
     selectedIssue: Issue;
 
     faUser = faUser;
@@ -28,29 +27,25 @@ export class PetitionProfileComponent implements OnInit {
     arrowUp = faArrowUp;
     arrowDown = faArrowDown;
 
-    loaded:boolean;
-    issues:Issue[]=[];
+    organizer=new User();
 
     ngOnInit(): void {
-        this.api.getIssues().subscribe((issues: Issue[]) => {
-            this.issues=issues;
-          });
+        this.route.params.subscribe((params: Params) => this.issueId = params['id']);
 
-        
-        this.api.getIssueById(this.issueId).subscribe((issues: Issue) => {
-            this.selectedIssue=issues;
+        this.api.getIssueById(this.issueId).subscribe((issue: Issue) => {
+            this.selectedIssue=issue;
+            this.api.getUserById(issue.userId).subscribe((user: User) => {
+                this.organizer = user;
+          });
           });
           setTimeout(() => {
             console.log(this.selectedIssue);
         }, 1000);
-        setTimeout(() => {
-            this.loaded=true;
-        }, 2000);
+        
     }
 
     openProfile() {
-        this.router.navigate(["/user-profile"],
-            { queryParams: { firstName: this.selectedIssue.userId } });
+        this.router.navigate(["profile", this.selectedIssue.userId]);
     }
 
     showDM(photoPath): void {
@@ -59,4 +54,5 @@ export class PetitionProfileComponent implements OnInit {
     showSignForm() :void{
         this.signForm.initialize();
     }
+   
 }

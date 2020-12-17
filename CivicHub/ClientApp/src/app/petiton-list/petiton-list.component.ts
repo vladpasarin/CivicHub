@@ -15,8 +15,6 @@ export class PetitonListComponent implements OnInit {
     faUser = faUser;
     faCaretUp = faCaretUp;
     faCaretDown = faCaretDown;
-
-    organizer=new User();
     
 
 issues: Issue[] = [];
@@ -29,16 +27,8 @@ issues: Issue[] = [];
     });
       
    }
-
-  searchUserById(userId){
-      this.api.getUserById(userId).subscribe((user: User) => {
-          console.log("Executing function searchUserById...");
-          this.organizer = user;
-          return this.organizer.firstName;
-    });
-  }
+   
   accessPetition(issue:Issue){
-    this.router.navigate(["/petition-profile"],
-        {queryParams:{id:issue.id}});
+    this.router.navigate(["petition-profile", issue.id]);
   }
 }

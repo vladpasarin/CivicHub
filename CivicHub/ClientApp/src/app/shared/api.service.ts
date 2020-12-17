@@ -23,7 +23,7 @@ export class ApiService {
   }
   */
     getIssues() {
-        return this.http.get(this.baseUrl + "/Issue/all", { headers: this.header });
+        return this.http.get(this.baseUrl + "/Issue/getAllWithUserDetails", { headers: this.header });
     }
     getIssueById(issueId: string) {
       return this.http.get(this.baseUrl + "/Issue/" + issueId, {

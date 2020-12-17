@@ -18,9 +18,10 @@
                 <p class="btn"><fa-icon [icon]="faEdit"> Petitie noua</fa-icon> Report an issue</p>
             </a>
             <a class="nav-link" id="dropdown">
-                <p class="btn"><fa-icon [icon]="faUser"></fa-icon> Profile</p>
+                <p *ngIf="logged == 'false' || logged==null" class="btn"><fa-icon [icon]="faUser"></fa-icon> Profile</p>
+                <p *ngIf="logged == 'true'" class="btn"><fa-icon [icon]="faUser"></fa-icon>{{firstName}} </p>
                 <div class="dropdown-content">
-                    <div class="content" (click)="checkLoggedIn()">{{firstName}}</div>
+                    <div *ngIf="logged == 'true'" class="content" (click)="toProfile()">Profile</div>
                     <div *ngIf="logged == 'true'" class="content" (click)="logout()">Logout</div>
                     <div *ngIf="logged == 'false' || logged==null" class="content" routerLink="/login">Login</div>
                 </div>
