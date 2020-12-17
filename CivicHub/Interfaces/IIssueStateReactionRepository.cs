@@ -8,5 +8,9 @@ namespace CivicHub.Interfaces
 {
     public interface IIssueStateReactionRepository : IGenericRepository<IssueStateReaction>
     {
+
+        Task<List<IssueStateReaction>> GetAllByIssueStateIdAsync(Guid userId);
+        int GetNumberOfDownVotes(Guid id);
+        int GetNumberOfUpVotes(Guid id);
     }
 }

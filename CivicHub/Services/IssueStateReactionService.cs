@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CivicHub.Dtos;
 using CivicHub.Entities;
+using CivicHub.Interfaces;
 using CivicHub.IServices;
 using CivicHub.Repositories;
 using System;
@@ -12,9 +13,9 @@ namespace CivicHub.Services
 {
     public class IssueStateReactionService : IIssueStateReactionService
     {
-        private readonly IssueStateReactionRepository _issueStateReactionRepository;
+        private readonly IIssueStateReactionRepository _issueStateReactionRepository;
         private readonly IMapper _mapper;
-        public IssueStateReactionService(IssueStateReactionRepository issueStateReactionRepository,IMapper mapper)
+        public IssueStateReactionService(IIssueStateReactionRepository issueStateReactionRepository,IMapper mapper)
         {
             _issueStateReactionRepository = issueStateReactionRepository;
             _mapper = mapper;
@@ -49,6 +50,19 @@ namespace CivicHub.Services
                 _issueStateReactionRepository.Update(issueStateReaction);
             }
             return _issueStateReactionRepository.SaveChanges();
+        }
+        public async Task<List<IssueStateReactionDto>> GetAllByIssueStateIdAsync(Guid id)
+        {
+            return _mapper.Map<List<IssueStateReactionDto>>(await _issueStateReactionRepository.GetAllByIssueStateIdAsync(id));
+        }
+
+        public int GetNumberOfDownVotes(Guid id)
+        {
+            return _issueStateReactionRepository.GetNumberOfDownVotes(id);
+        }
+        public int GetNumberOfUpVotes(Guid id)
+        {
+            return _issueStateReactionRepository.GetNumberOfUpVotes(id);
         }
     }
 }

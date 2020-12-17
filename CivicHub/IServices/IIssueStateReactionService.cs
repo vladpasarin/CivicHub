@@ -12,5 +12,8 @@ namespace CivicHub.IServices
         IssueStateReactionDto GetById(Guid id);
         bool Create(IssueStateReactionDto issueStateReactionDTO);
         bool Update(IssueStateReactionDto issueStateReactionDTO);
+        Task<List<IssueStateReactionDto>> GetAllByIssueStateIdAsync(Guid id);
+        int GetNumberOfDownVotes(Guid id);
+        int GetNumberOfUpVotes(Guid id);
     }
 }

@@ -20,6 +20,7 @@ namespace CivicHub.Services
             _issueStateRepository = issueStateRepository;
             _mapper = mapper;
         }
+
         public bool Create(IssueStateDto IssueStateDTO)
         {
             var IssueState = _mapper.Map<IssueState>(IssueStateDTO);
@@ -47,7 +48,7 @@ namespace CivicHub.Services
                 _issueStateRepository.Create(_mapper.Map<IssueState>(IssueStateDTO));
             }
             else
-            {
+            { 
                 _mapper.Map(IssueStateDTO, issue);
                 _issueStateRepository.Update(issue);
             }
