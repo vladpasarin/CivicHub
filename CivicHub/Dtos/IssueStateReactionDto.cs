@@ -10,7 +10,7 @@ namespace CivicHub.Dtos
         public Guid Id { get; set; }
         public Guid IssueStateId { get; set; }
         public Guid UserId { get; set; }
-        public int Vote { get; set; }
+        public String Vote { get; set; }
         public DateTime dateGiven { get; set; }
     }
 }

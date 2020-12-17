@@ -4,14 +4,16 @@ using CivicHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CivicHub.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20201217203711_migrenatie")]
+    partial class migrenatie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,27 +105,6 @@ namespace CivicHub.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("IssueStateComments");
-                });
-
-            modelBuilder.Entity("CivicHub.Entities.IssueStateCommentLike", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IssueStateCommentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasAlternateKey("UserId", "IssueStateCommentId");
-
-                    b.HasIndex("IssueStateCommentId");
-
-                    b.ToTable("IssueStateCommentLikes");
                 });
 
             modelBuilder.Entity("CivicHub.Entities.IssueStateCommentPhoto", b =>
@@ -334,25 +315,6 @@ namespace CivicHub.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CivicHub.Entities.IssueStateCommentLike", b =>
-                {
-                    b.HasOne("CivicHub.Entities.IssueStateComment", "IssueStateComment")
-                        .WithMany("IssueStateCommentLikes")
-                        .HasForeignKey("IssueStateCommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CivicHub.Entities.User", "User")
-                        .WithMany("IssueStateCommentLikes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("IssueStateComment");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CivicHub.Entities.IssueStateCommentPhoto", b =>
                 {
                     b.HasOne("CivicHub.Entities.IssueStateComment", "IssueStateComment")
@@ -444,16 +406,12 @@ namespace CivicHub.Migrations
 
             modelBuilder.Entity("CivicHub.Entities.IssueStateComment", b =>
                 {
-                    b.Navigation("IssueStateCommentLikes");
-
                     b.Navigation("IssueStateCommentPhotos");
                 });
 
             modelBuilder.Entity("CivicHub.Entities.User", b =>
                 {
                     b.Navigation("Issues");
-
-                    b.Navigation("IssueStateCommentLikes");
 
                     b.Navigation("IssueStateComments");
 

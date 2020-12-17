@@ -42,6 +42,7 @@ namespace CivicHub
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+            //Repositories
             services.AddTransient<IIssueRepository, IssueRepository>();
             services.AddTransient<IIssueStateCommentPhotoRepository, IssueStateCommentPhotoRepository>();
             services.AddTransient<IIssueStateCommentRepository, IssueStateCommentRepository>();
@@ -54,13 +55,18 @@ namespace CivicHub
             services.AddTransient<IIssueStateCommentLikeRepository, IssueStateCommentLikeRepository>();
             //services.AddTransient<>
             //services.AddTransient<IStateRepository, StateRepository>();
+            services.AddTransient<IIssueStateSignatureRepository, IssueStateSignatureRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
+            //services.AddTransient<IStateRepository, StateRepository>();
+
+            //Services
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IIssueService, IssueService>();
             services.AddTransient<IIssueStateService, IssueStateService>();
             services.AddTransient<IIssueStateCommentService, IssueStateCommentService>();
-            services.AddTransient<IIssueStateSignatureService, IssueStateSignatureService>();
             services.AddTransient<IIssueStateCommentLikeService, IssueStateCommentLikeService>();
+            services.AddTransient<IIssueStateReactionService, IssueStateReactionService>();
+            services.AddTransient<IIssueStateSignatureService, IssueStateSignatureService>();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
             options.SerializerSettings

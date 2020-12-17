@@ -26,6 +26,12 @@ namespace CivicHub.Controllers
             return Ok(_issueStateReactionService.GetAll());
         }
 
+        [HttpGet("getAllReactionsByIssueStateId/{id}")]
+        public async Task<IActionResult> GetAllByIssueStateIdAsync(Guid id)
+        {
+            return Ok(await _issueStateReactionService.GetAllByIssueStateIdAsync(id));
+        }
+
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
@@ -40,10 +46,16 @@ namespace CivicHub.Controllers
         [HttpPost]
         public IActionResult Create(IssueStateReactionDto IssueStateReactionDto)
         {
+
+            var vote = IssueStateReactionDto.Vote.ToLower();
+            if (!Equals(vote, "upvote") & !Equals(vote, "downvote"))
+                return StatusCode(400, "Bad request, vote field must be either \"Upvote\" or \"Downvote\"");
+
+
             var created = _issueStateReactionService.Create(IssueStateReactionDto);
 
             if (!created)
-                return StatusCode(500);
+                return StatusCode(500, "am crapat");
 
             return Ok(created);
         }
@@ -51,12 +63,28 @@ namespace CivicHub.Controllers
         [HttpPut]
         public IActionResult Update(IssueStateReactionDto IssueStateReactionDto)
         {
+            var vote = IssueStateReactionDto.Vote.ToLower();
+            if (!Equals(vote, "upvote") & !Equals(vote, "downvote"))
+                return StatusCode(400, "Bad request, vote field must be either \"Upvote\" or \"Downvote\"");
+
             var updated = _issueStateReactionService.Update(IssueStateReactionDto);
 
             if (!updated)
                 return StatusCode(500);
 
             return Ok(updated);
+        }
+
+        [HttpGet("numberOfDownVotes/{id}")]
+        public IActionResult GetNumberOfDownVotes(Guid id)
+        {
+           return Ok(_issueStateReactionService.GetNumberOfDownVotes(id));
+        }
+
+        [HttpGet("numberOfUpVotes/{id}")]
+        public IActionResult GetNumberOfUpVotes(Guid id)
+        {
+            return Ok(_issueStateReactionService.GetNumberOfUpVotes(id));
         }
     }
 }
