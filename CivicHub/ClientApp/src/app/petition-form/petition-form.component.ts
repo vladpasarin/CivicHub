@@ -18,6 +18,7 @@ export class PetitionFormComponent implements OnInit {
     markerLat: number;
     markerLng: number;
     markerAlpha = 1;
+
     addIssueForm: FormGroup;
     success: boolean;
     issue = new Issue();

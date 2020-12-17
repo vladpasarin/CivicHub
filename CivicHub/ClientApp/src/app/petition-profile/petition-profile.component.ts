@@ -4,6 +4,7 @@ import { ApiService } from '../shared/api.service';
 import { Issue } from '../shared/issue.model';
 import { User } from '../shared/user.model';
 import { PhotoModalComponent } from './photo-modal/photo-modal.component';
+import { faUser, faArrowAltCircleUp, faArrowAltCircleDown, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
     selector: 'petition-profile',
@@ -17,6 +18,12 @@ export class PetitionProfileComponent implements OnInit {
     @ViewChild("photoModal") photoModal: PhotoModalComponent;
     issueId = this.route.snapshot.queryParamMap.get('id');
     selectedIssue: Issue;
+
+    faUser = faUser;
+    upvote = faArrowAltCircleUp;
+    downvote = faArrowAltCircleDown;
+    arrowUp = faArrowUp;
+    arrowDown = faArrowDown;
 
     loaded:boolean;
     issues:Issue[]=[];
