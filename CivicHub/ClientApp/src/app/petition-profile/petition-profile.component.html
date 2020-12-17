@@ -1,7 +1,19 @@
 <app-header></app-header>
-<div class="issueHeader">
-    <h2 style="font-weight:bold">{{selectedIssue.title}}</h2>
-    <p id="organizer" (click)="openProfile()">Opened by {{selectedIssue.organizer.firstName}} {{selectedIssue.organizer.lastName}}</p>
+<div class="titleContainer">
+    <h1>Issue Title</h1>
+    <p id="organizer" (click)="openProfile()">Opened by <fa-icon [icon]="faUser"></fa-icon> User</p>
+    <p id="vote">Upvote <fa-icon id="up" [icon]="upvote"></fa-icon></p>
+    <p id="vote">Downvote <fa-icon id="down" [icon]="downvote"></fa-icon></p>
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Status
+        <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">1. Opened</a></li>
+          <li><a href="#">2. Closed</a></li>
+          <li><a href="#">3. Solved</a></li>
+        </ul>
+    </div>
+    <button class="btn btn-primary" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
 </div>
 <div class="description">
     <p class="labels">Description:</p>
@@ -9,9 +21,27 @@
         {{selectedIssue.description}}
     </div>
 </div>
-
 <div class="photos">
     <p class="labels">Photos:</p>
-    <img id="issuePhoto" src={{selectedIssue.photoPath}} (click)="showDM(selectedIssue.photoPath)">
+    <!-- <img id="issuePhoto" src={{selectedIssue.photoPath}} (click)="showDM(selectedIssue.photoPath)"> -->
 </div>
 <photo-modal #photoModal></photo-modal>
+<sign-form #signForm></sign-form>
+
+<div class="comments">
+    <p class="labels">Comments:</p>
+    <div class="issueComments">
+        <p>Comentariu facut la postare pt exemplificare 1</p>
+        <div class="reacts">
+            <p><fa-icon id="up" [icon]="arrowUp"></fa-icon></p>
+            <p><fa-icon id="up" [icon]="arrowDown"></fa-icon></p>
+        </div>
+    </div>
+    <div class="issueComments">
+        <p>Comentariu facut la postare pt exemplificare 2</p>
+        <div class="reacts">
+            <p><fa-icon id="up" [icon]="arrowUp"></fa-icon></p>
+            <p><fa-icon id="up" [icon]="arrowDown"></fa-icon></p>
+        </div>
+    </div>
+</div>

@@ -1,2 +1,46 @@
-<app-header></app-header>
-<agm-map [zoom]="zoom" [latitude]="lat" [longitude]="lng"></agm-map>
+﻿<app-header></app-header>
+<div class="container">
+    <div class="row mr-0">
+        <h1>Report an issue</h1>
+    </div>
+</div>
+<div class="mapContainer">
+    <agm-map [zoom]="zoom" [latitude]="latitude" [longitude]="longitude"  (mapReady)="mapReadyHandler($event)">
+        <agm-marker
+                [latitude]="markerLat"
+				[longitude]="markerLng"
+				[opacity]="markerAlpha"
+                [markerDraggable]="true"
+		>
+		</agm-marker>
+    </agm-map>
+</div>
+<form id="petitionForm" action="" [formGroup]="addIssueForm">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputAddress">Address:</label>
+            <input type="text" name="Address" class="form-control" id="inputAddress" placeholder="Address">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputPhoneNr">Phone Number:</label>
+            <input type="text" name="PhoneNr" class="form-control" id="inputPhoneNr" placeholder="Phone Nr.">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="inputIssueTitle">Title:</label>
+            <input type="text" name="IssueTitle" class="form-control" formControlName="title" id="inputIssueTitle" placeholder="">
+        </div>
+    </div>
+    <div class="form-row">
+        <span>Description: &nbsp;</span>
+        <textarea id="issueDescription" name="issueDescription" formControlName="description" rows="4" cols="50"></textarea>
+    </div>
+    <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
+    <input type='file' (change)="onSelectFile($event)" multiple>
+    <div class="text-center">
+        <button type="button" id="submit" class="btn btn-primary" (click)="addIssue()">Submit</button>
+    </div>
+</form>

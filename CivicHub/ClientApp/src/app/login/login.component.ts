@@ -31,12 +31,7 @@ export class LoginComponent implements OnInit {
     request = new Request();
     requestResponse = new RequestResponse();
     token: string;
-    //users: User[] = [];
-  users:User[]=[
-    {id:1,firstName:"Vlad",lastName:"Pasarin",mail:"vlad@gmail.com",password:"vlad1998"},
-      { id: 2, firstName: "Florin", lastName: "Stan", mail: "florin@yahoo.com",password:"florinel99"},
-      { id: 3, firstName: "Eusebiu", lastName: "Timofte", mail: "sebi@yahoo.com",password:"eusebi98"}
-];
+  
   ngOnInit() {
     this.loginForm = this.fb.group({
       mail: [null, Validators.required],
@@ -74,7 +69,6 @@ export class LoginComponent implements OnInit {
       }, 3000);
       this.validateAllFormFields(this.loginForm);
       }
-      //console.log(this.users);
       this.request.mail = this.f.mail.value;
       this.request.password = this.f.password.value;
       this.api.getLoginToken(this.request).subscribe((data) => {
@@ -91,7 +85,8 @@ export class LoginComponent implements OnInit {
               else {
 
                   sessionStorage.setItem('isLogged', 'true');
-                  //localStorage.setItem("firstName", user.firstName);
+                  sessionStorage.setItem('userId', this.requestResponse.id);
+                  console.log(this.requestResponse.id);
 
                   setTimeout(() => {
                       this.router.navigate(["/profile"],

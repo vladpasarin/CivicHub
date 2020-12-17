@@ -27,7 +27,7 @@
             <div class="detaliiIssue">
                 <div class="issueTitle">
                     <p id="title">{{issue.title}}</p>
-                    <p id="organizer">Opened by: <fa-icon [icon]="faUser"></fa-icon> &nbsp;{{issue.organizer.firstName}}</p>
+                    <p id="organizer">Opened by: <fa-icon [icon]="faUser"></fa-icon> &nbsp; {{ issue.userId | pipeFunction }}</p>
                 </div>
                 <p>{{issue.description}}</p>
 
@@ -41,7 +41,7 @@
             <div class="detaliiIssue">
                 <div class="issueTitle">
                     <p>{{issue.title}}</p>
-                    <p id="organizer">Opened by: {{issue.organizer.firstName}}</p>
+                    <!-- <p id="organizer">Opened by: {{issue.organizer.firstName}}</p> -->
                 </div>
                 <p>{{issue.description}}</p>
 

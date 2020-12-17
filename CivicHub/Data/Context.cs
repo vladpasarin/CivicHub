@@ -19,6 +19,7 @@ namespace CivicHub.Data
         public DbSet<IssueStateReaction> IssueStateReactions { get; set; }
         public DbSet<IssueStateVideo> IssueStateVideos { get; set; }
         public DbSet<IssueStateSignature> IssueSignatures { get; set; }
+        public DbSet<IssueStateCommentLike> IssueStateCommentLikes { get; set; }
         //public DbSet<State> States { get; set; }
         public DbSet<User> Users { get; set; }
 
@@ -128,7 +129,23 @@ namespace CivicHub.Data
             builder.Entity<User>()
                 .HasAlternateKey(x => x.Mail);
 
-            
+            //issue state comment M M user (like)
+            builder.Entity<IssueStateCommentLike>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.IssueStateCommentLikes)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(x => x.UserId);
+
+            builder.Entity<IssueStateCommentLike>()
+                .HasOne(x => x.IssueStateComment)
+                .WithMany(x => x.IssueStateCommentLikes)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasForeignKey(x => x.IssueStateCommentId);
+            //unique signature
+            builder.Entity<IssueStateCommentLike>()
+                .HasAlternateKey(x => new { x.UserId, x.IssueStateCommentId });
+
+
 
             //din proieect DAW laborator
             /*
