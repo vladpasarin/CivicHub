@@ -67,11 +67,12 @@ export class PetitionFormComponent implements OnInit {
             }, 3000);
             console.log("loginForm submitted");
             this.issue.description = this.f.description.value;
+            this.issue.title = this.f.title.value;
             this.issue.latitude = this.markerLat;
             this.issue.longitude = this.markerLng;
             this.issue.userId = this.userId;
             console.log(this.userId);
-            //si titlu
+            
             console.log(this.issue);
             this.api.addIssue(this.issue).subscribe(() => {
              
@@ -111,7 +112,7 @@ export class PetitionFormComponent implements OnInit {
     ngOnInit(): void {
         this.addIssueForm = this.fb.group({
             description: [null, Validators.required],
-            
+            title: [null, Validators.required],
         });
   }
 
