@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CivicHub.Entities
 {
-    public class IssueStateReaction: BaseEntity
+    public class IssueStateReaction : BaseEntity
     {
         public Guid IssueStateId { get; set; }
         public IssueState IssueState { get; set; }
