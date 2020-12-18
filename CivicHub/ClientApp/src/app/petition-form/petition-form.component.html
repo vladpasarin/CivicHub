@@ -31,12 +31,18 @@
     <div class="form-row">
         <div class="form-group col-md-8">
             <label for="inputIssueTitle">Title:</label>
-            <input type="text" name="IssueTitle" class="form-control" formControlName="title" id="inputIssueTitle" placeholder="">
+            <input type="text" autocomplete="off" name="IssueTitle" class="form-control" formControlName="title" id="inputIssueTitle" placeholder="">
+            <app-field-error-display [displayError]="isFieldValid('title')"
+                                       errorMsg="Please inform the title">
+              </app-field-error-display>
         </div>
     </div>
     <div class="form-row">
         <span>Description: &nbsp;</span>
         <textarea id="issueDescription" name="issueDescription" formControlName="description" rows="4" cols="50"></textarea>
+        <app-field-error-display [displayError]="isFieldValid('description')"
+                                       errorMsg="Please inform the description">
+              </app-field-error-display>
     </div>
     <img *ngFor='let url of urls'  [src]="url" height="200"> <br/>
     <input type='file' (change)="onSelectFile($event)" multiple>
