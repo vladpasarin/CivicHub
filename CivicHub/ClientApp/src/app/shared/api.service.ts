@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from "./user.model";
 import { Request } from "./request";
 import { Issue } from './issue.model';
+import { IssueComment } from './issueComment.model';
 
 @Injectable({
   providedIn: "root",
@@ -33,6 +34,12 @@ export class ApiService {
       });
     }
 
+    getAllCommentsByStateId(issueStateId: string) {
+      return this.http.get(this.baseUrl + "/IssueState/?????" + issueStateId, {
+        headers: this.header,
+      });
+    }
+
 
   getUsers() {
     return this.http.get(this.baseUrl + "/auth/all", { headers: this.header });
@@ -59,6 +66,12 @@ export class ApiService {
         return this.http.post(this.baseUrl + "/Issue", issue, {
             headers: this.header,
         });
+    }
+  
+    addComment(issueComment: IssueComment) {
+      return this.http.post(this.baseUrl + "/IssueStateComment", issueComment, {
+        headers: this.header,
+      });
     }
   
 }

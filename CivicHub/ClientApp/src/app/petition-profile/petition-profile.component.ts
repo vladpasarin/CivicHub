@@ -4,9 +4,10 @@ import { ApiService } from '../shared/api.service';
 import { Issue } from '../shared/issue.model';
 import { User } from '../shared/user.model';
 import { PhotoModalComponent } from './photo-modal/photo-modal.component';
-import { faUser, faArrowAltCircleUp, faArrowAltCircleDown, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faArrowAltCircleUp, faArrowAltCircleDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { SignFormComponent } from './sign-form/sign-form.component';
 import { IssueState } from '../shared/issueState.model';
+import { IssueComment } from '../shared/issueComment.model';
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
@@ -21,14 +22,16 @@ export class PetitionProfileComponent implements OnInit {
 
     issueId:string;
     selectedIssue: Issue;
-    commentText;
-    currentStateId;
+    commentText: string;
+    stateComment = new IssueComment();
+    currentState = new IssueState();
+    userId = sessionStorage.getItem('userId');
+    allComments: IssueComment[] = [];
 
     faUser = faUser;
     upvote = faArrowAltCircleUp;
     downvote = faArrowAltCircleDown;
-    arrowUp = faArrowUp;
-    arrowDown = faArrowDown;
+    thumbsUp = faThumbsUp;
 
     organizer=new User();
     issueStates:IssueState[]=[];
@@ -50,7 +53,29 @@ export class PetitionProfileComponent implements OnInit {
             this.issueStates=issueStates;
             console.log(this.issueStates);
       });
+        this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
+            this.allComments = allcomm;
+            console.log(this.allComments);
+        });
         
+    }
+
+    selectState(issueState: IssueState) {
+        this.currentState = issueState;
+    }
+
+    addComment() {
+        this.stateComment.IssueStateId = this.currentState.id;
+        this.stateComment.UserId = this.userId;
+        this.stateComment.Text = this.commentText;
+        this.stateComment.dateCreated = new Date();
+        console.log(this.stateComment);
+        this.api.addComment(this.stateComment).subscribe(() => {
+        });
+    }
+
+    getAllComments() {
+
     }
 
     openProfile() {

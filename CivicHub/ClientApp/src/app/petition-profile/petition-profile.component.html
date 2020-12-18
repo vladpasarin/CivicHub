@@ -2,13 +2,13 @@
 <div class="titleContainer">
     <h2 style="font-weight: bold;">{{selectedIssue.title}}</h2>
     <p id="organizer" (click)="openProfile()">Opened by: <fa-icon [icon]="faUser"></fa-icon>{{organizer.firstName}}</p>
-    <p id="vote">Upvote <fa-icon id="up" [icon]="upvote"></fa-icon></p>
-    <p id="vote">Downvote <fa-icon id="down" [icon]="downvote"></fa-icon></p>
+    <p id="vote">Upvote <fa-icon id="upVote" [icon]="upvote"></fa-icon></p>
+    <p id="vote">Downvote <fa-icon id="downVote" [icon]="downvote"></fa-icon></p>
     <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Status
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li *ngFor="let state of issueTypes" class="content"><a>{{state}}</a></li>
+          <li *ngFor="let issueState of issueStates" class="content" (click)="selectState(issueState)"><a>{{issueState.message}}</a></li>
         </ul>
     </div>
     <button class="btn btn-primary" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
@@ -33,21 +33,19 @@
     <div class="issueComments">
         <p>Comentariu facut la postare pt exemplificare 1</p>
         <div class="reacts">
-            <p><fa-icon id="up" [icon]="arrowUp"></fa-icon></p>
-            <p><fa-icon id="up" [icon]="arrowDown"></fa-icon></p>
+            <p><fa-icon id="up" [icon]="thumbsUp"></fa-icon></p>
         </div>
     </div>
     <div class="issueComments">
         <p>Comentariu facut la postare pt exemplificare 2</p>
         <div class="reacts">
-            <p><fa-icon id="up" [icon]="arrowUp"></fa-icon></p>
-            <p><fa-icon id="up" [icon]="arrowDown"></fa-icon></p>
+            <p><fa-icon id="up" [icon]="thumbsUp"></fa-icon></p>
         </div>
     </div>
     <div class="issueComments">
         <div class="newComment">
-            <textarea  [(ngModel)]="commentText" name="newComment" id="newCommentText" cols="100" rows="2"></textarea><br>
-            <button class="btn btn-primary" id="sendComment" type="button">Send</button>
+            <textarea  [(ngModel)]="commentText" name="newComment" id="newCommentText" cols="100" rows="2" placeholder="New Comment..."></textarea><br>
+            <button class="btn btn-primary" id="sendComment" type="button" (click)="addComment()">Send</button>
         </div>
     </div>
 </div>

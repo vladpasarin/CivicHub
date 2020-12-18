@@ -77,7 +77,11 @@
 .reacts {
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: 40px;
+}
+
+#up {
+  color: blue;
 }
 
 .labels {
