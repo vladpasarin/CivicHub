@@ -8,9 +8,7 @@
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Status
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li><a href="#">1. Opened</a></li>
-          <li><a href="#">2. Closed</a></li>
-          <li><a href="#">3. Solved</a></li>
+          <li *ngFor="let state of issueTypes" class="content"><a>{{state}}</a></li>
         </ul>
     </div>
     <button class="btn btn-primary" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
@@ -23,7 +21,9 @@
 </div>
 <div class="photos">
     <p class="labels">Photos:</p>
-    <!-- <img id="issuePhoto" src={{selectedIssue.photoPath}} (click)="showDM(selectedIssue.photoPath)"> -->
+    <img id="issuePhoto" 
+    src="https://cnet2.cbsistatic.com/img/-e95qclc6pwSnGE2YccC2oLDW_8=/1200x675/2020/04/16/7d6d8ed2-e10c-4f91-b2dd-74fae951c6d8/bazaart-edit-app.jpg" 
+    >
 </div>
 <photo-modal #photoModal></photo-modal>
 <sign-form #signForm></sign-form>

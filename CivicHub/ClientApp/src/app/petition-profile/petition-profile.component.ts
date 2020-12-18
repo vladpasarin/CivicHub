@@ -6,6 +6,7 @@ import { User } from '../shared/user.model';
 import { PhotoModalComponent } from './photo-modal/photo-modal.component';
 import { faUser, faArrowAltCircleUp, faArrowAltCircleDown, faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { SignFormComponent } from './sign-form/sign-form.component';
+import { IssueState } from '../shared/issueState.model';
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
@@ -28,6 +29,8 @@ export class PetitionProfileComponent implements OnInit {
     arrowDown = faArrowDown;
 
     organizer=new User();
+    issueStates:IssueState[]=[];
+    issueTypes=["Petiton pending","Petition waiting"];
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) => this.issueId = params['id']);
@@ -41,6 +44,10 @@ export class PetitionProfileComponent implements OnInit {
           setTimeout(() => {
             console.log(this.selectedIssue);
         }, 1000);
+        this.api.getAllStatesByIssueId(this.issueId).subscribe((issueStates: IssueState[]) => {
+            this.issueStates=issueStates;
+            console.log(this.issueStates);
+      });
         
     }
 

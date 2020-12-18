@@ -30,8 +30,6 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         this.firstName = sessionStorage.getItem('firstName');
         this.logged = sessionStorage.getItem('isLogged');
-        console.log(this.logged);
-        console.log(this.firstName);
         this.userId = sessionStorage.getItem('userId');
   }
   toProfile(){
