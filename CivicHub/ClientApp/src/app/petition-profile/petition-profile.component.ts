@@ -18,6 +18,8 @@ export class PetitionProfileComponent implements OnInit {
     @ViewChild("photoModal") photoModal: PhotoModalComponent;
     issueId = this.route.snapshot.queryParamMap.get('id');
     selectedIssue: Issue;
+    commentText;
+    currentStateId;
 
     faUser = faUser;
     upvote = faArrowAltCircleUp;

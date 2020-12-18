@@ -42,4 +42,10 @@
             <p><fa-icon id="up" [icon]="arrowDown"></fa-icon></p>
         </div>
     </div>
+    <div class="issueComments">
+        <div class="newComment">
+            <textarea  [(ngModel)]="commentText" name="newComment" id="newCommentText" cols="100" rows="2"></textarea><br>
+            <button class="btn btn-primary" id="sendComment" type="button">Send</button>
+        </div>
+    </div>
 </div>
