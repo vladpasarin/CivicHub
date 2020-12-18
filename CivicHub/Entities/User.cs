@@ -21,5 +21,6 @@ namespace CivicHub.Entities
         public ICollection<IssueStateComment> IssueStateComments { get; set; }
         public ICollection<IssueStateReaction> IssueStateReactions { get; set; }
         public ICollection<IssueStateSignature> IssueStateSignatures { get; set; }
+        public ICollection<IssueStateCommentLike> IssueStateCommentLikes { get; set; }
     }
 }

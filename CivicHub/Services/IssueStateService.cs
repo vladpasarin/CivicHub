@@ -20,12 +20,13 @@ namespace CivicHub.Services
             _issueStateRepository = issueStateRepository;
             _mapper = mapper;
         }
-        public IssueStateDto Create(IssueStateDto IssueStateDTO)
+
+        public bool Create(IssueStateDto IssueStateDTO)
         {
             var IssueState = _mapper.Map<IssueState>(IssueStateDTO);
             _issueStateRepository.Create(IssueState);
-            _issueStateRepository.SaveChanges();
-            return IssueStateDTO;
+            return _issueStateRepository.SaveChanges();
+            
         }
 
         public List<IssueStateDto> GetAll()
@@ -39,11 +40,24 @@ namespace CivicHub.Services
             return _mapper.Map<List<IssueStateDto>>(IssueStates);
         }
 
-        public IssueStateDto Update(IssueStateDto IssueStateDTO)
+        public bool Update(IssueStateDto IssueStateDTO)
         {
-            _issueStateRepository.Update(_mapper.Map<IssueState>(IssueStateDTO));
-            _issueStateRepository.SaveChanges();
-            return _mapper.Map<IssueStateDto>(_issueStateRepository.FindById(IssueStateDTO.Id));
+            var issue = _issueStateRepository.FindById(IssueStateDTO.Id);
+            if (issue == null)
+            {
+                _issueStateRepository.Create(_mapper.Map<IssueState>(IssueStateDTO));
+            }
+            else
+            { 
+                _mapper.Map(IssueStateDTO, issue);
+                _issueStateRepository.Update(issue);
+            }
+            return _issueStateRepository.SaveChanges();
+        }
+
+        public IssueStateDto GetLatestIssueState(Guid IssueId)
+        {
+            return _mapper.Map<IssueStateDto>(_issueStateRepository.GetLatestIssueState(IssueId));
         }
     }
 }

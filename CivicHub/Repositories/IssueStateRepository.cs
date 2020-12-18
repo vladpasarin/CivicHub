@@ -19,5 +19,23 @@ namespace CivicHub.Repositories
         {
             return await _table.Where(x => x.IssueId == IssueId).ToListAsync();
         }
+
+        public IssueState GetLatestIssueState(Guid IssueId)
+        {
+            var issueStates = _table.Where(x => x.IssueId == IssueId).ToList();
+            int index = -1;
+            //(int year, int month, int day, int hour, int minute, int second)
+            DateTime lastestDate = new DateTime(1900,1,1,0,0,0);
+            for(int i =0;i<issueStates.Count();i++)
+            {
+                if (issueStates[i].DateStart.CompareTo(lastestDate) > 0)
+                {
+                    lastestDate = issueStates[i].DateStart;
+                    index = i;
+                }
+            }
+
+            return issueStates[index];
+        }
     }
 }

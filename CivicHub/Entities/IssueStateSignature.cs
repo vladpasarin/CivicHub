@@ -16,6 +16,7 @@ namespace CivicHub.Entities
         public string Adresa { get; set; }
         public string SerieBuletin { get; set; }
         public string NumarBuletin { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

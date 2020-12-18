@@ -9,8 +9,8 @@ namespace CivicHub.IServices
     public interface IIssueStateCommentService
     {
         List<IssueStateCommentDto> GetAll(Guid IssueStateId);
-        IssueStateCommentDto Create(IssueStateCommentDto issueDTO);
-        IssueStateCommentDto Update(IssueStateCommentDto issueDTO);
+        bool Create(IssueStateCommentDto issueDTO);
+        bool Update(IssueStateCommentDto issueDTO);
         int Delete(IssueStateCommentDto issueDTO);
     }
 }
