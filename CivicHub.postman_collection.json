@@ -1,0 +1,571 @@
+{
+	"info": {
+		"_postman_id": "d7969708-24e9-4ff2-a6b1-dc916599301d",
+		"name": "CivicHub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\":\"Stan\",\r\n    \"lastname\":\"Florin\",\r\n    \"mail\":\"florinachio@iluminati.com\",\r\n    \"password\":\"suspicios\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/Auth/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"Auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mail\":\"florinachio@iluminati.com\",\r\n    \"password\":\"suspicios\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/Auth/Login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"Auth",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllRegisteredUsers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkzZmE2ZGFiLTZmZjQtNGQ5OC0zYjJhLTA4ZDg5YWY5MDA1ZCIsIm5iZiI6MTYwNzM3NzU1MCwiZXhwIjoxNjA3NTUwMzUwLCJpYXQiOjE2MDczNzc1NTB9.O5x-D31GlM3g15xLIdENLJuUC_FDYkQNvXvAVeI7sT8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44397/api/Auth/All",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"Auth",
+								"All"
+							]
+						},
+						"description": "E nevoie de autorizare (trebuie sa te loghezi)"
+					},
+					"response": []
+				},
+				{
+					"name": "GetRegisteredUserDetailsById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Issue",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkzZmE2ZGFiLTZmZjQtNGQ5OC0zYjJhLTA4ZDg5YWY5MDA1ZCIsIm5iZiI6MTYwNzQ1ODMzOCwiZXhwIjoxNjA3NjMxMTM4LCJpYXQiOjE2MDc0NTgzMzh9.wqf7lqCaFVkVKI8QSdD9tQhn-UMq0BAb6-EZelrwfvM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"ajutor\",\r\n\t\"latitude\" : 51.0,\r\n\t\"longitude\" : 28.0,\r\n\t\"description\" : \"sunt prost\",\r\n\t\"userId\" : \"5cb7484d-e7c1-48f9-0d39-08d8a1ef570b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/Issue",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"Issue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/Issue/all",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"Issue",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44397/api/Issue/649a9be0-65bd-425d-c595-08d8a20caedb",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"Issue",
+								"649a9be0-65bd-425d-c595-08d8a20caedb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"issueModificatCuUpdate\",\r\n    \"id\": \"398776ca-3fda-42f0-c596-08d8a20caedb\",\r\n    \"latitude\": 999.0,\r\n    \"longitude\": 999.0,\r\n    \"description\": \"updated\",\r\n    \"userId\": \"5cb7484d-e7c1-48f9-0d39-08d8a1ef570b\",\r\n    \"issueStates\": [\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/Issue",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"Issue"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetByUserId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkzZmE2ZGFiLTZmZjQtNGQ5OC0zYjJhLTA4ZDg5YWY5MDA1ZCIsIm5iZiI6MTYwNzQ2Nzk3MCwiZXhwIjoxNjA3NjQwNzcwLCJpYXQiOjE2MDc0Njc5NzB9.9zqdw_iqID9FibuIIKj9GAb57fI7Gf11EGMq1q06y34",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/Issue/getAllByUser/5cb7484d-e7c1-48f9-0d39-08d8a1ef570b",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"Issue",
+								"getAllByUser",
+								"5cb7484d-e7c1-48f9-0d39-08d8a1ef570b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllWithUsersDetails",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44397/api/Issue/getAllWithUserDetails",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"Issue",
+								"getAllWithUserDetails"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "IssueState",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjkzZmE2ZGFiLTZmZjQtNGQ5OC0zYjJhLTA4ZDg5YWY5MDA1ZCIsIm5iZiI6MTYwNzQ1ODMzOCwiZXhwIjoxNjA3NjMxMTM4LCJpYXQiOjE2MDc0NTgzMzh9.wqf7lqCaFVkVKI8QSdD9tQhn-UMq0BAb6-EZelrwfvM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"issueid\": \"57a2c403-4d49-4e48-e613-08d8a1efb516\",\r\n    \"type\":\"999\",\r\n    \"message\":\"nu s-a rezolvat\",\r\n    \"datestart\":\"2012-03-19T07:22Z\",\r\n    \"dateend\":\"\",\r\n    \"custommessage\" : \"NU SE MAI TERMINA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/IssueState",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueState"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllByIssueId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44397/api/IssueState/GetAllByIssueId/57a2c403-4d49-4e48-e613-08d8a1efb516",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueState",
+								"GetAllByIssueId",
+								"57a2c403-4d49-4e48-e613-08d8a1efb516"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetLatestStateByIssueId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"id\": \"bebe6a87-7105-4e9c-1c32-08d8a1f06091\",\r\n    \"issueId\": \"57a2c403-4d49-4e48-e613-08d8a1efb516\",\r\n    \"type\": 1,\r\n    \"message\": \"nu s-a rezolvat\",\r\n    \"dateStart\": \"2012-03-19T07:22Z\",\r\n    \"dateEnd\": \"2012-03-19T07:22Z\",\r\n    \"customMessage\": \"e o problema mare\"\r\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/IssueState",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueState"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "IssueStateReaction",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IssueStateId\":\"bebe6a87-7105-4e9c-1c32-08d8a1f06091\", \r\n    \"UserId\":\"5cb7484d-e7c1-48f9-0d39-08d8a1ef570b\", \r\n    \"Vote\":\"Upvote\",\r\n    \"dateGiven\":\"2020-12-19T15:22Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/IssueStateReaction",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueStateReaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllByIssueStateId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44397/api/IssueStateReaction/all",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueStateReaction",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"IssueStateId\":\"bebe6a87-7105-4e9c-1c32-08d8a1f06091\", \r\n    \"UserId\":\"5cb7484d-e7c1-48f9-0d39-08d8a1ef570b\", \r\n    \"Vote\":\"downvote\",\r\n    \"dateGiven\":\"2020-12-19T15:22Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/IssueStateReaction/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueStateReaction",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44397/api/IssueStateReaction/f9d5bd72-1e7f-4d17-abc3-08d8a2cbe5f3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueStateReaction",
+								"f9d5bd72-1e7f-4d17-abc3-08d8a2cbe5f3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetNumberOfUpVotes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44397/api/IssueStateReaction/numberOfUpVotes/f9d5bd72-1e7f-4d17-abc3-08d8a2cbe5f3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueStateReaction",
+								"numberOfUpVotes",
+								"f9d5bd72-1e7f-4d17-abc3-08d8a2cbe5f3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetNumberOfDownVotes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44397/api/IssueStateReaction/numberOfDownVotes/f9d5bd72-1e7f-4d17-abc3-08d8a2cbe5f3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueStateReaction",
+								"numberOfDownVotes",
+								"f9d5bd72-1e7f-4d17-abc3-08d8a2cbe5f3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	}
+}
