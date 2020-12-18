@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap");
 
 * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: normal;
 }
 
@@ -31,7 +31,17 @@
 .dropdown {
   margin: auto;
 }
-
+.dropdown-menu {
+  background-color: #f9f9f9;
+  max-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 2;
+  border-bottom: 5px solid rgb(87, 37, 37);
+}
+.content:hover {
+  background-color: gray;
+}
 .description {
   display: flex;
   flex-direction: row;
@@ -65,9 +75,9 @@
 }
 
 .reacts {
-  position: absolute;  
+  position: absolute;
   bottom: 0;
-  right: 0;                             
+  right: 0;
 }
 
 .labels {
@@ -86,6 +96,7 @@
   display: flex;
   flex-direction: row;
   margin: auto;
+  margin-top: 20px;
 }
 
 #issuePhoto {

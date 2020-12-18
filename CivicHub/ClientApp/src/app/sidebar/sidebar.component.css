@@ -35,9 +35,14 @@ ng-sidebar-container {
   margin-bottom: 30px;
 }
 .followup {
-    color: red
+  color: red;
 }
 
 .unfollow {
-    color: green
+  color: green;
+}
+#title:hover,
+#organizer:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

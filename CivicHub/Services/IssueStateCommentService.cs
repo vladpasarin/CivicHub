@@ -21,12 +21,11 @@ namespace CivicHub.Services
             _mapper = mapper;
         }
 
-        public IssueStateCommentDto Create(IssueStateCommentDto issueDTO)
+        public bool Create(IssueStateCommentDto issueDTO)
         {
             var issue = _mapper.Map<IssueStateComment>(issueDTO);
             _issueStateCommentRepository.Create(issue);
-            _issueStateCommentRepository.SaveChanges();
-            return _mapper.Map<IssueStateCommentDto>(_issueStateCommentRepository.GetWithDetails(issue.Id));
+            return _issueStateCommentRepository.SaveChanges();
         }
 
         public int Delete(IssueStateCommentDto issueDTO)
@@ -34,7 +33,8 @@ namespace CivicHub.Services
             if (_issueStateCommentRepository.FindById(issueDTO.Id) == null)
             {
                 return 404;
-            }else
+            }
+            else
             {
                 _issueStateCommentRepository.Delete(_mapper.Map<IssueStateComment>(issueDTO));
                 _issueStateCommentRepository.SaveChanges();
@@ -42,7 +42,8 @@ namespace CivicHub.Services
                 if (_issueStateCommentRepository.FindById(issueDTO.Id) == null)
                 {
                     return 200;
-                }else
+                }
+                else
                 {
                     return 500;
                 }
@@ -54,18 +55,19 @@ namespace CivicHub.Services
             return _mapper.Map<List<IssueStateCommentDto>>(_issueStateCommentRepository.GetAllWithDetails(issueStateId));
         }
 
-        public IssueStateCommentDto Update(IssueStateCommentDto issueDTO)
+        public bool Update(IssueStateCommentDto issueDTO)
         {
-            if (_issueStateCommentRepository.FindById(issueDTO.Id) == null)
+            var issue = _issueStateCommentRepository.FindById(issueDTO.Id);
+            if (issue == null)
             {
-                return null;
+                _issueStateCommentRepository.Create(_mapper.Map<IssueStateComment>(issueDTO));
             }
             else
             {
-                _issueStateCommentRepository.Update(_mapper.Map<IssueStateComment>(issueDTO));
-                _issueStateCommentRepository.SaveChanges();
-                return _mapper.Map<IssueStateCommentDto>(_issueStateCommentRepository.GetWithDetails(issueDTO.Id));
+                _mapper.Map(issueDTO, issue);
+                _issueStateCommentRepository.Update(issue);
             }
+            return _issueStateCommentRepository.SaveChanges();
         }
     }
 }

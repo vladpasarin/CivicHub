@@ -103,6 +103,19 @@ export class PetitionFormComponent implements OnInit {
         });
     }
 
+    isFieldValid(field: string) {
+        return (
+          !this.addIssueForm.get(field).valid && this.addIssueForm.get(field).touched
+        );
+      }
+    
+      displayFieldCss(field: string) {
+        return {
+          "has-error": this.isFieldValid(field),
+          "has-feedback": this.isFieldValid(field),
+        };
+      }
+
     get f() {
         return this.addIssueForm.controls;
     }

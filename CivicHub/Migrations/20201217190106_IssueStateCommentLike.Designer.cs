@@ -4,14 +4,16 @@ using CivicHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CivicHub.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20201217190106_IssueStateCommentLike")]
+    partial class IssueStateCommentLike
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,8 +181,8 @@ namespace CivicHub.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Vote")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Vote")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("dateGiven")
                         .HasColumnType("datetime2");

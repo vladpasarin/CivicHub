@@ -24,7 +24,7 @@ namespace CivicHub.Controllers
         public IActionResult Create(IssueStateDto issueStateDto)
         {
             var createdIssueState = _issueStateService.Create(issueStateDto);
-            if (createdIssueState == null)
+            if (!createdIssueState)
                 return StatusCode(500);
 
             return Ok(createdIssueState);
@@ -39,14 +39,23 @@ namespace CivicHub.Controllers
         [HttpPut]
         public IActionResult Update(IssueStateDto issueStateDTO)
         {
-
-            var issiogjewoij = issueStateDTO;
             var updatedIssueState = _issueStateService.Update(issueStateDTO);
 
-            if (updatedIssueState == null)
+            if (!updatedIssueState)
                 return StatusCode(500);
 
             return Ok(updatedIssueState);
+        }
+
+        [HttpGet("latestState/{id}")]
+        public IActionResult GetLatestIssueState(Guid id)
+        {
+            var latestIssueState = _issueStateService.GetLatestIssueState(id);
+
+            if (latestIssueState == null)
+                return StatusCode(500, "rahat");
+
+            return Ok(latestIssueState);
         }
     }
 }

@@ -9,8 +9,10 @@ namespace CivicHub.IServices
     public interface IIssueStateService
     {
         List<IssueStateDto> GetAll();
-        IssueStateDto Create(IssueStateDto IssueStateDTO);
-        IssueStateDto Update(IssueStateDto IssueDTO);
+        bool Create(IssueStateDto IssueStateDTO);
+        bool Update(IssueStateDto IssueDTO);
         Task<List<IssueStateDto>> GetAllByIssueIdAsync(Guid IssueId);
+        IssueStateDto GetLatestIssueState(Guid IssueId);
+
     }
 }

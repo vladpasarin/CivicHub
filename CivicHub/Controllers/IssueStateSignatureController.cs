@@ -55,17 +55,13 @@ namespace CivicHub.Controllers
             {
                 case 200:
                     return Ok();
-                    break;
                 case 404:
                     return NotFound("Nu este niciun issue state comment cu id -ul dat");
-                    break;
                 case 500:
                     return StatusCode(500, "Issue state comment-ul se afla in bd, dar nu a putut fi sters");
-                    break;
                 default:
                     return StatusCode(500, null);
             }
         }
     }
-}
 }

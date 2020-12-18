@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ApiService } from '../shared/api.service';
+import { User } from '../shared/user.model';
 
 @Component({
   selector: 'profile',
@@ -8,11 +10,28 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-    firstName = this.route.snapshot.queryParamMap.get('firstName');
+  constructor(private route: ActivatedRoute,private api:ApiService, private router:Router) { }
+  userId: string;
+  currentUser:User;
+  options = ['Followed', 'Signed', 'Organized','Achievements'];
+  selectedOption:string;
 
-    constructor(private route: ActivatedRoute) { }
+ngOnInit(): void {
+  this.selectedOption = 'Organized';
 
-  ngOnInit(): void {
-  }
+  this.route.params.subscribe((params: Params) => this.userId = params['id']);
+  console.log(this.userId);
 
+  this.api.getUserById(this.userId).subscribe((user: User) => {
+    this.currentUser = user;
+    console.log(this.currentUser);
+});
+}
+
+changeOption(option){
+  this.selectedOption=option;
+}
+toIssue(issueId:string){
+  this.router.navigate(["petition-profile", issueId]);
+}
 }

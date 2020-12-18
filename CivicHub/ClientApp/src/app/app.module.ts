@@ -29,6 +29,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PhotoModalComponent } from './petition-profile/photo-modal/photo-modal.component';
 import { PetitionFormComponent } from './petition-form/petition-form.component';
 import { PipeFunctionPipe } from './pipe-function.pipe';
+import { SignFormComponent } from "./petition-profile/sign-form/sign-form.component";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { PipeFunctionPipe } from './pipe-function.pipe';
         PhotoModalComponent,
         PetitionFormComponent,
         PipeFunctionPipe,
+        SignFormComponent,
 
   ],
   imports: [

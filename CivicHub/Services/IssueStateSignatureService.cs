@@ -38,7 +38,7 @@ namespace CivicHub.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Mail = user.Mail,
-                Name = signature.Name,
+                Name = signature.FirstName,
                 DateSigned = signature.DateSigned,
                 Cnp = signature.Cnp,
                 Adresa = signature.Adresa,
@@ -86,7 +86,7 @@ namespace CivicHub.Services
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Mail = user.Mail,
-                    Name = signature.Name,
+                    Name = signature.FirstName,
                     DateSigned = signature.DateSigned,
                     Cnp = signature.Cnp,
                     Adresa = signature.Adresa,
@@ -98,5 +98,4 @@ namespace CivicHub.Services
             return signatureResponses;
         }
     }
-}
 }

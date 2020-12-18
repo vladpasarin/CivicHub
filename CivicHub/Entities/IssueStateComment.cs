@@ -14,5 +14,6 @@ namespace CivicHub.Entities
         public User User { get; set; }
         public DateTime dateCreated { get; set; }
         public ICollection<IssueStateCommentPhoto> IssueStateCommentPhotos { get; set; }
+        public ICollection<IssueStateCommentLike> IssueStateCommentLikes { get; set; }
     }
 }

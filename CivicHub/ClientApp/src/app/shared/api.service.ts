@@ -15,21 +15,25 @@ export class ApiService {
   });
   baseUrl = "https://localhost:44397/api";
 
-    /*
-  getUser(id: number) {
-    return this.http.get(this.baseUrl + "/User/" + id.toString(), {
-      headers: this.header,
-    });
-  }
-  */
+  
     getIssues() {
-        return this.http.get(this.baseUrl + "/Issue/all", { headers: this.header });
+        return this.http.get(this.baseUrl + "/Issue/getAllWithUserDetails", 
+        { headers: this.header });
     }
+
     getIssueById(issueId: string) {
       return this.http.get(this.baseUrl + "/Issue/" + issueId, {
         headers: this.header,
       });
     }
+
+    getAllStatesByIssueId(issueId: string) {
+      return this.http.get(this.baseUrl + "/IssueState/GetAllByIssueId/" + issueId, {
+        headers: this.header,
+      });
+    }
+
+
   getUsers() {
     return this.http.get(this.baseUrl + "/auth/all", { headers: this.header });
   }
@@ -45,7 +49,7 @@ export class ApiService {
             headers: this.header, observe: 'response',
         });
     }
- 
+    
   addUser(user: User) {
     return this.http.post(this.baseUrl + "/auth/register", user, {
       headers: this.header,
