@@ -26,12 +26,14 @@
     >
 </div>
 <photo-modal #photoModal></photo-modal>
-<sign-form #signForm></sign-form>
-
+<sign-form #signForm [currentState]="currentState"></sign-form>
+<div>
+   <p class="labels">Signatures: {{allSignatures.length}}</p>
+</div>
 <div class="comments">
     <p class="labels">Comments:</p>
     <div *ngFor="let comment of allComments" class="issueComments">
-        <p>{{ comment.text }}</p>
+        <p>{{comment.text}}</p>
         <p><fa-icon [icon]="faUser"></fa-icon> User</p>
         <div class="reacts">
             <p><fa-icon id="up" [icon]="thumbsUp"></fa-icon></p>

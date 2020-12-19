@@ -5,6 +5,7 @@ import { Request } from "./request";
 import { Issue } from './issue.model';
 import { IssueComment } from './issueComment.model';
 import { IssueCommentLike } from './issueCommentLike.model';
+import { Signature } from "./signature.model";
 
 @Injectable({
   providedIn: "root",
@@ -40,7 +41,11 @@ export class ApiService {
         headers: this.header,
       });
     }
-
+    getAllSignaturesByStateId(issueStateId: string) {
+      return this.http.get(this.baseUrl + "/IssueStateSignature/all/" + issueStateId, {
+        headers: this.header,
+      });
+    }
 
   getUsers() {
     return this.http.get(this.baseUrl + "/auth/all", { headers: this.header });
@@ -77,6 +82,12 @@ export class ApiService {
 
     addCommentLike(issueCommentLike: IssueCommentLike) {
       
+    }
+
+    addSignature(signature:Signature){
+      return this.http.post(this.baseUrl + "/IssueStateSignature", signature, {
+        headers: this.header,
+      });
     }
   
 }
