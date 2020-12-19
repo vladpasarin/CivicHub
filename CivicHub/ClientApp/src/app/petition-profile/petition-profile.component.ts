@@ -52,12 +52,7 @@ export class PetitionProfileComponent implements OnInit {
         this.api.getAllStatesByIssueId(this.issueId).subscribe((issueStates: IssueState[]) => {
             this.issueStates=issueStates;
             console.log(this.issueStates);
-      });
-        this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
-            this.allComments = allcomm;
-            console.log(this.allComments);
         });
-        
     }
 
     selectState(issueState: IssueState) {
@@ -76,7 +71,10 @@ export class PetitionProfileComponent implements OnInit {
     }
 
     getAllComments() {
-
+        this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
+            this.allComments = allcomm;
+            console.log(this.allComments);
+        });
     }
 
     openProfile() {

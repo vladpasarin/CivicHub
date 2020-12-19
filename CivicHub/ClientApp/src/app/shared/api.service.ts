@@ -4,6 +4,7 @@ import { User } from "./user.model";
 import { Request } from "./request";
 import { Issue } from './issue.model';
 import { IssueComment } from './issueComment.model';
+import { IssueCommentLike } from './issueCommentLike.model';
 
 @Injectable({
   providedIn: "root",
@@ -72,6 +73,10 @@ export class ApiService {
       return this.http.post(this.baseUrl + "/IssueStateComment", issueComment, {
         headers: this.header,
       });
+    }
+
+    addCommentLike(issueCommentLike: IssueCommentLike) {
+      
     }
   
 }

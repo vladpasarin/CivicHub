@@ -8,7 +8,7 @@
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Status
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li *ngFor="let issueState of issueStates" class="content" (click)="selectState(issueState)"><a>{{issueState.message}}</a></li>
+          <li *ngFor="let issueState of issueStates" class="content" (click)="selectState(issueState);getAllComments()"><a>{{issueState.message}}</a></li>
         </ul>
     </div>
     <button class="btn btn-primary" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
@@ -31,7 +31,8 @@
 <div class="comments">
     <p class="labels">Comments:</p>
     <div *ngFor="let comment of allComments" class="issueComments">
-        <p>{{ allComments.text }}</p>
+        <p>{{ comment.text }}</p>
+        <p><fa-icon [icon]="faUser"></fa-icon> User</p>
         <div class="reacts">
             <p><fa-icon id="up" [icon]="thumbsUp"></fa-icon></p>
         </div>
