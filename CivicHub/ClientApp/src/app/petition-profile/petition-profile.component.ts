@@ -62,6 +62,7 @@ export class PetitionProfileComponent implements OnInit {
 
     selectState(issueState: IssueState) {
         this.currentState = issueState;
+        console.log(this.currentState);
     }
 
     addComment() {

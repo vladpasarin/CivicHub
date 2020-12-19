@@ -30,14 +30,8 @@
 
 <div class="comments">
     <p class="labels">Comments:</p>
-    <div class="issueComments">
-        <p>Comentariu facut la postare pt exemplificare 1</p>
-        <div class="reacts">
-            <p><fa-icon id="up" [icon]="thumbsUp"></fa-icon></p>
-        </div>
-    </div>
-    <div class="issueComments">
-        <p>Comentariu facut la postare pt exemplificare 2</p>
+    <div *ngFor="let comment of allComments" class="issueComments">
+        <p>{{ allComments.text }}</p>
         <div class="reacts">
             <p><fa-icon id="up" [icon]="thumbsUp"></fa-icon></p>
         </div>

@@ -35,7 +35,7 @@ export class ApiService {
     }
 
     getAllCommentsByStateId(issueStateId: string) {
-      return this.http.get(this.baseUrl + "/IssueState/?????" + issueStateId, {
+      return this.http.get(this.baseUrl + "/IssueStateComment/all/" + issueStateId, {
         headers: this.header,
       });
     }
