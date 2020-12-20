@@ -554,6 +554,61 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GetUserReactionToIssueState",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"issueStateId\": \"cd765d05-5c2a-42d4-10ba-08d8a2c7250e\",\r\n        \"userId\": \"5cb7484d-e7c1-48f9-0d39-08d8a1ef570b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44397/api/IssueStateReaction/getUserReactionToIssueState/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueStateReaction",
+								"getUserReactionToIssueState",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44397/api/IssueStateReaction/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44397",
+							"path": [
+								"api",
+								"IssueStateReaction",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

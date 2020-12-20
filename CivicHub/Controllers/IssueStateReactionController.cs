@@ -97,5 +97,11 @@ namespace CivicHub.Controllers
 
             return Ok(response);
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            return Ok(_issueStateReactionService.Delete(id));
+        }
     }
 }
