@@ -1,3 +1,5 @@
+import { Issue } from "./issue.model";
+
 export class User {
     id: string;
     firstName: string;
@@ -6,6 +8,7 @@ export class User {
     password:string;
     avatar: string;
     points: number;
+    issues: Issue[];
     constructor(input?: any) {
       Object.assign(this, input);
     }

@@ -1,16 +1,14 @@
 <app-header></app-header>
 <div class="titleContainer">
-    <h1>Issue Title</h1>
-    <p id="organizer" (click)="openProfile()">Opened by <fa-icon [icon]="faUser"></fa-icon> User</p>
-    <p id="vote">Upvote <fa-icon id="up" [icon]="upvote"></fa-icon></p>
-    <p id="vote">Downvote <fa-icon id="down" [icon]="downvote"></fa-icon></p>
+    <h2 style="font-weight: bold;">{{selectedIssue.title}}</h2>
+    <p id="organizer" (click)="openProfile()">Opened by: <fa-icon [icon]="faUser"></fa-icon>{{organizer.firstName}}</p>
+    <p id="vote">Upvote <fa-icon (click)="addUpvoteReaction(); getUpvotes()" id="upVote" [icon]="upvote"></fa-icon> {{ upvoteReacts }}</p>
+    <p id="vote">Downvote <fa-icon (click)="addDownvoteReaction(); getDownvotes()" id="downVote" [icon]="downvote"></fa-icon> {{ downvoteReacts }}</p>
     <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Status
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li><a href="#">1. Opened</a></li>
-          <li><a href="#">2. Closed</a></li>
-          <li><a href="#">3. Solved</a></li>
+          <li *ngFor="let issueState of issueStates" class="content" (click)="selectState(issueState);getAllComments()"><a>{{issueState.message}}</a></li>
         </ul>
     </div>
     <button class="btn btn-primary" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
@@ -23,25 +21,28 @@
 </div>
 <div class="photos">
     <p class="labels">Photos:</p>
-    <!-- <img id="issuePhoto" src={{selectedIssue.photoPath}} (click)="showDM(selectedIssue.photoPath)"> -->
+    <img id="issuePhoto" 
+    src="https://cnet2.cbsistatic.com/img/-e95qclc6pwSnGE2YccC2oLDW_8=/1200x675/2020/04/16/7d6d8ed2-e10c-4f91-b2dd-74fae951c6d8/bazaart-edit-app.jpg" 
+    >
 </div>
 <photo-modal #photoModal></photo-modal>
-<sign-form #signForm></sign-form>
-
+<sign-form #signForm [currentState]="currentState"></sign-form>
+<div>
+   <p class="labels">Signatures: {{allSignatures.length}}</p>
+</div>
 <div class="comments">
     <p class="labels">Comments:</p>
-    <div class="issueComments">
-        <p>Comentariu facut la postare pt exemplificare 1</p>
+    <div *ngFor="let comment of allComments" class="issueComments">
+        <p>{{comment.text}}</p>
+        <p><fa-icon [icon]="faUser"></fa-icon> User</p>
         <div class="reacts">
-            <p><fa-icon id="up" [icon]="arrowUp"></fa-icon></p>
-            <p><fa-icon id="up" [icon]="arrowDown"></fa-icon></p>
+            <p><fa-icon (click)="addCommentLike(comment)" id="up" [icon]="thumbsUp"></fa-icon> {{ allCommentLikes.length }}</p>
         </div>
     </div>
     <div class="issueComments">
-        <p>Comentariu facut la postare pt exemplificare 2</p>
-        <div class="reacts">
-            <p><fa-icon id="up" [icon]="arrowUp"></fa-icon></p>
-            <p><fa-icon id="up" [icon]="arrowDown"></fa-icon></p>
+        <div class="newComment">
+            <textarea  [(ngModel)]="commentText" name="newComment" id="newCommentText" cols="100" rows="2" placeholder="New Comment..."></textarea><br>
+            <button class="btn btn-primary" id="sendComment" type="button" (click)="addComment()">Send</button>
         </div>
     </div>
 </div>

@@ -60,10 +60,19 @@ namespace CivicHub.Controllers
         {
             var createdIssueComment = _issueStateCommentLikeService.Create(issueDTO);
 
-            if (createdIssueComment == null)
-                return StatusCode(500);
+            switch (createdIssueComment.Item1)
+            {
+                case 200:
+                    return Ok(createdIssueComment.Item2);
+                    
+                case 409:
+                    return Conflict();
+                case 500:
+                    return StatusCode(500);
+                default:
+                    return StatusCode(500);
 
-            return Ok(createdIssueComment);
+            }
         }
 
 

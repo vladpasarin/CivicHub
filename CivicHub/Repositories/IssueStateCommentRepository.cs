@@ -20,8 +20,6 @@ namespace CivicHub.Repositories
         {
             return _table
                 .Where(x => x.IssueStateId == issueStateId)
-                .Include(x => x.User)
-                .Include(x => x.IssueState)
                 .Include(x => x.IssueStateCommentPhotos)
                 .ToList();
         }

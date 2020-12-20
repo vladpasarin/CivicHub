@@ -8,6 +8,8 @@ export class Issue {
     description: string;
     userId: string;
     organizer:User;
+    firstName?: string;
+    lastName?: string;
     constructor(input?: any) {
       Object.assign(this, input);
     }

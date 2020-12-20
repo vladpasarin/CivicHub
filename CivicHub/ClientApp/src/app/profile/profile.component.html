@@ -2,27 +2,43 @@
 <div class="profileDetails">
     <div class="profile">
         <img class="profilePhoto" src="assets/images/profile.png" />
-        <p id="firstName"> {{firstName}} </p>
+        <p id="firstName"> {{currentUser.firstName}} {{currentUser.lastName}} </p>
     </div>
     <div class="rank"> Ranking </div>
 </div>
 <div class="options">
-    
-      <div>
-        <ul class="nav">
-          <a class="nav-link">
-            <p class="opt">Followed</p>
-          </a>
-            <a class="nav-link">
-              <p class="opt">Signed </p>
-            </a>
-            <a class="nav-link">
-              <p class="opt">Organized </p>
-            </a>
-            <a class="nav-link">
-              <p class="opt">Achievements </p>
-            </a>
-        </ul>
+  <div>
+    <ul class="nav">
+      <a *ngFor="let option of options" class="nav-link">
+        <p class="opt" (click)="changeOption(option)">{{option}}</p>
+      </a>
+    </ul>
+  </div>
+</div>
+<div *ngIf="selectedOption == 'Organized'">
+  {{selectedOption}}
+  <div *ngFor="let issue of currentUser.issues">
+         
+        <div class="issueView" >
+                <p class="issueTitle" (click)="toIssue(issue.id)">{{issue.title}}</p>
+        </div>
       </div>
-    </div>
-  
+</div>
+
+<div *ngIf="selectedOption == 'Followed'">
+
+         {{selectedOption}}
+        
+</div>
+
+<div *ngIf="selectedOption == 'Signed'">
+
+  {{selectedOption}}
+ 
+</div>
+
+<div *ngIf="selectedOption == 'Achievements'">
+
+  {{selectedOption}}
+ 
+</div>

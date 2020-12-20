@@ -4,50 +4,72 @@
   #signForm="bs-modal"
 >
   <div id="modal">      
-    <form action="" [formGroup]="">
+    <form action="" [formGroup]="addSignForm">
         <div class="form-flex">
             <h2 style="margin-bottom: 1em; font-weight: bold;">Petition sign</h2>
             <div class="form-row">
                 
                 <div class="form-group col-md-12">
-                    <label for="inputAddress">First name:</label>
-                    <input type="text" class="form-control" placeholder="Your first name">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="inputPhoneNr">Last name:</label>
-                    <input type="text" class="form-control" placeholder="Your last name">
+                    <label for="name">Name(First name and last name):</label>
+                    <input type="text" class="form-control"
+                    autocomplete="off"
+                    formControlName="name" placeholder="Your name">
+                    <app-field-error-display [displayError]="isFieldValid('name')"
+                                       errorMsg="Please inform your name">
+              </app-field-error-display>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="inputIssueTitle">CNP:</label>
-                    <input type="text" class="form-control" formControlName="title" placeholder="Your CNP">
+                    <input type="text" class="form-control"
+                    autocomplete="off"
+                    pattern="^(\d{13})?$"
+                     formControlName="cnp" placeholder="Your CNP">
+                     <app-field-error-display [displayError]="isFieldValid('cnp')"
+                                       errorMsg="Please inform your CNP">
+              </app-field-error-display>
                 </div>
             </div>
         </div>
         <div class="form-flex">
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="inputPhoneNr">Address:</label>
-                    <input type="text" class="form-control" placeholder="Your address">
+                    <label for="inputAddress">Address:</label>
+                    <input type="text" class="form-control"
+                    autocomplete="off"
+                    formControlName="address" placeholder="Your address">
+                    <app-field-error-display [displayError]="isFieldValid('address')"
+                                       errorMsg="Please inform your address">
+              </app-field-error-display>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="inputPhoneNr">ID card series:</label>
-                    <input type="text" class="form-control" placeholder="Your ID card series">
+                    <label for="inputIdCardSeries">ID card series:</label>
+                    <input type="text" class="form-control"
+                    autocomplete="off"
+                    pattern="^([A-Z]{2})?$"
+                     formControlName="idSeries" placeholder="Your ID card series">
+                     <app-field-error-display [displayError]="isFieldValid('idSeries')"
+                                       errorMsg="Please inform your ID card series">
+              </app-field-error-display>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="inputPhoneNr">ID card number:</label>
-                    <input type="text" class="form-control" placeholder="Your ID card number">
+                    <label for="inputIdCardNumber">ID card number:</label>
+                    <input type="text" class="form-control"
+                    autocomplete="off"
+                    pattern="^(\d{6})?$"
+                    formControlName="idNumber" placeholder="Your ID card number">
+                    <app-field-error-display [displayError]="isFieldValid('idNumber')"
+                                       errorMsg="Please inform your ID card number">
+              </app-field-error-display>
                 </div>
             </div>
             <div class="">
-                <button type="button" id="submit" class="btn btn-primary">Sign</button>
+                <button type="button" id="submit" class="btn btn-primary" (click)="addSign()">Sign</button>
             </div>
         </div>
     </form>

@@ -28,7 +28,9 @@ namespace CivicHub.Services
 
         public bool Create(IssueStateReactionDto issueStateReactionDto)
         {
-            _issueStateReactionRepository.Create(_mapper.Map<IssueStateReaction>(issueStateReactionDto));
+            var issueStateReaction = _mapper.Map<IssueStateReaction>(issueStateReactionDto);
+            issueStateReaction.dateGiven = DateTime.Now;
+            _issueStateReactionRepository.Create(issueStateReaction);
             return _issueStateReactionRepository.SaveChanges();
         }
 

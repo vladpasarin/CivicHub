@@ -3,6 +3,10 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User } from "./user.model";
 import { Request } from "./request";
 import { Issue } from './issue.model';
+import { IssueComment } from './issueComment.model';
+import { IssueCommentLike } from './issueCommentLike.model';
+import { Signature } from "./signature.model";
+import { IssueReaction } from './issueReaction.model';
 
 @Injectable({
   providedIn: "root",
@@ -15,21 +19,35 @@ export class ApiService {
   });
   baseUrl = "https://localhost:44397/api";
 
-    /*
-  getUser(id: number) {
-    return this.http.get(this.baseUrl + "/User/" + id.toString(), {
-      headers: this.header,
-    });
-  }
-  */
+  
     getIssues() {
-        return this.http.get(this.baseUrl + "/Issue/all", { headers: this.header });
+        return this.http.get(this.baseUrl + "/Issue/getAllWithUserDetails", 
+        { headers: this.header });
     }
+
     getIssueById(issueId: string) {
       return this.http.get(this.baseUrl + "/Issue/" + issueId, {
         headers: this.header,
       });
     }
+
+    getAllStatesByIssueId(issueId: string) {
+      return this.http.get(this.baseUrl + "/IssueState/GetAllByIssueId/" + issueId, {
+        headers: this.header,
+      });
+    }
+
+    getAllCommentsByStateId(issueStateId: string) {
+      return this.http.get(this.baseUrl + "/IssueStateComment/all/" + issueStateId, {
+        headers: this.header,
+      });
+    }
+    getAllSignaturesByStateId(issueStateId: string) {
+      return this.http.get(this.baseUrl + "/IssueStateSignature/all/" + issueStateId, {
+        headers: this.header,
+      });
+    }
+
   getUsers() {
     return this.http.get(this.baseUrl + "/auth/all", { headers: this.header });
   }
@@ -45,7 +63,25 @@ export class ApiService {
             headers: this.header, observe: 'response',
         });
     }
- 
+
+  getAllIssueStateCommentLikes(issueCommentId: string) {
+    return this.http.get(this.baseUrl + "/IssueStateCommentLike/all/" + issueCommentId, {
+      headers: this.header,
+    });
+  }
+
+  getNumberOfUpvotesByState(issueStateId: string) {
+    return this.http.get(this.baseUrl + "/IssueStateReaction/numberOfUpVotes/" + issueStateId, {
+      headers: this.header,
+    });
+  }
+
+  getNumberOfDownvotesByState(issueStateId: string) {
+    return this.http.get(this.baseUrl + "/IssueStateReaction/numberOfDownVotes/" + issueStateId, {
+      headers: this.header,
+    });
+  }
+    
   addUser(user: User) {
     return this.http.post(this.baseUrl + "/auth/register", user, {
       headers: this.header,
@@ -55,6 +91,30 @@ export class ApiService {
         return this.http.post(this.baseUrl + "/Issue", issue, {
             headers: this.header,
         });
+    }
+
+    addIssueReaction(issueReaction: IssueReaction) {
+      return this.http.post(this.baseUrl + "/IssueStateReaction", issueReaction, {
+        headers: this.header,
+      }); 
+    }
+  
+    addComment(issueComment: IssueComment) {
+      return this.http.post(this.baseUrl + "/IssueStateComment", issueComment, {
+        headers: this.header,
+      });
+    }
+
+    addCommentLike(issueCommentLike: IssueCommentLike, ) {
+      return this.http.post(this.baseUrl + "/IssueStateCommentLike", issueCommentLike, {
+        headers: this.header,
+      });
+    }
+
+    addSignature(signature:Signature){
+      return this.http.post(this.baseUrl + "/IssueStateSignature", signature, {
+        headers: this.header,
+      });
     }
   
 }

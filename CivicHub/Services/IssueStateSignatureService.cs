@@ -26,6 +26,7 @@ namespace CivicHub.Services
         public IssueStateSignatureResponseDto Create(IssueStateSignatureRequestDto issueDTO)
         {
             var issue = _mapper.Map<IssueStateSignature>(issueDTO);
+            issue.DateSigned = DateTime.Now;
             _issueStateSignatureRepository.Create(issue);
             _issueStateSignatureRepository.SaveChanges();
             var signature = _issueStateSignatureRepository.FindById(issue.Id);
@@ -73,7 +74,7 @@ namespace CivicHub.Services
         {
             List<IssueStateSignatureResponseDto> signatureResponses = new List<IssueStateSignatureResponseDto>();
 
-            List<IssueStateSignature> allSignatures = _issueStateSignatureRepository.GetAll();
+            List<IssueStateSignature> allSignatures = _issueStateSignatureRepository.GetAllWithDetails(issueStateId);
 
             foreach (IssueStateSignature signature in allSignatures)
             {

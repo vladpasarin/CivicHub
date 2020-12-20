@@ -86,11 +86,14 @@ export class LoginComponent implements OnInit {
 
                   sessionStorage.setItem('isLogged', 'true');
                   sessionStorage.setItem('userId', this.requestResponse.id);
+                  this.api.getUserById(this.requestResponse.id).subscribe((user: User) => {
+                    sessionStorage.setItem('firstName',user.firstName);
+              });
+                  
                   console.log(this.requestResponse.id);
 
                   setTimeout(() => {
-                      this.router.navigate(["/profile"],
-                          { queryParams: { /*firstName: user.firstName*/ } });
+                      this.router.navigate(["profile", this.requestResponse.id]);
                   }, 1000);
 
               }

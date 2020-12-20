@@ -16,11 +16,11 @@ const routes: Routes = [
   { path: "signUp", component: SignUpComponent },
   { path: "login", component: LoginComponent },
   { path: "home", component: HomeComponent },
-  { path: "profile", component: ProfileComponent },
+  { path: "profile/:id", component: ProfileComponent },
   { path: "contact", component: ContactComponent },
   { path: "petition-list", component: PetitonListComponent },
-  { path: "petition-profile", component: PetitionProfileComponent },
-  { path: "user-profile", component: UserProfileComponent },
+  { path: "petition-profile/:id", component: PetitionProfileComponent },
+  { path: "user-profile/:id", component: UserProfileComponent },
   { path: "petition-form", component: PetitionFormComponent },
 ];
 
