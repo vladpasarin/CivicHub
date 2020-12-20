@@ -34,5 +34,20 @@ namespace CivicHub.Repositories
                 .Where(x => x.Vote.ToLower().Equals("upvote") && x.Id == id)
                 .Count();
         }
+
+        public String GetUserReactionToIssueState(IssueStateReaction issueStateReaction) 
+        {
+            IssueStateReaction result;
+            try
+            {
+                result = _context.IssueStateReactions.Where(x => x.UserId == issueStateReaction.UserId &&
+                x.IssueStateId == issueStateReaction.IssueStateId).Single();
+            }catch(InvalidOperationException e)
+            { 
+                return "DidntReact"; 
+            }
+
+            return result.Vote;
+        }
     }
 }
