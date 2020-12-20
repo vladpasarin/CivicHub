@@ -62,6 +62,12 @@ export class ApiService {
             headers: this.header, observe: 'response',
         });
     }
+
+  getAllIssueStateCommentLikes(issueComment: IssueComment) {
+    return this.http.get(this.baseUrl + "/IssueStateCommentLike/all/" + issueComment.Id, {
+      headers: this.header,
+    });
+  }
     
   addUser(user: User) {
     return this.http.post(this.baseUrl + "/auth/register", user, {
@@ -80,8 +86,8 @@ export class ApiService {
       });
     }
 
-    addCommentLike(issueCommentLike: IssueCommentLike) {
-      return this.http.post(this.baseUrl + "/IssueStateCommentLike??", issueCommentLike, {
+    addCommentLike(issueCommentLike: IssueCommentLike, ) {
+      return this.http.post(this.baseUrl + "/IssueStateCommentLike", issueCommentLike, {
         headers: this.header,
       });
     }

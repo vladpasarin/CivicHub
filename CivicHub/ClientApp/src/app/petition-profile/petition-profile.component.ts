@@ -9,6 +9,7 @@ import { SignFormComponent } from './sign-form/sign-form.component';
 import { IssueState } from '../shared/issueState.model';
 import { IssueComment } from '../shared/issueComment.model';
 import { Signature } from '../shared/signature.model';
+import { IssueCommentLike } from '../shared/issueCommentLike.model';
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
@@ -29,6 +30,8 @@ export class PetitionProfileComponent implements OnInit {
     userId = sessionStorage.getItem('userId');
     allComments: IssueComment[] = [];
     allSignatures:Signature[]=[];
+    allCommentLikes: IssueCommentLike[] = [];
+    commentLike = new IssueCommentLike();
 
     faUser = faUser;
     upvote = faArrowAltCircleUp;
@@ -55,6 +58,12 @@ export class PetitionProfileComponent implements OnInit {
             console.log(this.currentState);
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
+                this.allComments.forEach(comment => {
+                    this.api.getAllIssueStateCommentLikes(comment).subscribe((allLikes: IssueCommentLike[]) => {
+                        this.allCommentLikes = allLikes;
+                        console.log(this.allCommentLikes);
+                    });
+                });
             });
             this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
                 this.allSignatures= allSignatures;
@@ -74,6 +83,12 @@ export class PetitionProfileComponent implements OnInit {
         this.stateComment.dateCreated = new Date();
         this.api.addComment(this.stateComment).subscribe(() => {
         });
+    }
+
+    addCommentLike(stateComment: IssueComment) {
+        this.commentLike.IssueStateCommentId = this.stateComment.Id;
+        this.commentLike.UserId = sessionStorage.getItem('userId');
+        console.log("AddCommentLike function executed...")
     }
 
     getAllComments() {
