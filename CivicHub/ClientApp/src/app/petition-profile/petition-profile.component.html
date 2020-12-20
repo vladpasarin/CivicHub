@@ -36,7 +36,7 @@
         <p>{{comment.text}}</p>
         <p><fa-icon [icon]="faUser"></fa-icon> User</p>
         <div class="reacts">
-            <p><fa-icon (click)="addCommentLike(comment)" id="up" [icon]="thumbsUp"></fa-icon> {{ allCommentLikes.length }}</p>
+            <p><fa-icon (click)="addCommentLike(comment)" id="up" [icon]="thumbsUp"></fa-icon> {{ comment.nrOfLikes }}</p>
         </div>
     </div>
     <div class="issueComments">

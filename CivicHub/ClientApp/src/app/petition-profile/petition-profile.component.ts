@@ -31,7 +31,6 @@ export class PetitionProfileComponent implements OnInit {
     userId = sessionStorage.getItem('userId');
     allComments: IssueComment[] = [];
     allSignatures:Signature[]=[];
-    allCommentLikes: IssueCommentLike[] = [];
     commentLike = new IssueCommentLike();
     issueStateReactions: IssueReaction[] = [];
     issueReact = new IssueReaction();
@@ -65,10 +64,11 @@ export class PetitionProfileComponent implements OnInit {
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
                 this.allComments.forEach(comment => {
-                    console.log("Comment: " + comment.text);
-                    this.api.getAllIssueStateCommentLikes(comment.Id).subscribe((allLikes: IssueCommentLike[]) => {
-                        this.allCommentLikes = allLikes;
-                        console.log(this.allCommentLikes);
+                    console.log(comment.id);
+                    //console.log("CommentId: " + comment.Id);
+                    this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
+                        comment.nrOfLikes = allLikes.length;
+                        console.log(allLikes.length);
                     });
                 });
             });
@@ -83,7 +83,6 @@ export class PetitionProfileComponent implements OnInit {
 
             this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
                 this.allSignatures= allSignatures;
-                console.log(this.allSignatures);
             });
         });
     }
@@ -121,20 +120,24 @@ export class PetitionProfileComponent implements OnInit {
             this.commentText='';
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
-                this.allComments.forEach(comment => {
-                    console.log("Comment: " + comment.text);
-                    this.api.getAllIssueStateCommentLikes(comment.Id).subscribe((allLikes: IssueCommentLike[]) => {
-                        this.allCommentLikes = allLikes;
-                        console.log(this.allCommentLikes);
-                    });
-                });
             });
         });
     }
 
     addCommentLike(stateComment: IssueComment) {
-        this.commentLike.IssueStateCommentId = this.stateComment.Id;
-        this.commentLike.UserId = this.userId;
+        this.commentLike.issueStateCommentId = stateComment.id;
+        this.commentLike.userId = this.userId;
+        this.api.addCommentLike(this.commentLike).subscribe(() => {
+            this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
+                this.allComments = allcomm;
+                this.allComments.forEach(comment => {
+                    this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
+                        comment.nrOfLikes = allLikes.length;
+                        console.log(allLikes.length);
+                    });
+                });
+            });
+        });
         console.log("AddCommentLike function executed...")
     }
 
