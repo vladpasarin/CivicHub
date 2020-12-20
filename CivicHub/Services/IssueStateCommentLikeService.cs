@@ -23,7 +23,7 @@ namespace CivicHub.Services
 
         public IssueStateCommentLike Create(IssueStateCommentLike issueStateReactionDTO)
         {
-
+            
             _issueStateCommentLikeRepository.Create(issueStateReactionDTO);
             _issueStateCommentLikeRepository.SaveChanges();
             return _issueStateCommentLikeRepository.FindById(issueStateReactionDTO.Id);
