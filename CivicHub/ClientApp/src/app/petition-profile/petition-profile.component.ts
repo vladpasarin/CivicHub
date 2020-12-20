@@ -10,6 +10,7 @@ import { IssueState } from '../shared/issueState.model';
 import { IssueComment } from '../shared/issueComment.model';
 import { Signature } from '../shared/signature.model';
 import { IssueCommentLike } from '../shared/issueCommentLike.model';
+import { IssueReaction } from '../shared/issueReaction.model';
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
@@ -32,6 +33,10 @@ export class PetitionProfileComponent implements OnInit {
     allSignatures:Signature[]=[];
     allCommentLikes: IssueCommentLike[] = [];
     commentLike = new IssueCommentLike();
+    issueStateReactions: IssueReaction[] = [];
+    issueReact = new IssueReaction();
+    upvoteReacts: number;
+    downvoteReacts: number;
 
     faUser = faUser;
     upvote = faArrowAltCircleUp;
@@ -56,15 +61,26 @@ export class PetitionProfileComponent implements OnInit {
             this.issueStates=issueStates;
             this.currentState=issueStates[0];
             console.log(this.currentState);
+
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
                 this.allComments.forEach(comment => {
-                    this.api.getAllIssueStateCommentLikes(comment).subscribe((allLikes: IssueCommentLike[]) => {
+                    console.log("Comment: " + comment.text);
+                    this.api.getAllIssueStateCommentLikes(comment.Id).subscribe((allLikes: IssueCommentLike[]) => {
                         this.allCommentLikes = allLikes;
                         console.log(this.allCommentLikes);
                     });
                 });
             });
+
+            this.api.getNumberOfUpvotesByState(this.currentState.id).subscribe((nrOfUpvotes: number) => {
+                this.upvoteReacts = nrOfUpvotes;
+            });
+
+            this.api.getNumberOfDownvotesByState(this.currentState.id).subscribe((nrOfDownvotes: number) => {
+                this.downvoteReacts = nrOfDownvotes;
+            });
+
             this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
                 this.allSignatures= allSignatures;
                 console.log(this.allSignatures);
@@ -76,24 +92,69 @@ export class PetitionProfileComponent implements OnInit {
         this.currentState = issueState;
     }
 
+    addUpvoteReaction() {
+        this.issueReact.IssueStateId = this.currentState.id;
+        this.issueReact.UserId = this.userId;
+        this.issueReact.Vote = "upvote";
+        this.issueReact.dateGiven = new Date();
+        console.log(this.issueReact);
+        this.api.addIssueReaction(this.issueReact).subscribe(() => {
+        });
+    }
+
+    addDownvoteReaction() {
+        this.issueReact.IssueStateId = this.currentState.id;
+        this.issueReact.UserId = this.userId;
+        this.issueReact.Vote = "downvote";
+        this.issueReact.dateGiven = new Date();
+        console.log(this.issueReact);
+        this.api.addIssueReaction(this.issueReact).subscribe(() => {
+        });
+    }
+
     addComment() {
         this.stateComment.IssueStateId = this.currentState.id;
         this.stateComment.UserId = this.userId;
         this.stateComment.text = this.commentText;
         this.stateComment.dateCreated = new Date();
         this.api.addComment(this.stateComment).subscribe(() => {
+            this.commentText='';
+            this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
+                this.allComments = allcomm;
+                this.allComments.forEach(comment => {
+                    console.log("Comment: " + comment.text);
+                    this.api.getAllIssueStateCommentLikes(comment.Id).subscribe((allLikes: IssueCommentLike[]) => {
+                        this.allCommentLikes = allLikes;
+                        console.log(this.allCommentLikes);
+                    });
+                });
+            });
         });
     }
 
     addCommentLike(stateComment: IssueComment) {
         this.commentLike.IssueStateCommentId = this.stateComment.Id;
-        this.commentLike.UserId = sessionStorage.getItem('userId');
+        this.commentLike.UserId = this.userId;
         console.log("AddCommentLike function executed...")
     }
 
     getAllComments() {
         this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
             this.allComments = allcomm;
+        });
+    }
+
+    getUpvotes() {
+        this.api.getNumberOfUpvotesByState(this.currentState.id).subscribe((nrOfUpvotes: number) => {
+            this.upvoteReacts = nrOfUpvotes;
+            console.log("Upvotes:" + this.upvoteReacts);
+        });
+    }
+
+    getDownvotes() {
+        this.api.getNumberOfDownvotesByState(this.currentState.id).subscribe((nrOfDownvotes: number) => {
+            this.downvoteReacts = nrOfDownvotes;
+            console.log("Downvotes" + this.downvoteReacts);
         });
     }
 

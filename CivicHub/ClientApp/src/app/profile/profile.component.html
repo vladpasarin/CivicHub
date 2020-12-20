@@ -16,9 +16,9 @@
   </div>
 </div>
 <div *ngIf="selectedOption == 'Organized'">
-
+  {{selectedOption}}
   <div *ngFor="let issue of currentUser.issues">
-         {{selectedOption}}
+         
         <div class="issueView" >
                 <p class="issueTitle" (click)="toIssue(issue.id)">{{issue.title}}</p>
         </div>

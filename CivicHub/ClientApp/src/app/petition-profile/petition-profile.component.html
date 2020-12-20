@@ -2,8 +2,8 @@
 <div class="titleContainer">
     <h2 style="font-weight: bold;">{{selectedIssue.title}}</h2>
     <p id="organizer" (click)="openProfile()">Opened by: <fa-icon [icon]="faUser"></fa-icon>{{organizer.firstName}}</p>
-    <p id="vote">Upvote <fa-icon id="upVote" [icon]="upvote"></fa-icon></p>
-    <p id="vote">Downvote <fa-icon id="downVote" [icon]="downvote"></fa-icon></p>
+    <p id="vote">Upvote <fa-icon (click)="addUpvoteReaction(); getUpvotes()" id="upVote" [icon]="upvote"></fa-icon> {{ upvoteReacts }}</p>
+    <p id="vote">Downvote <fa-icon (click)="addDownvoteReaction(); getDownvotes()" id="downVote" [icon]="downvote"></fa-icon> {{ downvoteReacts }}</p>
     <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Status
         <span class="caret"></span></button>
