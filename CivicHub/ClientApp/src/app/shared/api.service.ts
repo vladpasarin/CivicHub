@@ -76,7 +76,9 @@ export class ApiService {
     }
 
     addCommentLike(issueCommentLike: IssueCommentLike) {
-      
+      return this.http.post(this.baseUrl + "/IssueStateCommentLike??", issueCommentLike, {
+        headers: this.header,
+      });
     }
   
 }
