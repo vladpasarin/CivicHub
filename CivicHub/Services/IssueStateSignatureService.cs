@@ -73,7 +73,7 @@ namespace CivicHub.Services
         {
             List<IssueStateSignatureResponseDto> signatureResponses = new List<IssueStateSignatureResponseDto>();
 
-            List<IssueStateSignature> allSignatures = _issueStateSignatureRepository.GetAll();
+            List<IssueStateSignature> allSignatures = _issueStateSignatureRepository.GetAllWithDetails(issueStateId);
 
             foreach (IssueStateSignature signature in allSignatures)
             {

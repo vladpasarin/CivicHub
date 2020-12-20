@@ -82,7 +82,17 @@ namespace CivicHub.Services
         {
             var issue = _mapper.Map<Issue>(issueDTO);
             _issueRepository.Create(issue);
-            return _issueRepository.SaveChanges();
+            var result =  _issueRepository.SaveChanges();
+            _issueStateRepository.Create(new IssueState
+            {
+                IssueId = issue.Id,
+                Type = 0,
+                Message = "Strangerea de semnaturi a inceput",
+                DateStart = DateTime.Now,
+                
+            });
+            _issueStateRepository.SaveChanges();
+            return result;
         }
 
         public bool Update(IssueDto issueDTO)
