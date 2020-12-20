@@ -118,6 +118,17 @@ export class PetitionProfileComponent implements OnInit {
         this.stateComment.text = this.commentText;
         this.stateComment.dateCreated = new Date();
         this.api.addComment(this.stateComment).subscribe(() => {
+            this.commentText='';
+            this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
+                this.allComments = allcomm;
+                this.allComments.forEach(comment => {
+                    console.log("Comment: " + comment.text);
+                    this.api.getAllIssueStateCommentLikes(comment.Id).subscribe((allLikes: IssueCommentLike[]) => {
+                        this.allCommentLikes = allLikes;
+                        console.log(this.allCommentLikes);
+                    });
+                });
+            });
         });
     }
 
