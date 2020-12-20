@@ -6,6 +6,7 @@ import { Issue } from './issue.model';
 import { IssueComment } from './issueComment.model';
 import { IssueCommentLike } from './issueCommentLike.model';
 import { Signature } from "./signature.model";
+import { IssueReaction } from './issueReaction.model';
 
 @Injectable({
   providedIn: "root",
@@ -63,8 +64,20 @@ export class ApiService {
         });
     }
 
-  getAllIssueStateCommentLikes(issueComment: IssueComment) {
-    return this.http.get(this.baseUrl + "/IssueStateCommentLike/all/" + issueComment.Id, {
+  getAllIssueStateCommentLikes(issueCommentId: string) {
+    return this.http.get(this.baseUrl + "/IssueStateCommentLike/all/" + issueCommentId, {
+      headers: this.header,
+    });
+  }
+
+  getNumberOfUpvotesByState(issueStateId: string) {
+    return this.http.get(this.baseUrl + "/IssueStateReaction/numberOfUpVotes/" + issueStateId, {
+      headers: this.header,
+    });
+  }
+
+  getNumberOfDownvotesByState(issueStateId: string) {
+    return this.http.get(this.baseUrl + "/IssueStateReaction/numberOfDownVotes/" + issueStateId, {
       headers: this.header,
     });
   }
@@ -78,6 +91,12 @@ export class ApiService {
         return this.http.post(this.baseUrl + "/Issue", issue, {
             headers: this.header,
         });
+    }
+
+    addIssueReaction(issueReaction: IssueReaction) {
+      return this.http.post(this.baseUrl + "/IssueStateReaction", issueReaction, {
+        headers: this.header,
+      }); 
     }
   
     addComment(issueComment: IssueComment) {
