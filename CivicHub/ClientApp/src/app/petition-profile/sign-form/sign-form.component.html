@@ -10,23 +10,12 @@
             <div class="form-row">
                 
                 <div class="form-group col-md-12">
-                    <label for="inputAddress">First name:</label>
+                    <label for="name">Name(First name and last name):</label>
                     <input type="text" class="form-control"
                     autocomplete="off"
-                    formControlName="firstName" placeholder="Your first name">
-                    <app-field-error-display [displayError]="isFieldValid('firstName')"
-                                       errorMsg="Please inform your first name">
-              </app-field-error-display>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label for="inputPhoneNr">Last name:</label>
-                    <input type="text" autocomplete="off"
-                    class="form-control" 
-                    formControlName="lastName" placeholder="Your last name">
-                    <app-field-error-display [displayError]="isFieldValid('lastName')"
-                                       errorMsg="Please inform your last name">
+                    formControlName="name" placeholder="Your name">
+                    <app-field-error-display [displayError]="isFieldValid('name')"
+                                       errorMsg="Please inform your name">
               </app-field-error-display>
                 </div>
             </div>
@@ -46,7 +35,7 @@
         <div class="form-flex">
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="inputPhoneNr">Address:</label>
+                    <label for="inputAddress">Address:</label>
                     <input type="text" class="form-control"
                     autocomplete="off"
                     formControlName="address" placeholder="Your address">
@@ -57,7 +46,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="inputPhoneNr">ID card series:</label>
+                    <label for="inputIdCardSeries">ID card series:</label>
                     <input type="text" class="form-control"
                     autocomplete="off"
                     pattern="^([A-Z]{2})?$"
@@ -69,7 +58,7 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label for="inputPhoneNr">ID card number:</label>
+                    <label for="inputIdCardNumber">ID card number:</label>
                     <input type="text" class="form-control"
                     autocomplete="off"
                     pattern="^(\d{6})?$"

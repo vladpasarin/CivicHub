@@ -8,6 +8,7 @@ import { faUser, faArrowAltCircleUp, faArrowAltCircleDown, faThumbsUp } from '@f
 import { SignFormComponent } from './sign-form/sign-form.component';
 import { IssueState } from '../shared/issueState.model';
 import { IssueComment } from '../shared/issueComment.model';
+import { Signature } from '../shared/signature.model';
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
@@ -27,6 +28,7 @@ export class PetitionProfileComponent implements OnInit {
     currentState = new IssueState();
     userId = sessionStorage.getItem('userId');
     allComments: IssueComment[] = [];
+    allSignatures:Signature[]=[];
 
     faUser = faUser;
     upvote = faArrowAltCircleUp;
@@ -46,26 +48,30 @@ export class PetitionProfileComponent implements OnInit {
                 this.organizer = user;
           });
           });
-          setTimeout(() => {
-            console.log(this.selectedIssue);
-        }, 1000);
+          
         this.api.getAllStatesByIssueId(this.issueId).subscribe((issueStates: IssueState[]) => {
             this.issueStates=issueStates;
-            console.log(this.issueStates);
+            this.currentState=issueStates[0];
+            console.log(this.currentState);
+            this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
+                this.allComments = allcomm;
+            });
+            this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
+                this.allSignatures= allSignatures;
+                console.log(this.allSignatures);
+            });
         });
     }
 
     selectState(issueState: IssueState) {
         this.currentState = issueState;
-        console.log(this.currentState);
     }
 
     addComment() {
         this.stateComment.IssueStateId = this.currentState.id;
         this.stateComment.UserId = this.userId;
-        this.stateComment.Text = this.commentText;
+        this.stateComment.text = this.commentText;
         this.stateComment.dateCreated = new Date();
-        console.log(this.stateComment);
         this.api.addComment(this.stateComment).subscribe(() => {
         });
     }
@@ -73,7 +79,6 @@ export class PetitionProfileComponent implements OnInit {
     getAllComments() {
         this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
             this.allComments = allcomm;
-            console.log(this.allComments);
         });
     }
 
