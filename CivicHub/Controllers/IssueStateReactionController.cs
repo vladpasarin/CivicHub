@@ -86,5 +86,22 @@ namespace CivicHub.Controllers
         {
             return Ok(_issueStateReactionService.GetNumberOfUpVotes(id));
         }
+
+        [HttpGet("getUserReactionToIssueState")]
+        public IActionResult GetUserReactionToIssueState(IssueStateReactionDto issueStateReactionDto)
+        {
+            var response = _issueStateReactionService.GetUserReactionToIssueState(issueStateReactionDto);
+
+            if (response == null || response == "")
+                return StatusCode(500, "wtf");
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            return Ok(_issueStateReactionService.Delete(id));
+        }
     }
 }

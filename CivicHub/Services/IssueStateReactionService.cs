@@ -28,7 +28,9 @@ namespace CivicHub.Services
 
         public bool Create(IssueStateReactionDto issueStateReactionDto)
         {
-            _issueStateReactionRepository.Create(_mapper.Map<IssueStateReaction>(issueStateReactionDto));
+            var issueStateReaction = _mapper.Map<IssueStateReaction>(issueStateReactionDto);
+            issueStateReaction.dateGiven = DateTime.Now;
+            _issueStateReactionRepository.Create(issueStateReaction);
             return _issueStateReactionRepository.SaveChanges();
         }
 
@@ -63,6 +65,22 @@ namespace CivicHub.Services
         public int GetNumberOfUpVotes(Guid id)
         {
             return _issueStateReactionRepository.GetNumberOfUpVotes(id);
+        }
+
+        public string GetUserReactionToIssueState(IssueStateReactionDto issueStateReactionDto)
+        {
+            return _issueStateReactionRepository.GetUserReactionToIssueState(_mapper.Map<IssueStateReaction>(issueStateReactionDto));
+        }
+
+        public bool Delete(Guid issueStateReactionId)
+        {
+            var issueStateReaction = _issueStateReactionRepository.FindById(issueStateReactionId);
+
+            if (issueStateReaction == null)
+                return false;
+
+            _issueStateReactionRepository.Delete(issueStateReaction);
+            return _issueStateReactionRepository.SaveChanges();
         }
     }
 }

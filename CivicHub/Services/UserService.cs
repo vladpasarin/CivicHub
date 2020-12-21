@@ -39,7 +39,8 @@ namespace CivicHub.Services
                 Mail = request.Mail,
                 Password = request.Password,
                 FirstName = request.FirstName,
-                LastName = request.LastName
+                LastName = request.LastName,
+                DateRegistered = DateTime.Now
             };
 
             _userRepostiory.Create(entity);

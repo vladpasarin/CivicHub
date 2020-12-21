@@ -21,12 +21,24 @@ namespace CivicHub.Services
             _mapper = mapper;
         }
 
-        public IssueStateCommentLike Create(IssueStateCommentLike issueStateReactionDTO)
+        public Tuple<int, object> Create(IssueStateCommentLike issueStateReactionDTO)
         {
-
+            
+            if ( _issueStateCommentLikeRepository.getEntryByUserId(issueStateReactionDTO.IssueStateCommentId, issueStateReactionDTO.UserId) != null)
+            {
+                return new Tuple<int, object>(409, "Conflict");
+            }
             _issueStateCommentLikeRepository.Create(issueStateReactionDTO);
             _issueStateCommentLikeRepository.SaveChanges();
-            return _issueStateCommentLikeRepository.FindById(issueStateReactionDTO.Id);
+            var createdObject = _issueStateCommentLikeRepository.FindById(issueStateReactionDTO.Id);
+            if (createdObject == null)
+            {
+                return new Tuple<int, object>(500, "A fost executata comanda de creare, dar nu poate fi gasit in BD");
+            }
+            else
+            {
+                return new Tuple<int, object>(200, createdObject);
+            }
         }
 
         public int Delete(IssueStateCommentLike issueDTO)
