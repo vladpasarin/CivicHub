@@ -24,18 +24,18 @@ namespace CivicHub.Repositories
         public int GetNumberOfDownVotes(Guid id)
         {
             return _context.IssueStateReactions
-                .Where(x => x.Vote.ToLower().Equals("downvote") && x.Id == id)
+                .Where(x => x.Vote.ToLower().Equals("downvote") && x.IssueStateId == id)
                 .Count();
         }
 
         public int GetNumberOfUpVotes(Guid id)
         {
             return _context.IssueStateReactions
-                .Where(x => x.Vote.ToLower().Equals("upvote") && x.Id == id)
+                .Where(x => x.Vote.ToLower().Equals("upvote") && x.IssueStateId == id)
                 .Count();
         }
 
-        public String GetUserReactionToIssueState(IssueStateReaction issueStateReaction) 
+        public string GetUserReactionToIssueState(IssueStateReaction issueStateReaction) 
         {
             IssueStateReaction result;
             try

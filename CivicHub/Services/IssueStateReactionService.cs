@@ -71,5 +71,16 @@ namespace CivicHub.Services
         {
             return _issueStateReactionRepository.GetUserReactionToIssueState(_mapper.Map<IssueStateReaction>(issueStateReactionDto));
         }
+
+        public bool Delete(Guid issueStateReactionId)
+        {
+            var issueStateReaction = _issueStateReactionRepository.FindById(issueStateReactionId);
+
+            if (issueStateReaction == null)
+                return false;
+
+            _issueStateReactionRepository.Delete(issueStateReaction);
+            return _issueStateReactionRepository.SaveChanges();
+        }
     }
 }
