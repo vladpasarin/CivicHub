@@ -72,6 +72,9 @@ export class SignFormComponent implements OnInit {
         this.signature.userId=this.userId;
         this.api.addSignature(this.signature).subscribe(()=>{
           console.log(this.signature);
+          this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
+            this.petitonProfile.allSignatures=allSignatures;
+        });
         });
 
     } else {

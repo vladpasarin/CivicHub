@@ -89,6 +89,10 @@ export class PetitionProfileComponent implements OnInit {
 
     selectState(issueState: IssueState) {
         this.currentState = issueState;
+        console.log(this.currentState);
+        this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
+            this.allSignatures= allSignatures;
+        });
     }
 
     addUpvoteReaction() {
@@ -171,5 +175,6 @@ export class PetitionProfileComponent implements OnInit {
     showSignForm() :void{
         this.signForm.initialize();
     }
+
    
 }
