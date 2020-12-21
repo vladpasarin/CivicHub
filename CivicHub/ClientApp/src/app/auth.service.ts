@@ -9,5 +9,6 @@ export class AuthService {
     logout(): void {
         sessionStorage.setItem('isLogged', 'false');
         sessionStorage.removeItem('firstName');
+        sessionStorage.removeItem('userId');
   }
 }

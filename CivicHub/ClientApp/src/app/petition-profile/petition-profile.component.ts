@@ -36,6 +36,10 @@ export class PetitionProfileComponent implements OnInit {
     issueReact = new IssueReaction();
     upvoteReacts: number;
     downvoteReacts: number;
+    userIdInvalid:boolean;
+    userIdInvalid2:boolean;
+    currentUser=new User();
+
 
     faUser = faUser;
     upvote = faArrowAltCircleUp;
@@ -70,6 +74,10 @@ export class PetitionProfileComponent implements OnInit {
                         comment.nrOfLikes = allLikes.length;
                         console.log(allLikes.length);
                     });
+                    this.api.getUserById(comment.userId).subscribe((user: User) => {
+                        comment.userName = user.firstName;
+                        console.log(comment.userName);
+                    });
                 });
             });
 
@@ -89,6 +97,10 @@ export class PetitionProfileComponent implements OnInit {
 
     selectState(issueState: IssueState) {
         this.currentState = issueState;
+        console.log(this.currentState);
+        this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
+            this.allSignatures= allSignatures;
+        });
     }
 
     addUpvoteReaction() {
@@ -112,16 +124,24 @@ export class PetitionProfileComponent implements OnInit {
     }
 
     addComment() {
-        this.stateComment.IssueStateId = this.currentState.id;
-        this.stateComment.UserId = this.userId;
-        this.stateComment.text = this.commentText;
-        this.stateComment.dateCreated = new Date();
-        this.api.addComment(this.stateComment).subscribe(() => {
-            this.commentText='';
-            this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
-                this.allComments = allcomm;
+        if(this.userId == null){
+            this.userIdInvalid2=true
+            setTimeout(() => {
+              this.userIdInvalid2=false
+          }, 2000);
+          }
+        else{
+            this.stateComment.IssueStateId = this.currentState.id;
+            this.stateComment.userId = this.userId;
+            this.stateComment.text = this.commentText;
+            this.stateComment.dateCreated = new Date();
+            this.api.addComment(this.stateComment).subscribe(() => {
+                this.commentText='';
+                this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
+                    this.allComments = allcomm;
+                });
             });
-        });
+        }
     }
 
     addCommentLike(stateComment: IssueComment) {
@@ -169,7 +189,16 @@ export class PetitionProfileComponent implements OnInit {
         this.photoModal.initialize(photoPath);
     }
     showSignForm() :void{
-        this.signForm.initialize();
+        if(this.userId == null){
+            this.userIdInvalid=true
+            setTimeout(() => {
+              this.userIdInvalid=false
+          }, 2000);
+          }
+          else{
+            this.signForm.initialize();
+          }
     }
+
    
 }
