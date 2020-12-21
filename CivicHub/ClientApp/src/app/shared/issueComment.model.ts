@@ -1,11 +1,13 @@
 import { User } from "./user.model";
 
 export class IssueComment {
-    Id: string;
+    id: string;
     IssueStateId: string;
     text: string;
-    UserId: string;
+    userId: string;
     dateCreated: Date;
+    nrOfLikes? = 0;
+    userName?:string;
     constructor(input?: any) {
       Object.assign(this, input);
     }

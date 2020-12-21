@@ -31,12 +31,15 @@ export class PetitionProfileComponent implements OnInit {
     userId = sessionStorage.getItem('userId');
     allComments: IssueComment[] = [];
     allSignatures:Signature[]=[];
-    allCommentLikes: IssueCommentLike[] = [];
     commentLike = new IssueCommentLike();
     issueStateReactions: IssueReaction[] = [];
     issueReact = new IssueReaction();
     upvoteReacts: number;
     downvoteReacts: number;
+    userIdInvalid:boolean;
+    userIdInvalid2:boolean;
+    currentUser=new User();
+
 
     faUser = faUser;
     upvote = faArrowAltCircleUp;
@@ -65,10 +68,15 @@ export class PetitionProfileComponent implements OnInit {
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
                 this.allComments.forEach(comment => {
-                    console.log("Comment: " + comment.text);
-                    this.api.getAllIssueStateCommentLikes(comment.Id).subscribe((allLikes: IssueCommentLike[]) => {
-                        this.allCommentLikes = allLikes;
-                        console.log(this.allCommentLikes);
+                    console.log(comment.id);
+                    //console.log("CommentId: " + comment.Id);
+                    this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
+                        comment.nrOfLikes = allLikes.length;
+                        console.log(allLikes.length);
+                    });
+                    this.api.getUserById(comment.userId).subscribe((user: User) => {
+                        comment.userName = user.firstName;
+                        console.log(comment.userName);
                     });
                 });
             });
@@ -83,13 +91,16 @@ export class PetitionProfileComponent implements OnInit {
 
             this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
                 this.allSignatures= allSignatures;
-                console.log(this.allSignatures);
             });
         });
     }
 
     selectState(issueState: IssueState) {
         this.currentState = issueState;
+        console.log(this.currentState);
+        this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
+            this.allSignatures= allSignatures;
+        });
     }
 
     addUpvoteReaction() {
@@ -113,28 +124,40 @@ export class PetitionProfileComponent implements OnInit {
     }
 
     addComment() {
-        this.stateComment.IssueStateId = this.currentState.id;
-        this.stateComment.UserId = this.userId;
-        this.stateComment.text = this.commentText;
-        this.stateComment.dateCreated = new Date();
-        this.api.addComment(this.stateComment).subscribe(() => {
-            this.commentText='';
+        if(this.userId == null){
+            this.userIdInvalid2=true
+            setTimeout(() => {
+              this.userIdInvalid2=false
+          }, 2000);
+          }
+        else{
+            this.stateComment.IssueStateId = this.currentState.id;
+            this.stateComment.userId = this.userId;
+            this.stateComment.text = this.commentText;
+            this.stateComment.dateCreated = new Date();
+            this.api.addComment(this.stateComment).subscribe(() => {
+                this.commentText='';
+                this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
+                    this.allComments = allcomm;
+                });
+            });
+        }
+    }
+
+    addCommentLike(stateComment: IssueComment) {
+        this.commentLike.issueStateCommentId = stateComment.id;
+        this.commentLike.userId = this.userId;
+        this.api.addCommentLike(this.commentLike).subscribe(() => {
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
                 this.allComments.forEach(comment => {
-                    console.log("Comment: " + comment.text);
-                    this.api.getAllIssueStateCommentLikes(comment.Id).subscribe((allLikes: IssueCommentLike[]) => {
-                        this.allCommentLikes = allLikes;
-                        console.log(this.allCommentLikes);
+                    this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
+                        comment.nrOfLikes = allLikes.length;
+                        console.log(allLikes.length);
                     });
                 });
             });
         });
-    }
-
-    addCommentLike(stateComment: IssueComment) {
-        this.commentLike.IssueStateCommentId = this.stateComment.Id;
-        this.commentLike.UserId = this.userId;
         console.log("AddCommentLike function executed...")
     }
 
@@ -166,7 +189,16 @@ export class PetitionProfileComponent implements OnInit {
         this.photoModal.initialize(photoPath);
     }
     showSignForm() :void{
-        this.signForm.initialize();
+        if(this.userId == null){
+            this.userIdInvalid=true
+            setTimeout(() => {
+              this.userIdInvalid=false
+          }, 2000);
+          }
+          else{
+            this.signForm.initialize();
+          }
     }
+
    
 }

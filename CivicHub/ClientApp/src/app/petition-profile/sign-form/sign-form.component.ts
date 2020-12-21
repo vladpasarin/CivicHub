@@ -18,6 +18,7 @@ export class SignFormComponent implements OnInit {
   signature= new Signature();
   currentDate=new Date();
   userId = sessionStorage.getItem('userId');
+  userIdInvalid:boolean;
 
   @Input() currentState:IssueState;
 
@@ -62,6 +63,8 @@ export class SignFormComponent implements OnInit {
         console.log("loginForm submitted");
         console.log(this.f);
         //api add
+        console.log(this.userId);
+       
         this.signature.name=this.f.name.value;
         this.signature.cnp=this.f.cnp.value;
         this.signature.adresa=this.f.address.value;
@@ -72,6 +75,9 @@ export class SignFormComponent implements OnInit {
         this.signature.userId=this.userId;
         this.api.addSignature(this.signature).subscribe(()=>{
           console.log(this.signature);
+          this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
+            this.petitonProfile.allSignatures=allSignatures;
+        });
         });
 
     } else {

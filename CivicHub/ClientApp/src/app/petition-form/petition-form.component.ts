@@ -18,6 +18,7 @@ export class PetitionFormComponent implements OnInit {
     markerLat: number;
     markerLng: number;
     markerAlpha = 1;
+    userIdInvalid:boolean;
 
     addIssueForm: FormGroup;
     success: boolean;
@@ -60,6 +61,13 @@ export class PetitionFormComponent implements OnInit {
   }
 
     addIssue() {
+        if(this.userId == null){
+          this.userIdInvalid=true
+          setTimeout(() => {
+            this.userIdInvalid=false
+        }, 2000);
+        }
+        else{
         if (this.addIssueForm.valid) {
             this.success = true;
             setTimeout(() => {
@@ -88,7 +96,7 @@ export class PetitionFormComponent implements OnInit {
             }, 3000);
             this.validateAllFormFields(this.addIssueForm);
         }
-        
+      }
     }
 
     validateAllFormFields(formGroup: FormGroup) {

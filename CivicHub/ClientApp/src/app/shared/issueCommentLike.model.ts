@@ -1,8 +1,8 @@
 
 export class IssueCommentLike {
-    Id: string;
-    IssueStateCommentId: string;
-    UserId: string;
+    id: string;
+    issueStateCommentId: string;
+    userId: string;
     constructor(input?: any) {
       Object.assign(this, input);
     }
