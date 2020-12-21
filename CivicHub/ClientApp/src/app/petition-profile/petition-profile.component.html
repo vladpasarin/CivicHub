@@ -13,6 +13,7 @@
     </div>
     <button class="btn btn-primary" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
 </div>
+<p class="text-center" style="color:red;" *ngIf="userIdInvalid==true">You need to login</p>
 <div class="description">
     <p class="labels">Description:</p>
     <div class="issueDescription">
@@ -34,7 +35,7 @@
     <p class="labels">Comments:</p>
     <div *ngFor="let comment of allComments" class="issueComments">
         <p>{{comment.text}}</p>
-        <p><fa-icon [icon]="faUser"></fa-icon> User</p>
+        <p><fa-icon [icon]="faUser"></fa-icon> {{comment.userName}}</p>
         <div class="reacts">
             <p><fa-icon (click)="addCommentLike(comment)" id="up" [icon]="thumbsUp"></fa-icon> {{ comment.nrOfLikes }}</p>
         </div>
@@ -43,6 +44,7 @@
         <div class="newComment">
             <textarea  [(ngModel)]="commentText" name="newComment" id="newCommentText" cols="100" rows="2" placeholder="New Comment..."></textarea><br>
             <button class="btn btn-primary" id="sendComment" type="button" (click)="addComment()">Send</button>
+            <p class="text-center" style="color:red;" *ngIf="userIdInvalid2==true">You need to login</p>
         </div>
     </div>
 </div>

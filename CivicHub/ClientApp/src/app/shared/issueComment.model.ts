@@ -4,9 +4,10 @@ export class IssueComment {
     id: string;
     IssueStateId: string;
     text: string;
-    UserId: string;
+    userId: string;
     dateCreated: Date;
     nrOfLikes? = 0;
+    userName?:string;
     constructor(input?: any) {
       Object.assign(this, input);
     }

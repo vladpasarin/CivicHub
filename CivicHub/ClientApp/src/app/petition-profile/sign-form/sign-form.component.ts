@@ -18,6 +18,7 @@ export class SignFormComponent implements OnInit {
   signature= new Signature();
   currentDate=new Date();
   userId = sessionStorage.getItem('userId');
+  userIdInvalid:boolean;
 
   @Input() currentState:IssueState;
 
@@ -62,6 +63,8 @@ export class SignFormComponent implements OnInit {
         console.log("loginForm submitted");
         console.log(this.f);
         //api add
+        console.log(this.userId);
+       
         this.signature.name=this.f.name.value;
         this.signature.cnp=this.f.cnp.value;
         this.signature.adresa=this.f.address.value;
