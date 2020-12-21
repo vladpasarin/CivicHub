@@ -24,6 +24,7 @@ namespace CivicHub.Services
         public bool Create(IssueStateCommentDto issueDTO)
         {
             var issue = _mapper.Map<IssueStateComment>(issueDTO);
+            issue.dateCreated = DateTime.Now;
             _issueStateCommentRepository.Create(issue);
             return _issueStateCommentRepository.SaveChanges();
         }
