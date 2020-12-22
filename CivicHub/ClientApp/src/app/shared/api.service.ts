@@ -7,6 +7,7 @@ import { IssueComment } from './issueComment.model';
 import { IssueCommentLike } from './issueCommentLike.model';
 import { Signature } from "./signature.model";
 import { IssueReaction } from './issueReaction.model';
+import { IssueReactByUser } from "./issueReactByUser.model";
 
 @Injectable({
   providedIn: "root",
@@ -116,5 +117,23 @@ export class ApiService {
         headers: this.header,
       });
     }
+
+    checkIfUserLikedComment(userId: string, issueStateCommentId: string) {
+      return this.http.get(this.baseUrl + "/IssueStateCommentLike/" + userId + "/" + issueStateCommentId, {
+        headers: this.header,
+      });
+    }
+
+    /*getUserReactionToIssue(issueReactByUser: IssueReactByUser) {
+      return this.http.get(this.baseUrl + "/IssueStateReaction/getUserReactionToIssueState/", issueReactByUser, {
+        headers: this.header,
+      });
+    }*/
+
+    /*deleteCommentLike(issueCommentLike: IssueCommentLike) {
+      return this.http.delete(this.baseUrl + "/IssueStateCommentLike", issueCommentLike, {
+        headers: this.header,
+      });
+    }*/
   
 }

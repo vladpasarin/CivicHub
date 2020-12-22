@@ -107,8 +107,8 @@
   margin: auto;
   object-fit: cover;
   border-radius: 10%;
-  height: 250px;
-  width: 250px;
+  height: 300px;
+  width: 400px;
   margin-bottom: 30px;
   transition: 0.3;
 }
