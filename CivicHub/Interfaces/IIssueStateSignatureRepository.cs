@@ -9,5 +9,6 @@ namespace CivicHub.Interfaces
     public interface IIssueStateSignatureRepository : IGenericRepository<IssueStateSignature>
     {
         List<IssueStateSignature> GetAllWithDetails(Guid issueStateId);
+        IssueStateSignature GetByUserIdAndIssueStateId(Guid userId, Guid issueStateId);
     }
 }

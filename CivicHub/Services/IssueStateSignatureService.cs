@@ -26,6 +26,10 @@ namespace CivicHub.Services
         public IssueStateSignatureResponseDto Create(IssueStateSignatureRequestDto issueDTO)
         {
             var issue = _mapper.Map<IssueStateSignature>(issueDTO);
+            if (_issueStateSignatureRepository.GetByUserIdAndIssueStateId(issue.UserId, issue.IssueStateId) != null)
+            {
+                return null;
+            }
             issue.DateSigned = DateTime.Now;
             _issueStateSignatureRepository.Create(issue);
             _issueStateSignatureRepository.SaveChanges();

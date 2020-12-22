@@ -41,7 +41,7 @@ namespace CivicHub.Controllers
             var createdIssueComment = _issueStateSignatureService.Create(issueDTO);
 
             if (createdIssueComment == null)
-                return StatusCode(500);
+                return Conflict("Userul deja a semnat aceasta petitie");
 
             return Ok(createdIssueComment);
         }

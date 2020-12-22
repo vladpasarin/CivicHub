@@ -24,5 +24,13 @@ namespace CivicHub.Repositories
                 .Include(x => x.IssueState)
                 .ToList();
         }
+
+        public IssueStateSignature GetByUserIdAndIssueStateId(Guid userId, Guid issueStateId)
+        {
+            return _table
+                .Where(x => x.UserId == userId)
+                .Where(x => x.IssueStateId == issueStateId)
+                .FirstOrDefault();
+        }
     }
 }
