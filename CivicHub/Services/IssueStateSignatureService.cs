@@ -52,14 +52,15 @@ namespace CivicHub.Services
             };
         }
 
-        public int Delete(IssueStateSignatureRequestDto issueDTO)
+        public int Delete(Guid issueStateSignatureId)
         {
-            if (_issueStateSignatureRepository.FindById(issueDTO.Id) == null)
+            if (_issueStateSignatureRepository.FindById(issueStateSignatureId) == null)
             {
                 return 404;
             }
             else
             {
+                var issueDTO = _issueStateSignatureRepository.FindById(issueStateSignatureId);
                 _issueStateSignatureRepository.Delete(_mapper.Map<IssueStateSignature>(issueDTO));
                 _issueStateSignatureRepository.SaveChanges();
 

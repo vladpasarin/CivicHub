@@ -55,10 +55,10 @@ namespace CivicHub.Controllers
             return Ok(updated);
         }
 
-        [HttpDelete]
-        public IActionResult Delete(IssueStateCommentDto issueDTO)
+        [HttpDelete("{issueStateCommentId}")]
+        public IActionResult Delete(Guid issueStateCommentId)
         {
-            var result = _issueStateCommentService.Delete(issueDTO);
+            var result = _issueStateCommentService.Delete(issueStateCommentId);
             switch (result)
             {
                 case 200:

@@ -76,10 +76,10 @@ namespace CivicHub.Controllers
         }
 
 
-        [HttpDelete]
-        public IActionResult Delete(IssueStateCommentLike issueDTO)
+        [HttpDelete("{issueStateCommentLikeId}")]
+        public IActionResult Delete(Guid issueStateCommentLikeId)
         {
-            var result = _issueStateCommentLikeService.Delete(issueDTO);
+            var result = _issueStateCommentLikeService.Delete(issueStateCommentLikeId);
             switch (result)
             {
                 case 200:

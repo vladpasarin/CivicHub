@@ -41,14 +41,15 @@ namespace CivicHub.Services
             }
         }
 
-        public int Delete(IssueStateCommentLike issueDTO)
+        public int Delete(Guid issueStateCommentLikeId)
         {
-            if (_issueStateCommentLikeRepository.FindById(issueDTO.Id) == null)
+            if (_issueStateCommentLikeRepository.FindById(issueStateCommentLikeId) == null)
             {
                 return 404;
             }
             else
             {
+                var issueDTO = _issueStateCommentLikeRepository.FindById(issueStateCommentLikeId);
                 _issueStateCommentLikeRepository.Delete(issueDTO);
                 _issueStateCommentLikeRepository.SaveChanges();
 

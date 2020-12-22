@@ -47,10 +47,10 @@ namespace CivicHub.Controllers
         }
        
 
-        [HttpDelete]
-        public IActionResult Delete(IssueStateSignatureRequestDto issueDTO)
+        [HttpDelete("{issueStateSignatureId}")]
+        public IActionResult Delete(Guid issueStateSignatureId)
         {
-            var result = _issueStateSignatureService.Delete(issueDTO);
+            var result = _issueStateSignatureService.Delete(issueStateSignatureId);
             switch (result)
             {
                 case 200:

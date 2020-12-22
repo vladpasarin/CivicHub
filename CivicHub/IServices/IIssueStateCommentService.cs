@@ -11,6 +11,6 @@ namespace CivicHub.IServices
         List<IssueStateCommentDto> GetAll(Guid IssueStateId);
         bool Create(IssueStateCommentDto issueDTO);
         bool Update(IssueStateCommentDto issueDTO);
-        int Delete(IssueStateCommentDto issueDTO);
+        int Delete(Guid issueStateCommentId);
     }
 }

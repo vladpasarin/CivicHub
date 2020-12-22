@@ -11,6 +11,6 @@ namespace CivicHub.IServices
         List<IssueStateCommentLike> GetAll(Guid issueStateCommentId);
         Tuple<int, object> Create(IssueStateCommentLike issueStateReactionDTO);
         bool UserVoted(Guid userid, Guid issueStateCommentId);
-        int Delete(IssueStateCommentLike issueDTO);
+        int Delete(Guid issueStateCommentLikeId);
     }
 }
