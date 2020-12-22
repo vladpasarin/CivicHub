@@ -139,6 +139,16 @@ export class PetitionProfileComponent implements OnInit {
                 this.commentText='';
                 this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                     this.allComments = allcomm;
+                    this.allComments.forEach(comment => {
+                        this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
+                            comment.nrOfLikes = allLikes.length;
+                            console.log(allLikes.length);
+                        });
+                        this.api.getUserById(comment.userId).subscribe((user: User) => {
+                            comment.userName = user.firstName;
+                            console.log(comment.userName);
+                        });
+                    });
                 });
             });
         }
@@ -154,6 +164,10 @@ export class PetitionProfileComponent implements OnInit {
                     this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
                         comment.nrOfLikes = allLikes.length;
                         console.log(allLikes.length);
+                    });
+                    this.api.getUserById(comment.userId).subscribe((user: User) => {
+                        comment.userName = user.firstName;
+                        console.log(comment.userName);
                     });
                 });
             });

@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
@@ -18,7 +19,7 @@ export class SignFormComponent implements OnInit {
   signature= new Signature();
   currentDate=new Date();
   userId = sessionStorage.getItem('userId');
-  userIdInvalid:boolean;
+  errorAdd:boolean;
 
   @Input() currentState:IssueState;
 
@@ -60,10 +61,7 @@ export class SignFormComponent implements OnInit {
         setTimeout(() => {
             this.success = null;
         }, 3000);
-        console.log("loginForm submitted");
-        console.log(this.f);
         //api add
-        console.log(this.userId);
        
         this.signature.name=this.f.name.value;
         this.signature.cnp=this.f.cnp.value;
@@ -77,8 +75,17 @@ export class SignFormComponent implements OnInit {
           console.log(this.signature);
           this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
             this.petitonProfile.allSignatures=allSignatures;
-        });
-        });
+            this.signForm.hide();
+          });
+
+        },
+          (error: HttpErrorResponse) => {
+            console.log('err', error.message);
+            this.errorAdd = true;
+            setTimeout(() => {
+                this.errorAdd = null;
+            }, 2000);
+          });
 
     } else {
         this.success = false;
