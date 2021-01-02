@@ -8,5 +8,6 @@ namespace CivicHub.Interfaces
 {
     public interface IIssueStatePhotoRepository : IGenericRepository<IssueStatePhoto>
     {
+        List<IssueStatePhoto> GetAllWithDetails(Guid issueStateId);
     }
 }

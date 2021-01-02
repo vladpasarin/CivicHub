@@ -14,5 +14,12 @@ namespace CivicHub.Repositories
         {
 
         }
+
+        public List<IssueStatePhoto> GetAllWithDetails(Guid issueStateId)
+        {
+            return _table
+                .Where(x => x.IssueStateId == issueStateId)
+                .ToList();
+        }
     }
 }

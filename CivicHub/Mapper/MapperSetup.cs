@@ -28,6 +28,8 @@ namespace CivicHub.Mapper
             CreateMap<IssueStateSignatureResponseDto , IssueStateSignature>();
             CreateMap<IssueStateReaction, IssueStateReactionDto>();
             CreateMap<IssueStateReactionDto, IssueStateReaction>();
+            CreateMap<IssueStatePhoto, IssueStatePhotoDto>();
+            CreateMap<IssueStatePhotoDto, IssueStatePhoto>();
 
         }
 
