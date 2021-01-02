@@ -14,10 +14,12 @@ namespace CivicHub.Services
     public class IssueStateService : IIssueStateService
     {
         private readonly IIssueStateRepository _issueStateRepository;
+        private readonly IIssueStatePhotoRepository _issueStatePhotoRepository;
         private readonly IMapper _mapper;
-        public IssueStateService(IIssueStateRepository issueStateRepository, IMapper mapper)
+        public IssueStateService(IIssueStateRepository issueStateRepository, IMapper mapper, IIssueStatePhotoRepository issueStatePhotoRepository)
         {
             _issueStateRepository = issueStateRepository;
+            _issueStatePhotoRepository = issueStatePhotoRepository;
             _mapper = mapper;
         }
 
@@ -100,6 +102,15 @@ namespace CivicHub.Services
             });
             var lastIssueStateAfter = GetLatestIssueState(signaturesSubmittedDto.IssueId);
             //add photos to issue state
+            foreach(byte[] photo in signaturesSubmittedDto.Photos)
+            {
+                _issueStatePhotoRepository.Create(new IssueStatePhoto
+                {
+                    IssueStateId = lastIssueStateAfter.Id,
+                    Photo = photo,
+                    dateAdded = DateTime.Now
+                });
+            }
             return lastIssueStateAfter;
         }
     }
