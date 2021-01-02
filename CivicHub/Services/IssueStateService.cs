@@ -80,5 +80,27 @@ namespace CivicHub.Services
 
             return issueStateDto;
         }
+
+        public IssueStateDto ConfirmSignatureSubmission(SignaturesSubmittedDto signaturesSubmittedDto)
+        {
+            var issueLastState = GetLatestIssueState(signaturesSubmittedDto.IssueId);
+
+            if (issueLastState.Type != 1)
+            {
+                return null;
+            }
+
+            // create issue state nou cu waiting for response
+            Create(new IssueStateDto
+            {
+                IssueId = issueLastState.IssueId,
+                DateStart = DateTime.Now,
+                Message = "Se asteapta raspunsul din partea autoritatilor",
+                Type = 2
+            });
+            var lastIssueStateAfter = GetLatestIssueState(signaturesSubmittedDto.IssueId);
+            //add photos to issue state
+            return lastIssueStateAfter;
+        }
     }
 }

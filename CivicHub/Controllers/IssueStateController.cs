@@ -69,12 +69,6 @@ namespace CivicHub.Controllers
         public IActionResult signaturesSubmitted(SignaturesSubmittedDto signaturesSubmittedDto)
         {
             var issue = _issueService.GetById(signaturesSubmittedDto.IssueId);
-            var issueLastState = _issueStateService.GetLatestIssueState(signaturesSubmittedDto.IssueId);
-
-            if (issueLastState.Type != 1)
-            {
-                return StatusCode(400, "Last issue state must be waiting for signature submission");
-            }
             // get last tate
             // check type is 2
             // check the logged user is the organizer 
@@ -84,17 +78,15 @@ namespace CivicHub.Controllers
                 return StatusCode(400, "Only the organizer can change the status of the issue");
             }
 
-            // create issue state nou cu waiting for response
-            _issueStateService.Create(new IssueStateDto
+            var result = _issueStateService.ConfirmSignatureSubmission(signaturesSubmittedDto);
+            if (result == null)
             {
-                IssueId = issue.Id,
-                DateStart = DateTime.Now,
-                Message = "Se asteapta raspunsul din partea autoritatilor",
-                Type = 2
-            });
-            var lastIssueStateAfter = _issueStateService.GetLatestIssueState(signaturesSubmittedDto.IssueId);
-            //add photos to issue state
-            return Ok(lastIssueStateAfter);
+                return StatusCode(400, "Last issue state must be waiting for signature submission");
+            }
+            else
+            {
+                return Ok(result);
+            }
 
         }
 

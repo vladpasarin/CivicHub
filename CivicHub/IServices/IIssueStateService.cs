@@ -13,6 +13,7 @@ namespace CivicHub.IServices
         bool Update(IssueStateDto IssueDTO);
         Task<List<IssueStateDto>> GetAllByIssueIdAsync(Guid IssueId);
         IssueStateDto GetLatestIssueState(Guid IssueId);
+        IssueStateDto ConfirmSignatureSubmission(SignaturesSubmittedDto signaturesSubmittedDto);
 
     }
 }
