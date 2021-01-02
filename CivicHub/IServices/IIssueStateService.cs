@@ -14,6 +14,7 @@ namespace CivicHub.IServices
         Task<List<IssueStateDto>> GetAllByIssueIdAsync(Guid IssueId);
         IssueStateDto GetLatestIssueState(Guid IssueId);
         IssueStateDto ConfirmSignatureSubmission(SignaturesSubmittedDto signaturesSubmittedDto);
+        IssueStateDto AddGivenResponse(ResponseGivenDto responseGivenDto);
 
     }
 }

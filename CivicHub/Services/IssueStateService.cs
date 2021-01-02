@@ -113,5 +113,37 @@ namespace CivicHub.Services
             }
             return lastIssueStateAfter;
         }
+
+        public IssueStateDto AddGivenResponse(ResponseGivenDto responseGivenDto)
+        {
+            var issueLastState = GetLatestIssueState(responseGivenDto.IssueId);
+
+            if (issueLastState.Type != 2)
+            {
+                return null;
+            }
+
+            // create issue state nou cu waiting for response
+            Create(new IssueStateDto
+            {
+                IssueId = issueLastState.IssueId,
+                DateStart = DateTime.Now,
+                Message = "Raspunsul autoritatilor a fost dat",
+                CustomMessage = responseGivenDto.MessageFromAuthorities,
+                Type = 3
+            });
+            var lastIssueStateAfter = GetLatestIssueState(responseGivenDto.IssueId);
+            //add photos to issue state
+            foreach (byte[] photo in responseGivenDto.Photos)
+            {
+                _issueStatePhotoRepository.Create(new IssueStatePhoto
+                {
+                    IssueStateId = lastIssueStateAfter.Id,
+                    Photo = photo,
+                    dateAdded = DateTime.Now
+                });
+            }
+            return lastIssueStateAfter;
+        }
     }
 }

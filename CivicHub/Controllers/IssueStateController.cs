@@ -90,5 +90,31 @@ namespace CivicHub.Controllers
 
         }
 
+        [HttpPost("responseGiven")]
+        [Authorize]
+        public IActionResult responseGiven(ResponseGivenDto responseGivenDto)
+        {
+            var issue = _issueService.GetById(responseGivenDto.IssueId);
+            // get last tate
+            // check type is 2
+            // check the logged user is the organizer 
+            // 
+            if (((User)HttpContext.Items["User"]).Id != issue.UserId)
+            {
+                return StatusCode(400, "Only the organizer can change the status of the issue");
+            }
+
+            var result = _issueStateService.AddGivenResponse(responseGivenDto);
+            if (result == null)
+            {
+                return StatusCode(400, "Last issue state must be waiting for signature submission");
+            }
+            else
+            {
+                return Ok(result);
+            }
+
+        }
+
     }
 }
