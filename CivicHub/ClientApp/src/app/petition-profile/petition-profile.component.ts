@@ -39,6 +39,7 @@ export class PetitionProfileComponent implements OnInit {
     userIdInvalid:boolean;
     userIdInvalid2:boolean;
     currentUser=new User();
+    checkIfUserLiked: boolean;
 
 
     faUser = faUser;
@@ -110,6 +111,7 @@ export class PetitionProfileComponent implements OnInit {
         this.issueReact.dateGiven = new Date();
         console.log(this.issueReact);
         this.api.addIssueReaction(this.issueReact).subscribe(() => {
+            this.getUpvotes();
         });
     }
 
@@ -120,6 +122,7 @@ export class PetitionProfileComponent implements OnInit {
         this.issueReact.dateGiven = new Date();
         console.log(this.issueReact);
         this.api.addIssueReaction(this.issueReact).subscribe(() => {
+            this.getDownvotes();
         });
     }
 
@@ -139,6 +142,16 @@ export class PetitionProfileComponent implements OnInit {
                 this.commentText='';
                 this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                     this.allComments = allcomm;
+                    this.allComments.forEach(comment => {
+                        this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
+                            comment.nrOfLikes = allLikes.length;
+                            console.log(allLikes.length);
+                        });
+                        this.api.getUserById(comment.userId).subscribe((user: User) => {
+                            comment.userName = user.firstName;
+                            console.log(comment.userName);
+                        });
+                    });
                 });
             });
         }
@@ -147,6 +160,7 @@ export class PetitionProfileComponent implements OnInit {
     addCommentLike(stateComment: IssueComment) {
         this.commentLike.issueStateCommentId = stateComment.id;
         this.commentLike.userId = this.userId;
+
         this.api.addCommentLike(this.commentLike).subscribe(() => {
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
@@ -155,6 +169,17 @@ export class PetitionProfileComponent implements OnInit {
                         comment.nrOfLikes = allLikes.length;
                         console.log(allLikes.length);
                     });
+
+                    this.api.getUserById(comment.userId).subscribe((user: User) => {
+                        comment.userName = user.firstName;
+                        console.log(comment.userName);
+                    });
+
+                   /*this.api.checkIfUserLikedComment(this.userId, comment.id).subscribe((check: boolean) => {
+                        if (check == true) {
+                            
+                        }
+                    });*/
                 });
             });
         });
