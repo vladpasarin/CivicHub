@@ -67,6 +67,7 @@ namespace CivicHub
             services.AddTransient<IIssueStateCommentLikeService, IssueStateCommentLikeService>();
             services.AddTransient<IIssueStateReactionService, IssueStateReactionService>();
             services.AddTransient<IIssueStateSignatureService, IssueStateSignatureService>();
+            services.AddTransient<IIssueStatePhotoService, IssueStatePhotoService>();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
             options.SerializerSettings

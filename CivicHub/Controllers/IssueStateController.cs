@@ -116,5 +116,45 @@ namespace CivicHub.Controllers
 
         }
 
+        [HttpPost("reopenIssue/{issueId}")]
+        [Authorize]
+        public IActionResult reopenIssue(Guid issueId)
+        {
+            var issue = _issueService.GetById(issueId);
+            if (((User)HttpContext.Items["User"]).Id != issue.UserId)
+            {
+                return StatusCode(400, "Only the organizer can change the status of the issue");
+            }
+            var result = _issueStateService.ReopenIssue(issueId);
+            return StatusCode(result.Item1, result.Item2);
+
+        }
+
+        [HttpPost("implemented")]
+        [Authorize]
+        public IActionResult implemented(ResponseImplementedDto responseImplementedDto)
+        {
+            var issue = _issueService.GetById(responseImplementedDto.IssueId);
+            // get last tate
+            // check type is 2
+            // check the logged user is the organizer 
+            // 
+            if (((User)HttpContext.Items["User"]).Id != issue.UserId)
+            {
+                return StatusCode(400, "Only the organizer can change the status of the issue");
+            }
+
+            var result = _issueStateService.ChangeStateToImplemented(responseImplementedDto);
+            if (result == null)
+            {
+                return StatusCode(400, "Last issue state must be waiting for signature submission");
+            }
+            else
+            {
+                return Ok(result);
+            }
+
+        }
+
     }
 }

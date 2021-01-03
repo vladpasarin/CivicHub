@@ -15,6 +15,9 @@ namespace CivicHub.IServices
         IssueStateDto GetLatestIssueState(Guid IssueId);
         IssueStateDto ConfirmSignatureSubmission(SignaturesSubmittedDto signaturesSubmittedDto);
         IssueStateDto AddGivenResponse(ResponseGivenDto responseGivenDto);
+        IssueStateDto AddUngivenResponse(Guid issueId);
+        Tuple<int, object> ReopenIssue(Guid issueId);
+        IssueStateDto ChangeStateToImplemented(ResponseImplementedDto responseImplementedDto);
 
     }
 }
