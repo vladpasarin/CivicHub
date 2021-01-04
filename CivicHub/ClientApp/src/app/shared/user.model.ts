@@ -9,6 +9,7 @@ export class User {
     avatar: string;
     points: number;
     issues: Issue[];
+    badgeType?:string;
     constructor(input?: any) {
       Object.assign(this, input);
     }
