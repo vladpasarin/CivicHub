@@ -5,46 +5,58 @@
     <p id="vote">Upvote <fa-icon (click)="addUpvoteReaction()" id="upVote" [icon]="upvote"></fa-icon> {{ upvoteReacts }}</p>
     <p id="vote">Downvote <fa-icon (click)="addDownvoteReaction()" id="downVote" [icon]="downvote"></fa-icon> {{ downvoteReacts }}</p>
     <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Status
+        <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Status
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
           <li *ngFor="let issueState of issueStates" class="content" (click)="selectState(issueState);getAllComments()"><a>{{issueState.message}}</a></li>
         </ul>
     </div>
-    <button class="btn btn-primary" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
 </div>
+<hr>
 <p class="text-center" style="color:red;" *ngIf="userIdInvalid==true">You need to login</p>
-<div class="description">
-    <p class="labels">Description:</p>
-    <div class="issueDescription">
-        {{selectedIssue.description}}
+<div class="details">
+    <div class="detailsLeft">
+        <div class="photos">
+            <img id="issuePhoto" 
+            src="https://i0.1616.ro/media/2/2701/33631/16664900/1/whatsapp-image-2017-02-23-at-09-38-33.jpg" 
+            >
+        </div>
+        <p style="margin-left: 100px; font-size: 22px;font-weight: bold;">Description:</p>
+        <div class="description">
+            <div class="issueDescription">
+                {{selectedIssue.description}}
+            </div>
+        </div>
+    </div>
+    
+    <div class="detailsRight">
+        <div class="signatures">
+        <p class="labels">Signatures: {{allSignatures.length}}</p>
+        <button class="btn" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
+        </div>
+        <div class="comments">
+            <p class="labels">Comments:</p>
+            <div *ngFor="let comment of allComments | slice:0:show" class="issueComments">
+                <p>{{comment.text}}</p>
+                <p><fa-icon [icon]="faUser"></fa-icon> {{comment.userName}}</p>
+                <div class="reacts">
+                    <p><fa-icon (click)="addCommentLike(comment)" id="up" [icon]="thumbsUp"></fa-icon> {{ comment.nrOfLikes }}</p>
+                </div>
+            </div>
+            <p class="text-center" style="color:red;" *ngIf="errorAdd==true">You need to login</p>
+            <p id="seeComments" *ngIf="show == 3" (click)="show = allComments.length">See more comments</p>
+            <p id="seeComments" *ngIf="show == allComments.length" (click)="show = 3">See less comments</p>
+            
+            <div class="issueComments">
+                <div class="newComment">
+                    <textarea  [(ngModel)]="commentText" name="newComment" id="newCommentText" cols="50" rows="2" placeholder="New Comment..."></textarea><br>
+                    <button class="btn btn-primary" id="sendComment" type="button" (click)="addComment()">Send</button>
+                    <p class="text-center" style="color:red;" *ngIf="userIdInvalid2==true">You need to login</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-<div class="photos">
-    <p class="labels">Photos:</p>
-    <img id="issuePhoto" 
-    src="https://i0.1616.ro/media/2/2701/33631/16664900/1/whatsapp-image-2017-02-23-at-09-38-33.jpg" 
-    >
-</div>
+
 <photo-modal #photoModal></photo-modal>
 <sign-form #signForm [currentState]="currentState"></sign-form>
-<div>
-   <p class="labels">Signatures: {{allSignatures.length}}</p>
-</div>
-<div class="comments">
-    <p class="labels">Comments:</p>
-    <div *ngFor="let comment of allComments" class="issueComments">
-        <p>{{comment.text}}</p>
-        <p><fa-icon [icon]="faUser"></fa-icon> {{comment.userName}}</p>
-        <div class="reacts">
-            <p><fa-icon (click)="addCommentLike(comment)" id="up" [icon]="thumbsUp"></fa-icon> {{ comment.nrOfLikes }}</p>
-        </div>
-    </div>
-    <div class="issueComments">
-        <div class="newComment">
-            <textarea  [(ngModel)]="commentText" name="newComment" id="newCommentText" cols="100" rows="2" placeholder="New Comment..."></textarea><br>
-            <button class="btn btn-primary" id="sendComment" type="button" (click)="addComment()">Send</button>
-            <p class="text-center" style="color:red;" *ngIf="userIdInvalid2==true">You need to login</p>
-        </div>
-    </div>
-</div>

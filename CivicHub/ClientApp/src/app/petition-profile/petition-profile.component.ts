@@ -40,6 +40,8 @@ export class PetitionProfileComponent implements OnInit {
     userIdInvalid2:boolean;
     currentUser=new User();
     checkIfUserLiked: boolean;
+    show=3;
+    errorAdd: boolean;
 
 
     faUser = faUser;
@@ -158,9 +160,14 @@ export class PetitionProfileComponent implements OnInit {
     }
 
     addCommentLike(stateComment: IssueComment) {
+        if(this.userId == null){
+            this.errorAdd=true
+            setTimeout(() => {
+              this.errorAdd=false
+          }, 2000);
+        }
         this.commentLike.issueStateCommentId = stateComment.id;
         this.commentLike.userId = this.userId;
-
         this.api.addCommentLike(this.commentLike).subscribe(() => {
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
