@@ -25,6 +25,25 @@ ngOnInit(): void {
   this.api.getUserById(this.userId).subscribe((user: User) => {
     this.currentUser = user;
     console.log(this.currentUser);
+    if(this.currentUser.points<10){
+      this.currentUser.badgeType="Star_badge.png";
+    }
+    if(this.currentUser.points>10){
+      this.currentUser.badgeType="badge1.png";
+    }
+    if(this.currentUser.points>30){
+      this.currentUser.badgeType="badge2.png";
+    }
+    if(this.currentUser.points>80){
+      this.currentUser.badgeType="badge3.png";
+    }
+    if(this.currentUser.points>150){
+      this.currentUser.badgeType="badge4.png";
+    }
+    if(this.currentUser.points>500){
+      this.currentUser.badgeType="badge5.png";
+    }
+    
 });
 }
 
