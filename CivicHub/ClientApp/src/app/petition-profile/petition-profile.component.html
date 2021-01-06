@@ -36,7 +36,7 @@
         </div>
         <div class="comments">
             <p class="labels">Comments:</p>
-            <div *ngFor="let comment of allComments | slice:0:show" class="issueComments">
+            <div *ngFor="let comment of allComments | slice:0:showNumber" class="issueComments">
                 <p>{{comment.text}}</p>
                 <p><fa-icon [icon]="faUser"></fa-icon> {{comment.userName}}</p>
                 <div class="reacts">
@@ -44,8 +44,8 @@
                 </div>
             </div>
             <p class="text-center" style="color:red;" *ngIf="errorAdd==true">You need to login</p>
-            <p id="seeComments" *ngIf="show == 3" (click)="show = allComments.length">See more comments</p>
-            <p id="seeComments" *ngIf="show == allComments.length" (click)="show = 3">See less comments</p>
+            <p id="seeComments" *ngIf="allComments.length > 3 && show == false" (click)="show = true; showNumber = allComments.length">See more comments</p>
+            <p id="seeComments" *ngIf="show == true" (click)="show = false; showNumber = 3">See less comments</p>
             
             <div class="issueComments">
                 <div class="newComment">

@@ -40,7 +40,8 @@ export class PetitionProfileComponent implements OnInit {
     userIdInvalid2:boolean;
     currentUser=new User();
     checkIfUserLiked: boolean;
-    show=3;
+    show = false;
+    showNumber = 3;
     errorAdd: boolean;
 
 
