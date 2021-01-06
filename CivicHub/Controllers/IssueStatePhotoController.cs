@@ -73,4 +73,3 @@ namespace CivicHub.Controllers
         }
     }
 }
-}
