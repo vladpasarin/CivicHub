@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { Issue } from '../shared/issue.model';
+import { User } from '../shared/user.model';
 
 @Component({
   selector: 'app-petition-form',
@@ -27,6 +28,14 @@ export class PetitionFormComponent implements OnInit {
    
   map: google.maps.Map<Element>;
   mapClickListener: google.maps.MapsEventListener;
+//   geolocator.config({
+//     language: "en",
+//     google: {
+//         version: "3",
+//         key: "YOUR-GOOGLE-API-KEY"
+//     }
+// });
+
 
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
@@ -56,8 +65,36 @@ export class PetitionFormComponent implements OnInit {
 
           console.log(e.latLng.lat(), e.latLng.lng());
           this.addMarker(e.latLng.lat(), e.latLng.lng());
+          this.getAddress(e.latLng.lat(),e.latLng.lng());
       });
     });
+  }
+  
+    address:string;
+    
+
+    getAddress( lat: number, lng: number ) {
+      console.log('Finding Address');
+      if (navigator.geolocation) {
+        let geocoder = new google.maps.Geocoder();
+        let latlng = new google.maps.LatLng(lat, lng);
+        let request = {location:latlng};
+        geocoder.geocode(request, (results, status) => {
+          console.log(status);
+          if (status === google.maps.GeocoderStatus.OK) {
+            let result = results[0];
+            console.log(result);
+            let rsltAdrComponent = result.address_components;
+            let resultLength = rsltAdrComponent.length;
+            if (result != null) {
+              this.address = rsltAdrComponent[resultLength - 8].short_name;
+              console.log(this.address);
+            } else {
+              alert('No address available!');
+            }
+          }
+        });
+    }
   }
 
     addIssue() {

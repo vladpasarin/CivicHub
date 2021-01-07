@@ -16,7 +16,7 @@ import { CommonModule } from "@angular/common";
 import { SignUpComponent } from "./signUp/signUp.component";
 import { AuthGuard } from "./auth.guard";
 import { LoginComponent } from "./login/login.component";
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule, AgmGeocoder } from '@agm/core';
 import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -64,7 +64,7 @@ import { SignFormComponent } from "./petition-profile/sign-form/sign-form.compon
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     AgmCoreModule.forRoot({
-       apiKey: 'AIzaSyA9ue3Q6fk7aQGRym6lVpZ2LiFy-GItiMk'
+       apiKey: 'AIzaSyA7CkGiCKCmf1QT2e7i-0OYfR0NdgSieYc'
      }),
       SidebarModule.forRoot(),
       FontAwesomeModule,

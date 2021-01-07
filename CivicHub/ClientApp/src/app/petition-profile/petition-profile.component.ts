@@ -43,7 +43,11 @@ export class PetitionProfileComponent implements OnInit {
     show = false;
     showNumber = 3;
     errorAdd: boolean;
-
+    photos=["https://i0.1616.ro/media/2/2701/33631/16664900/1/whatsapp-image-2017-02-23-at-09-38-33.jpg",
+            "https://autoblog.md/media/2018/03/gropi-bd-Dacia_0.jpg",
+            "https://playtech.ro/wp-content/uploads/2018/02/gropi-bucure%C8%99ti-rom%C3%A2nia-1170x658.jpg",
+            "https://neurococi.ro/assets/images/posts/amp/gropstop.jpg",
+            "https://www.banatulazi.ro/wp-content/uploads/2017/09/drum-gropi3.jpg"]
 
     faUser = faUser;
     upvote = faArrowAltCircleUp;
