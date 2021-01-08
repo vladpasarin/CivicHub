@@ -20,6 +20,7 @@ export class PetitionFormComponent implements OnInit {
     markerLng: number;
     markerAlpha = 1;
     userIdInvalid:boolean;
+    address:string;
 
     addIssueForm: FormGroup;
     success: boolean;
@@ -28,14 +29,6 @@ export class PetitionFormComponent implements OnInit {
    
   map: google.maps.Map<Element>;
   mapClickListener: google.maps.MapsEventListener;
-//   geolocator.config({
-//     language: "en",
-//     google: {
-//         version: "3",
-//         key: "YOUR-GOOGLE-API-KEY"
-//     }
-// });
-
 
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
@@ -69,9 +62,7 @@ export class PetitionFormComponent implements OnInit {
       });
     });
   }
-  
-    address:string;
-    
+      
 
     getAddress( lat: number, lng: number ) {
       console.log('Finding Address');
@@ -85,9 +76,8 @@ export class PetitionFormComponent implements OnInit {
             let result = results[0];
             console.log(result);
             let rsltAdrComponent = result.address_components;
-            let resultLength = rsltAdrComponent.length;
             if (result != null) {
-              this.address = rsltAdrComponent[resultLength - 8].short_name;
+              this.address = rsltAdrComponent[1].short_name + " " + rsltAdrComponent[0].short_name
               console.log(this.address);
             } else {
               alert('No address available!');
