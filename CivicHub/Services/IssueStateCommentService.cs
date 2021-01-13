@@ -13,12 +13,14 @@ namespace CivicHub.Services
     public class IssueStateCommentService : IIssueStateCommentService
     {
         private readonly IIssueStateCommentRepository _issueStateCommentRepository;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public IssueStateCommentService(IIssueStateCommentRepository issueStateCommentRepository, IMapper mapper)
+        public IssueStateCommentService(IIssueStateCommentRepository issueStateCommentRepository, IMapper mapper, IUserService userService)
         {
             _issueStateCommentRepository = issueStateCommentRepository;
             _mapper = mapper;
+            _userService = userService;
         }
 
         public bool Create(IssueStateCommentDto issueDTO)
@@ -26,7 +28,13 @@ namespace CivicHub.Services
             var issue = _mapper.Map<IssueStateComment>(issueDTO);
             issue.dateCreated = DateTime.Now;
             _issueStateCommentRepository.Create(issue);
-            return _issueStateCommentRepository.SaveChanges();
+            var result =  _issueStateCommentRepository.SaveChanges();
+            if (result == true)
+            {
+                //add points
+                _userService.AddPoints(issue.UserId, 1);
+            }
+            return result;
         }
 
         public int Delete(Guid issueStateCommentId)

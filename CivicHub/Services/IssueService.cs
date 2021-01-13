@@ -15,13 +15,15 @@ namespace CivicHub.Services
     {
         private readonly IIssueRepository _issueRepository;
         private readonly IIssueStateRepository _issueStateRepository;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public IssueService(IIssueRepository issueRepository, IIssueStateRepository issueStateRepository, IMapper mapper)
+        public IssueService(IIssueRepository issueRepository, IIssueStateRepository issueStateRepository, IMapper mapper, IUserService userService)
         {
             _issueRepository = issueRepository;
             _issueStateRepository = issueStateRepository;
             _mapper = mapper;
+            _userService = userService;
         }
 
         public List<IssueDto> GetAll()
@@ -93,6 +95,8 @@ namespace CivicHub.Services
 
             }) ;
             _issueStateRepository.SaveChanges();
+            //add points
+            _userService.AddPoints(issue.UserId, 25);
             return result;
         }
 

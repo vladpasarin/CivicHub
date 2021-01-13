@@ -22,6 +22,8 @@ namespace CivicHub.Data
         public DbSet<IssueStateCommentLike> IssueStateCommentLikes { get; set; }
         //public DbSet<State> States { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Prize> Prizes { get; set; }
+        public DbSet<PrizeGiven> PrizeGivens { get; set; }
 
         //declar relatiile dintre tabele
 
@@ -144,6 +146,23 @@ namespace CivicHub.Data
             //unique signature
             builder.Entity<IssueStateCommentLike>()
                 .HasAlternateKey(x => new { x.UserId, x.IssueStateCommentId });
+
+            //prize M M user (given)
+            builder.Entity<PrizeGiven>()
+               .HasOne(x => x.User)
+               .WithMany(x => x.PrizeGivens)
+               .OnDelete(DeleteBehavior.NoAction)
+               .HasForeignKey(x => x.UserId);
+
+            builder.Entity<PrizeGiven>()
+                .HasOne(x => x.Prize)
+                .WithMany(x => x.PrizeGivens)
+                .OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(x => x.PrizeId);
+            //unique signature
+            builder.Entity<PrizeGiven>()
+                .HasAlternateKey(x => new { x.UserId, x.PrizeId });
+
 
 
 

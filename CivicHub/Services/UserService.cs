@@ -100,5 +100,30 @@ namespace CivicHub.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
+        public User AddPoints(Guid userId, int numberOfPoints)
+        {
+            User user = _userRepostiory.FindById(userId);
+            user.Points += numberOfPoints;
+            _userRepostiory.Update(user);
+            _userRepostiory.SaveChanges();
+            return _userRepostiory.FindById(userId);
+        }
+
+        public User UsePoints(Guid userId, int numberOfPoints)
+        {
+            User user = _userRepostiory.FindById(userId);
+            user.PointsUsed += numberOfPoints;
+            _userRepostiory.Update(user);
+            _userRepostiory.SaveChanges();
+            return _userRepostiory.FindById(userId);
+        }
+
+        public List<User> getUsersTop()
+        {
+            return _userRepostiory.GetAllOrderedByPoints();
+        }
     }
+
+    
 }

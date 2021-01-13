@@ -16,11 +16,13 @@ namespace CivicHub.Entities
         public string Password { get; set; }
         public byte[] Avatar { get; set; }
         public int Points { get; set; }
+        public int PointsUsed { get; set; }
         public DateTime DateRegistered { get; set; }
         public ICollection<Issue> Issues { get; set; }
         public ICollection<IssueStateComment> IssueStateComments { get; set; }
         public ICollection<IssueStateReaction> IssueStateReactions { get; set; }
         public ICollection<IssueStateSignature> IssueStateSignatures { get; set; }
         public ICollection<IssueStateCommentLike> IssueStateCommentLikes { get; set; }
+        public ICollection<PrizeGiven> PrizeGivens { get; set; }
     }
 }

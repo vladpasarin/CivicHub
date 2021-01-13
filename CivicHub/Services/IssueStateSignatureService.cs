@@ -14,13 +14,15 @@ namespace CivicHub.Services
     {
         private readonly IIssueStateSignatureRepository _issueStateSignatureRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public IssueStateSignatureService(IIssueStateSignatureRepository issueStateCommentRepository, IMapper mapper, IUserRepository userRepository)
+        public IssueStateSignatureService(IIssueStateSignatureRepository issueStateCommentRepository, IMapper mapper, IUserRepository userRepository, IUserService userService)
         {
             _issueStateSignatureRepository = issueStateCommentRepository;
             _userRepository = userRepository;
             _mapper = mapper;
+            _userService = userService;
         }
 
         public IssueStateSignatureResponseDto Create(IssueStateSignatureRequestDto issueDTO)
@@ -35,6 +37,8 @@ namespace CivicHub.Services
             _issueStateSignatureRepository.SaveChanges();
             var signature = _issueStateSignatureRepository.FindById(issue.Id);
             var user = _userRepository.FindById(signature.UserId);
+            //add points
+            _userService.AddPoints(user.Id, 4);
             return new IssueStateSignatureResponseDto()
             {
                 Id = signature.Id,

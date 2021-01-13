@@ -16,13 +16,17 @@ namespace CivicHub.Services
         private readonly IIssueStateRepository _issueStateRepository;
         private readonly IIssueStatePhotoRepository _issueStatePhotoRepository;
         private readonly IIssueStateReactionRepository _issueStateReactionRepository;
+        private readonly IIssueRepository _issueRepository;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        public IssueStateService(IIssueStateRepository issueStateRepository, IMapper mapper, IIssueStatePhotoRepository issueStatePhotoRepository, IIssueStateReactionRepository issueStateReactionRepository)
+        public IssueStateService(IIssueStateRepository issueStateRepository, IMapper mapper, IIssueRepository issueRepository, IIssueStatePhotoRepository issueStatePhotoRepository, IIssueStateReactionRepository issueStateReactionRepository, IUserService userService)
         {
             _issueStateRepository = issueStateRepository;
             _issueStatePhotoRepository = issueStatePhotoRepository;
             _issueStateReactionRepository = issueStateReactionRepository;
             _mapper = mapper;
+            _userService = userService;
+            _issueRepository = issueRepository;
         }
 
         public bool Create(IssueStateDto IssueStateDTO)
@@ -82,6 +86,7 @@ namespace CivicHub.Services
                 return _mapper.Map<IssueStateDto>(_issueStateRepository.GetLatestIssueState(IssueId));
             }
 
+            //close the issue
             if (issueStateDto.Type == 4 && (DateTime.Now - issueStateDto.DateStart).Days > 14)
             {
                 Create(new IssueStateDto
@@ -91,6 +96,8 @@ namespace CivicHub.Services
                     Message = "Problema e inchisa",
                     Type = 4
                 });
+                //add points
+                _userService.AddPoints(_issueRepository.FindById(IssueId).UserId ,40);
                 return _mapper.Map<IssueStateDto>(_issueStateRepository.GetLatestIssueState(IssueId));
             }
 

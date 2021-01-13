@@ -14,5 +14,8 @@ namespace CivicHub.IServices
         List<UserDto> GetAll();
         bool Register(RegisterRequest request);
         AuthenticationResponse Login(AuthenticationRequest request);
+        User AddPoints(Guid userId, int numberOfPoints);
+        User UsePoints(Guid userId, int numberOfPoints);
+        List<User> getUsersTop();
     }
 }

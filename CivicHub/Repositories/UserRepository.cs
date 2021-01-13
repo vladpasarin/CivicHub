@@ -14,9 +14,16 @@ namespace CivicHub.Repositories
         {
         }
 
+        public List<User> GetAllOrderedByPoints()
+        {
+            return _table.OrderByDescending(x => x.Points).ToList();
+        }
+
         public User GetByUserAndPassword(string mail, string password)
         {
             return _table.Where(x => x.Mail == mail && x.Password == password).FirstOrDefault();
         }
+
+        
     }
 }

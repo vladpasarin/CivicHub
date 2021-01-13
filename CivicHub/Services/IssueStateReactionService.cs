@@ -15,10 +15,12 @@ namespace CivicHub.Services
     {
         private readonly IIssueStateReactionRepository _issueStateReactionRepository;
         private readonly IMapper _mapper;
-        public IssueStateReactionService(IIssueStateReactionRepository issueStateReactionRepository,IMapper mapper)
+        private readonly IUserService _userService;
+        public IssueStateReactionService(IIssueStateReactionRepository issueStateReactionRepository,IMapper mapper, IUserService userService)
         {
             _issueStateReactionRepository = issueStateReactionRepository;
             _mapper = mapper;
+            _userService = userService;
         }
 
         public IssueStateReactionDto GetById(Guid id)
@@ -31,7 +33,13 @@ namespace CivicHub.Services
             var issueStateReaction = _mapper.Map<IssueStateReaction>(issueStateReactionDto);
             issueStateReaction.dateGiven = DateTime.Now;
             _issueStateReactionRepository.Create(issueStateReaction);
-            return _issueStateReactionRepository.SaveChanges();
+            var result =  _issueStateReactionRepository.SaveChanges();
+            if (result == true)
+            {
+                //add points
+                _userService.AddPoints(issueStateReaction.UserId, 2);
+            }
+            return result;
         }
 
         public List<IssueStateReactionDto> GetAll()

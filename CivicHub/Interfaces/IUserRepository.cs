@@ -9,5 +9,6 @@ namespace CivicHub.Interfaces
     public interface IUserRepository : IGenericRepository<User>
     {
         User GetByUserAndPassword(string mail, string password);
+        List<User> GetAllOrderedByPoints();
     }
 }
