@@ -1,6 +1,7 @@
 .table {
   margin: auto;
   width: 80%;
+  margin-bottom: 100px;
 }
 /* tr.border_bottom td,
 th {
@@ -10,6 +11,13 @@ th:hover {
   cursor: pointer;
 }
 .user:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+td {
+  font-size: larger;
+}
+#seeComments:hover {
   text-decoration: underline;
   cursor: pointer;
 }
