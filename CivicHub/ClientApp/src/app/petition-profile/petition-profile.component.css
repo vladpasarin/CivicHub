@@ -12,6 +12,21 @@
   margin-left: 80px;
 }
 
+.details {
+  display: flex;
+  flex-direction: row;
+  margin-top: 50px;
+}
+.detailsLeft {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  align-self: flex-start;
+  flex-direction: column;
+  width: 50%;
+  margin-right: 70px;
+}
+
 #sign {
   margin: auto;
 }
@@ -29,7 +44,7 @@
 }
 
 .dropdown {
-  margin: auto;
+  margin-left: 100px;
 }
 .dropdown-menu {
   background-color: #f9f9f9;
@@ -43,16 +58,14 @@
   background-color: gray;
 }
 .description {
-  display: flex;
-  flex-direction: row;
-  margin-top: 80px;
+  margin-top: 20px;
 }
 
 .issueDescription {
   background-color: rgb(230, 236, 240);
   min-height: 200px;
-  width: 70%;
   margin: auto;
+  width: 60%;
   border-bottom: 5px solid rgb(87, 37, 37);
   border-radius: 10px;
   padding: 20px;
@@ -65,8 +78,7 @@
 
 .issueComments {
   background-color: rgb(230, 236, 240);
-  width: 80%;
-  margin: auto;
+  width: 110%;
   border-bottom: 5px solid rgb(87, 37, 37);
   border-radius: 10px;
   padding: 20px;
@@ -85,8 +97,7 @@
 }
 
 .labels {
-  margin-top: 80px;
-  margin-left: 100px;
+  margin-top: 20px;
   margin-bottom: 20px;
   font-size: 22px;
 }
@@ -97,18 +108,22 @@
 }
 
 .photos {
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-  margin-top: 20px;
+  flex: 0 32%;
 }
 
+.photoRow {
+  width: 80%;
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+  align-content: center;
+}
 #issuePhoto {
   margin: auto;
   object-fit: cover;
   border-radius: 10%;
-  height: 300px;
-  width: 400px;
+  height: 150px;
+  width: 200px;
   margin-bottom: 30px;
   transition: 0.3;
 }
@@ -116,4 +131,26 @@
 #issuePhoto:hover {
   cursor: pointer;
   opacity: 0.7;
+}
+#seeComments:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.signatures {
+  display: flex;
+  flex-direction: row;
+}
+.btn {
+  background-color: rgb(20, 182, 20);
+  color: white;
+}
+
+.btn:hover {
+  background: rgb(0, 0, 0);
+}
+hr {
+  width: 95%;
+  background-color: rgb(175, 175, 175);
+  border: 0 none;
+  height: 2px;
 }

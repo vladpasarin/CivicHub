@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
   constructor(private route: ActivatedRoute,private api:ApiService, private router:Router) { }
   userId: string;
   currentUser:User;
-  options = ['Followed', 'Signed', 'Organized','Achievements'];
+  options = ['Followed', 'Signed', 'Organized','Prizes'];
   selectedOption:string;
 
 ngOnInit(): void {

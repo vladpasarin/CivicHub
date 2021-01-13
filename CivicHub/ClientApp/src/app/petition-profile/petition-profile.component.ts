@@ -40,7 +40,14 @@ export class PetitionProfileComponent implements OnInit {
     userIdInvalid2:boolean;
     currentUser=new User();
     checkIfUserLiked: boolean;
-
+    show = false;
+    showNumber = 3;
+    errorAdd: boolean;
+    photos=["https://i0.1616.ro/media/2/2701/33631/16664900/1/whatsapp-image-2017-02-23-at-09-38-33.jpg",
+            "https://autoblog.md/media/2018/03/gropi-bd-Dacia_0.jpg",
+            "https://playtech.ro/wp-content/uploads/2018/02/gropi-bucure%C8%99ti-rom%C3%A2nia-1170x658.jpg",
+            "https://neurococi.ro/assets/images/posts/amp/gropstop.jpg",
+            "https://www.banatulazi.ro/wp-content/uploads/2017/09/drum-gropi3.jpg"]
 
     faUser = faUser;
     upvote = faArrowAltCircleUp;
@@ -101,6 +108,21 @@ export class PetitionProfileComponent implements OnInit {
         console.log(this.currentState);
         this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
             this.allSignatures= allSignatures;
+            this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
+                this.allComments = allcomm;
+                this.allComments.forEach(comment => {
+                    console.log(comment.id);
+                    //console.log("CommentId: " + comment.Id);
+                    this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
+                        comment.nrOfLikes = allLikes.length;
+                        console.log(allLikes.length);
+                    });
+                    this.api.getUserById(comment.userId).subscribe((user: User) => {
+                        comment.userName = user.firstName;
+                        console.log(comment.userName);
+                    });
+                });
+            });
         });
     }
 
@@ -158,9 +180,14 @@ export class PetitionProfileComponent implements OnInit {
     }
 
     addCommentLike(stateComment: IssueComment) {
+        if(this.userId == null){
+            this.errorAdd=true
+            setTimeout(() => {
+              this.errorAdd=false
+          }, 2000);
+        }
         this.commentLike.issueStateCommentId = stateComment.id;
         this.commentLike.userId = this.userId;
-
         this.api.addCommentLike(this.commentLike).subscribe(() => {
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;

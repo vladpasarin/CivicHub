@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgZone } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { Issue } from '../shared/issue.model';
+import { User } from '../shared/user.model';
 
 @Component({
   selector: 'app-petition-form',
@@ -11,6 +12,8 @@ import { Issue } from '../shared/issue.model';
   styleUrls: ['./petition-form.component.css']
 })
 export class PetitionFormComponent implements OnInit {
+  @ViewChild('address') adresa:ElementRef;
+
   latitude = 44.439663;
   longitude = 26.096306;
   zoom = 13.0;
@@ -54,10 +57,34 @@ export class PetitionFormComponent implements OnInit {
     this.mapClickListener = this.map.addListener('click', (e: google.maps.MouseEvent) => {
       this.zone.run(() => {
 
-          console.log(e.latLng.lat(), e.latLng.lng());
           this.addMarker(e.latLng.lat(), e.latLng.lng());
+          this.getAddress(e.latLng.lat(),e.latLng.lng());
       });
     });
+  }
+      
+
+    getAddress( lat: number, lng: number ) {
+      console.log('Finding Address');
+      if (navigator.geolocation) {
+        let geocoder = new google.maps.Geocoder();
+        let latlng = new google.maps.LatLng(lat, lng);
+        let request = {location:latlng};
+        geocoder.geocode(request, (results, status) => {
+          console.log(status);
+          if (status === google.maps.GeocoderStatus.OK) {
+            let result = results[0];
+            console.log(result);
+            let rsltAdrComponent = result.address_components;
+            if (result != null) {
+              this.adresa.nativeElement.value=rsltAdrComponent[1].short_name + " " + rsltAdrComponent[0].short_name
+              console.log(this.adresa.nativeElement.value);
+            } else {
+              alert('No address available!');
+            }
+          }
+        });
+    }
   }
 
     addIssue() {

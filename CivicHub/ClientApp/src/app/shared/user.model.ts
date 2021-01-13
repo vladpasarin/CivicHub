@@ -10,6 +10,7 @@ export class User {
     points: number;
     issues: Issue[];
     badgeType?:string;
+    index?:number;
     constructor(input?: any) {
       Object.assign(this, input);
     }
