@@ -30,6 +30,8 @@ import { PhotoModalComponent } from './petition-profile/photo-modal/photo-modal.
 import { PetitionFormComponent } from './petition-form/petition-form.component';
 import { PipeFunctionPipe } from './pipe-function.pipe';
 import { SignFormComponent } from "./petition-profile/sign-form/sign-form.component";
+import { TopsComponent } from './tops/tops.component';
+import { SortDirective } from "./directive/sort.directive";
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { SignFormComponent } from "./petition-profile/sign-form/sign-form.compon
         PetitionFormComponent,
         PipeFunctionPipe,
         SignFormComponent,
+        TopsComponent,
+        SortDirective,
 
   ],
   imports: [

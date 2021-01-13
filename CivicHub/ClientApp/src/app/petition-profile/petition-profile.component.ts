@@ -108,6 +108,21 @@ export class PetitionProfileComponent implements OnInit {
         console.log(this.currentState);
         this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
             this.allSignatures= allSignatures;
+            this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
+                this.allComments = allcomm;
+                this.allComments.forEach(comment => {
+                    console.log(comment.id);
+                    //console.log("CommentId: " + comment.Id);
+                    this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
+                        comment.nrOfLikes = allLikes.length;
+                        console.log(allLikes.length);
+                    });
+                    this.api.getUserById(comment.userId).subscribe((user: User) => {
+                        comment.userName = user.firstName;
+                        console.log(comment.userName);
+                    });
+                });
+            });
         });
     }
 

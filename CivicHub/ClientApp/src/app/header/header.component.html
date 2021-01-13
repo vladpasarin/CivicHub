@@ -15,7 +15,10 @@
                 <p class="btn"><fa-icon [icon]="faPhone"></fa-icon> Contact </p>
             </a>
             <a class="nav-link" routerLink="/petition-form">
-                <p class="btn"><fa-icon [icon]="faEdit"> Petitie noua</fa-icon> Report an issue</p>
+                <p class="btn"><fa-icon [icon]="faEdit"></fa-icon> Report an issue</p>
+            </a>
+            <a class="nav-link" routerLink="/tops">
+                <p class="btn"><fa-icon [icon]="faTrophy"></fa-icon> Tops </p>
             </a>
             <a class="nav-link" id="dropdown">
                 <p *ngIf="logged == 'false' || logged==null" class="btn"><fa-icon [icon]="faUser"></fa-icon> Profile</p>

@@ -1,0 +1,25 @@
+<app-header></app-header>
+    <div class='container'>
+      <h1 class="text-center" style="margin-top:30px; margin-bottom: 50px;">Users ranking</h1>
+          <table class="table table-striped border mt-1 table-hover">
+            <thead class="thead-dark">
+                <th scope="col" [appSort]="users" data-order="desc" data-name="index"><fa-icon [icon]="faBars"></fa-icon> Position</th>
+                <th scope="col" [appSort]="users" data-order="desc" data-name="lastName"><fa-icon [icon]="faUser"></fa-icon> Name</th>
+                <th scope="col" [appSort]="users" data-order="desc" data-name="points"><fa-icon [icon]="faAward"></fa-icon> Points</th>
+            </thead>
+            <tbody>
+              <tr class="border_bottom" *ngFor="let user of users;let pozitie = index">
+                    <td>
+                        {{user.index}}
+                    </td>
+                    <td class="user" (click)="goToUserProfile(user.id)">
+                        {{user.lastName}} {{user.firstName}}
+                    </td>
+                    <td>
+                        {{user.points}}
+                    </td>             
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  

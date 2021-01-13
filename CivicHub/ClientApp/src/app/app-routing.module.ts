@@ -9,6 +9,7 @@ import { PetitonListComponent } from './petiton-list/petiton-list.component';
 import { PetitionProfileComponent } from './petition-profile/petition-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PetitionFormComponent } from './petition-form/petition-form.component';
+import { TopsComponent } from "./tops/tops.component";
 
 
 const routes: Routes = [
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: "petition-profile/:id", component: PetitionProfileComponent },
   { path: "user-profile/:id", component: UserProfileComponent },
   { path: "petition-form", component: PetitionFormComponent },
+  { path: "tops", component: TopsComponent },
+
 ];
 
 @NgModule({
