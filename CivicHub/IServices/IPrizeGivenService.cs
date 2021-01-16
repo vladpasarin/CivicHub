@@ -10,7 +10,7 @@ namespace CivicHub.IServices
     {
         PrizeGiven GetById(Guid id);
         List<PrizeGiven> GetAll();
-        bool Create(PrizeGiven issueDTO);
-        bool Update(PrizeGiven issueDTO);
+        PrizeGiven Create(PrizeGiven issueDTO);
+        PrizeGiven Update(PrizeGiven issueDTO);
     }
 }
