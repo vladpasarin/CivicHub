@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CivicHub.IServices
 {
-    interface IPrizeGivenService
+    public interface IPrizeGivenService
     {
         PrizeGiven GetById(Guid id);
         List<PrizeGiven> GetAll();
-        PrizeGiven Create(PrizeGiven issueDTO);
+        Tuple<int, object> Create(PrizeGiven issueDTO);
         PrizeGiven Update(PrizeGiven issueDTO);
     }
 }

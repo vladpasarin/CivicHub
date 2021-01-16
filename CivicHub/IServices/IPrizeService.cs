@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CivicHub.IServices
 {
-    interface IPrizeService
+    public interface IPrizeService
     {
         Prize GetById(Guid id);
         List<Prize> GetAll();

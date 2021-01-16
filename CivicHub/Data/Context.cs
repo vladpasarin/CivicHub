@@ -163,7 +163,14 @@ namespace CivicHub.Data
             builder.Entity<PrizeGiven>()
                 .HasAlternateKey(x => new { x.UserId, x.PrizeId });
 
+            // default value points and used points
+            builder.Entity<User>()
+                .Property(x => x.Points)
+                .HasDefaultValue(0);
 
+            builder.Entity<User>()
+                .Property(x => x.PointsUsed)
+                .HasDefaultValue(0);
 
 
             //din proieect DAW laborator

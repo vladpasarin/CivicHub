@@ -13,18 +13,35 @@ namespace CivicHub.Services
     {
 
         private readonly IPrizeGivenRepository _prizeGivenRepository;
+        private readonly IPrizeRepository _prizeRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public PrizeGivenService(IPrizeGivenRepository prizeGivenRepository, IMapper mapper)
+        public PrizeGivenService(IPrizeGivenRepository prizeGivenRepository, IMapper mapper, IPrizeRepository prizeRepository, IUserRepository userRepository)
         {
             _prizeGivenRepository = prizeGivenRepository;
+            _prizeRepository = prizeRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
-        public PrizeGiven Create(PrizeGiven issueDTO)
+        public Tuple<int, object> Create(PrizeGiven issueDTO)
         {
+            Prize prize = _prizeRepository.FindById(issueDTO.PrizeId);
+            User user = _userRepository.FindById(issueDTO.UserId);
+            if (user.Points - user.PointsUsed < prize.Price)
+            {
+                return new Tuple<int, object>(400, "Userul nu are destule puncte ramase pentru a cumpara");
+            }
             _prizeGivenRepository.Create(issueDTO);
             _prizeGivenRepository.SaveChanges();
-            return _prizeGivenRepository.FindById(issueDTO.Id);
+            PrizeGiven prizeCreated = _prizeGivenRepository.FindById(issueDTO.Id);
+            if (prizeCreated == null)
+            {
+                return new Tuple<int, object>(500, "Obiectul PrizeGiven nu a putut fi gasit in bd dupa creare");
+            }else
+            {
+                return new Tuple<int, object>(200, _prizeGivenRepository.FindById(issueDTO.Id));
+            }   
         }
 
         public List<PrizeGiven> GetAll()
