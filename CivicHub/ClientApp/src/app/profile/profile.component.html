@@ -4,7 +4,10 @@
         <img class="profilePhoto" src="assets/images/profile.png" />
         <p id="firstName"> {{currentUser.firstName}} {{currentUser.lastName}} </p>
     </div>
-    <div class="rank"> <img src="../../assets/images/{{currentUser.badgeType}}" alt="Ranking"> </div>
+    <div class="rank"> 
+      <img src="../../assets/images/{{currentUser.badgeType}}" alt="Ranking">
+      <p>Total points: {{currentUser.points}}</p> 
+    </div>
 </div>
 <div class="options">
   <div>

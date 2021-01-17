@@ -10,6 +10,7 @@ export class Issue {
     organizer:User;
     firstName?: string;
     lastName?: string;
+    numberOfSignatures?: number;
     constructor(input?: any) {
       Object.assign(this, input);
     }
