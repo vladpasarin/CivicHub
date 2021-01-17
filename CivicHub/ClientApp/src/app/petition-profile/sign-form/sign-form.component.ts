@@ -20,6 +20,7 @@ export class SignFormComponent implements OnInit {
   currentDate=new Date();
   userId = sessionStorage.getItem('userId');
   errorAdd:boolean;
+  successAdd="";
 
   @Input() currentState:IssueState;
 
@@ -73,9 +74,13 @@ export class SignFormComponent implements OnInit {
         this.signature.userId=this.userId;
         this.api.addSignature(this.signature).subscribe(()=>{
           console.log(this.signature);
+          this.successAdd="Perfect! You gained 4 points.";
           this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
             this.petitonProfile.allSignatures=allSignatures;
-            this.signForm.hide();
+            setTimeout(() => {
+              this.successAdd = "";
+              this.signForm.hide();
+          }, 4000);
           });
 
         },
