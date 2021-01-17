@@ -28,6 +28,7 @@ namespace CivicHub.Services
         {
             Prize prize = _prizeRepository.FindById(issueDTO.PrizeId);
             User user = _userRepository.FindById(issueDTO.UserId);
+            int pointsBefore = user.PointsUsed;
             if (user.Points - user.PointsUsed < prize.Price)
             {
                 return new Tuple<int, object>(400, "Userul nu are destule puncte ramase pentru a cumpara");
@@ -40,6 +41,14 @@ namespace CivicHub.Services
                 return new Tuple<int, object>(500, "Obiectul PrizeGiven nu a putut fi gasit in bd dupa creare");
             }else
             {
+                user.PointsUsed += prize.Price;
+                _userRepository.Update(user);
+                _userRepository.SaveChanges();
+                var user2 = _userRepository.FindById(user.Id);
+                if (user2.PointsUsed == pointsBefore)
+                {
+                    return new Tuple<int, object>(500, "Can't add points used to user");
+                }
                 return new Tuple<int, object>(200, _prizeGivenRepository.FindById(issueDTO.Id));
             }   
         }
