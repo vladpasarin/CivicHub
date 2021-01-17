@@ -14,5 +14,6 @@ namespace CivicHub.Dtos
         public string Description { get; set; }
         public Guid UserId { get; set; }
         public List<IssueStateDto> IssueStates { get; set; }
+        public int NumberOfSignatures { get; set; }
     }
 }

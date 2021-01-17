@@ -53,11 +53,11 @@ namespace CivicHub
             services.AddTransient<IIssueStateCommentRepository, IssueStateCommentRepository>();
             services.AddTransient<IIssueStateSignatureRepository, IssueStateSignatureRepository>();
             services.AddTransient<IIssueStateCommentLikeRepository, IssueStateCommentLikeRepository>();
-            //services.AddTransient<>
-            //services.AddTransient<IStateRepository, StateRepository>();
             services.AddTransient<IIssueStateSignatureRepository, IssueStateSignatureRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
-            //services.AddTransient<IStateRepository, StateRepository>();
+            services.AddTransient<IPrizeRepository, PrizeRepository>();
+            services.AddTransient<IPrizeGivenRepository, PrizeGivenRepository>();
+
 
             //Services
             services.AddTransient<IUserService, UserService>();
@@ -68,6 +68,8 @@ namespace CivicHub
             services.AddTransient<IIssueStateReactionService, IssueStateReactionService>();
             services.AddTransient<IIssueStateSignatureService, IssueStateSignatureService>();
             services.AddTransient<IIssueStatePhotoService, IssueStatePhotoService>();
+            services.AddTransient<IPrizeService, PrizeService>();
+            services.AddTransient<IPrizeGivenService, PrizeGivenService>();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
             options.SerializerSettings

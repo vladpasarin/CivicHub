@@ -15,15 +15,17 @@ namespace CivicHub.Services
     {
         private readonly IIssueRepository _issueRepository;
         private readonly IIssueStateRepository _issueStateRepository;
+        private readonly IIssueStateSignatureRepository _issueStateSignatureRepository;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public IssueService(IIssueRepository issueRepository, IIssueStateRepository issueStateRepository, IMapper mapper, IUserService userService)
+        public IssueService(IIssueRepository issueRepository, IIssueStateRepository issueStateRepository, IMapper mapper, IUserService userService, IIssueStateSignatureRepository issueStateSignatureRepository)
         {
             _issueRepository = issueRepository;
             _issueStateRepository = issueStateRepository;
             _mapper = mapper;
             _userService = userService;
+            _issueStateSignatureRepository = issueStateSignatureRepository;
         }
 
         public List<IssueDto> GetAll()
@@ -66,6 +68,15 @@ namespace CivicHub.Services
         {
             var issueDto = _mapper.Map<IssueDto>(_issueRepository.FindById(id));
             issueDto.IssueStates = _mapper.Map<List<IssueStateDto>>(_issueStateRepository.GetAllByIssueIdAsync(issueDto.Id).Result);
+            int numberOfSignatures = 0;
+            foreach (IssueStateDto issueState in issueDto.IssueStates)
+            {
+                if (issueState.Type == 0)
+                {
+                    numberOfSignatures += _issueStateSignatureRepository.GetAllWithDetails(issueState.Id).Count;
+                }
+            }
+            issueDto.NumberOfSignatures = numberOfSignatures;
             return issueDto;
         }
 
