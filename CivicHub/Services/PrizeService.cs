@@ -43,15 +43,5 @@ namespace CivicHub.Services
             _prizeRepository.SaveChanges();
             return _prizeRepository.FindById(issueDTO.Id);
         }
-
-        bool IPrizeService.Create(Prize issueDTO)
-        {
-            throw new NotImplementedException();
-        }
-
-        bool IPrizeService.Update(Prize issueDTO)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
