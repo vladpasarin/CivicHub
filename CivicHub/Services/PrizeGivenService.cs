@@ -26,6 +26,9 @@ namespace CivicHub.Services
         }
         public Tuple<int, object> Create(PrizeGiven issueDTO)
         {
+            issueDTO.DateGiven = DateTime.Now;
+            issueDTO.EstimatedDelivery = DateTime.Now.AddDays(7);
+            issueDTO.DeliveryState = 0;
             Prize prize = _prizeRepository.FindById(issueDTO.PrizeId);
             User user = _userRepository.FindById(issueDTO.UserId);
             int pointsBefore = user.PointsUsed;
