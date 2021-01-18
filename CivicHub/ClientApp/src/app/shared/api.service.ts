@@ -8,6 +8,7 @@ import { IssueCommentLike } from './issueCommentLike.model';
 import { Signature } from "./signature.model";
 import { IssueReaction } from './issueReaction.model';
 import { IssueReactByUser } from "./issueReactByUser.model";
+import { PrizeGiven } from "./prizeGiven.model";
 
 @Injectable({
   providedIn: "root",
@@ -124,6 +125,24 @@ export class ApiService {
 
     checkIfUserLikedComment(userId: string, issueStateCommentId: string) {
       return this.http.get(this.baseUrl + "/IssueStateCommentLike/" + userId + "/" + issueStateCommentId, {
+        headers: this.header,
+      });
+    }
+
+    getAllPrizes() {
+      return this.http.get(this.baseUrl + "/Prize/all", {
+        headers: this.header,
+      });
+    }
+
+    getPrizesByUser(userId: string) {
+      return this.http.get(this.baseUrl + "/prizeGiven/userPrizes/" + userId, {
+        headers: this.header,
+      });
+    }
+
+    redeemPrize(prizeGiven: PrizeGiven){
+      return this.http.post(this.baseUrl + "/prizeGiven", prizeGiven, {
         headers: this.header,
       });
     }

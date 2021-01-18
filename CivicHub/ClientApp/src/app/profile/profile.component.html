@@ -41,7 +41,25 @@
 </div>
 
 <div *ngIf="selectedOption == 'Prizes'">
-
+  <div *ngFor="let prize of userPrizes">
+    <span>Owned Prizes</span>
+    <div class="myPrizes">
+      <div class="prizeName">
+        <p>{{ prize.name }}</p>
+      </div>
+      <p>{{ prize.description }}</p>
+    </div>
+  </div>
   {{selectedOption}}
+  <div *ngFor="let prize of availablePrizes">
+    <div class="allPrizes">
+        <div class="prizeName">
+          <p>{{ prize.name }}</p>
+        </div>
+        <p>{{ prize.description }}</p>
+        <p class="price">Price: {{ prize.price }}</p>
+        <button type="button" class="btn btn-primary" (click)=> Redeem</button>
+    </div>
+  </div>
  
 </div>
