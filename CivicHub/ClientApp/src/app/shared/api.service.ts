@@ -31,7 +31,11 @@ export class ApiService {
         headers: this.header,
       });
     }
-
+    getBagdeNumber(userId:string){
+      return this.http.get(this.baseUrl + "/Gamification/GetBadgeNumber/" + userId, {
+        headers: this.header,
+      });
+    }
     getAllStatesByIssueId(issueId: string) {
       return this.http.get(this.baseUrl + "/IssueState/GetAllByIssueId/" + issueId, {
         headers: this.header,

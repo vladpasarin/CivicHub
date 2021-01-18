@@ -58,3 +58,7 @@
   text-decoration: underline;
   cursor: pointer;
 }
+#badge {
+  height: 90%;
+  width: 90%;
+}

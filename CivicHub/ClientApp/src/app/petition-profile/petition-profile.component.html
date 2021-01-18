@@ -32,9 +32,10 @@
     </div>
     
     <div class="detailsRight">
-        <div class="signatures">
-        <p class="labels">Signatures: {{allSignatures.length}}</p>
-        <button class="btn" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
+        <p class="text-center" style="color: green;" *ngIf="voteSuccess != '' ">{{voteSuccess}}</p>
+        <div class="signatures" *ngIf="currentState.type==0">
+            <p class="labels">Signatures: {{allSignatures.length}}</p>
+            <button class="btn" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
         </div>
         <div class="comments">
             <p class="labels">Comments:</p>
@@ -53,7 +54,8 @@
                 <div class="newComment">
                     <textarea  [(ngModel)]="commentText" name="newComment" id="newCommentText" cols="50" rows="2" placeholder="New Comment..."></textarea><br>
                     <button class="btn btn-primary" id="sendComment" type="button" (click)="addComment()">Send</button>
-                    <p class="text-center" style="color:red;" *ngIf="userIdInvalid2==true">You need to login</p>
+                    <p class="text-center" style="color:red;" *ngIf="invalidComment==true">Invalid action</p>
+                    <p class="text-center" style="color: green;" *ngIf="successAdd != '' ">{{successAdd}}</p>
                 </div>
             </div>
         </div>

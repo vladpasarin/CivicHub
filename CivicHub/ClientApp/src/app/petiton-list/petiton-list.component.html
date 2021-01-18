@@ -9,31 +9,28 @@
            [(ngModel)]="searchText" />
     <div class="sortbar">
         <p>
-            Sort by: Number of signatures &nbsp;<fa-icon [icon]="faCaretUp"></fa-icon><fa-icon [icon]="faCaretDown"></fa-icon>
+            Sort by: Number of signatures &nbsp;<fa-icon [icon]="faCaretUp" (click)="sortIssuesAscending()"></fa-icon><fa-icon (click)="sortIssuesDescending()" [icon]="faCaretDown"></fa-icon>
             Number of reactions &nbsp;<fa-icon [icon]="faCaretUp"></fa-icon><fa-icon [icon]="faCaretDown"></fa-icon>
         </p>
     </div>
 </div>
 <div class="container">
-    <ng-container *ngFor="
-          let issue of issues
-            | searchFilter
-              : {
-                  title: searchText
-                };
-          let ind = index
-        ">
+    <div *ngFor="
+          let issue of issues | searchFilter: { title: searchText}; let i = index">
+
         <div class="view col mb-3 mr-3 p-0 hoverable" (click)="accessPetition(issue)">
             <div class="detaliiIssue">
                 <div class="issueTitle">
-                    <p id="title">{{issue.title}}</p>
+                    <p id="title" [ngStyle]="{'color': (issue.userId==userId) ? '#F4D03F' : '#000000'}">{{i+1}}. {{ issue.title}}
+                         <fa-icon *ngIf="issue.userId==userId" [icon]="faStar"></fa-icon></p>
                     <p id="organizer">Opened by: <fa-icon [icon]="faUser"></fa-icon> &nbsp; {{issue.firstName}}</p>
+                    <p id="organizer">Number of signatures: {{issue.numberOfSignatures}}</p>
                 </div>
                 <p>{{issue.description}}</p>
 
             </div>
         </div>
-    </ng-container>
+    </div>
 </div>
 <div *ngIf="searchText.length == null" class="container">
     <ng-container *ngFor="let issue of issues">

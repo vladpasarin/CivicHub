@@ -37,12 +37,14 @@ export class PetitionProfileComponent implements OnInit {
     upvoteReacts: number;
     downvoteReacts: number;
     userIdInvalid:boolean;
-    userIdInvalid2:boolean;
+    invalidComment:boolean;
     currentUser=new User();
     checkIfUserLiked: boolean;
     show = false;
     showNumber = 3;
     errorAdd: boolean;
+    successAdd;
+    voteSuccess;
     photos=["https://i0.1616.ro/media/2/2701/33631/16664900/1/whatsapp-image-2017-02-23-at-09-38-33.jpg",
             "https://autoblog.md/media/2018/03/gropi-bd-Dacia_0.jpg",
             "https://playtech.ro/wp-content/uploads/2018/02/gropi-bucure%C8%99ti-rom%C3%A2nia-1170x658.jpg",
@@ -134,6 +136,10 @@ export class PetitionProfileComponent implements OnInit {
         console.log(this.issueReact);
         this.api.addIssueReaction(this.issueReact).subscribe(() => {
             this.getUpvotes();
+            this.voteSuccess="The organizer thanks you! You gained 2 points";
+            setTimeout(() => {
+                this.voteSuccess="";
+            }, 3000);
         });
     }
 
@@ -145,16 +151,21 @@ export class PetitionProfileComponent implements OnInit {
         console.log(this.issueReact);
         this.api.addIssueReaction(this.issueReact).subscribe(() => {
             this.getDownvotes();
+            this.voteSuccess="Thanks for your reaction! You gained 2 points";
+            setTimeout(() => {
+                this.voteSuccess="";
+            }, 3000);
         });
     }
 
     addComment() {
-        if(this.userId == null){
-            this.userIdInvalid2=true
+        if(this.userId == null || this.commentText == null){
+            this.invalidComment=true
             setTimeout(() => {
-              this.userIdInvalid2=false
-          }, 2000);
+              this.invalidComment=false
+          }, 3000);
           }
+        
         else{
             this.stateComment.IssueStateId = this.currentState.id;
             this.stateComment.userId = this.userId;
@@ -164,6 +175,10 @@ export class PetitionProfileComponent implements OnInit {
                 this.commentText='';
                 this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                     this.allComments = allcomm;
+                        this.successAdd="Fantastic! You gained 1 point";
+                        setTimeout(() => {
+                            this.successAdd="";
+                        }, 3000);
                     this.allComments.forEach(comment => {
                         this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
                             comment.nrOfLikes = allLikes.length;

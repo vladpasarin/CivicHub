@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   currentUser:User;
   options = ['Followed', 'Signed', 'Organized','Prizes'];
   selectedOption:string;
+  badgeNumber:number;
 
 ngOnInit(): void {
   this.selectedOption = 'Organized';
@@ -25,25 +26,37 @@ ngOnInit(): void {
   this.api.getUserById(this.userId).subscribe((user: User) => {
     this.currentUser = user;
     console.log(this.currentUser);
-    if(this.currentUser.points<10){
-      this.currentUser.badgeType="Star_badge.png";
-    }
-    if(this.currentUser.points>10){
-      this.currentUser.badgeType="badge1.png";
-    }
-    if(this.currentUser.points>30){
-      this.currentUser.badgeType="badge2.png";
-    }
-    if(this.currentUser.points>80){
-      this.currentUser.badgeType="badge3.png";
-    }
-    if(this.currentUser.points>150){
-      this.currentUser.badgeType="badge4.png";
-    }
-    if(this.currentUser.points>500){
-      this.currentUser.badgeType="badge5.png";
-    }
-    
+    this.api.getBagdeNumber(user.id).subscribe((badgeNr:number)=>{
+      this.badgeNumber=badgeNr;
+      console.log(this.badgeNumber);
+      if(this.badgeNumber==1){
+        this.currentUser.badgeType="Star_badge.png";
+      }
+      if(this.badgeNumber==2){
+        this.currentUser.badgeType="badge1.png";
+      }
+      if(this.badgeNumber==3){
+        this.currentUser.badgeType="badge2.png";
+      }
+      if(this.badgeNumber==4){
+        this.currentUser.badgeType="badge3.png";
+      }
+      if(this.badgeNumber==5){
+        this.currentUser.badgeType="badge4.png";
+      }
+      if(this.badgeNumber==6){
+        this.currentUser.badgeType="badge5.png";
+      }
+      if(this.badgeNumber==7){
+        this.currentUser.badgeType="badge6.png";
+      }
+      if(this.badgeNumber==8){
+        this.currentUser.badgeType="badge7.png";
+      }
+      if(this.badgeNumber==9){
+        this.currentUser.badgeType="badge8.png";
+      }
+    });
 });
 }
 
