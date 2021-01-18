@@ -63,6 +63,11 @@ namespace CivicHub.Services
             return _prizeGivenRepository.FindById(id);
         }
 
+        public List<PrizeGiven> GetUserPrizes(Guid id)
+        {
+            return _prizeGivenRepository.getUserPrizes(id);
+        }
+
         public PrizeGiven Update(PrizeGiven issueDTO)
         {
             _prizeGivenRepository.Update(issueDTO);

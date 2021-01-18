@@ -29,6 +29,16 @@ namespace CivicHub.Controllers
             return Ok(prize);
         }
 
+        [HttpGet("userPrizes/{id}")]
+        public IActionResult GetUserPrizes(Guid id)
+        {
+            PrizeGiven prize = _prizeGivenService.GetById(id);
+            if (prize == null)
+                return NotFound();
+
+            return Ok(prize);
+        }
+
         [HttpGet("all")]
         public IActionResult GetAll()
         {

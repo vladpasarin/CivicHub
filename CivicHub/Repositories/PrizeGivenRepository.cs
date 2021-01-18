@@ -13,5 +13,10 @@ namespace CivicHub.Repositories
         public PrizeGivenRepository(Context context) : base(context)
         {
         }
+
+        public List<PrizeGiven> getUserPrizes(Guid id)
+        {
+            return _table.Where(x => x.UserId == id).ToList();
+        }
     }
 }
