@@ -22,6 +22,7 @@ export class PetitionFormComponent implements OnInit {
     markerLng: number;
     markerAlpha = 1;
     userIdInvalid:boolean;
+    successAdd="";
 
     addIssueForm: FormGroup;
     success: boolean;
@@ -95,7 +96,7 @@ export class PetitionFormComponent implements OnInit {
         }, 2000);
         }
         else{
-        if (this.addIssueForm.valid) {
+        if (this.addIssueForm.valid && this.markerLat != null && this.markerLng != null) {
             this.success = true;
             setTimeout(() => {
                 this.success = null;
@@ -107,11 +108,13 @@ export class PetitionFormComponent implements OnInit {
             this.issue.longitude = this.markerLng;
             this.issue.userId = this.userId;
             console.log(this.userId);
-            
             console.log(this.issue);
             this.api.addIssue(this.issue).subscribe(() => {
-             
+              this.successAdd="Excellent! You gained 25 points"
+              setTimeout(() => {
+                this.successAdd = "";
                 this.router.navigate(["/home"]);
+            }, 3000);
             },
                 (error: Error) => {
                     console.log('err', error);
@@ -159,6 +162,7 @@ export class PetitionFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.addIssueForm = this.fb.group({
+            address:[null,Validators.required],
             description: [null, Validators.required],
             title: [null, Validators.required],
         });
