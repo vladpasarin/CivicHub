@@ -32,11 +32,8 @@ namespace CivicHub.Controllers
         [HttpGet("userPrizes/{id}")]
         public IActionResult GetUserPrizes(Guid id)
         {
-            PrizeGiven prize = _prizeGivenService.GetById(id);
-            if (prize == null)
-                return NotFound();
-
-            return Ok(prize);
+            List<PrizeGiven> prizes = _prizeGivenService.GetUserPrizes(id);
+            return Ok(prizes);
         }
 
         [HttpGet("all")]
