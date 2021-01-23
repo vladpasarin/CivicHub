@@ -24,5 +24,6 @@ namespace CivicHub.Entities
         public ICollection<IssueStateSignature> IssueStateSignatures { get; set; }
         public ICollection<IssueStateCommentLike> IssueStateCommentLikes { get; set; }
         public ICollection<PrizeGiven> PrizeGivens { get; set; }
+        public ICollection<Follow> Follows { get; set; }
     }
 }
