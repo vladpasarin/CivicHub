@@ -62,3 +62,7 @@
   height: 90%;
   width: 90%;
 }
+progress[value] {
+  width: 250px;
+  height: 25px;
+}

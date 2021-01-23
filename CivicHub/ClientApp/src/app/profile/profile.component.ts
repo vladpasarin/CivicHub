@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { User } from '../shared/user.model';
 
+
 @Component({
   selector: 'profile',
   templateUrl: './profile.component.html',
@@ -16,6 +17,8 @@ export class ProfileComponent implements OnInit {
   options = ['Followed', 'Signed', 'Organized','Prizes'];
   selectedOption:string;
   badgeNumber:number;
+  punctaje=[10,50,150,300,450,650,900,1200];
+  punctajNextRank:number;
 
 ngOnInit(): void {
   this.selectedOption = 'Organized';
@@ -56,8 +59,21 @@ ngOnInit(): void {
       if(this.badgeNumber==9){
         this.currentUser.badgeType="badge8.png";
       }
+      this.checkNextRankPoints();
     });
 });
+}
+
+checkNextRankPoints(){
+  var keepGoing = true;
+  this.punctaje.forEach(punctaj => {
+        if(keepGoing){
+          if(this.currentUser.points<punctaj){
+            this.punctajNextRank=punctaj;
+            keepGoing=false;
+          }
+        }
+  });
 }
 
 changeOption(option){

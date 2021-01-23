@@ -109,6 +109,7 @@ export class PetitionFormComponent implements OnInit {
             this.issue.userId = this.userId;
             console.log(this.userId);
             console.log(this.issue);
+            console.log(this.f.address.value)
             this.api.addIssue(this.issue).subscribe(() => {
               this.successAdd="Excellent! You gained 25 points"
               setTimeout(() => {
@@ -162,7 +163,7 @@ export class PetitionFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.addIssueForm = this.fb.group({
-            address:[null,Validators.required],
+            address:[null],
             description: [null, Validators.required],
             title: [null, Validators.required],
         });

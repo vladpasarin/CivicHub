@@ -154,3 +154,14 @@ hr {
   border: 0 none;
   height: 2px;
 }
+.mapContainer {
+  margin: auto;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  width: 80%;
+  border: 10px solid black;
+  border-radius: 10px;
+}
+agm-map {
+  height: 300px;
+}
