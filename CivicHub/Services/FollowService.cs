@@ -21,6 +21,10 @@ namespace CivicHub.Services
         }
         public Tuple<int, object> Create(Follow follow)
         {
+            if (followRepository.getByUserAndIssue(follow.UserId, follow.IssueId) != null)
+            {
+                return new Tuple<int, object>(400, "User already following");
+            }
             followRepository.Create(follow);
             followRepository.SaveChanges();
             return new Tuple<int, object>(200, followRepository.FindById(follow.Id));
@@ -46,6 +50,18 @@ namespace CivicHub.Services
         public Follow GetById(Guid id)
         {
             return followRepository.FindById(id);
+        }
+
+        public Tuple<int, object> GetByIssueAndUserId(Guid userId, Guid issueId)
+        {
+            var result = followRepository.getByUserAndIssue(userId, issueId);
+            if ( result == null)
+            {
+                return new Tuple<int, object>(404, "Follow not found");
+            }else
+            {
+                return new Tuple<int, object>(200, result);
+            }
         }
 
         public Tuple<int, object> GetByIssueId(Guid id)

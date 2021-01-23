@@ -24,5 +24,10 @@ namespace CivicHub.Repositories
         {
             return _table.Where(x => x.UserId == userId).ToList();
         }
+
+        public Follow getByUserAndIssue(Guid userId, Guid issueId)
+        {
+            return _table.Where(x => x.UserId == userId && x.IssueId == issueId).FirstOrDefault();
+        }
     }
 }

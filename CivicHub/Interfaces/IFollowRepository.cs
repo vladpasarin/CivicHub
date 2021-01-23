@@ -10,5 +10,6 @@ namespace CivicHub.Interfaces
     {
         List<Follow> getByUser(Guid userId);
         List<Follow> getByIssue(Guid issueId);
+        Follow getByUserAndIssue(Guid userId, Guid issueId);
     }
 }

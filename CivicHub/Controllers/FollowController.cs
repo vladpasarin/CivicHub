@@ -64,6 +64,13 @@ namespace CivicHub.Controllers
             return StatusCode(res.Item1, res.Item2);
         }
 
+        [HttpGet("getAllByIssueAndUser/{issueId}/{userId")]
+        public IActionResult GetAllByIssueAndUserId(Guid issueId, Guid userId)
+        {
+            var res = followService.GetByIssueAndUserId(userId, issueId);
+            return StatusCode(res.Item1, res.Item2);
+        }
+
         [HttpDelete]
         public IActionResult Delete(Guid id)
         {
