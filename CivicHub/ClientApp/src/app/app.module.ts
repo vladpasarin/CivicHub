@@ -33,6 +33,7 @@ import { SignFormComponent } from "./petition-profile/sign-form/sign-form.compon
 import { TopsComponent } from './tops/tops.component';
 import { SortDirective } from "./directive/sort.directive";
 
+
 @NgModule({
   declarations: [
     SearchPipe,
@@ -53,8 +54,7 @@ import { SortDirective } from "./directive/sort.directive";
         PipeFunctionPipe,
         SignFormComponent,
         TopsComponent,
-        SortDirective,
-
+        SortDirective
   ],
   imports: [
     CommonModule,

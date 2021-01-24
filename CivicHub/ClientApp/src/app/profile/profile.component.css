@@ -95,3 +95,8 @@
   margin-top: auto;
   margin-bottom: auto;
 }
+
+progress[value] {
+  width: 250px;
+  height: 25px;
+}

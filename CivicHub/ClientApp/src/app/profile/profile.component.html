@@ -6,7 +6,11 @@
     </div>
     <div class="rank"> 
       <img id="badge" src="../../assets/images/{{currentUser.badgeType}}" alt="Ranking">
-      <p>Total points: {{currentUser.points}}</p> 
+      <!-- <p style="font-size:22px">Total points: {{currentUser.points}}</p>  -->
+      <p *ngIf="currentUser.points<1200" style="font-size:18px">Remaining points to next rank: {{punctajNextRank-currentUser.points}}</p>
+      <p *ngIf="currentUser.points>=1200" style="font-size: 22px;">You are the civic king!</p>       
+      <progress max="{{punctajNextRank}}" value="{{currentUser.points}}"></progress>
+      <p *ngIf="currentUser.points<1200">{{currentUser.points}} / {{punctajNextRank}}</p>
     </div>
 </div>
 <div class="options">

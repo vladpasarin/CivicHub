@@ -15,6 +15,7 @@ namespace CivicHub.Entities
         public User User { get; set; }
         public Guid UserId { get; set; }
         public ICollection<IssueState> IssueStates { get; set; }
+        public ICollection<Follow> Follows { get; set; }
 
     }
 }
