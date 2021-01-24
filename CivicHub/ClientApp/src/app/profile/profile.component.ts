@@ -22,9 +22,10 @@ export class ProfileComponent implements OnInit {
   badgeNumber:number;
   availablePrizes: Prize[] = [];
   userPrizes: Prize[] = [];
-  prizeGiven: PrizeGiven;
+  prizesGiven: PrizeGiven[] = [];
   punctaje=[10,50,150,300,450,650,900,1200];
   punctajNextRank:number;
+  redeemedPrize =  new PrizeGiven();
 
   ngOnInit(): void {
     this.selectedOption = 'Organized';
@@ -32,42 +33,49 @@ export class ProfileComponent implements OnInit {
     this.route.params.subscribe((params: Params) => this.userId = params['id']);
     console.log(this.userId);
 
-  this.api.getUserById(this.userId).subscribe((user: User) => {
-    this.currentUser = user;
-    console.log(this.currentUser);
-    this.api.getBagdeNumber(user.id).subscribe((badgeNr:number)=>{
-      this.badgeNumber=badgeNr;
-      console.log(this.badgeNumber);
-      if(this.badgeNumber==1){
-        this.currentUser.badgeType="Star_badge.png";
-      }
-      if(this.badgeNumber==2){
-        this.currentUser.badgeType="badge1.png";
-      }
-      if(this.badgeNumber==3){
-        this.currentUser.badgeType="badge2.png";
-      }
-      if(this.badgeNumber==4){
-        this.currentUser.badgeType="badge3.png";
-      }
-      if(this.badgeNumber==5){
-        this.currentUser.badgeType="badge4.png";
-      }
-      if(this.badgeNumber==6){
-        this.currentUser.badgeType="badge5.png";
-      }
-      if(this.badgeNumber==7){
-        this.currentUser.badgeType="badge6.png";
-      }
-      if(this.badgeNumber==8){
-        this.currentUser.badgeType="badge7.png";
-      }
-      if(this.badgeNumber==9){
-        this.currentUser.badgeType="badge8.png";
-      }
-      this.checkNextRankPoints();
-    });
-});
+    this.api.getUserById(this.userId).subscribe((user: User) => {
+      this.currentUser = user;
+      console.log(this.currentUser);
+      this.api.getBagdeNumber(user.id).subscribe((badgeNr:number)=>{
+        this.badgeNumber=badgeNr;
+        console.log(this.badgeNumber);
+        if(this.badgeNumber==1){
+          this.currentUser.badgeType="Star_badge.png";
+        }
+        if(this.badgeNumber==2){
+          this.currentUser.badgeType="badge1.png";
+        }
+        if(this.badgeNumber==3){
+          this.currentUser.badgeType="badge2.png";
+        }
+        if(this.badgeNumber==4){
+          this.currentUser.badgeType="badge3.png";
+        }
+        if(this.badgeNumber==5){
+          this.currentUser.badgeType="badge4.png";
+        }
+        if(this.badgeNumber==6){
+          this.currentUser.badgeType="badge5.png";
+        }
+        if(this.badgeNumber==7){
+          this.currentUser.badgeType="badge6.png";
+        }
+        if(this.badgeNumber==8){
+          this.currentUser.badgeType="badge7.png";
+        }
+        if(this.badgeNumber==9){
+          this.currentUser.badgeType="badge8.png";
+        }
+        this.checkNextRankPoints();
+      });
+
+      this.api.getAllPrizes().subscribe((prizes: Prize[]) => {
+        this.availablePrizes = prizes;
+        console.log(prizes);
+      });
+
+      this.getUserPrizes();
+  });
 }
 
 checkNextRankPoints(){
@@ -88,6 +96,28 @@ changeOption(option){
 
 toIssue(issueId:string){
   this.router.navigate(["petition-profile", issueId]);
+}
+
+getUserPrizes() {
+  this.api.getPrizeGivenByUser(this.currentUser.id).subscribe((prize: PrizeGiven[]) => {
+    this.prizesGiven = prize;
+    console.log("Al user-ului: " + prize);
+    this.prizesGiven.forEach(prizeGiven => {
+      this.api.getPrizebyPrizeGiven(prizeGiven.prizeId).subscribe((prize: Prize) => {
+        this.userPrizes.push(prize);
+      });
+    });
+  });
+}
+
+redeemPrize(prize: Prize) {
+  console.log(prize);
+  this.redeemedPrize.prizeId = prize.id;
+  this.redeemedPrize.userId = this.currentUser.id;
+  this.api.redeemPrize(this.redeemedPrize).subscribe(() => {
+    console.log("Successfuly added!")
+  });
+  this.getUserPrizes();
 }
 }
 

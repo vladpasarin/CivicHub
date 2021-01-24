@@ -135,8 +135,14 @@ export class ApiService {
       });
     }
 
-    getPrizesByUser(userId: string) {
+    getPrizeGivenByUser(userId: string) {
       return this.http.get(this.baseUrl + "/prizeGiven/userPrizes/" + userId, {
+        headers: this.header,
+      });
+    }
+
+    getPrizebyPrizeGiven(prizeId: string) {
+      return this.http.get(this.baseUrl + "/prize/" + prizeId, {
         headers: this.header,
       });
     }
