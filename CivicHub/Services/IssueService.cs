@@ -102,7 +102,7 @@ namespace CivicHub.Services
                 Type = 0,
                 Message = "Strangerea de semnaturi a inceput",
                 DateStart = DateTime.Now,
-                DateEnd = DateTime.Now.AddMinutes(4)
+                DateEnd = DateTime.Now.AddMinutes(1)
 
             }) ;
             _issueStateRepository.SaveChanges();

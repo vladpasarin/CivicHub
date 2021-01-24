@@ -71,8 +71,8 @@ export class PetitionProfileComponent implements OnInit {
           });
           
         this.api.getAllStatesByIssueId(this.issueId).subscribe((issueStates: IssueState[]) => {
-            this.issueStates=issueStates;
-            this.currentState=issueStates[0];
+            this.issueStates = issueStates;
+            this.currentState = issueStates[issueStates.length - 1];
             console.log(this.currentState);
 
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {

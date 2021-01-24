@@ -19,8 +19,8 @@ export class ProfileComponent implements OnInit {
   options = ['Followed', 'Signed', 'Organized','Prizes'];
   selectedOption:string;
   badgeNumber:number;
-  availablePrizes: Prize[] = []
-  userPrizes: Prize[] = []
+  availablePrizes: Prize[] = [];
+  userPrizes: Prize[] = [];
   prizeGiven: PrizeGiven;
 
   ngOnInit(): void {
@@ -71,7 +71,7 @@ export class ProfileComponent implements OnInit {
 
       this.api.getPrizesByUser(this.currentUser.id).subscribe((prizes: Prize[]) => {
         this.userPrizes = prizes;
-        console.log(prizes);
+        console.log("Al user-ului: " + prizes);
       });
   });
 }

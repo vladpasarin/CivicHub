@@ -19,9 +19,9 @@ export class ApiService {
   header = new HttpHeaders({
     "Content-Type": "application/json",
   });
+
   baseUrl = "https://localhost:44397/api";
 
-  
     getIssues() {
         return this.http.get(this.baseUrl + "/Issue/getAllWithUserDetails", 
         { headers: this.header });
