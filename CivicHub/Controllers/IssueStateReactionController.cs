@@ -87,10 +87,14 @@ namespace CivicHub.Controllers
             return Ok(_issueStateReactionService.GetNumberOfUpVotes(id));
         }
 
-        [HttpGet("getUserReactionToIssueState")]
-        public IActionResult GetUserReactionToIssueState(IssueStateReactionDto issueStateReactionDto)
+        [HttpGet("getUserReactionToIssueState/{issueStateId}/{userId}")]
+        public IActionResult GetUserReactionToIssueState(Guid issueStateId, Guid userId)
         {
-            var response = _issueStateReactionService.GetUserReactionToIssueState(issueStateReactionDto);
+            var response = _issueStateReactionService.GetUserReactionToIssueState(new IssueStateReactionDto()
+            {
+                IssueStateId = issueStateId,
+                UserId = userId
+            }); 
 
             if (response == null || response == "")
                 return StatusCode(500, "wtf");
