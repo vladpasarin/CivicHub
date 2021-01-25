@@ -24,8 +24,8 @@ h1 {
 
 form {
   z-index: 0;
-  margin-left: 4em;
-  margin-right: 4em;
+  margin-left: 6em;
+  margin-right: 6em;
   background-color: #f1f1f1;
   margin-bottom: 5em;
   padding-top: 1em;
@@ -46,4 +46,8 @@ img {
 
 .btn:hover {
   background: rgb(0, 0, 0);
+}
+.form-group {
+  margin: auto;
+  margin-bottom: 1em;
 }

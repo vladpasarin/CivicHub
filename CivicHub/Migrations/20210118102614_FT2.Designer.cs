@@ -4,44 +4,22 @@ using CivicHub.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CivicHub.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210118102614_FT2")]
+    partial class FT2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
-
-            modelBuilder.Entity("CivicHub.Entities.Follow", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("DateAdded")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("IssueId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasAlternateKey("UserId", "IssueId");
-
-                    b.HasIndex("IssueId");
-
-                    b.ToTable("Follows");
-                });
 
             modelBuilder.Entity("CivicHub.Entities.Issue", b =>
                 {
@@ -380,25 +358,6 @@ namespace CivicHub.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("CivicHub.Entities.Follow", b =>
-                {
-                    b.HasOne("CivicHub.Entities.Issue", "Issue")
-                        .WithMany("Follows")
-                        .HasForeignKey("IssueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CivicHub.Entities.User", "User")
-                        .WithMany("Follows")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Issue");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CivicHub.Entities.Issue", b =>
                 {
                     b.HasOne("CivicHub.Entities.User", "User")
@@ -551,8 +510,6 @@ namespace CivicHub.Migrations
 
             modelBuilder.Entity("CivicHub.Entities.Issue", b =>
                 {
-                    b.Navigation("Follows");
-
                     b.Navigation("IssueStates");
                 });
 
@@ -583,8 +540,6 @@ namespace CivicHub.Migrations
 
             modelBuilder.Entity("CivicHub.Entities.User", b =>
                 {
-                    b.Navigation("Follows");
-
                     b.Navigation("Issues");
 
                     b.Navigation("IssueStateCommentLikes");

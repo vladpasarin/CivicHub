@@ -50,6 +50,7 @@ namespace CivicHub.Services
 
         public async Task<List<IssueStateDto>> GetAllByIssueIdAsync(Guid IssueId)
         {
+            GetLatestIssueState(IssueId);
             var IssueStates = await _issueStateRepository.GetAllByIssueIdAsync(IssueId);
             return _mapper.Map<List<IssueStateDto>>(IssueStates);
         }

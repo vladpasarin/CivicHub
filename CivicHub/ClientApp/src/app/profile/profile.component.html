@@ -6,7 +6,11 @@
     </div>
     <div class="rank"> 
       <img id="badge" src="../../assets/images/{{currentUser.badgeType}}" alt="Ranking">
-      <p>Total points: {{currentUser.points}}</p> 
+      <!-- <p style="font-size:22px">Total points: {{currentUser.points}}</p>  -->
+      <p *ngIf="currentUser.points<1200" style="font-size:18px">Remaining points to next rank: {{punctajNextRank-currentUser.points}}</p>
+      <p *ngIf="currentUser.points>=1200" style="font-size: 22px;">You are the civic king!</p>       
+      <progress max="{{punctajNextRank}}" value="{{currentUser.points}}"></progress>
+      <p *ngIf="currentUser.points<1200">{{currentUser.points}} / {{punctajNextRank}}</p>
     </div>
 </div>
 <div class="options">
@@ -23,14 +27,25 @@
   <div *ngFor="let issue of currentUser.issues">
          
         <div class="issueView" >
+          <div class="content">
                 <p class="issueTitle" (click)="toIssue(issue.id)">{{issue.title}}</p>
+          </div>
         </div>
       </div>
 </div>
 
 <div *ngIf="selectedOption == 'Followed'">
 
-         {{selectedOption}}
+  {{selectedOption}}
+  <div *ngFor="let follow of follows">
+         
+    <div class="issueView" >
+      <div class="content">
+            <p class="issueTitle" (click)="toIssue(follow.issueId)">{{follow.title}}</p>
+            <button *ngIf="currentUser.id == loggedUserId" type="button" style="margin-top: 10px;" class="btn btn-primary" >Unfollow</button>
+      </div>
+    </div>
+  </div>       
         
 </div>
 
@@ -41,7 +56,25 @@
 </div>
 
 <div *ngIf="selectedOption == 'Prizes'">
-
+  <span>Owned Prizes</span>
+  <div *ngFor="let prize of userPrizes">
+    <div class="allPrizes">
+      <div class="prizeName">
+        <p>{{ prize.name }}</p>
+      </div>
+      <p>{{ prize.description }}</p>
+    </div>
+  </div>
+  <br>
   {{selectedOption}}
- 
+  <div *ngFor="let prize of availablePrizes">
+    <div class="allPrizes">
+        <div class="prizeName">
+          <p>{{ prize.name }}</p>
+        </div>
+        <p>{{ prize.description }}</p>
+        <p class="price">Price: {{ prize.price }}</p>
+        <button type="button" class="btn btn-primary" (click)="redeemPrize(prize)">Redeem</button>
+    </div>
+  </div>
 </div>

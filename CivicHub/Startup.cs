@@ -57,6 +57,7 @@ namespace CivicHub
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IPrizeRepository, PrizeRepository>();
             services.AddTransient<IPrizeGivenRepository, PrizeGivenRepository>();
+            services.AddTransient<IFollowRepository, FollowRepository>();
 
             //Services
             services.AddTransient<IUserService, UserService>();
@@ -69,6 +70,7 @@ namespace CivicHub
             services.AddTransient<IIssueStatePhotoService, IssueStatePhotoService>();
             services.AddTransient<IPrizeService, PrizeService>();
             services.AddTransient<IPrizeGivenService, PrizeGivenService>();
+            services.AddTransient<IFollowService, FollowService>();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
             options.SerializerSettings
@@ -107,11 +109,11 @@ namespace CivicHub
 
             app.UseMiddleware<JwtMiddleware>(); 
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints((endpoints) =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>

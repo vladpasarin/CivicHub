@@ -8,6 +8,8 @@ import { IssueCommentLike } from './issueCommentLike.model';
 import { Signature } from "./signature.model";
 import { IssueReaction } from './issueReaction.model';
 import { IssueReactByUser } from "./issueReactByUser.model";
+import { PrizeGiven } from "./prizeGiven.model";
+import { Follow } from "./follow.model";
 
 @Injectable({
   providedIn: "root",
@@ -18,9 +20,9 @@ export class ApiService {
   header = new HttpHeaders({
     "Content-Type": "application/json",
   });
+
   baseUrl = "https://localhost:44397/api";
 
-  
     getIssues() {
         return this.http.get(this.baseUrl + "/Issue/getAllWithUserDetails", 
         { headers: this.header });
@@ -69,6 +71,17 @@ export class ApiService {
         });
     }
 
+    getFollowByUserIdAndIssueId(userId:string,issueId:string){
+      return this.http.get(this.baseUrl + "/Follow/getAllByIssueAndUser/" + issueId +"/" + userId, {
+        headers: this.header,
+      });
+    }
+    getFollowsByUserId(userId:string){
+      return this.http.get(this.baseUrl + "/Follow/getAllByUser/" + userId, {
+        headers: this.header,
+      });
+    }
+
   getAllIssueStateCommentLikes(issueCommentId: string) {
     return this.http.get(this.baseUrl + "/IssueStateCommentLike/all/" + issueCommentId, {
       headers: this.header,
@@ -103,6 +116,12 @@ export class ApiService {
         headers: this.header,
       }); 
     }
+
+    addFollow(follow:Follow){
+      return this.http.post(this.baseUrl + "/Follow", follow, {
+        headers: this.header,
+      });
+    }
   
     addComment(issueComment: IssueComment) {
       return this.http.post(this.baseUrl + "/IssueStateComment", issueComment, {
@@ -124,6 +143,36 @@ export class ApiService {
 
     checkIfUserLikedComment(userId: string, issueStateCommentId: string) {
       return this.http.get(this.baseUrl + "/IssueStateCommentLike/" + userId + "/" + issueStateCommentId, {
+        headers: this.header,
+      });
+    }
+
+    getAllPrizes() {
+      return this.http.get(this.baseUrl + "/Prize/all", {
+        headers: this.header,
+      });
+    }
+
+    getPrizeGivenByUser(userId: string) {
+      return this.http.get(this.baseUrl + "/prizeGiven/userPrizes/" + userId, {
+        headers: this.header,
+      });
+    }
+
+    getPrizebyPrizeGiven(prizeId: string) {
+      return this.http.get(this.baseUrl + "/prize/" + prizeId, {
+        headers: this.header,
+      });
+    }
+
+    redeemPrize(prizeGiven: PrizeGiven){
+      return this.http.post(this.baseUrl + "/prizeGiven", prizeGiven, {
+        headers: this.header,
+      });
+    }
+
+    deleteFollow(issueId: number,userId:number) {
+      return this.http.delete(this.baseUrl + "/Follow/", {
         headers: this.header,
       });
     }

@@ -24,6 +24,7 @@ namespace CivicHub.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Prize> Prizes { get; set; }
         public DbSet<PrizeGiven> PrizeGivens { get; set; }
+        public DbSet<Follow> Follows { get; set; }
 
         //declar relatiile dintre tabele
 
@@ -163,6 +164,22 @@ namespace CivicHub.Data
             builder.Entity<PrizeGiven>()
                 .HasAlternateKey(x => new { x.UserId, x.PrizeId });
 
+            // user M M issue (follows)
+            builder.Entity<Follow>()
+                .HasOne(x => x.User)
+                .WithMany(x => x.Follows)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasForeignKey(x => x.UserId);
+
+            builder.Entity<Follow>()
+                .HasOne(x => x.Issue)
+                .WithMany(x => x.Follows)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasForeignKey(x => x.IssueId);
+            //unique signature
+            builder.Entity<Follow>()
+                .HasAlternateKey(x => new { x.UserId, x.IssueId });
+
             // default value points and used points
             builder.Entity<User>()
                 .Property(x => x.Points)
@@ -171,6 +188,8 @@ namespace CivicHub.Data
             builder.Entity<User>()
                 .Property(x => x.PointsUsed)
                 .HasDefaultValue(0);
+
+
 
 
             //din proieect DAW laborator

@@ -18,7 +18,7 @@ export class PetitonListComponent implements OnInit {
     faStar=faStar;
     
 
-issues: Issue[] = [];
+  issues: Issue[] = [];
   constructor(private router: Router,private api:ApiService,private changeDetection: ChangeDetectorRef) { }
   
   userId = sessionStorage.getItem('userId');
