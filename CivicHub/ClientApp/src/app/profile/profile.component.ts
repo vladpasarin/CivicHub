@@ -15,22 +15,9 @@ import { User } from '../shared/user.model';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,private api:ApiService, private router:Router) { }
-  userId: string;
-  currentUser:User;
-  options = ['Followed', 'Signed', 'Organized','Prizes'];
-  selectedOption:string;
-  badgeNumber:number;
-  availablePrizes: Prize[] = [];
-  userPrizes: Prize[] = [];
-  prizesGiven: PrizeGiven[] = [];
-  punctaje=[10,50,150,300,450,650,900,1200];
-  punctajNextRank:number;
-  redeemedPrize =  new PrizeGiven();
-  follows:Follow[]=[];
-
-  ngOnInit(): void {
-    this.selectedOption = 'Organized';
+  constructor(private route: ActivatedRoute,private api:ApiService, private router:Router) {
+    route.params.subscribe(val => {
+      this.selectedOption = 'Organized';
 
     this.route.params.subscribe((params: Params) => this.userId = params['id']);
     console.log(this.userId);
@@ -83,6 +70,27 @@ export class ProfileComponent implements OnInit {
 
       this.getUserPrizes();
     });
+
+    });
+
+   }
+  userId: string;
+  currentUser:User;
+  options = ['Followed', 'Signed', 'Organized','Prizes'];
+  selectedOption:string;
+  badgeNumber:number;
+  availablePrizes: Prize[] = [];
+  userPrizes: Prize[] = [];
+  prizesGiven: PrizeGiven[] = [];
+  punctaje=[10,50,150,300,450,650,900,1200];
+  punctajNextRank:number;
+  redeemedPrize =  new PrizeGiven();
+  follows:Follow[]=[];
+  loggedUserId = sessionStorage.getItem('userId');
+
+
+  ngOnInit(): void {
+    
 }
 
 checkNextRankPoints(){
@@ -109,6 +117,7 @@ getUserPrizes() {
   this.api.getPrizeGivenByUser(this.currentUser.id).subscribe((prize: PrizeGiven[]) => {
     this.prizesGiven = prize;
     console.log("Al user-ului: " + prize);
+    this.userPrizes=[];
     this.prizesGiven.forEach(prizeGiven => {
       this.api.getPrizebyPrizeGiven(prizeGiven.prizeId).subscribe((prize: Prize) => {
         this.userPrizes.push(prize);
@@ -123,8 +132,8 @@ redeemPrize(prize: Prize) {
   this.redeemedPrize.userId = this.currentUser.id;
   this.api.redeemPrize(this.redeemedPrize).subscribe(() => {
     console.log("Successfuly added!")
+    this.getUserPrizes();
   });
-  this.getUserPrizes();
 }
 }
 
