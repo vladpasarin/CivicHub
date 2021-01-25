@@ -18,8 +18,7 @@ export class TopsComponent implements OnInit {
   faStar=faStar;
   users:User[]=[];
   show = false;
-  showNumber=10;
-  selectedOption:number;
+  selectedOption=10;
   options = [
     { name: "10", value: 10 },
     { name: "25", value: 25 }

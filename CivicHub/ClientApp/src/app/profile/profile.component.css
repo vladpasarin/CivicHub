@@ -60,6 +60,9 @@
   margin-top: 10px;
   margin-bottom: 20px;
 }
+.issueTitle {
+  font-size: larger;
+}
 .issueTitle:hover {
   text-decoration: underline;
   cursor: pointer;

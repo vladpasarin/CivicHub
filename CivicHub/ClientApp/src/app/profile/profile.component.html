@@ -41,7 +41,7 @@
          
     <div class="issueView" >
       <div class="content">
-            <p class="issueTitle" >{{follow.issueId}}</p>
+            <p class="issueTitle" (click)="toIssue(follow.issueId)">{{follow.title}}</p>
             <button *ngIf="currentUser.id == loggedUserId" type="button" style="margin-top: 10px;" class="btn btn-primary" >Unfollow</button>
       </div>
     </div>

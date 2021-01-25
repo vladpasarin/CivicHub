@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { Follow } from '../shared/follow.model';
+import { Issue } from '../shared/issue.model';
 import { Prize } from '../shared/prize.model';
 import { PrizeGiven } from '../shared/prizeGiven.model';
 import { User } from '../shared/user.model';
@@ -25,6 +26,11 @@ export class ProfileComponent implements OnInit {
     this.api.getFollowsByUserId(this.userId).subscribe((fav:Follow[])=>{
       this.follows=fav;
       console.log(this.follows);
+      this.follows.forEach(follow => {
+        this.api.getIssueById(follow.issueId).subscribe((issue:Issue)=>{
+          follow.title=issue.title;
+        });
+      });
     });
 
     this.api.getUserById(this.userId).subscribe((user: User) => {
