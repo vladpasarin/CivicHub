@@ -11,6 +11,7 @@ import { IssueComment } from '../shared/issueComment.model';
 import { Signature } from '../shared/signature.model';
 import { IssueCommentLike } from '../shared/issueCommentLike.model';
 import { IssueReaction } from '../shared/issueReaction.model';
+import { Follow } from '../shared/follow.model';
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
@@ -23,6 +24,7 @@ export class PetitionProfileComponent implements OnInit {
     @ViewChild("photoModal") photoModal: PhotoModalComponent;
     @ViewChild("signForm") signForm: SignFormComponent;
 
+    isFollow: boolean = false;
     issueId:string;
     selectedIssue: Issue;
     commentText: string;
@@ -59,6 +61,8 @@ export class PetitionProfileComponent implements OnInit {
     organizer=new User();
     issueStates:IssueState[]=[];
     issueTypes=["Petiton pending","Petition waiting"];
+    activeFollow:Follow;
+    follow=new Follow();
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) => this.issueId = params['id']);
@@ -102,8 +106,37 @@ export class PetitionProfileComponent implements OnInit {
             this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
                 this.allSignatures= allSignatures;
             });
+            this.api.getFollowByUserIdAndIssueId(this.userId,this.issueId).subscribe((fav:Follow)=>{
+                this.activeFollow=fav;
+                console.log(this.activeFollow);
+              });
         });
     }
+
+    addToFavourites(){
+        if(this.activeFollow == null){
+          this.follow.issueId=this.issueId
+          this.follow.userId=this.userId;
+          this.api.addFollow(this.follow).subscribe(()=>{
+            this.api.getFollowByUserIdAndIssueId(this.userId,this.issueId).subscribe((fav:Follow)=>{
+              this.activeFollow=fav;
+              console.log(this.activeFollow);
+            });
+          });
+        }
+        // else{
+        //   this.api.deleteFavourite(this.propertyId,this.userId).subscribe(() => {
+        //     this.api.getFavouriteByUserAndProperty(this.userId,this.propertyId).subscribe((fav:Favourite)=>{
+        //       this.activeFavourite=fav;
+        //       console.log(this.activeFavourite);
+        //     });
+        //   });
+        // }
+      }
+        changeStyle() {
+            this.isFollow = !this.isFollow;
+    
+        }
 
     selectState(issueState: IssueState) {
         this.currentState = issueState;

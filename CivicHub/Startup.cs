@@ -57,6 +57,7 @@ namespace CivicHub
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IPrizeRepository, PrizeRepository>();
             services.AddTransient<IPrizeGivenRepository, PrizeGivenRepository>();
+            services.AddTransient<IFollowRepository, FollowRepository>();
 
 
             //Services
@@ -70,6 +71,7 @@ namespace CivicHub
             services.AddTransient<IIssueStatePhotoService, IssueStatePhotoService>();
             services.AddTransient<IPrizeService, PrizeService>();
             services.AddTransient<IPrizeGivenService, PrizeGivenService>();
+            services.AddTransient<IFollowService, FollowService>();
 
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
             options.SerializerSettings

@@ -2,6 +2,7 @@ import { PrenormalizedTemplateMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
+import { Follow } from '../shared/follow.model';
 import { Prize } from '../shared/prize.model';
 import { PrizeGiven } from '../shared/prizeGiven.model';
 import { User } from '../shared/user.model';
@@ -26,12 +27,18 @@ export class ProfileComponent implements OnInit {
   punctaje=[10,50,150,300,450,650,900,1200];
   punctajNextRank:number;
   redeemedPrize =  new PrizeGiven();
+  follows:Follow[]=[];
 
   ngOnInit(): void {
     this.selectedOption = 'Organized';
 
     this.route.params.subscribe((params: Params) => this.userId = params['id']);
     console.log(this.userId);
+
+    this.api.getFollowsByUserId(this.userId).subscribe((fav:Follow[])=>{
+      this.follows=fav;
+      console.log(this.follows);
+    });
 
     this.api.getUserById(this.userId).subscribe((user: User) => {
       this.currentUser = user;
@@ -75,7 +82,7 @@ export class ProfileComponent implements OnInit {
       });
 
       this.getUserPrizes();
-  });
+    });
 }
 
 checkNextRankPoints(){

@@ -165,3 +165,10 @@ hr {
 agm-map {
   height: 300px;
 }
+.followup {
+  color: red;
+}
+
+.unfollow {
+  color: green;
+}

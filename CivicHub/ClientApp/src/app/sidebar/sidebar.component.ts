@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { HomeComponent } from '../home/home.component';
 import { ApiService } from '../shared/api.service';
+import { Follow } from '../shared/follow.model';
 import { Issue } from '../shared/issue.model';
 import { User } from '../shared/user.model';
 
@@ -18,6 +19,10 @@ export class SidebarComponent implements OnInit {
   open=true;
   issue:Issue;
   organizer=new User();
+  userId = sessionStorage.getItem('userId');
+  activeFollow:Follow;
+  follow=new Follow();
+
 
   ngOnInit(): void {
     const side=new SidebarComponent(this.home);
@@ -25,9 +30,33 @@ export class SidebarComponent implements OnInit {
     console.log(this.issue.id);
     this.api.getUserById(this.issue.userId).subscribe((user: User) => {
       this.organizer = user;
-});
+    });
+    this.api.getFollowByUserIdAndIssueId(this.userId,this.issue.id).subscribe((fav:Follow)=>{
+      this.activeFollow=fav;
+      console.log(this.activeFollow);
+    });
   }
-    onClick() {
+  addToFavourites(){
+    if(this.activeFollow == null){
+      this.follow.issueId=this.issue.id;
+      this.follow.userId=this.userId;
+      this.api.addFollow(this.follow).subscribe(()=>{
+        this.api.getFollowByUserIdAndIssueId(this.userId,this.issue.id).subscribe((fav:Follow)=>{
+          this.activeFollow=fav;
+          console.log(this.activeFollow);
+        });
+      });
+    }
+    // else{
+    //   this.api.deleteFavourite(this.propertyId,this.userId).subscribe(() => {
+    //     this.api.getFavouriteByUserAndProperty(this.userId,this.propertyId).subscribe((fav:Favourite)=>{
+    //       this.activeFavourite=fav;
+    //       console.log(this.activeFavourite);
+    //     });
+    //   });
+    // }
+  }
+    changeStyle() {
         this.isFollow = !this.isFollow;
 
     }

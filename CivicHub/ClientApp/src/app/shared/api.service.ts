@@ -9,6 +9,7 @@ import { Signature } from "./signature.model";
 import { IssueReaction } from './issueReaction.model';
 import { IssueReactByUser } from "./issueReactByUser.model";
 import { PrizeGiven } from "./prizeGiven.model";
+import { Follow } from "./follow.model";
 
 @Injectable({
   providedIn: "root",
@@ -70,6 +71,17 @@ export class ApiService {
         });
     }
 
+    getFollowByUserIdAndIssueId(userId:string,issueId:string){
+      return this.http.get(this.baseUrl + "/Follow/getAllByIssueAndUser/" + issueId +"/" + userId, {
+        headers: this.header,
+      });
+    }
+    getFollowsByUserId(userId:string){
+      return this.http.get(this.baseUrl + "/Follow/getAllByUser/" + userId, {
+        headers: this.header,
+      });
+    }
+
   getAllIssueStateCommentLikes(issueCommentId: string) {
     return this.http.get(this.baseUrl + "/IssueStateCommentLike/all/" + issueCommentId, {
       headers: this.header,
@@ -103,6 +115,12 @@ export class ApiService {
       return this.http.post(this.baseUrl + "/IssueStateReaction", issueReaction, {
         headers: this.header,
       }); 
+    }
+
+    addFollow(follow:Follow){
+      return this.http.post(this.baseUrl + "/Follow", follow, {
+        headers: this.header,
+      });
     }
   
     addComment(issueComment: IssueComment) {
@@ -149,6 +167,12 @@ export class ApiService {
 
     redeemPrize(prizeGiven: PrizeGiven){
       return this.http.post(this.baseUrl + "/prizeGiven", prizeGiven, {
+        headers: this.header,
+      });
+    }
+
+    deleteFollow(issueId: number,userId:number) {
+      return this.http.delete(this.baseUrl + "/Follow/", {
         headers: this.header,
       });
     }

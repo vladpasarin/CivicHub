@@ -48,11 +48,17 @@
   margin-left: 10px;
   width: 96%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   border: 2px solid rgb(23, 87, 143);
   border-radius: 7px;
   background-color: rgb(230, 236, 240);
   box-shadow: 0 2px 3px rgb(37, 37, 37);
+}
+.content {
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 .issueTitle:hover {
   text-decoration: underline;

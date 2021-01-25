@@ -27,14 +27,25 @@
   <div *ngFor="let issue of currentUser.issues">
          
         <div class="issueView" >
+          <div class="content">
                 <p class="issueTitle" (click)="toIssue(issue.id)">{{issue.title}}</p>
+          </div>
         </div>
       </div>
 </div>
 
 <div *ngIf="selectedOption == 'Followed'">
 
-         {{selectedOption}}
+  {{selectedOption}}
+  <div *ngFor="let follow of follows">
+         
+    <div class="issueView" >
+      <div class="content">
+            <p class="issueTitle" >{{follow.issueId}}</p>
+            <button type="button" style="margin-top: 10px;" class="btn btn-primary" >Unfollow</button>
+      </div>
+    </div>
+  </div>       
         
 </div>
 
