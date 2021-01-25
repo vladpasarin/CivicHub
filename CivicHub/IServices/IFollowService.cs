@@ -16,6 +16,7 @@ namespace CivicHub.IServices
         Tuple<int, object> GetByUserId(Guid id);
         Tuple<int, object> GetByIssueId(Guid id);
         Tuple<int, object> GetByIssueAndUserId(Guid userId, Guid issueId);
+        Tuple<int, object> Delete(Guid userId, Guid issueId);
 
     }
 }
