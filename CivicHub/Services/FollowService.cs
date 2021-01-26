@@ -42,6 +42,31 @@ namespace CivicHub.Services
             return new Tuple<int, object>(200, "Sters cu succes");
         }
 
+        public Tuple<int, object> Delete(Guid userId, Guid issueId)
+        {
+            var obj = followRepository.getByUserAndIssue(userId, issueId);
+            var user = userRepository.FindById(userId);
+            var issue = issueRepository.FindById(issueId);
+            if (user == null)
+            {
+                return new Tuple<int, object>(400, "There is no user with specified id");
+            }
+            if (issue == null)
+            {
+                return new Tuple<int, object>(400, "There is no issue with specified id");
+            }
+            if (obj == null)
+            {
+                return new Tuple<int, object>(400, "Indicated user wasn't following the issue");
+            }
+            else
+            {
+                followRepository.Delete(obj);
+                followRepository.SaveChanges();
+                return new Tuple<int, object>(200, "Successfully deleted");
+            }
+        }
+
         public List<Follow> GetAll()
         {
             return followRepository.GetAll();

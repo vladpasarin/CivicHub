@@ -59,7 +59,6 @@ namespace CivicHub
             services.AddTransient<IPrizeGivenRepository, PrizeGivenRepository>();
             services.AddTransient<IFollowRepository, FollowRepository>();
 
-
             //Services
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IIssueService, IssueService>();

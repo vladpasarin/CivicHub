@@ -77,5 +77,12 @@ namespace CivicHub.Controllers
             var res = followService.Delete(id);
             return StatusCode(res.Item1, res.Item2);
         }
+
+        [HttpDelete("byUserAndIssue/{userId}/{issueId}")]
+        public IActionResult Delete(Guid userId, Guid issueId)
+        {
+            var res = followService.Delete(userId, issueId);
+            return StatusCode(res.Item1, res.Item2);
+        }
     }
 }
