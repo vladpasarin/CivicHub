@@ -12,6 +12,7 @@ import { Signature } from '../shared/signature.model';
 import { IssueCommentLike } from '../shared/issueCommentLike.model';
 import { IssueReaction } from '../shared/issueReaction.model';
 import { Follow } from '../shared/follow.model';
+import { IssuePhoto } from '../shared/issuePhoto.model';
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
@@ -64,6 +65,7 @@ export class PetitionProfileComponent implements OnInit {
     activeFollow:Follow;
     follow=new Follow();
     activeReaction: IssueReaction;
+    issueStatePhotos:IssuePhoto[]=[];
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) => this.issueId = params['id']);
@@ -112,6 +114,10 @@ export class PetitionProfileComponent implements OnInit {
                 this.activeFollow=fav;
                 console.log(this.activeFollow);
               });
+            this.api.getIssueStatePhotos(this.currentState.id).subscribe((photos:IssuePhoto[])=>{
+                this.issueStatePhotos=photos;
+                console.log(this.issueStatePhotos)
+            });
         });
     }
 
@@ -140,6 +146,10 @@ export class PetitionProfileComponent implements OnInit {
     selectState(issueState: IssueState) {
         this.currentState = issueState;
         console.log(this.currentState);
+        this.api.getIssueStatePhotos(this.currentState.id).subscribe((photos:IssuePhoto[])=>{
+            this.issueStatePhotos=photos;
+            console.log(this.issueStatePhotos)
+        });
         this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
             this.allSignatures= allSignatures;
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
