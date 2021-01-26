@@ -63,6 +63,7 @@ export class PetitionProfileComponent implements OnInit {
     issueTypes=["Petiton pending","Petition waiting"];
     activeFollow:Follow;
     follow=new Follow();
+    activeReaction: string;
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) => this.issueId = params['id']);
@@ -94,6 +95,10 @@ export class PetitionProfileComponent implements OnInit {
                     });
                 });
             });
+            
+            console.log("before");
+            this.getUserReaction(this.currentState.id, this.userId);
+            console.log("after");
 
             this.api.getNumberOfUpvotesByState(this.currentState.id).subscribe((nrOfUpvotes: number) => {
                 this.upvoteReacts = nrOfUpvotes;
@@ -159,33 +164,55 @@ export class PetitionProfileComponent implements OnInit {
     }
 
     addUpvoteReaction() {
-        this.issueReact.IssueStateId = this.currentState.id;
-        this.issueReact.UserId = this.userId;
-        this.issueReact.Vote = "upvote";
-        this.issueReact.dateGiven = new Date();
-        console.log(this.issueReact);
-        if ()
-        this.api.addIssueReaction(this.issueReact).subscribe(() => {
-            this.getUpvotes();
-            this.voteSuccess="The organizer thanks you! You gained 2 points";
-            setTimeout(() => {
-                this.voteSuccess="";
-            }, 3000);
-        });
+        if (this.activeReaction == null) {
+            this.issueReact.IssueStateId = this.currentState.id;
+            this.issueReact.UserId = this.userId;
+            this.issueReact.Vote = "upvote";
+            this.issueReact.dateGiven = new Date();
+            console.log(this.issueReact);
+            this.api.addIssueReaction(this.issueReact).subscribe(() => {
+                this.getUpvotes();
+                this.voteSuccess="The organizer thanks you! You gained 2 points";
+                setTimeout(() => {
+                    this.voteSuccess="";
+                }, 3000);
+            });
+        } 
+        else {
+            this.api.deleteUserReaction(this.activeReaction.Id).subscribe(() => {
+                this.activeReaction = null;
+            });
+        }
     }
 
     addDownvoteReaction() {
-        this.issueReact.IssueStateId = this.currentState.id;
-        this.issueReact.UserId = this.userId;
-        this.issueReact.Vote = "downvote";
-        this.issueReact.dateGiven = new Date();
-        console.log(this.issueReact);
-        this.api.addIssueReaction(this.issueReact).subscribe(() => {
-            this.getDownvotes();
-            this.voteSuccess="Thanks for your reaction! You gained 2 points";
-            setTimeout(() => {
-                this.voteSuccess="";
-            }, 3000);
+        if (this.activeReaction == null) {
+            this.issueReact.IssueStateId = this.currentState.id;
+            this.issueReact.UserId = this.userId;
+            this.issueReact.Vote = "downvote";
+            this.issueReact.dateGiven = new Date();
+            console.log(this.issueReact);
+            this.api.addIssueReaction(this.issueReact).subscribe(() => {
+                this.getDownvotes();
+                this.voteSuccess="Thanks for your reaction! You gained 2 points";
+                setTimeout(() => {
+                    this.voteSuccess="";
+                }, 3000);
+            });
+        }
+        else {
+            this.api.deleteUserReaction(this.activeReaction.Id).subscribe(() => {
+                this.activeReaction = null;
+            });
+        }
+    }
+
+    getUserReaction(stateId: string, userId: string) {
+        console.log("inside");
+        this.api.getUserReactionToIssue(stateId, userId).subscribe((reaction: string) => {
+            console.log("inside api");
+            this.activeReaction = reaction;
+            console.log("activeReaction: " + this.activeReaction);
         });
     }
 
