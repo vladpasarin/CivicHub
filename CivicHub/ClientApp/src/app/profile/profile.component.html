@@ -42,7 +42,7 @@
     <div class="issueView" >
       <div class="content">
             <p class="issueTitle" (click)="toIssue(follow.issueId)">{{follow.title}}</p>
-            <button *ngIf="currentUser.id == loggedUserId" type="button" style="margin-top: 10px;" class="btn btn-primary" >Unfollow</button>
+            <button *ngIf="currentUser.id == loggedUserId" type="button" style="margin-top: 10px;background-color: red;color: white;" class="btn" (click)="deleteFollow(follow.issueId)" >Unfollow</button>
       </div>
     </div>
   </div>       
@@ -66,15 +66,17 @@
     </div>
   </div>
   <br>
-  {{selectedOption}}
-  <div *ngFor="let prize of availablePrizes">
-    <div class="allPrizes">
-        <div class="prizeName">
-          <p>{{ prize.name }}</p>
-        </div>
-        <p>{{ prize.description }}</p>
-        <p class="price">Price: {{ prize.price }}</p>
-        <button type="button" class="btn btn-primary" (click)="redeemPrize(prize)">Redeem</button>
+  <div *ngIf="loggedUserId==currentUser.id">
+    {{selectedOption}}
+    <div *ngFor="let prize of availablePrizes">
+      <div class="allPrizes">
+          <div class="prizeName">
+            <p>{{ prize.name }}</p>
+          </div>
+          <p>{{ prize.description }}</p>
+          <p class="price">Price: {{ prize.price }}</p>
+          <button type="button" class="btn btn-primary" (click)="redeemPrize(prize)">Redeem</button>
+      </div>
     </div>
-  </div>
+  </div>  
 </div>

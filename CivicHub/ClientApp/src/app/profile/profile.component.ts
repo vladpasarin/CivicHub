@@ -111,6 +111,20 @@ checkNextRankPoints(){
   });
 }
 
+deleteFollow(issueId:string){
+  this.api.deleteFollow(this.userId, issueId).subscribe(() => {
+    this.api.getFollowsByUserId(this.userId).subscribe((fav:Follow[])=>{
+      this.follows=fav;
+      console.log(this.follows);
+      this.follows.forEach(follow => {
+        this.api.getIssueById(follow.issueId).subscribe((issue:Issue)=>{
+          follow.title=issue.title;
+        });
+      });
+    });
+  });
+}
+
 changeOption(option){
   this.selectedOption=option;
 }

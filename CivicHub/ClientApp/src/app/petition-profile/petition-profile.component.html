@@ -10,7 +10,7 @@
         <ul class="dropdown-menu">
           <li *ngFor="let issueState of issueStates" class="content" (click)="selectState(issueState);getAllComments()"><a>{{issueState.message}}</a></li>
         </ul>
-        <button *ngIf="userId!=null" class="btn" type="button" style="background-color: rgb(240, 226, 226);margin-left: 50px;" [ngClass]="{'followup' : activeFollow!=null,
+        <button *ngIf="userId!=null" class="btn" type="button" style="margin-left: 50px;" [ngClass]="{'followup' : activeFollow!=null,
         'unfollow' : activeFollow == null }"
                         (click)="changeStyle();addToFavourites()">
         {{activeFollow==null ? 'Follow' : (activeFollow != null ? 'Unfollow' : '')}}

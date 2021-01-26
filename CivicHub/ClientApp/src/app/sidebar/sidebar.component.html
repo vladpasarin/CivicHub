@@ -9,8 +9,8 @@
             <p>{{issue.description}}</p>
             <p style="font-weight: bold;">Organizer:</p>
             <p id="organizer" (click)="toProfile(organizer.id)">{{organizer.firstName}} {{organizer.lastName}}</p>
-            <button *ngIf="userId!=null" class="btn" style="background-color: rgb(240, 226, 226);margin-top: 20px;" [ngClass]="{'followup' : activeFollow!=null,
-                'unfollow' : activeFollow == null }"
+            <button *ngIf="userId!=null" class="btn" style="color: white;margin-top: 20px;" [ngClass]="{'unfollow' : activeFollow==null,
+                'followup' : activeFollow != null }"
                                 (click)="changeStyle();addToFavourites()">
                 {{activeFollow==null ? 'Follow' : (activeFollow != null ? 'Unfollow' : '')}}
             </button>

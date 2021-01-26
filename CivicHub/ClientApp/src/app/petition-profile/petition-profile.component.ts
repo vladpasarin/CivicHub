@@ -124,14 +124,11 @@ export class PetitionProfileComponent implements OnInit {
             });
           });
         }
-        // else{
-        //   this.api.deleteFavourite(this.propertyId,this.userId).subscribe(() => {
-        //     this.api.getFavouriteByUserAndProperty(this.userId,this.propertyId).subscribe((fav:Favourite)=>{
-        //       this.activeFavourite=fav;
-        //       console.log(this.activeFavourite);
-        //     });
-        //   });
-        // }
+        else{
+            this.api.deleteFollow(this.userId,this.issueId).subscribe(() => {
+                this.activeFollow=null;
+              });
+        }
       }
         changeStyle() {
             this.isFollow = !this.isFollow;
