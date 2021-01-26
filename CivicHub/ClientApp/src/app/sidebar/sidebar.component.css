@@ -35,11 +35,11 @@ ng-sidebar-container {
   margin-bottom: 30px;
 }
 .followup {
-  color: red;
+  background-color: red;
 }
 
 .unfollow {
-  color: green;
+  background-color: rgb(20, 182, 20);
 }
 #title:hover,
 #organizer:hover {

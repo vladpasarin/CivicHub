@@ -171,10 +171,10 @@ export class ApiService {
       });
     }
 
-    deleteFollow(issueId: number,userId:number) {
-      return this.http.delete(this.baseUrl + "/Follow/", {
+    deleteFollow(userId: string,issueId:string) {
+      return this.http.delete(this.baseUrl + "/Follow/byUserAndIssue/" + userId.toString() + "/" + issueId.toString(), {
         headers: this.header,
-      });
+});
     }
 
     /*getUserReactionToIssue(issueReactByUser: IssueReactByUser) {

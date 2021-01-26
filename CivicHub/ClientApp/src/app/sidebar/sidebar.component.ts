@@ -14,7 +14,7 @@ import { User } from '../shared/user.model';
 export class SidebarComponent implements OnInit {
   constructor(private home:HomeComponent, private api?:ApiService, private router?:Router) {
   }
-    isFollow: boolean = false;
+  isFollow: boolean = false;
   opened = false;
   open=true;
   issue:Issue;
@@ -47,14 +47,11 @@ export class SidebarComponent implements OnInit {
         });
       });
     }
-    // else{
-    //   this.api.deleteFavourite(this.propertyId,this.userId).subscribe(() => {
-    //     this.api.getFavouriteByUserAndProperty(this.userId,this.propertyId).subscribe((fav:Favourite)=>{
-    //       this.activeFavourite=fav;
-    //       console.log(this.activeFavourite);
-    //     });
-    //   });
-    // }
+    else{
+      this.api.deleteFollow(this.userId,this.issue.id).subscribe(() => {
+        this.activeFollow=null;
+      });
+    }
   }
     changeStyle() {
         this.isFollow = !this.isFollow;

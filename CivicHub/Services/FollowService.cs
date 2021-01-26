@@ -63,7 +63,7 @@ namespace CivicHub.Services
             {
                 followRepository.Delete(obj);
                 followRepository.SaveChanges();
-                return new Tuple<int, object>(200, "Successfully deleted");
+                return new Tuple<int, object>(200, obj);
             }
         }
 
