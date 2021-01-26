@@ -75,7 +75,7 @@ namespace CivicHub.Services
             return _issueStateReactionRepository.GetNumberOfUpVotes(id);
         }
 
-        public string GetUserReactionToIssueState(IssueStateReactionDto issueStateReactionDto)
+        public IssueStateReaction GetUserReactionToIssueState(IssueStateReactionDto issueStateReactionDto)
         {
             return _issueStateReactionRepository.GetUserReactionToIssueState(_mapper.Map<IssueStateReaction>(issueStateReactionDto));
         }

@@ -44,9 +44,7 @@ export class SignFormComponent implements OnInit {
 }
 
   ngOnInit() {
-    setTimeout(() => {
-      console.log(this.currentState);
-  }, 1000);
+   
     this.addSignForm = this.fb.group({
       name: [null, Validators.required],
       cnp: [null, Validators.required],

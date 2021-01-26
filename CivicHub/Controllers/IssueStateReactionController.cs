@@ -96,7 +96,7 @@ namespace CivicHub.Controllers
                 UserId = userId
             }); 
 
-            if (response == null || response == "")
+            if (response == null)
                 return StatusCode(500, "wtf");
 
             return Ok(response);

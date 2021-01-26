@@ -63,7 +63,7 @@ export class PetitionProfileComponent implements OnInit {
     issueTypes=["Petiton pending","Petition waiting"];
     activeFollow:Follow;
     follow=new Follow();
-    activeReaction: string;
+    activeReaction: IssueReaction;
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) => this.issueId = params['id']);
@@ -78,7 +78,6 @@ export class PetitionProfileComponent implements OnInit {
         this.api.getAllStatesByIssueId(this.issueId).subscribe((issueStates: IssueState[]) => {
             this.issueStates=issueStates;
             this.currentState=issueStates[this.issueStates.length - 1];
-            console.log(this.currentState);
 
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
@@ -96,9 +95,7 @@ export class PetitionProfileComponent implements OnInit {
                 });
             });
             
-            console.log("before");
             this.getUserReaction(this.currentState.id, this.userId);
-            console.log("after");
 
             this.api.getNumberOfUpvotesByState(this.currentState.id).subscribe((nrOfUpvotes: number) => {
                 this.upvoteReacts = nrOfUpvotes;
@@ -164,14 +161,17 @@ export class PetitionProfileComponent implements OnInit {
     }
 
     addUpvoteReaction() {
+        console.log(this.activeReaction);
         if (this.activeReaction == null) {
-            this.issueReact.IssueStateId = this.currentState.id;
-            this.issueReact.UserId = this.userId;
-            this.issueReact.Vote = "upvote";
+            this.issueReact.issueStateId = this.currentState.id;
+            this.issueReact.userId = this.userId;
+            this.issueReact.vote = "upvote";
             this.issueReact.dateGiven = new Date();
             console.log(this.issueReact);
+            this.activeReaction=this.issueReact;
             this.api.addIssueReaction(this.issueReact).subscribe(() => {
                 this.getUpvotes();
+                this.getUserReaction(this.currentState.id, this.userId);
                 this.voteSuccess="The organizer thanks you! You gained 2 points";
                 setTimeout(() => {
                     this.voteSuccess="";
@@ -179,21 +179,29 @@ export class PetitionProfileComponent implements OnInit {
             });
         } 
         else {
-            this.api.deleteUserReaction(this.activeReaction.Id).subscribe(() => {
-                this.activeReaction = null;
-            });
+            if(this.activeReaction.vote="upvote"){
+                this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
+                    this.activeReaction = null;
+                    this.getUpvotes();
+                    this.getDownvotes();
+    
+    
+                });
+            }
         }
     }
 
     addDownvoteReaction() {
+        console.log(this.activeReaction);
         if (this.activeReaction == null) {
-            this.issueReact.IssueStateId = this.currentState.id;
-            this.issueReact.UserId = this.userId;
-            this.issueReact.Vote = "downvote";
+            this.issueReact.issueStateId = this.currentState.id;
+            this.issueReact.userId = this.userId;
+            this.issueReact.vote = "downvote";
             this.issueReact.dateGiven = new Date();
-            console.log(this.issueReact);
+            this.activeReaction=this.issueReact;
             this.api.addIssueReaction(this.issueReact).subscribe(() => {
                 this.getDownvotes();
+                this.getUserReaction(this.currentState.id, this.userId);
                 this.voteSuccess="Thanks for your reaction! You gained 2 points";
                 setTimeout(() => {
                     this.voteSuccess="";
@@ -201,18 +209,20 @@ export class PetitionProfileComponent implements OnInit {
             });
         }
         else {
-            this.api.deleteUserReaction(this.activeReaction.Id).subscribe(() => {
-                this.activeReaction = null;
-            });
+            if(this.activeReaction.vote="downvote"){
+                this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
+                    this.activeReaction = null;
+                    this.getUpvotes();
+                    this.getDownvotes();
+                });
+            }
         }
     }
 
-    getUserReaction(stateId: string, userId: string) {
-        console.log("inside");
-        this.api.getUserReactionToIssue(stateId, userId).subscribe((reaction: string) => {
-            console.log("inside api");
+    getUserReaction(stateId:string,userId: string) {
+        this.api.getUserReactionToIssue(stateId, userId).subscribe((reaction:IssueReaction) => {
             this.activeReaction = reaction;
-            console.log("activeReaction: " + this.activeReaction);
+            console.log(this.activeReaction)
         });
     }
 

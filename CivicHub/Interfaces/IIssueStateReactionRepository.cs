@@ -12,6 +12,6 @@ namespace CivicHub.Interfaces
         Task<List<IssueStateReaction>> GetAllByIssueStateIdAsync(Guid userId);
         int GetNumberOfDownVotes(Guid id);
         int GetNumberOfUpVotes(Guid id);
-        string GetUserReactionToIssueState(IssueStateReaction issueStateReaction);
+        IssueStateReaction GetUserReactionToIssueState(IssueStateReaction issueStateReaction);
     }
 }
