@@ -177,11 +177,11 @@ export class ApiService {
       });
     }
 
-    /*getUserReactionToIssue(issueReactByUser: IssueReactByUser) {
-      return this.http.get(this.baseUrl + "/IssueStateReaction/getUserReactionToIssueState/", issueReactByUser, {
+    getUserReactionToIssue(userId: string, issueStateId: string) {
+      return this.http.get(this.baseUrl + "/IssueStateReaction/getUserReactionToIssueState/" + userId + "/" + issueStateId, {
         headers: this.header,
       });
-    }*/
+    }
 
     /*deleteCommentLike(issueCommentLike: IssueCommentLike) {
       return this.http.delete(this.baseUrl + "/IssueStateCommentLike", issueCommentLike, {

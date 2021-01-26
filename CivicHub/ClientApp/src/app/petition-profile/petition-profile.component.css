@@ -17,6 +17,11 @@
   flex-direction: row;
   margin-top: 50px;
 }
+
+.detailsRight {
+  max-width: 40%;
+}
+
 .detailsLeft {
   position: sticky;
   position: -webkit-sticky;
@@ -24,6 +29,7 @@
   align-self: flex-start;
   flex-direction: column;
   width: 50%;
+  max-width: 50%;
   margin-right: 70px;
 }
 

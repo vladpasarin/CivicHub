@@ -167,6 +167,7 @@ export class PetitionProfileComponent implements OnInit {
         this.issueReact.Vote = "upvote";
         this.issueReact.dateGiven = new Date();
         console.log(this.issueReact);
+        if ()
         this.api.addIssueReaction(this.issueReact).subscribe(() => {
             this.getUpvotes();
             this.voteSuccess="The organizer thanks you! You gained 2 points";

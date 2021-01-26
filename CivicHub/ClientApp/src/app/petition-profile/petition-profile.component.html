@@ -34,11 +34,6 @@
                 {{selectedIssue.description}}
             </div>
         </div>
-        <div class="mapContainer">
-            <agm-map [zoom]="13" [latitude]="selectedIssue.latitude" [longitude]="selectedIssue.longitude">
-                <agm-marker [latitude]="selectedIssue.latitude" [longitude]="selectedIssue.longitude"></agm-marker>
-            </agm-map>
-        </div>
     </div>
     
     <div class="detailsRight">
@@ -48,6 +43,11 @@
         </div>
         <div class="signatures" *ngIf="currentState.type==0 && issueStates[issueStates.length-1].type==0">
             <button class="btn" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
+        </div>
+        <div class="mapContainer">
+            <agm-map [zoom]="13" [latitude]="selectedIssue.latitude" [longitude]="selectedIssue.longitude">
+                <agm-marker [latitude]="selectedIssue.latitude" [longitude]="selectedIssue.longitude"></agm-marker>
+            </agm-map>
         </div>
         <div class="comments">
             <p class="labels">Comments:</p>

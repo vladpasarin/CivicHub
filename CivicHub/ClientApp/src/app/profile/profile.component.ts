@@ -120,7 +120,7 @@ toIssue(issueId:string){
 }
 
 getUserPrizes() {
-  this.api.getPrizeGivenByUser(this.currentUser.id).subscribe((prize: PrizeGiven[]) => {
+  this.api.getPrizeGivenByUser(this.loggedUserId).subscribe((prize: PrizeGiven[]) => {
     this.prizesGiven = prize;
     console.log("Al user-ului: " + prize);
     this.userPrizes=[];
@@ -135,7 +135,7 @@ getUserPrizes() {
 redeemPrize(prize: Prize) {
   console.log(prize);
   this.redeemedPrize.prizeId = prize.id;
-  this.redeemedPrize.userId = this.currentUser.id;
+  this.redeemedPrize.userId = this.loggedUserId;
   this.api.redeemPrize(this.redeemedPrize).subscribe(() => {
     console.log("Successfuly added!")
     this.getUserPrizes();
