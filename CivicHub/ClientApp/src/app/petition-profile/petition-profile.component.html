@@ -22,9 +22,9 @@
 <div class="details">
     <div class="detailsLeft">
         <div class="photoRow">
-            <div class="photos" *ngFor="let photo of issueStatePhotos; let ind = index" >
+            <div class="photos" *ngFor="let photo of photos; let ind = index" >
                 <img id="issuePhoto" 
-                src="data:image/png;base64,{{photo}}" (click)="showDM(photo)"
+                src="{{photo}}" (click)="showDM(photo)"
                 >
             </div>
         </div>
