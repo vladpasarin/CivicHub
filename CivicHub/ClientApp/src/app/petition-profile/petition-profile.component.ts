@@ -162,6 +162,14 @@ export class PetitionProfileComponent implements OnInit {
 
     addUpvoteReaction() {
         if (this.activeReaction != null) {
+            if (this.activeReaction.vote == "upvote") {
+                this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
+                    this.activeReaction = null;
+                    this.getUpvotes();
+                    this.getDownvotes();
+                });
+                return;
+            }
             this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
                 this.activeReaction = null;
                 this.getUpvotes();
@@ -186,6 +194,14 @@ export class PetitionProfileComponent implements OnInit {
 
     addDownvoteReaction() {
         if (this.activeReaction != null) {
+            if (this.activeReaction.vote == "downvote") {
+                this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
+                    this.activeReaction = null;
+                    this.getUpvotes();
+                    this.getDownvotes();
+                }); 
+                return;
+            }
             this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
                 this.activeReaction = null;
                 this.getUpvotes();
