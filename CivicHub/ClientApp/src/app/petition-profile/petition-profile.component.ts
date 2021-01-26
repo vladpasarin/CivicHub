@@ -162,64 +162,52 @@ export class PetitionProfileComponent implements OnInit {
     }
 
     addUpvoteReaction() {
-        console.log(this.activeReaction);
-        if (this.activeReaction == null) {
-            this.issueReact.issueStateId = this.currentState.id;
-            this.issueReact.userId = this.userId;
-            this.issueReact.vote = "upvote";
-            this.issueReact.dateGiven = new Date();
-            console.log(this.issueReact);
-            this.activeReaction=this.issueReact;
-            this.api.addIssueReaction(this.issueReact).subscribe(() => {
-                this.getUserReaction(this.issueReact.userId, this.currentState.id);
+        if (this.activeReaction != null) {
+            this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
+                this.activeReaction = null;
                 this.getUpvotes();
-                this.getUserReaction(this.currentState.id, this.userId);
-                this.voteSuccess="The organizer thanks you! You gained 2 points";
-                setTimeout(() => {
-                    this.voteSuccess="";
-                }, 3000);
+                this.getDownvotes();
             });
-        } 
-        else {
-            if(this.activeReaction.vote="upvote"){
-                this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
-                    this.activeReaction = null;
-                    this.getUpvotes();
-                    this.getDownvotes();
-    
-    
-                });
-            }
         }
+        this.issueReact.issueStateId = this.currentState.id;
+        this.issueReact.userId = this.userId;
+        this.issueReact.vote = "upvote";
+        this.issueReact.dateGiven = new Date();
+        console.log(this.issueReact);
+        this.activeReaction=this.issueReact;
+        this.api.addIssueReaction(this.issueReact).subscribe(() => {
+            this.getUserReaction(this.issueReact.userId, this.currentState.id);
+            this.getUpvotes();
+            this.getUserReaction(this.currentState.id, this.userId);
+            this.voteSuccess="The organizer thanks you! You gained 2 points";
+            setTimeout(() => {
+                this.voteSuccess="";
+            }, 3000);
+        });
     }
 
     addDownvoteReaction() {
-        console.log(this.activeReaction);
-        if (this.activeReaction == null) {
-            this.issueReact.issueStateId = this.currentState.id;
-            this.issueReact.userId = this.userId;
-            this.issueReact.vote = "downvote";
-            this.issueReact.dateGiven = new Date();
-            this.activeReaction=this.issueReact;
-            this.api.addIssueReaction(this.issueReact).subscribe(() => {
-                this.getUserReaction(this.issueReact.userId, this.issueReact.issueStateId);
+        if (this.activeReaction != null) {
+            this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
+                this.activeReaction = null;
+                this.getUpvotes();
                 this.getDownvotes();
-                this.getUserReaction(this.currentState.id, this.userId);
-                this.voteSuccess="Thanks for your reaction! You gained 2 points";
-                setTimeout(() => {
-                    this.voteSuccess="";
-                }, 3000);
             });
         }
-        else {
-            if(this.activeReaction.vote="downvote"){
-                this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
-                    this.activeReaction = null;
-                    this.getUpvotes();
-                    this.getDownvotes();
-                });
-            }
-        }
+        this.issueReact.issueStateId = this.currentState.id;
+        this.issueReact.userId = this.userId;
+        this.issueReact.vote = "downvote";
+        this.issueReact.dateGiven = new Date();
+        this.activeReaction=this.issueReact;
+        this.api.addIssueReaction(this.issueReact).subscribe(() => {
+            this.getUserReaction(this.issueReact.userId, this.issueReact.issueStateId);
+            this.getDownvotes();
+            this.getUserReaction(this.currentState.id, this.userId);
+            this.voteSuccess="Thanks for your reaction! You gained 2 points";
+            setTimeout(() => {
+                this.voteSuccess="";
+            }, 3000);
+        });
     }
 
     getUserReaction(stateId:string,userId: string) {
