@@ -31,7 +31,7 @@ export class PetitionFormComponent implements OnInit {
    
   map: google.maps.Map<Element>;
   mapClickListener: google.maps.MapsEventListener;
-
+  image;
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
         var filesAmount = event.target.files.length;
@@ -40,11 +40,13 @@ export class PetitionFormComponent implements OnInit {
 
                 reader.onload = (event:any) => {
                   console.log(event.target.result);
-                   this.urls.push(event.target.result); 
+                   this.urls.push(event.target.result);
+                   
                 }
 
                 reader.readAsDataURL(event.target.files[i]);
-        }
+
+         }
     }
   }
 
@@ -66,20 +68,16 @@ export class PetitionFormComponent implements OnInit {
       
 
     getAddress( lat: number, lng: number ) {
-      console.log('Finding Address');
       if (navigator.geolocation) {
         let geocoder = new google.maps.Geocoder();
         let latlng = new google.maps.LatLng(lat, lng);
         let request = {location:latlng};
         geocoder.geocode(request, (results, status) => {
-          console.log(status);
           if (status === google.maps.GeocoderStatus.OK) {
             let result = results[0];
-            console.log(result);
             let rsltAdrComponent = result.address_components;
             if (result != null) {
               this.adresa.nativeElement.value=rsltAdrComponent[1].short_name + " " + rsltAdrComponent[0].short_name
-              console.log(this.adresa.nativeElement.value);
             } else {
               alert('No address available!');
             }
