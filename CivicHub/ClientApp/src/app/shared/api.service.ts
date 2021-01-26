@@ -178,7 +178,7 @@ export class ApiService {
     }
 
     getUserReactionToIssue(userId: string, issueStateId: string) {
-      return this.http.get(this.baseUrl + "/issueStateReaction/getUserReactionToIssueState/" + userId + "/" + issueStateId, {
+      return this.http.get(this.baseUrl + "/issueStateReaction/getUserReactionToIssueState/" + issueStateId + "/" + userId, {
         headers: this.header,
       });
     }

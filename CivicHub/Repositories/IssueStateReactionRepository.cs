@@ -35,7 +35,7 @@ namespace CivicHub.Repositories
                 .Count();
         }
 
-        public string GetUserReactionToIssueState(IssueStateReaction issueStateReaction) 
+        public IssueStateReaction GetUserReactionToIssueState(IssueStateReaction issueStateReaction) 
         {
             IssueStateReaction result;
             try
@@ -44,10 +44,10 @@ namespace CivicHub.Repositories
                 x.IssueStateId == issueStateReaction.IssueStateId).Single();
             }catch(InvalidOperationException e)
             { 
-                return "DidntReact"; 
+                return null; 
             }
 
-            return result.Vote;
+            return result;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CivicHub.Dtos;
+using CivicHub.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,6 @@ namespace CivicHub.IServices
         Task<List<IssueStateReactionDto>> GetAllByIssueStateIdAsync(Guid id);
         int GetNumberOfDownVotes(Guid id);
         int GetNumberOfUpVotes(Guid id);
-        String GetUserReactionToIssueState(IssueStateReactionDto issueStateReactionDto);
+        IssueStateReaction GetUserReactionToIssueState(IssueStateReactionDto issueStateReactionDto);
     }
 }

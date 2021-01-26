@@ -12,6 +12,7 @@ import { Signature } from '../shared/signature.model';
 import { IssueCommentLike } from '../shared/issueCommentLike.model';
 import { IssueReaction } from '../shared/issueReaction.model';
 import { Follow } from '../shared/follow.model';
+import { state } from '@angular/animations';
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
@@ -63,7 +64,7 @@ export class PetitionProfileComponent implements OnInit {
     issueTypes=["Petiton pending","Petition waiting"];
     activeFollow:Follow;
     follow=new Follow();
-    activeReaction: string;
+    activeReaction = new IssueReaction();
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) => this.issueId = params['id']);
@@ -96,9 +97,7 @@ export class PetitionProfileComponent implements OnInit {
                 });
             });
             
-            console.log("before");
-            this.getUserReaction(this.currentState.id, this.userId);
-            console.log("after");
+            this.getUserReaction(this.userId, this.currentState.id);
 
             this.api.getNumberOfUpvotesByState(this.currentState.id).subscribe((nrOfUpvotes: number) => {
                 this.upvoteReacts = nrOfUpvotes;
@@ -165,12 +164,13 @@ export class PetitionProfileComponent implements OnInit {
 
     addUpvoteReaction() {
         if (this.activeReaction == null) {
-            this.issueReact.IssueStateId = this.currentState.id;
-            this.issueReact.UserId = this.userId;
-            this.issueReact.Vote = "upvote";
+            this.issueReact.issueStateId = this.currentState.id;
+            this.issueReact.userId = this.userId;
+            this.issueReact.vote = "upvote";
             this.issueReact.dateGiven = new Date();
             console.log(this.issueReact);
             this.api.addIssueReaction(this.issueReact).subscribe(() => {
+                this.getUserReaction(this.issueReact.userId, this.currentState.id);
                 this.getUpvotes();
                 this.voteSuccess="The organizer thanks you! You gained 2 points";
                 setTimeout(() => {
@@ -179,7 +179,7 @@ export class PetitionProfileComponent implements OnInit {
             });
         } 
         else {
-            this.api.deleteUserReaction(this.activeReaction.Id).subscribe(() => {
+            this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
                 this.activeReaction = null;
             });
         }
@@ -187,12 +187,13 @@ export class PetitionProfileComponent implements OnInit {
 
     addDownvoteReaction() {
         if (this.activeReaction == null) {
-            this.issueReact.IssueStateId = this.currentState.id;
-            this.issueReact.UserId = this.userId;
-            this.issueReact.Vote = "downvote";
+            this.issueReact.issueStateId = this.currentState.id;
+            this.issueReact.userId = this.userId;
+            this.issueReact.vote = "downvote";
             this.issueReact.dateGiven = new Date();
             console.log(this.issueReact);
             this.api.addIssueReaction(this.issueReact).subscribe(() => {
+                this.getUserReaction(this.issueReact.userId, this.issueReact.issueStateId);
                 this.getDownvotes();
                 this.voteSuccess="Thanks for your reaction! You gained 2 points";
                 setTimeout(() => {
@@ -201,17 +202,16 @@ export class PetitionProfileComponent implements OnInit {
             });
         }
         else {
-            this.api.deleteUserReaction(this.activeReaction.Id).subscribe(() => {
+            this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
                 this.activeReaction = null;
             });
         }
     }
 
-    getUserReaction(stateId: string, userId: string) {
-        console.log("inside");
-        this.api.getUserReactionToIssue(stateId, userId).subscribe((reaction: string) => {
-            console.log("inside api");
-            this.activeReaction = reaction;
+    getUserReaction(userId: string, stateId: string) {
+        this.api.getUserReactionToIssue(userId, stateId).subscribe((reaction) => {
+            //this.activeReaction = reaction;
+            console.log("reaction: " + reaction);
             console.log("activeReaction: " + this.activeReaction);
         });
     }

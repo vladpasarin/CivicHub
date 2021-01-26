@@ -1,10 +1,10 @@
 
 export class IssueReaction {
-    Id: string;
-    IssueStateId: string;
-    UserId: string;
+    id: string;
+    issueStateId: string;
+    userId: string;
     dateGiven: Date;
-    Vote: string;
+    vote: string;
     constructor(input?: any) {
       Object.assign(this, input);
     }
