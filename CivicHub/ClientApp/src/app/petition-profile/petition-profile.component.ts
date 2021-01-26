@@ -161,6 +161,53 @@ export class PetitionProfileComponent implements OnInit {
     }
 
     addUpvoteReaction() {
+        if (this.activeReaction != null) {
+            this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
+                this.activeReaction = null;
+                this.getUpvotes();
+                this.getDownvotes();
+            });
+        }
+        this.issueReact.issueStateId = this.currentState.id;
+        this.issueReact.userId = this.userId;
+        this.issueReact.vote = "upvote";
+        this.issueReact.dateGiven = new Date();
+        console.log(this.issueReact);
+        this.activeReaction=this.issueReact;
+        this.api.addIssueReaction(this.issueReact).subscribe(() => {
+            this.getUpvotes();
+            this.getUserReaction(this.currentState.id, this.userId);
+            this.voteSuccess="The organizer thanks you! You gained 2 points";
+            setTimeout(() => {
+                this.voteSuccess="";
+            }, 3000);
+        });
+    }
+
+    addDownvoteReaction() {
+        if (this.activeReaction != null) {
+            this.api.deleteUserReaction(this.activeReaction.id).subscribe(() => {
+                this.activeReaction = null;
+                this.getUpvotes();
+                this.getDownvotes();
+            });
+        }
+        this.issueReact.issueStateId = this.currentState.id;
+        this.issueReact.userId = this.userId;
+        this.issueReact.vote = "downvote";
+        this.issueReact.dateGiven = new Date();
+        this.activeReaction=this.issueReact;
+        this.api.addIssueReaction(this.issueReact).subscribe(() => {
+            this.getDownvotes();
+            this.getUserReaction(this.currentState.id, this.userId);
+            this.voteSuccess="Thanks for your reaction! You gained 2 points";
+            setTimeout(() => {
+                this.voteSuccess="";
+            }, 3000);
+        });
+    }
+
+    /*addUpvoteReaction() {
         console.log(this.activeReaction);
         if (this.activeReaction == null) {
             this.issueReact.issueStateId = this.currentState.id;
@@ -217,7 +264,7 @@ export class PetitionProfileComponent implements OnInit {
                 });
             }
         }
-    }
+    }*/
 
     getUserReaction(stateId:string,userId: string) {
         this.api.getUserReactionToIssue(stateId, userId).subscribe((reaction:IssueReaction) => {
