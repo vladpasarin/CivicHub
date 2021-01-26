@@ -12,6 +12,7 @@ import { Signature } from '../shared/signature.model';
 import { IssueCommentLike } from '../shared/issueCommentLike.model';
 import { IssueReaction } from '../shared/issueReaction.model';
 import { Follow } from '../shared/follow.model';
+import { IssuePhoto } from '../shared/issuePhoto.model';
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
@@ -47,6 +48,7 @@ export class PetitionProfileComponent implements OnInit {
     errorAdd: boolean;
     successAdd;
     voteSuccess;
+    issueStatePhotos:IssuePhoto[]=[];
     photos=["https://i0.1616.ro/media/2/2701/33631/16664900/1/whatsapp-image-2017-02-23-at-09-38-33.jpg",
             "https://autoblog.md/media/2018/03/gropi-bd-Dacia_0.jpg",
             "https://playtech.ro/wp-content/uploads/2018/02/gropi-bucure%C8%99ti-rom%C3%A2nia-1170x658.jpg",
@@ -82,15 +84,11 @@ export class PetitionProfileComponent implements OnInit {
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
                 this.allComments.forEach(comment => {
-                    console.log(comment.id);
-                    //console.log("CommentId: " + comment.Id);
                     this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
                         comment.nrOfLikes = allLikes.length;
-                        console.log(allLikes.length);
                     });
                     this.api.getUserById(comment.userId).subscribe((user: User) => {
                         comment.userName = user.firstName;
-                        console.log(comment.userName);
                     });
                 });
             });
@@ -112,6 +110,10 @@ export class PetitionProfileComponent implements OnInit {
                 this.activeFollow=fav;
                 console.log(this.activeFollow);
               });
+            this.api.getIssueStatePhotos(this.currentState.id).subscribe((photos:IssuePhoto[])=>{
+                this.issueStatePhotos=photos;
+                console.log(this.issueStatePhotos);
+            });
         });
     }
 
@@ -139,21 +141,20 @@ export class PetitionProfileComponent implements OnInit {
 
     selectState(issueState: IssueState) {
         this.currentState = issueState;
-        console.log(this.currentState);
+        this.api.getIssueStatePhotos(this.currentState.id).subscribe((photos:IssuePhoto[])=>{
+            this.issueStatePhotos=photos;
+            console.log(this.issueStatePhotos);
+        });
         this.api.getAllSignaturesByStateId(this.currentState.id).subscribe((allSignatures:Signature[])=>{
             this.allSignatures= allSignatures;
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;
                 this.allComments.forEach(comment => {
-                    console.log(comment.id);
-                    //console.log("CommentId: " + comment.Id);
                     this.api.getAllIssueStateCommentLikes(comment.id).subscribe((allLikes: IssueCommentLike[]) => {
                         comment.nrOfLikes = allLikes.length;
-                        console.log(allLikes.length);
                     });
                     this.api.getUserById(comment.userId).subscribe((user: User) => {
                         comment.userName = user.firstName;
-                        console.log(comment.userName);
                     });
                 });
             });

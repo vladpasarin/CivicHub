@@ -105,9 +105,6 @@ export class PetitionFormComponent implements OnInit {
             this.issue.latitude = this.markerLat;
             this.issue.longitude = this.markerLng;
             this.issue.userId = this.userId;
-            console.log(this.userId);
-            console.log(this.issue);
-            console.log(this.f.address.value)
             this.api.addIssue(this.issue).subscribe(() => {
               this.successAdd="Excellent! You gained 25 points"
               setTimeout(() => {

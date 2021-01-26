@@ -10,6 +10,7 @@ import { IssueReaction } from './issueReaction.model';
 import { IssueReactByUser } from "./issueReactByUser.model";
 import { PrizeGiven } from "./prizeGiven.model";
 import { Follow } from "./follow.model";
+import { IssuePhoto } from "./issuePhoto.model";
 
 @Injectable({
   providedIn: "root",
@@ -30,6 +31,11 @@ export class ApiService {
 
     getIssueById(issueId: string) {
       return this.http.get(this.baseUrl + "/Issue/" + issueId, {
+        headers: this.header,
+      });
+    }
+    getIssueStatePhotos(issueStateId:string){
+      return this.http.get(this.baseUrl + "/IssueStatePhoto/all/" + issueStateId, {
         headers: this.header,
       });
     }
@@ -137,6 +143,12 @@ export class ApiService {
 
     addSignature(signature:Signature){
       return this.http.post(this.baseUrl + "/IssueStateSignature", signature, {
+        headers: this.header,
+      });
+    }
+
+    addIssueStatePhoto(issueStatePhoto:IssuePhoto){
+      return this.http.post(this.baseUrl + "/IssueStatePhoto", issueStatePhoto, {
         headers: this.header,
       });
     }
