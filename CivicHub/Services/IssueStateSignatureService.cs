@@ -13,16 +13,20 @@ namespace CivicHub.Services
     public class IssueStateSignatureService : IIssueStateSignatureService
     {
         private readonly IIssueStateSignatureRepository _issueStateSignatureRepository;
+        private readonly IIssueService _issueService;
+        private readonly IIssueStateRepository _issueStateRepository;
         private readonly IUserRepository _userRepository;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public IssueStateSignatureService(IIssueStateSignatureRepository issueStateCommentRepository, IMapper mapper, IUserRepository userRepository, IUserService userService)
-        {
+        public IssueStateSignatureService(IIssueStateSignatureRepository issueStateCommentRepository, IMapper mapper, IUserRepository userRepository, IUserService userService, IIssueService issueService, IIssueStateRepository issueStateRepository)
+        { 
             _issueStateSignatureRepository = issueStateCommentRepository;
             _userRepository = userRepository;
             _mapper = mapper;
             _userService = userService;
+            _issueService = issueService;
+            _issueStateRepository = issueStateRepository;
         }
 
         public IssueStateSignatureResponseDto Create(IssueStateSignatureRequestDto issueDTO)
@@ -106,6 +110,20 @@ namespace CivicHub.Services
             }
 
             return signatureResponses;
+        }
+
+        public List<IssueDto> GetAllSignedIssuesByUser(Guid userId)
+        {
+            var signedIssues = _issueStateSignatureRepository.GetAllSignedIssuesByUser(userId);
+            List<IssueDto> userIssues = new List<IssueDto>();
+
+            foreach(var signedIssue in signedIssues){
+
+               var issueState = _issueStateRepository.FindById(signedIssue.IssueStateId);
+               userIssues.Add(_issueService.GetById(issueState.Id));
+            }
+
+            return userIssues;
         }
     }
 }

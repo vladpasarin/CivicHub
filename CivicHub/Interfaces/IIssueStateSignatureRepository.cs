@@ -10,5 +10,7 @@ namespace CivicHub.Interfaces
     {
         List<IssueStateSignature> GetAllWithDetails(Guid issueStateId);
         IssueStateSignature GetByUserIdAndIssueStateId(Guid userId, Guid issueStateId);
+        List<IssueStateSignature> GetAllSignedIssuesByUser(Guid userId);
+
     }
 }
