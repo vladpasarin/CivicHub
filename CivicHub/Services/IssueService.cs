@@ -142,5 +142,27 @@ namespace CivicHub.Services
             }
             return _issueRepository.SaveChanges();
         }
+
+        public (bool status,string msg) CheckIssueState(Guid issueId)
+        {
+            var issueState = _issueStateRepository.GetLatestIssueState(issueId);
+            if (issueState == null)
+                return(false, "Issue state not found");
+
+            if (issueState.DateEnd != null)
+                return (true, $"Issue was closed at {(DateTime)issueState.DateEnd:dd/MMMM/yyyy}");
+           
+            else
+            {
+                var timePassed = DateTime.UtcNow - issueState.DateStart;
+                if (timePassed.Days > DateTime.DaysInMonth(issueState.DateStart.Year, issueState.DateStart.Month))
+                {
+                    //issueState.DateEnd = DateTime.UtcNow;
+                    return (true, "Petitia este inactiva de " + timePassed.Days.ToString() + " de zile");
+                }
+
+                return (true, "Petitia e inca activa");    
+            }
+        }
     }
 }

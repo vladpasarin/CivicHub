@@ -74,5 +74,19 @@ namespace CivicHub.Controllers
 
             return Ok(issues);
         }
+
+        [HttpGet("checkIssueState/{id}")]
+        public IActionResult CheckIssueState(Guid id)
+        {
+           var response = _issueService.CheckIssueState(id);
+
+           if(!response.status)
+           {
+                return StatusCode(404, response.msg);
+           }
+
+           return Ok(response.msg);
+            
+        }
     }
 }
