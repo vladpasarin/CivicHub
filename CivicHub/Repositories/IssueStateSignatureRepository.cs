@@ -32,5 +32,12 @@ namespace CivicHub.Repositories
                 .Where(x => x.IssueStateId == issueStateId)
                 .FirstOrDefault();
         }
+
+        public List<IssueStateSignature> GetAllSignedIssuesByUser(Guid userId)
+        {
+            return _table
+                .Where(x => x.UserId == userId)
+                .ToList();
+        }
     }
 }

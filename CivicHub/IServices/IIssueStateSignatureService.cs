@@ -11,5 +11,6 @@ namespace CivicHub.IServices
         List<IssueStateSignatureResponseDto> GetAll(Guid IssueStateId);
         IssueStateSignatureResponseDto Create(IssueStateSignatureRequestDto issueDTO);
         int Delete(Guid issueStateSignatureId);
+        List<IssueDto> GetAllSignedIssuesByUser(Guid userId);
     }
 }

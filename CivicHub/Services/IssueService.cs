@@ -107,7 +107,7 @@ namespace CivicHub.Services
                 DateEnd = DateTime.Now.AddMinutes(1)
 
             };
-            _issueStateRepository.Create(issueStateDto) ;
+            _issueStateRepository.Create(issueStateDto);
             _issueStateRepository.SaveChanges();
             if(issueDTO.Photos != null)
             { 
