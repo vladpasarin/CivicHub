@@ -111,7 +111,7 @@ namespace CivicHub.Services
             _issueStateRepository.SaveChanges();
             if(issueDTO.Photos != null)
             { 
-                foreach (byte[] photo in issueDTO.Photos)
+                foreach (string photo in issueDTO.Photos)
                 {
 
                     _issueStatePhotoService.Create(new IssueStatePhotoDto

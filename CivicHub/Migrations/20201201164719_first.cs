@@ -29,7 +29,7 @@ namespace CivicHub.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Mail = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Avatar = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Avatar = table.Column<string>(type: "varbinary(max)", nullable: true),
                     Points = table.Column<int>(type: "int", nullable: false),
                     DateRegistered = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -118,7 +118,7 @@ namespace CivicHub.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IssueStateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Photo = table.Column<string>(type: "varbinary(max)", nullable: true),
                     dateAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -165,7 +165,7 @@ namespace CivicHub.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IssueStateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Photo = table.Column<string>(type: "varbinary(max)", nullable: true),
                     dateAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -185,7 +185,7 @@ namespace CivicHub.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IssueStateCommentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Photo = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    Photo = table.Column<string>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
