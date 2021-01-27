@@ -16,7 +16,7 @@ namespace CivicHub.Dtos
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Mail { get; set; }
-        public byte[] Avatar { get; set; }
+        public string Avatar { get; set; }
         public int Points { get; set; }
         public List<IssueStateDto> IssueStates { get; set; }
     }

@@ -115,12 +115,15 @@ namespace CivicHub.Services
         public List<IssueDto> GetAllSignedIssuesByUser(Guid userId)
         {
             var signedIssues = _issueStateSignatureRepository.GetAllSignedIssuesByUser(userId);
+
             List<IssueDto> userIssues = new List<IssueDto>();
 
             foreach(var signedIssue in signedIssues){
 
                var issueState = _issueStateRepository.FindById(signedIssue.IssueStateId);
-               userIssues.Add(_issueService.GetById(issueState.Id));
+               var issue = _issueService.GetById(issueState.Id);
+               if(issue != null)
+                  userIssues.Add(issue);
             }
 
             return userIssues;

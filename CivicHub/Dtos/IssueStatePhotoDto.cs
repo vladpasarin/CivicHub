@@ -9,7 +9,7 @@ namespace CivicHub.Dtos
     {
         public Guid Id { get; set; }
         public Guid IssueStateId { get; set; }
-        public byte[] Photo { get; set; }
+        public string Photo { get; set; }
         public DateTime dateAdded { get; set; }
     }
 }

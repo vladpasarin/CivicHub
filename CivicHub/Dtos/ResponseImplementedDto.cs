@@ -8,7 +8,7 @@ namespace CivicHub.Dtos
     public class ResponseImplementedDto
     {
         public Guid IssueId { get; set; }
-        public List<byte[]> Photos { get; set; }
+        public List<string> Photos { get; set; }
         public string MessageFromAuthorities { get; set; }
     }
 }

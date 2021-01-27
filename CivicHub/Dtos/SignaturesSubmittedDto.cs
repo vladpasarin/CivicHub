@@ -8,6 +8,6 @@ namespace CivicHub.Dtos
     public class SignaturesSubmittedDto
     {
         public Guid IssueId { get; set; }
-        public List<byte[]> Photos { get; set; }
+        public List<string> Photos { get; set; }
     }
 }
