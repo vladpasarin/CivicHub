@@ -21,6 +21,7 @@
 <p class="text-center" style="color:red;" *ngIf="userIdInvalid==true">You need to login</p>
 <div class="details">
     <div class="detailsLeft">
+        <p *ngIf="issueStatePhotos.length>0" style="margin-left: 250px; font-size: 22px;font-weight: bold;">Photos:</p>
         <div class="photoRow">
             <div class="photos" *ngFor="let statePhoto of issueStatePhotos; let ind = index" >
                 <img id="issuePhoto" 
@@ -40,9 +41,7 @@
         <p class="text-center" style="color: green;" *ngIf="voteSuccess != '' ">{{voteSuccess}}</p>
         <div class="signatures" *ngIf="currentState.type==0">
             <p class="labels">Signatures: {{allSignatures.length}}</p>
-        </div>
-        <div class="signatures" *ngIf="currentState.type==0 && issueStates[issueStates.length-1].type==0">
-            <button class="btn" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
+            <button *ngIf="issueStates[issueStates.length-1].type==0" class="btn" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
         </div>
         <div class="mapContainer">
             <agm-map [zoom]="13" [latitude]="selectedIssue.latitude" [longitude]="selectedIssue.longitude">

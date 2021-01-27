@@ -19,13 +19,10 @@
 }
 
 .detailsRight {
-  max-width: 40%;
+  max-width: 30%;
 }
 
 .detailsLeft {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
   align-self: flex-start;
   flex-direction: column;
   width: 50%;
@@ -169,7 +166,7 @@ hr {
   border-radius: 10px;
 }
 agm-map {
-  height: 300px;
+  height: 200px;
 }
 .followup {
   background-color: red;

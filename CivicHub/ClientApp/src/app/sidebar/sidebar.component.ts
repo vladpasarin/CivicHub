@@ -4,6 +4,8 @@ import { HomeComponent } from '../home/home.component';
 import { ApiService } from '../shared/api.service';
 import { Follow } from '../shared/follow.model';
 import { Issue } from '../shared/issue.model';
+import { IssuePhoto } from '../shared/issuePhoto.model';
+import { IssueState } from '../shared/issueState.model';
 import { User } from '../shared/user.model';
 
 @Component({
@@ -22,7 +24,8 @@ export class SidebarComponent implements OnInit {
   userId = sessionStorage.getItem('userId');
   activeFollow:Follow;
   follow=new Follow();
-
+  state0:IssueState;
+  photo0:IssuePhoto;
 
   ngOnInit(): void {
     const side=new SidebarComponent(this.home);
@@ -34,6 +37,14 @@ export class SidebarComponent implements OnInit {
     this.api.getFollowByUserIdAndIssueId(this.userId,this.issue.id).subscribe((fav:Follow)=>{
       this.activeFollow=fav;
       console.log(this.activeFollow);
+    });
+    this.api.getAllStatesByIssueId(this.issue.id).subscribe((issueStates: IssueState[]) => {
+      this.state0=issueStates[0];
+      console.log(this.state0);
+      this.api.getIssueStatePhotos(this.state0.id).subscribe((photos:IssuePhoto[])=>{
+        this.photo0=photos[0];
+        console.log(this.photo0);
+    });
     });
   }
   addToFavourites(){
