@@ -18,6 +18,7 @@ export class PetitionFormComponent implements OnInit {
   longitude = 26.096306;
   zoom = 13.0;
   urls = [];
+  photoByte:string;
     markerLat: number;
     markerLng: number;
     markerAlpha = 1;
@@ -31,7 +32,7 @@ export class PetitionFormComponent implements OnInit {
    
   map: google.maps.Map<Element>;
   mapClickListener: google.maps.MapsEventListener;
-  image;
+
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
         var filesAmount = event.target.files.length;
@@ -39,8 +40,8 @@ export class PetitionFormComponent implements OnInit {
                 var reader = new FileReader();
 
                 reader.onload = (event:any) => {
-                  console.log(event.target.result);
-                   this.urls.push(event.target.result);
+                  this.photoByte = event.target.result.replace('data:image/png;base64,','');
+                   this.urls.push(this.photoByte);
                    
                 }
 
@@ -105,6 +106,7 @@ export class PetitionFormComponent implements OnInit {
             this.issue.latitude = this.markerLat;
             this.issue.longitude = this.markerLng;
             this.issue.userId = this.userId;
+            this.issue.photos = this.urls;
             this.api.addIssue(this.issue).subscribe(() => {
               this.successAdd="Excellent! You gained 25 points"
               setTimeout(() => {
