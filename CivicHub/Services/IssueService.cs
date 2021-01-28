@@ -16,16 +16,18 @@ namespace CivicHub.Services
         private readonly IIssueRepository _issueRepository;
         private readonly IIssueStateRepository _issueStateRepository;
         private readonly IIssueStateSignatureRepository _issueStateSignatureRepository;
+        private readonly IIssueStatePhotoService _issueStatePhotoService;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public IssueService(IIssueRepository issueRepository, IIssueStateRepository issueStateRepository, IMapper mapper, IUserService userService, IIssueStateSignatureRepository issueStateSignatureRepository)
+        public IssueService(IIssueRepository issueRepository, IIssueStateRepository issueStateRepository, IMapper mapper, IUserService userService, IIssueStateSignatureRepository issueStateSignatureRepository, IIssueStatePhotoService issueStatePhotoService)
         {
             _issueRepository = issueRepository;
             _issueStateRepository = issueStateRepository;
             _mapper = mapper;
             _userService = userService;
             _issueStateSignatureRepository = issueStateSignatureRepository;
+            _issueStatePhotoService = issueStatePhotoService;
         }
 
         public List<IssueDto> GetAll()
@@ -96,7 +98,7 @@ namespace CivicHub.Services
             var issue = _mapper.Map<Issue>(issueDTO);
             _issueRepository.Create(issue);
             var result =  _issueRepository.SaveChanges();
-            _issueStateRepository.Create(new IssueState
+            var issueStateDto = new IssueState
             {
                 IssueId = issue.Id,
                 Type = 0,
@@ -104,8 +106,23 @@ namespace CivicHub.Services
                 DateStart = DateTime.Now,
                 DateEnd = DateTime.Now.AddMinutes(1)
 
-            }) ;
+            };
+            _issueStateRepository.Create(issueStateDto);
             _issueStateRepository.SaveChanges();
+            if(issueDTO.Photos != null)
+            { 
+                foreach (string photo in issueDTO.Photos)
+                {
+
+                    _issueStatePhotoService.Create(new IssueStatePhotoDto
+                    {
+
+                        IssueStateId = issueStateDto.Id,
+                        Photo = photo,
+                        dateAdded = issueStateDto.DateStart
+                    });
+                }
+            }
             //add points
             _userService.AddPoints(issue.UserId, 25);
             return result;
@@ -124,6 +141,28 @@ namespace CivicHub.Services
                 _issueRepository.Update(issue);
             }
             return _issueRepository.SaveChanges();
+        }
+
+        public (bool status,string msg) CheckIssueState(Guid issueId)
+        {
+            var issueState = _issueStateRepository.GetLatestIssueState(issueId);
+            if (issueState == null)
+                return(false, "Issue state not found");
+
+            if (issueState.DateEnd != null)
+                return (true, $"Issue was closed at {(DateTime)issueState.DateEnd:dd/MMMM/yyyy}");
+           
+            else
+            {
+                var timePassed = DateTime.UtcNow - issueState.DateStart;
+                if (timePassed.Days > DateTime.DaysInMonth(issueState.DateStart.Year, issueState.DateStart.Month))
+                {
+                    //issueState.DateEnd = DateTime.UtcNow;
+                    return (true, "Petitia este inactiva de " + timePassed.Days.ToString() + " de zile");
+                }
+
+                return (true, "Petitia e inca activa");    
+            }
         }
     }
 }

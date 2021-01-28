@@ -9,6 +9,6 @@ namespace CivicHub.Entities
     {
         public Guid IssueStateCommentId { get; set; }
         public IssueStateComment IssueStateComment { get; set; }
-        public byte[] Photo { get; set; }
+        public string Photo { get; set; }
     }
 }

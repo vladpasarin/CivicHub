@@ -131,7 +131,7 @@ namespace CivicHub.Services
             });
             var lastIssueStateAfter = GetLatestIssueState(signaturesSubmittedDto.IssueId);
             //add photos to issue state
-            foreach(byte[] photo in signaturesSubmittedDto.Photos)
+            foreach(string photo in signaturesSubmittedDto.Photos)
             {
                 _issueStatePhotoRepository.Create(new IssueStatePhoto
                 {
@@ -163,7 +163,7 @@ namespace CivicHub.Services
             });
             var lastIssueStateAfter = GetLatestIssueState(responseGivenDto.IssueId);
             //add photos to issue state
-            foreach (byte[] photo in responseGivenDto.Photos)
+            foreach (string photo in responseGivenDto.Photos)
             {
                 _issueStatePhotoRepository.Create(new IssueStatePhoto
                 {
@@ -247,7 +247,7 @@ namespace CivicHub.Services
             });
             var lastIssueStateAfter = GetLatestIssueState(responseImplementedDto.IssueId);
             //add photos to issue state
-            foreach (byte[] photo in responseImplementedDto.Photos)
+            foreach (string photo in responseImplementedDto.Photos)
             {
                 _issueStatePhotoRepository.Create(new IssueStatePhoto
                 {

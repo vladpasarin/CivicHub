@@ -159,8 +159,8 @@ namespace CivicHub.Migrations
                     b.Property<Guid>("IssueStateCommentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -178,8 +178,8 @@ namespace CivicHub.Migrations
                     b.Property<Guid>("IssueStateId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("dateAdded")
                         .HasColumnType("datetime2");
@@ -269,8 +269,8 @@ namespace CivicHub.Migrations
                     b.Property<Guid>("IssueStateId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("Photo")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("dateAdded")
                         .HasColumnType("datetime2");
@@ -344,8 +344,8 @@ namespace CivicHub.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("Avatar")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateRegistered")
                         .HasColumnType("datetime2");

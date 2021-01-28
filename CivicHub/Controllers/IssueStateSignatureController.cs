@@ -34,6 +34,21 @@ namespace CivicHub.Controllers
             }
         }
 
+        [HttpGet("GetIssuesSignedByUser/{id}")]
+        public IActionResult GetIssuesSignedByUser(Guid id)
+        {
+            var issues = _issueStateSignatureService.GetAllSignedIssuesByUser(id);
+            if (issues == null)
+            {
+                return NotFound();
+            }
+            if (issues.Count() == 0)
+            {
+                return StatusCode(200, "Nu s-a gasit nicio petitie semnata");
+            }
+
+            return Ok(issues);
+        }
 
         [HttpPost]
         public IActionResult Create(IssueStateSignatureRequestDto issueDTO)
