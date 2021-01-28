@@ -1,5 +1,5 @@
 ng-sidebar-container {
-  height: 732px;
+  height: 100vh;
 }
 ::ng-deep .ng-sidebar {
   background-color: black;

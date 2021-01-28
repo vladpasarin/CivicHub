@@ -175,3 +175,8 @@ agm-map {
 .unfollow {
   background-color: rgb(20, 182, 20);
 }
+
+#proof {
+  margin-left: 2em;
+  background-color: blue;
+}

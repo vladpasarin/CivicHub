@@ -14,7 +14,8 @@
         'unfollow' : activeFollow == null }"
                         (click)="changeStyle();addToFavourites()">
         {{activeFollow==null ? 'Follow' : (activeFollow != null ? 'Unfollow' : '')}}
-</button>
+        </button>
+        <button *ngIf="currentState.type == 1 && userId == organizer.id" class="btn" id="proof" type="button">Submit proof</button>
     </div>
 </div>
 <hr>
