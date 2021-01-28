@@ -60,6 +60,11 @@ export class ApiService {
         headers: this.header,
       });
     }
+    getAllSignaturesByUser(userId: string) {
+      return this.http.get(this.baseUrl + "/IssueStateSignature/GetIssuesSignedByUser/" + userId, {
+        headers: this.header,
+      });
+    }
 
   getUsers() {
     return this.http.get(this.baseUrl + "/auth/all", { headers: this.header });

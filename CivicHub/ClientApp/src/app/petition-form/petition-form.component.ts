@@ -40,7 +40,8 @@ export class PetitionFormComponent implements OnInit {
                 var reader = new FileReader();
 
                 reader.onload = (event:any) => {
-                  this.photoByte = event.target.result.replace('data:image/png;base64,','');
+                  // this.photoByte = event.target.result.replace('data:image/png;base64,','');
+                  this.photoByte=event.target.result;
                    this.urls.push(this.photoByte);
                    
                 }
