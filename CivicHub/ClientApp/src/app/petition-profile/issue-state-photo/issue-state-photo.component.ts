@@ -18,7 +18,7 @@ export class IssueStatePhotoComponent implements OnInit {
   urls = [];
   issuePhoto = new IssuePhoto();
   @Input() currentState: IssueState;
-  @Output() refreshPhotos = new EventEmitter<string>(); 
+  @Output("refreshIssuePhotos") refreshIssuePhotos = new EventEmitter<string>(); 
 
   constructor(private petitionProfile: PetitionProfileComponent,
     private api?: ApiService
@@ -65,6 +65,6 @@ export class IssueStatePhotoComponent implements OnInit {
       this.api.addIssueStatePhoto(this.issuePhoto).subscribe();
     });
     this.exit();
-    this.refreshPhotos.emit("Success");
+    this.refreshIssuePhotos.emit("Success");
   }
 }
