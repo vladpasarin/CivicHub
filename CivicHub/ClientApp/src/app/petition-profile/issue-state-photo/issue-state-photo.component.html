@@ -1,0 +1,8 @@
+<div bsModal class="row modal fade">
+    <div id="modal">
+        <div class="form-group col-md-6">
+            <input type='file' (change)="onSelectFile($event)" multiple>
+        </div>
+        <img *ngFor='let url of urls'  src="data:image/png;base64,{{url}}" height="200"> <br/>
+    </div>
+</div>

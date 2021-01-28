@@ -13,17 +13,21 @@ import { IssueCommentLike } from '../shared/issueCommentLike.model';
 import { IssueReaction } from '../shared/issueReaction.model';
 import { Follow } from '../shared/follow.model';
 import { IssuePhoto } from '../shared/issuePhoto.model';
+import { IssueStatePhotoComponent } from './issue-state-photo/issue-state-photo.component';
+
 @Component({
     selector: 'petition-profile',
     templateUrl: './petition-profile.component.html',
     styleUrls: ['./petition-profile.component.css']
 })
+
 export class PetitionProfileComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private router: Router,private api:ApiService) { }
 
     @ViewChild("photoModal") photoModal: PhotoModalComponent;
     @ViewChild("signForm") signForm: SignFormComponent;
+    @ViewChild("statePhoto") statePhoto: IssueStatePhotoComponent;
 
     isFollow: boolean = false;
     issueId:string;
@@ -427,8 +431,8 @@ export class PetitionProfileComponent implements OnInit {
             this.signForm.initialize();
           }
     }
-    showImageModal(): void {
-        var modal = <HTMLElement>document.getElementsByClassName("row modal fade")[0];
-        modal.style.display = "block";
+
+    showStatePhotoModal(): void {
+        this.statePhoto.initialize();
     }
 }

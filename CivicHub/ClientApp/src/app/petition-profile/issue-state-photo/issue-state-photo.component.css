@@ -1,0 +1,9 @@
+#modal {
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 10px;
+    width: 50%;
+    margin: auto;
+    display: block;
+    margin-top: 100px;
+}

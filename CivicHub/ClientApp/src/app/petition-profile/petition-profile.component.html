@@ -15,15 +15,7 @@
                         (click)="changeStyle();addToFavourites()">
         {{activeFollow==null ? 'Follow' : (activeFollow != null ? 'Unfollow' : '')}}
         </button>
-        <button *ngIf="currentState.type == 1 && userId == organizer.id" class="btn-submit" id="proof" type="button" (click)="showImageModal()">Submit petition</button>
-    </div>
-</div>
-<div bsModal class="row modal fade">
-    <div id="modal">
-        <div class="form-group col-md-6">
-            <input type='file' (change)="onSelectFile($event)" multiple>
-        </div>
-        <img *ngFor='let url of urls'  src="data:image/png;base64,{{url}}" height="200"> <br/>
+        <button *ngIf="currentState.type == 1 && userId == organizer.id" class="btn-submit" id="proof" type="button" (click)="showStatePhotoModal()">Submit petition</button>
     </div>
 </div>
 <hr>

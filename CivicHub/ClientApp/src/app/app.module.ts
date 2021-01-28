@@ -32,6 +32,7 @@ import { PipeFunctionPipe } from './pipe-function.pipe';
 import { SignFormComponent } from "./petition-profile/sign-form/sign-form.component";
 import { TopsComponent } from './tops/tops.component';
 import { SortDirective } from "./directive/sort.directive";
+import { IssueStatePhotoComponent } from './petition-profile/issue-state-photo/issue-state-photo.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { SortDirective } from "./directive/sort.directive";
         PipeFunctionPipe,
         SignFormComponent,
         TopsComponent,
-        SortDirective
+        SortDirective,
+        IssueStatePhotoComponent
   ],
   imports: [
     CommonModule,
