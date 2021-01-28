@@ -11,6 +11,7 @@ export class Issue {
     firstName?: string;
     lastName?: string;
     numberOfSignatures?: number;
+    photos?: string[];
     constructor(input?: any) {
       Object.assign(this, input);
     }

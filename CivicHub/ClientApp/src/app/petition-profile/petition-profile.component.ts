@@ -66,6 +66,8 @@ export class PetitionProfileComponent implements OnInit {
     follow=new Follow();
     activeReaction: IssueReaction;
     issueStatePhotos:IssuePhoto[]=[];
+    urls = [];
+    photoByte: string;
 
     ngOnInit(): void {
         this.route.params.subscribe((params: Params) => this.issueId = params['id']);
@@ -119,6 +121,24 @@ export class PetitionProfileComponent implements OnInit {
                 console.log(this.issueStatePhotos)
             });
         });
+    }
+
+    onSelectFile(event) {
+        if (event.target.files && event.target.files[0]) {
+            var filesAmount = event.target.files.length;
+            for (let i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+    
+                    reader.onload = (event:any) => {
+                      this.photoByte = event.target.result.replace('data:image/png;base64,','');
+                      this.urls.push(this.photoByte);
+                       
+                    }
+    
+                    reader.readAsDataURL(event.target.files[i]);
+    
+             }
+        }
     }
 
     addToFavourites(){
@@ -407,6 +427,8 @@ export class PetitionProfileComponent implements OnInit {
             this.signForm.initialize();
           }
     }
-
-   
+    showImageModal(): void {
+        var modal = <HTMLElement>document.getElementsByClassName("row modal fade")[0];
+        modal.style.display = "block";
+    }
 }

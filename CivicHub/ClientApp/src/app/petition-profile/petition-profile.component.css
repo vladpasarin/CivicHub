@@ -143,6 +143,7 @@
   display: flex;
   flex-direction: row;
 }
+
 .btn {
   background-color: rgb(20, 182, 20);
   color: white;
@@ -179,4 +180,19 @@ agm-map {
 #proof {
   margin-left: 2em;
   background-color: blue;
+}
+
+#modal {
+  background-color: white;
+  border: 3px solid black;
+  border-radius: 10px;
+  width: 50%;
+  margin: auto;
+  display: none;
+  margin-top: 100px;
+}
+
+.btn-submit {
+  background-color: blue;
+  color: white;
 }
