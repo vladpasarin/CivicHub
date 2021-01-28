@@ -6,4 +6,11 @@
     margin: auto;
     display: block;
     margin-top: 100px;
+    padding: 2em;
+}
+
+.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

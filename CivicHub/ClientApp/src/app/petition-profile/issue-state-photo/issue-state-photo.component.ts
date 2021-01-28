@@ -1,6 +1,8 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ApiService } from 'src/app/shared/api.service';
+import { IssuePhoto } from 'src/app/shared/issuePhoto.model';
 import { IssueState } from 'src/app/shared/issueState.model';
 import { PetitionProfileComponent } from '../petition-profile.component';
 
@@ -13,9 +15,10 @@ import { PetitionProfileComponent } from '../petition-profile.component';
 export class IssueStatePhotoComponent implements OnInit {
   userId = sessionStorage.getItem('userId');
   photoByte: string;
-  urls: any[];
-
+  urls = [];
+  issuePhoto = new IssuePhoto();
   @Input() currentState: IssueState;
+  @Output() refreshPhotos = new EventEmitter<string>(); 
 
   constructor(private petitionProfile: PetitionProfileComponent,
     private api?: ApiService
@@ -28,6 +31,10 @@ export class IssueStatePhotoComponent implements OnInit {
 
   initialize(): void {
     this.issueStatePhoto.show();
+  }
+
+  exit(): void {
+    this.issueStatePhoto.hide();
   }
 
   onSelectFile(event) {
@@ -47,5 +54,17 @@ export class IssueStatePhotoComponent implements OnInit {
 
          }
     }
+  }
+
+  addIssueStatePhoto() {
+    console.log(this.currentState);
+    this.issuePhoto.issueStateId = this.currentState.id;
+    this.issuePhoto.dateAdded = new Date();
+    this.urls.forEach(url => {
+      this.issuePhoto.photo = url;
+      this.api.addIssueStatePhoto(this.issuePhoto).subscribe();
+    });
+    this.exit();
+    this.refreshPhotos.emit("Success");
   }
 }

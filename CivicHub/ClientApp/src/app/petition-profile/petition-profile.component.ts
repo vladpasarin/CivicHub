@@ -417,4 +417,11 @@ export class PetitionProfileComponent implements OnInit {
     showStatePhotoModal(): void {
         this.issueStatePhoto.initialize();
     }
+
+    refreshIssuePhotos() {
+        this.api.getIssueStatePhotos(this.currentState.id).subscribe((photos:IssuePhoto[])=>{
+            this.issueStatePhotos=photos;
+            console.log(this.issueStatePhotos)
+        });
+    }
 }

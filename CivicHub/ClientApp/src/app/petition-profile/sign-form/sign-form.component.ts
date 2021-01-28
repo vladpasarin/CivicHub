@@ -44,7 +44,6 @@ export class SignFormComponent implements OnInit {
 }
 
   ngOnInit() {
-   
     this.addSignForm = this.fb.group({
       name: [null, Validators.required],
       cnp: [null, Validators.required],
