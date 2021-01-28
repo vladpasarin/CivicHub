@@ -12,6 +12,8 @@ import { PetitionProfileComponent } from '../petition-profile.component';
 
 export class IssueStatePhotoComponent implements OnInit {
   userId = sessionStorage.getItem('userId');
+  photoByte: string;
+  urls: any[];
 
   @Input() currentState: IssueState;
 
@@ -19,13 +21,31 @@ export class IssueStatePhotoComponent implements OnInit {
     private api?: ApiService
   ) { }
 
-  @ViewChild("statePhoto") statePhoto: ModalDirective;
+  @ViewChild("issueStatePhoto") issueStatePhoto: ModalDirective;
 
   ngOnInit(): void {
   }
 
   initialize(): void {
-    this.statePhoto.show();
+    this.issueStatePhoto.show();
   }
 
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+        var filesAmount = event.target.files.length;
+        for (let i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = (event:any) => {
+                  // this.photoByte = event.target.result.replace('data:image/png;base64,','');
+                  this.photoByte=event.target.result;
+                   this.urls.push(this.photoByte);
+                   
+                }
+
+                reader.readAsDataURL(event.target.files[i]);
+
+         }
+    }
+  }
 }
