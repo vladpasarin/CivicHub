@@ -120,10 +120,14 @@ export class PetitionProfileComponent implements OnInit {
                 this.activeFollow=fav;
                 console.log(this.activeFollow);
               });
-            this.api.getIssueStatePhotos(this.currentState.id).subscribe((photos:IssuePhoto[])=>{
-                this.issueStatePhotos=photos;
-                console.log(this.issueStatePhotos)
-            });
+            this.getPhotos();
+        });
+    }
+
+    getPhotos(){
+        this.api.getIssueStatePhotos(this.currentState.id).subscribe((photos:IssuePhoto[])=>{
+            this.issueStatePhotos=photos;
+            console.log(this.issueStatePhotos)
         });
     }
 

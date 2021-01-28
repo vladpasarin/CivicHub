@@ -64,7 +64,8 @@ export class IssueStatePhotoComponent implements OnInit {
       this.issuePhoto.photo = url;
       this.api.addIssueStatePhoto(this.issuePhoto).subscribe();
     });
+    this.petitionProfile.getPhotos();
     this.exit();
-    this.refreshPhotos.emit("Success");
+    // this.refreshPhotos.emit("Success");
   }
 }
