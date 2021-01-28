@@ -52,7 +52,7 @@
     <div class="form-group col-md-6">
         <input type='file' (change)="onSelectFile($event)" multiple>
     </div>
-    <img *ngFor='let url of urls'  src="data:image/png;base64,{{url}}" height="200"> <br/>
+    <img *ngFor='let url of urls'  src="{{url}}" height="200"> <br/>
 
     <div class="text-center">
         <button type="button" id="submit" class="btn" (click)="addIssue()">Submit</button>

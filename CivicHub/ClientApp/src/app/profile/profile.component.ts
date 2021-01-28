@@ -6,6 +6,7 @@ import { Follow } from '../shared/follow.model';
 import { Issue } from '../shared/issue.model';
 import { Prize } from '../shared/prize.model';
 import { PrizeGiven } from '../shared/prizeGiven.model';
+import { Signature } from '../shared/signature.model';
 import { User } from '../shared/user.model';
 
 
@@ -25,20 +26,20 @@ export class ProfileComponent implements OnInit {
 
     this.api.getFollowsByUserId(this.userId).subscribe((fav:Follow[])=>{
       this.follows=fav;
-      console.log(this.follows);
       this.follows.forEach(follow => {
         this.api.getIssueById(follow.issueId).subscribe((issue:Issue)=>{
           follow.title=issue.title;
         });
       });
     });
-
+    this.api.getAllSignaturesByUser(this.userId).subscribe((signatures:Signature[])=>{
+      this.signatures=signatures;
+      console.log(this.signatures);
+    });
     this.api.getUserById(this.userId).subscribe((user: User) => {
       this.currentUser = user;
-      console.log(this.currentUser);
       this.api.getBagdeNumber(user.id).subscribe((badgeNr:number)=>{
         this.badgeNumber=badgeNr;
-        console.log(this.badgeNumber);
         if(this.badgeNumber==1){
           this.currentUser.badgeType="Star_badge.png";
         }
@@ -80,6 +81,7 @@ export class ProfileComponent implements OnInit {
     });
 
    }
+  signatures:Signature[]=[];
   userId: string;
   currentUser:User;
   options = ['Followed', 'Signed', 'Organized','Prizes'];

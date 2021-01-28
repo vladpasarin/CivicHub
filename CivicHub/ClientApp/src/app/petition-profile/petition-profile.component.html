@@ -34,7 +34,7 @@
         <div class="photoRow">
             <div class="photos" *ngFor="let statePhoto of issueStatePhotos; let ind = index" >
                 <img id="issuePhoto" 
-                src="data:image/png;base64,{{statePhoto.photo}}" (click)="showDM(statePhoto.photo)"
+                src="{{statePhoto.photo}}" (click)="showDM(statePhoto.photo)"
                 >
             </div>
         </div>

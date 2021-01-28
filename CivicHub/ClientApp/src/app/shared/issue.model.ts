@@ -8,10 +8,10 @@ export class Issue {
     description: string;
     userId: string;
     organizer:User;
+    photos?:string[];
     firstName?: string;
     lastName?: string;
     numberOfSignatures?: number;
-    photos?: string[];
     constructor(input?: any) {
       Object.assign(this, input);
     }
