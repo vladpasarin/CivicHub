@@ -99,10 +99,10 @@ namespace CivicHub.Controllers
             // check type is 2
             // check the logged user is the organizer 
             // 
-            if (((User)HttpContext.Items["User"]).Id != issue.UserId)
-            {
-                return StatusCode(400, "Only the organizer can change the status of the issue");
-            }
+            //if (((User)HttpContext.Items["User"]).Id != issue.UserId)
+            //{
+            //    return StatusCode(400, "Only the organizer can change the status of the issue");
+            //}
 
             var result = _issueStateService.AddGivenResponse(responseGivenDto);
             if (result == null)
@@ -139,10 +139,10 @@ namespace CivicHub.Controllers
             // check type is 2
             // check the logged user is the organizer 
             // 
-            if (((User)HttpContext.Items["User"]).Id != issue.UserId)
-            {
-                return StatusCode(400, "Only the organizer can change the status of the issue");
-            }
+            //if (((User)HttpContext.Items["User"]).Id != issue.UserId)
+            //{
+            //    return StatusCode(400, "Only the organizer can change the status of the issue");
+            //}
 
             var result = _issueStateService.ChangeStateToImplemented(responseImplementedDto);
             if (result == null)
