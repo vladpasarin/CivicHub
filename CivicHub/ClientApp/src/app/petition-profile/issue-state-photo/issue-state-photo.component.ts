@@ -18,7 +18,7 @@ export class IssueStatePhotoComponent implements OnInit {
   urls = [];
   issuePhoto = new IssuePhoto();
   @Input() currentState: IssueState;
-  @Output() refreshPhotos = new EventEmitter<string>(); 
+  @Output("refreshIssuePhotos") refreshIssuePhotos = new EventEmitter<string>(); 
 
   constructor(private petitionProfile: PetitionProfileComponent,
     private api?: ApiService
@@ -62,9 +62,10 @@ export class IssueStatePhotoComponent implements OnInit {
     this.issuePhoto.dateAdded = new Date();
     this.urls.forEach(url => {
       this.issuePhoto.photo = url;
-      this.api.addIssueStatePhoto(this.issuePhoto).subscribe();
+      this.api.addIssueStatePhoto(this.issuePhoto).subscribe(() => {
+        this.petitionProfile.getPhotos();
+      });
     });
-    this.petitionProfile.getPhotos();
     this.exit();
     // this.refreshPhotos.emit("Success");
   }
