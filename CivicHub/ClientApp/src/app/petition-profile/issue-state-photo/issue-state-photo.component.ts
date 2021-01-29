@@ -4,6 +4,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ApiService } from 'src/app/shared/api.service';
 import { IssuePhoto } from 'src/app/shared/issuePhoto.model';
 import { IssueState } from 'src/app/shared/issueState.model';
+import { SignatureSubmitted } from 'src/app/shared/signatureSubmitted.model';
 import { PetitionProfileComponent } from '../petition-profile.component';
 
 @Component({
@@ -17,6 +18,7 @@ export class IssueStatePhotoComponent implements OnInit {
   photoByte: string;
   urls = [];
   issuePhoto = new IssuePhoto();
+  signatureSubmitted = new SignatureSubmitted();
   @Input() currentState: IssueState;
   @Output("refreshIssuePhotos") refreshIssuePhotos = new EventEmitter<string>(); 
 
@@ -58,6 +60,12 @@ export class IssueStatePhotoComponent implements OnInit {
 
   addIssueStatePhoto() {
     console.log(this.currentState);
+    this.signatureSubmitted.issueId=this.currentState.issueId;
+    this.signatureSubmitted.photos=this.urls;
+    console.log(this.signatureSubmitted);
+    this.api.addSignatureSubmitted(this.signatureSubmitted).subscribe(()=>{
+      this.petitionProfile.getStates();
+    });
     this.issuePhoto.issueStateId = this.currentState.id;
     this.issuePhoto.dateAdded = new Date();
     this.urls.forEach(url => {

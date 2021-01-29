@@ -32,10 +32,10 @@ export class ProfileComponent implements OnInit {
         });
       });
     });
-    this.api.getAllSignaturesByUser(this.userId).subscribe((signatures:Signature[])=>{
-      this.signatures=signatures;
-      console.log(this.signatures);
-    });
+    // this.api.getAllSignaturesByUser(this.userId).subscribe((signatures:Signature[])=>{
+    //   this.signatures=signatures;
+    //   console.log(this.signatures);
+    // });
     this.api.getUserById(this.userId).subscribe((user: User) => {
       this.currentUser = user;
       this.api.getBagdeNumber(user.id).subscribe((badgeNr:number)=>{

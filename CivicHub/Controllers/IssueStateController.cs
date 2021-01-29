@@ -65,7 +65,7 @@ namespace CivicHub.Controllers
         // semnaturile au fost submise. se trimit niste poze, asta va contine dto-ul. si metoda va crea un nou state care va avea la fotografii pozele alea
         
         [HttpPost("signaturesSubmitted")]
-        [Authorize]
+        //[Authorize]
         public IActionResult signaturesSubmitted(SignaturesSubmittedDto signaturesSubmittedDto)
         {
             var issue = _issueService.GetById(signaturesSubmittedDto.IssueId);
@@ -73,10 +73,10 @@ namespace CivicHub.Controllers
             // check type is 2
             // check the logged user is the organizer 
             // 
-            if ( ((User)HttpContext.Items["User"]).Id != issue.UserId )
-            {
-                return StatusCode(400, "Only the organizer can change the status of the issue");
-            }
+            //if ( ((User)HttpContext.Items["User"]).Id != issue.UserId )
+            //{
+            //    return StatusCode(400, "Only the organizer can change the status of the issue");
+            //}
 
             var result = _issueStateService.ConfirmSignatureSubmission(signaturesSubmittedDto);
             if (result == null)

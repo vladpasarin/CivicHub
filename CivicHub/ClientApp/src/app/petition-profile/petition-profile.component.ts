@@ -82,7 +82,11 @@ export class PetitionProfileComponent implements OnInit {
                 this.organizer = user;
           });
           });
-          
+        this.getStates();
+        
+    }
+
+    getStates(){
         this.api.getAllStatesByIssueId(this.issueId).subscribe((issueStates: IssueState[]) => {
             this.issueStates=issueStates;
             this.currentState=issueStates[this.issueStates.length - 1];

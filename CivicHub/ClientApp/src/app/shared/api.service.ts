@@ -11,6 +11,7 @@ import { IssueReactByUser } from "./issueReactByUser.model";
 import { PrizeGiven } from "./prizeGiven.model";
 import { Follow } from "./follow.model";
 import { IssuePhoto } from "./issuePhoto.model";
+import { SignatureSubmitted } from "./signatureSubmitted.model";
 
 @Injectable({
   providedIn: "root",
@@ -148,6 +149,12 @@ export class ApiService {
 
     addSignature(signature:Signature){
       return this.http.post(this.baseUrl + "/IssueStateSignature", signature, {
+        headers: this.header,
+      });
+    }
+
+    addSignatureSubmitted(signatureSubmitted: SignatureSubmitted){
+      return this.http.post(this.baseUrl + "/IssueState/signaturesSubmitted", signatureSubmitted, {
         headers: this.header,
       });
     }
