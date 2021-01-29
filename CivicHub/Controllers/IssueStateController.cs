@@ -91,7 +91,7 @@ namespace CivicHub.Controllers
         }
 
         [HttpPost("responseGiven")]
-        [Authorize]
+        //[Authorize]
         public IActionResult responseGiven(ResponseGivenDto responseGivenDto)
         {
             var issue = _issueService.GetById(responseGivenDto.IssueId);
@@ -117,7 +117,7 @@ namespace CivicHub.Controllers
         }
 
         [HttpPost("reopenIssue/{issueId}")]
-        [Authorize]
+        //[Authorize]
         public IActionResult reopenIssue(Guid issueId)
         {
             var issue = _issueService.GetById(issueId);
@@ -131,7 +131,7 @@ namespace CivicHub.Controllers
         }
 
         [HttpPost("implemented")]
-        [Authorize]
+        //[Authorize]
         public IActionResult implemented(ResponseImplementedDto responseImplementedDto)
         {
             var issue = _issueService.GetById(responseImplementedDto.IssueId);
