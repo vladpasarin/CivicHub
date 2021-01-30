@@ -99,10 +99,10 @@ namespace CivicHub.Controllers
             // check type is 2
             // check the logged user is the organizer 
             // 
-            /*if (((User)HttpContext.Items["User"]).Id != issue.UserId)
+            if (((User)HttpContext.Items["User"]).Id != issue.UserId)
             {
                 return StatusCode(400, "Only the organizer can change the status of the issue");
-            }*/
+            }
 
             var result = _issueStateService.AddGivenResponse(responseGivenDto);
             if (result == null)
@@ -117,7 +117,7 @@ namespace CivicHub.Controllers
         }
 
         [HttpPost("reopenIssue/{issueId}")]
-        [Authorize]
+        //[Authorize]
         public IActionResult reopenIssue(Guid issueId)
         {
             var issue = _issueService.GetById(issueId);
@@ -131,7 +131,7 @@ namespace CivicHub.Controllers
         }
 
         [HttpPost("implemented")]
-        [Authorize]
+        //[Authorize]
         public IActionResult implemented(ResponseImplementedDto responseImplementedDto)
         {
             var issue = _issueService.GetById(responseImplementedDto.IssueId);
@@ -139,10 +139,10 @@ namespace CivicHub.Controllers
             // check type is 2
             // check the logged user is the organizer 
             // 
-            if (((User)HttpContext.Items["User"]).Id != issue.UserId)
-            {
-                return StatusCode(400, "Only the organizer can change the status of the issue");
-            }
+            //if (((User)HttpContext.Items["User"]).Id != issue.UserId)
+            //{
+            //    return StatusCode(400, "Only the organizer can change the status of the issue");
+            //}
 
             var result = _issueStateService.ChangeStateToImplemented(responseImplementedDto);
             if (result == null)
