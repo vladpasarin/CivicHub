@@ -4,6 +4,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ApiService } from 'src/app/shared/api.service';
 import { IssuePhoto } from 'src/app/shared/issuePhoto.model';
 import { IssueState } from 'src/app/shared/issueState.model';
+import { ResponseGiven } from 'src/app/shared/responseGiven.model';
 import { SignatureSubmitted } from 'src/app/shared/signatureSubmitted.model';
 import { PetitionProfileComponent } from '../petition-profile.component';
 
@@ -19,6 +20,7 @@ export class IssueStatePhotoComponent implements OnInit {
   urls = [];
   issuePhoto = new IssuePhoto();
   signatureSubmitted = new SignatureSubmitted();
+  responseGiven = new ResponseGiven(); 
   @Input() currentState: IssueState;
   @Output("refreshIssuePhotos") refreshIssuePhotos = new EventEmitter<string>(); 
 
@@ -58,14 +60,18 @@ export class IssueStatePhotoComponent implements OnInit {
     }
   }
 
-  addIssueStatePhoto() {
+  addIssueSubmition() {
     console.log(this.currentState);
     this.signatureSubmitted.issueId=this.currentState.issueId;
     this.signatureSubmitted.photos=this.urls;
     console.log(this.signatureSubmitted);
     this.api.addSignatureSubmitted(this.signatureSubmitted).subscribe(()=>{
       this.petitionProfile.getStates();
+      this.addIssueStatePhoto();
     });
+  }
+
+  addIssueStatePhoto() {
     this.issuePhoto.issueStateId = this.currentState.id;
     this.issuePhoto.dateAdded = new Date();
     this.urls.forEach(url => {
@@ -76,5 +82,24 @@ export class IssueStatePhotoComponent implements OnInit {
     });
     this.exit();
     // this.refreshPhotos.emit("Success");
+  }
+
+  addIssueResponse() {
+    this.responseGiven.issueId = this.currentState.issueId;
+    this.responseGiven.photos = this.urls;
+    console.log(this.responseGiven);
+    this.api.addIssueResponse(this.responseGiven).subscribe(() => {
+      this.petitionProfile.getStates();
+      this.addIssueStatePhoto();
+    });
+  }
+
+  addNextState() {
+    if (this.currentState.type == 1) {
+      this.addIssueSubmition();
+    }
+    if (this.currentState.type == 2) {
+      this.addIssueResponse();
+    }
   }
 }

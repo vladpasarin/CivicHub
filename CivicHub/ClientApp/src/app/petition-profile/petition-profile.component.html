@@ -16,6 +16,7 @@
         {{activeFollow==null ? 'Follow' : (activeFollow != null ? 'Unfollow' : '')}}
         </button>
         <button *ngIf="currentState.type == 1 && userId == organizer.id" class="btn-submit" id="proof" type="button" (click)="showStatePhotoModal()">Submit petition</button>
+        <button *ngIf="currentState.type == 2 && userId == organizer.id" class="btn-submit" id="proof" type="button" (click)="showStatePhotoModal()">Submit response</button>
     </div>
 </div>
 <hr>

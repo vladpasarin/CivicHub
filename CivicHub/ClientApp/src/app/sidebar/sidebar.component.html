@@ -14,7 +14,7 @@
                                 (click)="changeStyle();addToFavourites()">
                 {{activeFollow==null ? 'Follow' : (activeFollow != null ? 'Unfollow' : '')}}
             </button>
-            <img *ngIf="photo0!=null" id="issuePhoto" src="data:image/png;base64,{{photo0.photo}}">
+            <img *ngIf="photo0!=null" id="issuePhoto" src="{{photo0.photo}}">
         </div>
         </ul>
     </ng-sidebar>

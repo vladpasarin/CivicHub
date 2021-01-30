@@ -4,6 +4,10 @@
             <input type='file' (change)="onSelectFile($event)" multiple>
         </div>
         <img *ngFor='let url of urls'  src="{{url}}" height="200"> <br/>
-        <button class="btn-primary" (click)="addIssueStatePhoto()">Submit</button>
+        <div *ngIf="currentState.type == 2">
+            <span>Response Description: </span>
+            <textarea id="response" name="responseDescription" formControlName="description" rows="4" cols="30"></textarea>
+        </div>
+        <button class="btn-primary" (click)="addNextState()">Submit</button>
     </div>
 </div>

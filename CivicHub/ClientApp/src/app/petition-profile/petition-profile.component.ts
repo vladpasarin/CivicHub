@@ -14,6 +14,7 @@ import { IssueReaction } from '../shared/issueReaction.model';
 import { Follow } from '../shared/follow.model';
 import { IssuePhoto } from '../shared/issuePhoto.model';
 import { IssueStatePhotoComponent } from './issue-state-photo/issue-state-photo.component';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'petition-profile',
@@ -86,7 +87,7 @@ export class PetitionProfileComponent implements OnInit {
         
     }
 
-    getStates(){
+    getStates(): Observable<string> {
         this.api.getAllStatesByIssueId(this.issueId).subscribe((issueStates: IssueState[]) => {
             this.issueStates=issueStates;
             this.currentState=issueStates[this.issueStates.length - 1];
@@ -126,6 +127,7 @@ export class PetitionProfileComponent implements OnInit {
               });
             this.getPhotos();
         });
+        return new Observable();
     }
 
     getPhotos(){

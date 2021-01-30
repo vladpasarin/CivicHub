@@ -12,6 +12,7 @@ import { PrizeGiven } from "./prizeGiven.model";
 import { Follow } from "./follow.model";
 import { IssuePhoto } from "./issuePhoto.model";
 import { SignatureSubmitted } from "./signatureSubmitted.model";
+import { ResponseGiven } from "./responseGiven.model";
 
 @Injectable({
   providedIn: "root",
@@ -161,6 +162,12 @@ export class ApiService {
 
     addIssueStatePhoto(issueStatePhoto:IssuePhoto){
       return this.http.post(this.baseUrl + "/IssueStatePhoto", issueStatePhoto, {
+        headers: this.header,
+      });
+    }
+
+    addIssueResponse(response: ResponseGiven) {
+      return this.http.post(this.baseUrl + "/IssueState/responseGiven", response, {
         headers: this.header,
       });
     }
