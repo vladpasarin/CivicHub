@@ -31,7 +31,7 @@ namespace CivicHub.Controllers
         {
             IssueDto issue = _issueService.GetById(id);
             if (issue == null)
-                return NotFound();
+                return NotFound("No issue with id " + id.ToString() + " was found");
 
             return Ok(issue);
         }
@@ -61,7 +61,10 @@ namespace CivicHub.Controllers
         [HttpGet("getAllByUser/{id}")]
         public async Task<IActionResult> GetAllByUserIdAsync(Guid id)
         {
-            return Ok(await _issueService.GetAllByUserIdAsync(id));
+            var createdIssues = await _issueService.GetAllByUserIdAsync(id);
+            if (createdIssues == null)
+                return NotFound("No issues found for user");
+            return Ok(createdIssues);
         }
 
         [HttpGet("getAllWithUserDetails")]
