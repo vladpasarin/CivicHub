@@ -64,11 +64,11 @@
     
       <p class="listTitle">{{selectedOption}}</p>
 
-      <div *ngFor="let signature of signatures">
+      <div *ngFor="let signature of issueSignatures">
              
         <div class="issueView" >
           <div class="content">
-                <p class="issueTitle">{{signature.id}}</p>
+                <p class="issueTitle" (click)="toIssue(signature.id)">{{signature.title}}</p>
           </div>
         </div>
       </div>       

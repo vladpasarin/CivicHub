@@ -37,14 +37,9 @@ export class ProfileComponent implements OnInit {
         });
       });
     });
-    this.api.getAllSignaturesByUser(this.userId).subscribe((signatures:Signature[])=>{
-      this.signatures=signatures;
-      console.log(this.signatures);
-      this.signatures.forEach(sign => {
-        this.api.getIssueState(sign.issueStateId).subscribe((issueState:IssueState)=>{
-          this.api.getIssue()
-        });
-      });
+    this.api.getAllSignaturesByUser(this.userId).subscribe((issue:Issue[])=>{
+      this.issueSignatures=issue;
+      console.log(this.issueSignatures);
     });
     this.api.getUserById(this.userId).subscribe((user: User) => {
       this.currentUser = user;
@@ -87,7 +82,7 @@ export class ProfileComponent implements OnInit {
     });
 
    }
-  signatures:Signature[]=[];
+  issueSignatures:Issue[]=[];
   userId: string;
   currentUser:User;
   options = ['Followed', 'Signed', 'Organized','Prizes'];

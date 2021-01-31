@@ -9,6 +9,7 @@ export class Signature {
     adresa:string;
     serieBuletin:string;
     numarBuletin:number;
+    issueTitle?:string;
     constructor(input?: any) {
       Object.assign(this, input);
     }
