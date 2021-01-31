@@ -14,6 +14,7 @@ namespace CivicHub.Dtos
         public string Avatar { get; set; }
         public int Points { get; set; }
         public DateTime DateRegistered { get; set; }
+        public int PointsUsed { get; set; }
         public List<IssueDto> Issues { get; set; }
     }
 }
