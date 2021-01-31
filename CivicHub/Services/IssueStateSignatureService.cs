@@ -51,12 +51,7 @@ namespace CivicHub.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Mail = user.Mail,
-                Name = signature.FirstName,
-                DateSigned = signature.DateSigned,
-                Cnp = signature.Cnp,
-                Adresa = signature.Adresa,
-                SerieBuletin = signature.SerieBuletin,
-                NumarBuletin = signature.NumarBuletin
+                DateSigned = signature.DateSigned
             };
         }
 
@@ -100,12 +95,7 @@ namespace CivicHub.Services
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Mail = user.Mail,
-                    Name = signature.FirstName,
-                    DateSigned = signature.DateSigned,
-                    Cnp = signature.Cnp,
-                    Adresa = signature.Adresa,
-                    SerieBuletin = signature.SerieBuletin,
-                    NumarBuletin = signature.NumarBuletin
+                    DateSigned = signature.DateSigned
                 });
             }
 
