@@ -63,6 +63,16 @@
     <div *ngIf="selectedOption == 'Signed'">
     
       <p class="listTitle">{{selectedOption}}</p>
+
+      <div *ngFor="let signature of signatures">
+             
+        <div class="issueView" >
+          <div class="content">
+                <p class="issueTitle">{{signature.id}}</p>
+          </div>
+        </div>
+      </div>       
+
      
     </div>
     
