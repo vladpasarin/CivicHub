@@ -4,7 +4,7 @@ import { ApiService } from '../shared/api.service';
 import { Issue } from '../shared/issue.model';
 import { User } from '../shared/user.model';
 import { PhotoModalComponent } from './photo-modal/photo-modal.component';
-import { faUser, faArrowAltCircleUp, faArrowAltCircleDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faArrowAltCircleUp, faArrowAltCircleDown, faThumbsUp, faCheckCircle, faReply, faStream, faCommentAlt, faComments, faImages, faSignature } from '@fortawesome/free-solid-svg-icons';
 import { SignFormComponent } from './sign-form/sign-form.component';
 import { IssueState } from '../shared/issueState.model';
 import { IssueComment } from '../shared/issueComment.model';
@@ -36,6 +36,7 @@ export class PetitionProfileComponent implements OnInit {
     commentText: string;
     stateComment = new IssueComment();
     currentState = new IssueState();
+    latestState = new IssueState();
     userId = sessionStorage.getItem('userId');
     allComments: IssueComment[] = [];
     allSignatures:Signature[]=[];
@@ -63,6 +64,13 @@ export class PetitionProfileComponent implements OnInit {
     upvote = faArrowAltCircleUp;
     downvote = faArrowAltCircleDown;
     thumbsUp = faThumbsUp;
+    checkCircle = faCheckCircle;
+    reply=faReply;
+    stream=faStream;
+    commentAlt= faCommentAlt;
+    comments = faComments;
+    images= faImages;
+    signature = faSignature;
 
     organizer=new User();
     issueStates:IssueState[]=[];
@@ -89,8 +97,9 @@ export class PetitionProfileComponent implements OnInit {
 
     getStates(): Observable<string> {
         this.api.getAllStatesByIssueId(this.issueId).subscribe((issueStates: IssueState[]) => {
-            this.issueStates=issueStates;
-            this.currentState=issueStates[this.issueStates.length - 1];
+            this.issueStates = issueStates;
+            this.currentState = issueStates[this.issueStates.length - 1];
+            this.latestState = issueStates[this.issueStates.length - 1];
 
             this.api.getAllCommentsByStateId(this.currentState.id).subscribe((allcomm: IssueComment[]) => {
                 this.allComments = allcomm;

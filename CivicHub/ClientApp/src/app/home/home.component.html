@@ -1,10 +1,13 @@
 <app-header></app-header>
 <div class="div1" (click)="closeSidebar()">
 <agm-map [zoom]="zoom" 
- [latitude]="lat" [longitude]="lng">
+ [latitude]="lat" [longitude]="lng" (mapClick)="mapClick()">
 <agm-marker *ngFor="let issue of issues" [latitude]="issue.latitude" [longitude]="issue.longitude" 
-(markerClick)="toggleSidebar(issue);refresh()" ></agm-marker>
+    (markerClick)="toggleSidebar(issue);refresh();markerClick(iw)">
+    <agm-info-window #iw>
+          {{issue.title}}
+      </agm-info-window>
+</agm-marker>
 </agm-map>
 </div>
 <app-sidebar #sidebar *ngIf="opened == true" class="sidebar"></app-sidebar>
-

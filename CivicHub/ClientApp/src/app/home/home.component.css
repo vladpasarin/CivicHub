@@ -7,3 +7,7 @@ agm-map {
   position: absolute;
   z-index: 1;
 }
+.selected {
+  background-color: blue;
+  color: blue;
+}
