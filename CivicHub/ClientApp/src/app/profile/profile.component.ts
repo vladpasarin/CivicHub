@@ -74,11 +74,6 @@ export class ProfileComponent implements OnInit {
         this.checkNextRankPoints();
       });
 
-      this.api.getAllPrizes().subscribe((prizes: Prize[]) => {
-        this.availablePrizes = prizes;
-        console.log(prizes);
-      });
-
       this.getUserPrizes();
     });
 
@@ -140,16 +135,25 @@ toIssue(issueId:string){
 }
 
 getUserPrizes() {
-  this.api.getPrizeGivenByUser(this.loggedUserId).subscribe((prize: PrizeGiven[]) => {
-    this.prizesGiven = prize;
-    console.log("Al user-ului: " + prize);
-    this.userPrizes=[];
-    this.prizesGiven.forEach(prizeGiven => {
-      this.api.getPrizebyPrizeGiven(prizeGiven.prizeId).subscribe((prize: Prize) => {
-        this.userPrizes.push(prize);
+  this.api.getAllPrizes().subscribe((prizes: Prize[]) => {
+    this.availablePrizes = prizes;
+    console.log(prizes);
+    this.api.getPrizeGivenByUser(this.loggedUserId).subscribe((prize: PrizeGiven[]) => {
+      this.prizesGiven = prize;
+      console.log(prize);
+      this.userPrizes=[];
+      this.prizesGiven.forEach(prizeGiven => {
+        this.api.getPrizebyPrizeGiven(prizeGiven.prizeId).subscribe((prize: Prize) => {
+          this.userPrizes.push(prize);
+          this.availablePrizes.forEach((availablePrize, index)=>{
+            if(availablePrize.id==prize.id){
+              this.availablePrizes.splice(index,1);
+            }
+          });
+        });
       });
     });
-  });
+  });  
 }
 
 redeemPrize(prize: Prize) {

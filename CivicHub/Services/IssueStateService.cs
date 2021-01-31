@@ -82,20 +82,21 @@ namespace CivicHub.Services
                     IssueId = issueStateDto.IssueId,
                     DateStart = DateTime.Now,
                     Type = 1,
-                    Message = "Se asteapta ca organizatorul sa depuna petitia"
+                    Message = "Waiting for the organizer to hand in the petition"
                 });
                 return _mapper.Map<IssueStateDto>(_issueStateRepository.GetLatestIssueState(IssueId));
             }
 
             //close the issue
-            if (issueStateDto.Type == 4 && (DateTime.Now - issueStateDto.DateStart).Days > 14)
+            if (issueStateDto.Type == 4 && (DateTime.Now - issueStateDto.DateStart).Seconds > 5)
+            //if (issueStateDto.Type == 4 && (DateTime.Now - issueStateDto.DateStart).Days > 14)
             {
                 Create(new IssueStateDto
                 {
                     IssueId = IssueId,
                     DateStart = DateTime.Now,
-                    Message = "Problema e inchisa",
-                    Type = 4
+                    Message = "The issue is closed",
+                    Type = 5
                 });
                 //add points
                 _userService.AddPoints(_issueRepository.FindById(IssueId).UserId ,40);
@@ -126,7 +127,7 @@ namespace CivicHub.Services
             {
                 IssueId = issueLastState.IssueId,
                 DateStart = DateTime.Now,
-                Message = "Se asteapta raspunsul din partea autoritatilor",
+                Message = "Waiting for the authorities response",
                 Type = 2
             });
             var lastIssueStateAfter = GetLatestIssueState(signaturesSubmittedDto.IssueId);
@@ -157,7 +158,7 @@ namespace CivicHub.Services
             {
                 IssueId = issueLastState.IssueId,
                 DateStart = DateTime.Now,
-                Message = "Raspunsul autoritatilor a fost dat",
+                Message = "Waiting for the solution implementation",
                 CustomMessage = responseGivenDto.MessageFromAuthorities,
                 Type = 3
             });
@@ -220,7 +221,7 @@ namespace CivicHub.Services
             {
                 IssueId = issueLastState.IssueId,
                 DateStart = DateTime.Now,
-                Message = "Strangerea de semnaturi a inceput",
+                Message = "Collecting signatures",
                 Type = 0
             });
             var lastIssueStateAfter = GetLatestIssueState(issueId);
@@ -241,7 +242,7 @@ namespace CivicHub.Services
             {
                 IssueId = issueLastState.IssueId,
                 DateStart = DateTime.Now,
-                Message = "Solutia a fost implementata",
+                Message = "The solution was implemented",
                 CustomMessage = responseImplementedDto.MessageFromAuthorities,
                 Type = 4
             });

@@ -172,6 +172,12 @@ export class ApiService {
       });
     }
 
+    addImplementedResponse(response: ResponseGiven) {
+      return this.http.post(this.baseUrl + "/IssueState/implemented", response, {
+        headers: this.header,
+      });
+    }
+
     checkIfUserLikedComment(userId: string, issueStateCommentId: string) {
       return this.http.get(this.baseUrl + "/IssueStateCommentLike/" + userId + "/" + issueStateCommentId, {
         headers: this.header,
