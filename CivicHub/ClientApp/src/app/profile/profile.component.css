@@ -1,27 +1,112 @@
-.profilePhoto {
-  object-fit: cover;
-  height: 300px;
-  width: 300px;
+*{
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
 }
-.profile {
-  margin-top: 50px;
-  width: 60%;
-  display: flex;
+
+.listTitle {
+  background-color: darkcyan;
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+  padding: 10px;
+  border-radius: 30px;
+}
+
+.detailsRight {
+  max-width: 60%;
+  width: 50%;
+  margin-top: 20px;
+}
+
+.detailsLeft {
+  align-self: flex-start;
   flex-direction: column;
-  align-items: center;
+  max-width: 40%;
+  width: 40%;
+  margin-right: 70px;
 }
-#firstName {
-  font-size: 26px;
+
+.container {
+  display: flex;
+  flex-direction: row;
 }
-.profileDetails {
+
+.flex-column .nav-item a {
+  margin-top: 20px;
+  margin-left: 2em;
+}
+
+.selectorItem {
+  background-color: white;
+  display: block;
+  padding: 12px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.selector a.active {
+  background-color: darkcyan;
+  color: white;
+  border-radius: 30px;
+}
+
+.selector {
+  max-width: 100%;
+  width: 60%;
+}
+
+.divider {
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 95%;
+  height: 100%;
+}
+
+#dividerText {
+  border: none;
+  color: white;
+  padding: 5px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+  font-size: small;
+  font-weight: bold;
+}
+
+hr {
+  margin-left: 1em;
+  width: 80%;
+  height: 1px;
+  background-color: rgb(175, 175, 175);
+  border-radius: 5px;
+}
+
+.profile {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+  align-items: center;
+}
+
+#firstName {
+  font-size: 20px;
+}
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+  width: 100%;
 }
 .rank {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  font-size: 20px;
 }
 .options {
   margin-top: 50px;
@@ -37,7 +122,7 @@
 }
 .opt {
   color: black;
-  font-size: 30px;
+  font-size: 40px;
   border-radius: 10px;
 }
 .opt:hover {
@@ -68,8 +153,11 @@
   cursor: pointer;
 }
 #badge {
-  height: 90%;
-  width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 5rem;
+  width: 4rem;
   margin-top: 40px;
 }
 
@@ -109,4 +197,8 @@
 progress[value] {
   width: 250px;
   height: 25px;
+}
+
+.userIcon {
+  font-size: 5em;
 }

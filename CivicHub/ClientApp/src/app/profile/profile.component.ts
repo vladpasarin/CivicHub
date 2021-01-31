@@ -1,6 +1,7 @@
 import { PrenormalizedTemplateMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { faCircle, faLevelUpAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../shared/api.service';
 import { Follow } from '../shared/follow.model';
 import { Issue } from '../shared/issue.model';
@@ -16,6 +17,9 @@ import { User } from '../shared/user.model';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  faUser = faUser;
+  levelUp = faLevelUpAlt;
+  faCircle = faCircle;
 
   constructor(private route: ActivatedRoute,private api:ApiService, private router:Router) {
     route.params.subscribe(val => {
@@ -156,6 +160,10 @@ redeemPrize(prize: Prize) {
     console.log("Successfuly added!")
     this.getUserPrizes();
   });
+}
+
+activateClass(option) {
+  option.active = !option.active;
 }
 }
 

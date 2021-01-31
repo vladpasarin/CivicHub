@@ -1,82 +1,94 @@
 <app-header></app-header>
-<div class="profileDetails">
-    <div class="profile">
-        <img class="profilePhoto" src="assets/images/profile.png" />
-        <p id="firstName"> {{currentUser.firstName}} {{currentUser.lastName}} </p>
+<div class="container">
+  <div class="detailsLeft">
+    <div class="profileDetails">
+      <div class="profile">
+          <p class="userIcon"><fa-icon [icon]="faUser"></fa-icon></p>
+          <p id="firstName"> {{currentUser.firstName}} {{currentUser.lastName}} </p>
+      </div>
+      <div class="divider">
+        <span class="btn-primary" id="dividerText"> Rank </span>
+        <hr>
+      </div>
+      <div class="rank"> 
+        <img id="badge" src="../../assets/images/{{currentUser.badgeType}}" alt="Ranking">
+        <!-- <p style="font-size:22px">Total points: {{currentUser.points}}</p>  -->
+        <p *ngIf="currentUser.points<1200" style="font-size:18px">Remaining points to next rank: {{punctajNextRank-currentUser.points}}</p>
+        <p *ngIf="currentUser.points>=1200" style="font-size: 22px;">You are the civic king!</p>       
+        <progress max="{{punctajNextRank}}" value="{{currentUser.points}}"></progress>
+        <p *ngIf="currentUser.points<1200">{{currentUser.points}} / {{punctajNextRank}}</p>
+      </div>
+      <div class="divider">
+        <span class="btn-primary" id="dividerText"> Details </span>
+        <hr>
+      </div>
     </div>
-    <div class="rank"> 
-      <img id="badge" src="../../assets/images/{{currentUser.badgeType}}" alt="Ranking">
-      <!-- <p style="font-size:22px">Total points: {{currentUser.points}}</p>  -->
-      <p *ngIf="currentUser.points<1200" style="font-size:18px">Remaining points to next rank: {{punctajNextRank-currentUser.points}}</p>
-      <p *ngIf="currentUser.points>=1200" style="font-size: 22px;">You are the civic king!</p>       
-      <progress max="{{punctajNextRank}}" value="{{currentUser.points}}"></progress>
-      <p *ngIf="currentUser.points<1200">{{currentUser.points}} / {{punctajNextRank}}</p>
+    <div class="selector">
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item" *ngFor="let option of options">
+          <a class="selectorItem active" (click)="changeOption(option)"> {{ option }} </a>
+        </li>
+      </ul>
     </div>
-</div>
-<div class="options">
-  <div>
-    <ul class="nav">
-      <a *ngFor="let option of options" class="nav-link">
-        <p class="opt" (click)="changeOption(option)">{{option}}</p>
-      </a>
-    </ul>
   </div>
-</div>
-<div *ngIf="selectedOption == 'Organized'">
-  {{selectedOption}}
-  <div *ngFor="let issue of currentUser.issues">
-         
+  <div class="detailsRight">
+    <div *ngIf="selectedOption == 'Organized'">
+      <p class="listTitle"> {{selectedOption}} </p>
+      <div *ngFor="let issue of currentUser.issues">
+             
+            <div class="issueView" >
+              <div class="content">
+                    <p class="issueTitle" (click)="toIssue(issue.id)">{{issue.title}}</p>
+              </div>
+            </div>
+          </div>
+    </div>
+    
+    <div *ngIf="selectedOption == 'Followed'">
+    
+      <p class="listTitle">{{selectedOption}}</p>
+      <div *ngFor="let follow of follows">
+             
         <div class="issueView" >
           <div class="content">
-                <p class="issueTitle" (click)="toIssue(issue.id)">{{issue.title}}</p>
+                <p class="issueTitle" (click)="toIssue(follow.issueId)">{{follow.title}}</p>
+                <button *ngIf="currentUser.id == loggedUserId" type="button" style="margin-top: 10px;background-color: red;color: white;" class="btn" (click)="deleteFollow(follow.issueId)" >Unfollow</button>
           </div>
         </div>
-      </div>
-</div>
-
-<div *ngIf="selectedOption == 'Followed'">
-
-  {{selectedOption}}
-  <div *ngFor="let follow of follows">
-         
-    <div class="issueView" >
-      <div class="content">
-            <p class="issueTitle" (click)="toIssue(follow.issueId)">{{follow.title}}</p>
-            <button *ngIf="currentUser.id == loggedUserId" type="button" style="margin-top: 10px;background-color: red;color: white;" class="btn" (click)="deleteFollow(follow.issueId)" >Unfollow</button>
-      </div>
+      </div>       
+            
     </div>
-  </div>       
-        
-</div>
-
-<div *ngIf="selectedOption == 'Signed'">
-
-  {{selectedOption}}
- 
-</div>
-
-<div *ngIf="selectedOption == 'Prizes'">
-  <span>Owned Prizes</span>
-  <div *ngFor="let prize of userPrizes">
-    <div class="allPrizes">
-      <div class="prizeName">
-        <p>{{ prize.name }}</p>
-      </div>
-      <p>{{ prize.description }}</p>
+    
+    <div *ngIf="selectedOption == 'Signed'">
+    
+      <p class="listTitle">{{selectedOption}}</p>
+     
     </div>
-  </div>
-  <br>
-  <div *ngIf="loggedUserId ==currentUser.id">
-    {{selectedOption}}
-    <div *ngFor="let prize of availablePrizes">
-      <div class="allPrizes">
+    
+    <div *ngIf="selectedOption == 'Prizes'">
+      <p class="listTitle">Owned Prizes</p>
+      <div *ngFor="let prize of userPrizes">
+        <div class="allPrizes">
           <div class="prizeName">
             <p>{{ prize.name }}</p>
           </div>
           <p>{{ prize.description }}</p>
-          <p class="price">Price: {{ prize.price }}</p>
-          <button type="button" class="btn btn-primary" (click)="redeemPrize(prize)">Redeem</button>
+        </div>
       </div>
+      <br>
+      <div *ngIf="loggedUserId ==currentUser.id">
+        <p class="listTitle">{{selectedOption}}</p>
+        <div *ngFor="let prize of availablePrizes">
+          <div class="allPrizes">
+              <div class="prizeName">
+                <p>{{ prize.name }}</p>
+              </div>
+              <p>{{ prize.description }}</p>
+              <p class="price">Price: {{ prize.price }}</p>
+              <button type="button" class="btn btn-primary" (click)="redeemPrize(prize)">Redeem</button>
+          </div>
+        </div>
+      </div>  
     </div>
-  </div>  
+  </div>
 </div>
