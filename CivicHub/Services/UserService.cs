@@ -40,7 +40,12 @@ namespace CivicHub.Services
                 Password = request.Password,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
-                DateRegistered = DateTime.Now
+                DateRegistered = DateTime.Now,
+                Cnp = request.Cnp,
+                Adresa = request.Adresa,
+                SerieBuletin = request.SerieBuletin,
+                NumarBuletin = request.NumarBuletin
+
             };
 
             _userRepostiory.Create(entity);

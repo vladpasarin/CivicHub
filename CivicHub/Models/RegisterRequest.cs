@@ -16,5 +16,13 @@ namespace CivicHub.Models
         public string Mail { get; set; }
         [Required]
         public string Password { get; set; }
+        [Required]
+        public string Cnp { get; set; }
+        [Required]
+        public string Adresa { get; set; }
+        [Required]
+        public string SerieBuletin { get; set; }
+        [Required]
+        public string NumarBuletin { get; set; }
     }
 }

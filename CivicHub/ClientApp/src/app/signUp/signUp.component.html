@@ -86,20 +86,19 @@
           <input type="text" class="form-control"
           autocomplete="off"
           pattern="^(\d{13})?$"
-           formControlName="cnp" placeholder="Your CNP">
+           formControlName="cnp">
            <app-field-error-display [displayError]="isFieldValid('cnp')"
                              errorMsg="Please inform your CNP">
     </app-field-error-display>
       </div>
   </div>
-  <div class="form-flex">
     <div class="form-row">
         <div class="form-group col-md-12">
             <label for="inputAddress">Address:</label>
             <input type="text" class="form-control"
             autocomplete="off"
-            formControlName="address" placeholder="Your address">
-            <app-field-error-display [displayError]="isFieldValid('address')"
+            formControlName="adresa">
+            <app-field-error-display [displayError]="isFieldValid('adresa')"
                                errorMsg="Please inform your address">
       </app-field-error-display>
         </div>
@@ -110,8 +109,8 @@
             <input type="text" class="form-control"
             autocomplete="off"
             pattern="^([A-Z]{2})?$"
-             formControlName="idSeries" placeholder="Your ID card series">
-             <app-field-error-display [displayError]="isFieldValid('idSeries')"
+             formControlName="serieBuletin">
+             <app-field-error-display [displayError]="isFieldValid('serieBuletin')"
                                errorMsg="Please inform your ID card series">
       </app-field-error-display>
         </div>
@@ -122,8 +121,8 @@
             <input type="text" class="form-control"
             autocomplete="off"
             pattern="^(\d{6})?$"
-            formControlName="idNumber" placeholder="Your ID card number">
-            <app-field-error-display [displayError]="isFieldValid('idNumber')"
+            formControlName="numarBuletin">
+            <app-field-error-display [displayError]="isFieldValid('numarBuletin')"
                                errorMsg="Please inform your ID card number">
       </app-field-error-display>
         </div>
@@ -135,7 +134,6 @@
       </div>
     </div>
     <button class="btn" (click)="reset()">Reset</button>
-  </div>
   </form>
   <p *ngIf="success" style="color: green; font-size: 22px">
     User added successfully
