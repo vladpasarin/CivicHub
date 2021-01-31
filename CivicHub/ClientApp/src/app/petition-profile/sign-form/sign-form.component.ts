@@ -14,7 +14,6 @@ import { PetitionProfileComponent } from '../petition-profile.component';
 })
 export class SignFormComponent implements OnInit {
 
-  addSignForm: FormGroup;
   success: boolean;
   signature= new Signature();
   currentDate=new Date();
@@ -27,45 +26,13 @@ export class SignFormComponent implements OnInit {
   constructor( private petitonProfile:PetitionProfileComponent,private fb?:FormBuilder, private api?:ApiService) { }
 
   @ViewChild("signForm") signForm: ModalDirective;
-  
-  validateAllFormFields(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach((field) => {
-        const control = formGroup.get(field);
-        if (control instanceof FormControl) {
-            control.markAsTouched({ onlySelf: true });
-        } else if (control instanceof FormGroup) {
-            this.validateAllFormFields(control);
-        }
-    });
-}
-
-  get f() {
-    return this.addSignForm.controls;
-}
 
   ngOnInit() {
-    this.addSignForm = this.fb.group({
-      name: [null, Validators.required],
-      cnp: [null, Validators.required],
-      address: [null, Validators.required],
-      idSeries: [null, Validators.required],
-      idNumber: [null, Validators.required],
-  });
+    
   }
 
   addSign() {
-    if (this.addSignForm.valid) {
-        this.success = true;
-        setTimeout(() => {
-            this.success = null;
-        }, 3000);
-        //api add
        
-        this.signature.name=this.f.name.value;
-        this.signature.cnp=this.f.cnp.value;
-        this.signature.adresa=this.f.address.value;
-        this.signature.serieBuletin=this.f.idSeries.value;
-        this.signature.numarBuletin=this.f.idNumber.value;
         this.signature.dateSigned=this.currentDate;
         this.signature.issueStateId=this.currentState.id;
         this.signature.userId=this.userId;
@@ -88,27 +55,7 @@ export class SignFormComponent implements OnInit {
                 this.errorAdd = null;
             }, 2000);
           });
-
-    } else {
-        this.success = false;
-        setTimeout(() => {
-            this.success = null;
-        }, 3000);
-        this.validateAllFormFields(this.addSignForm);
-    }
     
-}
-isFieldValid(field: string) {
-  return (
-    !this.addSignForm.get(field).valid && this.addSignForm.get(field).touched
-  );
-}
-
-displayFieldCss(field: string) {
-  return {
-    "has-error": this.isFieldValid(field),
-    "has-feedback": this.isFieldValid(field),
-  };
 }
 
   initialize(): void {
