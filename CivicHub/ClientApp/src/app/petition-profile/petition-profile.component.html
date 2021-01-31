@@ -8,21 +8,22 @@
         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Status
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li *ngFor="let issueState of issueStates" class="content" (click)="selectState(issueState);getAllComments()"><a>{{issueState.message}}</a></li>
+          <li *ngFor="let issueState of issueStates; let i = index" class="content" (click)="selectState(issueState);getAllComments()"><a>{{i+1}}. {{issueState.message}}</a></li>
         </ul>
         <button *ngIf="userId!=null" class="btn" type="button" style="margin-left: 50px;" [ngClass]="{'followup' : activeFollow!=null,
         'unfollow' : activeFollow == null }"
                         (click)="changeStyle();addToFavourites()">
         {{activeFollow==null ? 'Follow' : (activeFollow != null ? 'Unfollow' : '')}}
         </button>
-        <button *ngIf="currentState.type == 1 && userId == organizer.id" class="btn-submit" id="proof" type="button" (click)="showStatePhotoModal()">Submit petition</button>
-        <button *ngIf="currentState.type == 2 && userId == organizer.id" class="btn-submit" id="proof" type="button" (click)="showStatePhotoModal()">Submit response</button>
+        <button *ngIf="currentState.type == 1 && userId == organizer.id && issueStatePhotos.length == 0" class="btn" id="proof" type="button" (click)="showStatePhotoModal()">Submit petition</button>
+        <button *ngIf="currentState.type == 2 && userId == organizer.id && issueStatePhotos.length == 0" class="btn" id="proof" type="button" (click)="showStatePhotoModal()">Submit response</button>
     </div>
 </div>
 <hr>
 <p class="text-center" style="color:red;" *ngIf="userIdInvalid==true">You need to login</p>
 <div class="details">
     <div class="detailsLeft">
+        <p  style="margin-left: 250px; font-size: 22px;font-weight: bold;">State: {{currentState.message}}</p>
         <p *ngIf="issueStatePhotos.length>0" style="margin-left: 250px; font-size: 22px;font-weight: bold;">Photos:</p>
         <div class="photoRow">
             <div class="photos" *ngFor="let statePhoto of issueStatePhotos; let ind = index" >
@@ -30,8 +31,17 @@
                 src="{{statePhoto.photo}}" (click)="showDM(statePhoto.photo)"
                 >
             </div>
+        
         </div>
-        <p style="margin-left: 250px; font-size: 22px;font-weight: bold;">Description:</p>
+
+        <p *ngIf="currentState.customMessage != null" style="margin-left: 250px; font-size: 22px;font-weight: bold;margin-top: 20px;">Authority response:</p>
+        <div *ngIf="currentState.customMessage != null" class="description">
+            <div class="issueDescription">
+                {{currentState.customMessage}}
+            </div>
+        </div>
+
+        <p style="margin-left: 250px; font-size: 22px;font-weight: bold; margin-top: 20px;">Description:</p>
         <div class="description">
             <div class="issueDescription">
                 {{selectedIssue.description}}

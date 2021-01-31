@@ -2,7 +2,8 @@
 <div class="div1" (click)="closeSidebar()">
 <agm-map [zoom]="zoom" 
  [latitude]="lat" [longitude]="lng">
-<agm-marker *ngFor="let issue of issues" [latitude]="issue.latitude" [longitude]="issue.longitude" (markerClick)="toggleSidebar(issue);refresh()"></agm-marker>
+<agm-marker *ngFor="let issue of issues" [latitude]="issue.latitude" [longitude]="issue.longitude" 
+(markerClick)="toggleSidebar(issue);refresh()" ></agm-marker>
 </agm-map>
 </div>
 <app-sidebar #sidebar *ngIf="opened == true" class="sidebar"></app-sidebar>

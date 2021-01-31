@@ -6,8 +6,8 @@
         <img *ngFor='let url of urls'  src="{{url}}" height="200"> <br/>
         <div *ngIf="currentState.type == 2">
             <span>Response Description: </span>
-            <textarea id="response" name="responseDescription" formControlName="description" rows="4" cols="30"></textarea>
+            <textarea id="response" [(ngModel)]="authorityResponse" rows="4" cols="30"></textarea>
         </div>
-        <button class="btn-primary" (click)="addNextState()">Submit</button>
+        <button style="margin-top: 20px;" class="btn-primary" (click)="addNextState()">Submit</button>
     </div>
 </div>

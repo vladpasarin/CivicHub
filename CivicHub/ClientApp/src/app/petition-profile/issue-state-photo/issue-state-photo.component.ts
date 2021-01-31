@@ -20,7 +20,8 @@ export class IssueStatePhotoComponent implements OnInit {
   urls = [];
   issuePhoto = new IssuePhoto();
   signatureSubmitted = new SignatureSubmitted();
-  responseGiven = new ResponseGiven(); 
+  responseGiven = new ResponseGiven();
+  authorityResponse: string; 
   @Input() currentState: IssueState;
   @Output("refreshIssuePhotos") refreshIssuePhotos = new EventEmitter<string>(); 
 
@@ -81,12 +82,14 @@ export class IssueStatePhotoComponent implements OnInit {
       });
     });
     this.exit();
+    this.urls=[];
     // this.refreshPhotos.emit("Success");
   }
 
   addIssueResponse() {
     this.responseGiven.issueId = this.currentState.issueId;
     this.responseGiven.photos = this.urls;
+    this.responseGiven.messageFromAuthorities = this.authorityResponse;
     console.log(this.responseGiven);
     this.api.addIssueResponse(this.responseGiven).subscribe(() => {
       this.petitionProfile.getStates();
