@@ -41,5 +41,10 @@ namespace CivicHub.Repositories
 
             //return issueStates[index];
         }
+
+        public IssueState GetById(Guid issueStateId)
+        {
+            return _table.Where(x => x.Id == issueStateId).FirstOrDefault();
+        }
     }
 }

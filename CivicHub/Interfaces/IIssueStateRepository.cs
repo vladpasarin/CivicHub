@@ -11,5 +11,7 @@ namespace CivicHub.Interfaces
         Task<List<IssueState>> GetAllByIssueIdAsync(Guid IssueId);
 
         IssueState GetLatestIssueState(Guid IssueId);
+
+        IssueState GetById(Guid issueStateId);
     }
 }

@@ -51,6 +51,16 @@ namespace CivicHub.Controllers
             return Ok(updatedIssueState);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(Guid id)
+        {
+            var issueStateDto = _issueStateService.GetById(id);
+            if (issueStateDto == null)
+                return StatusCode(404, "No issue state with id " + id + " was found");
+
+            return Ok(issueStateDto);
+        }
+
         [HttpGet("latestState/{id}")]
         public IActionResult GetLatestIssueState(Guid id)
         {
