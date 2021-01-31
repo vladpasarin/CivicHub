@@ -69,6 +69,8 @@ namespace CivicHub.Services
         public IssueDto GetById(Guid id)
         {
             var issueDto = _mapper.Map<IssueDto>(_issueRepository.FindById(id));
+            if (issueDto == null)
+                return null;
             issueDto.IssueStates = _mapper.Map<List<IssueStateDto>>(_issueStateRepository.GetAllByIssueIdAsync(issueDto.Id).Result);
             int numberOfSignatures = 0;
             foreach (IssueStateDto issueState in issueDto.IssueStates)
@@ -85,6 +87,8 @@ namespace CivicHub.Services
         public async Task<List<IssueDto>> GetAllByUserIdAsync(Guid userId)
         {
             var userIssuesDtos = _mapper.Map<List<IssueDto>>(await _issueRepository.FindByUserIdAsync(userId));
+            if (userIssuesDtos == null || userIssuesDtos.Count() == 0)
+                return null;
             foreach(var userIssueDto in userIssuesDtos)
             {
                 userIssueDto.IssueStates = _mapper.Map<List<IssueStateDto>>(await _issueStateRepository.GetAllByIssueIdAsync(userIssueDto.Id));
