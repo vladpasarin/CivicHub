@@ -17,7 +17,7 @@
         <p *ngIf="currentUser.points>=1200" style="font-size: 22px;">You are the civic king!</p>       
         <progress max="{{punctajNextRank}}" value="{{currentUser.points}}"></progress>
         <p *ngIf="currentUser.points<1200">{{currentUser.points}} / {{punctajNextRank}}</p>
-        <p *ngIf="userId == loggedUserId">Available points for prizes: {{ currentUser.points - currentUser.pointsUsed }}</p>
+        <p *ngIf="userId == loggedUserId">Available points for prizes: {{ availablePoints }}</p>
       </div>
       <div class="divider">
         <span class="btn-primary" id="dividerText"> Details </span>
