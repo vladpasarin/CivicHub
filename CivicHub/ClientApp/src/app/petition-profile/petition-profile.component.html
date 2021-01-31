@@ -19,8 +19,9 @@
                         (click)="changeStyle();addToFavourites()">
         {{activeFollow==null ? 'Follow' : (activeFollow != null ? 'Unfollow' : '')}}
         </button>
-        <button *ngIf="currentState.type == 1 && userId == organizer.id && issueStatePhotos.length == 0" class="btn" id="proof" type="button" (click)="showStatePhotoModal()">Submit petition</button>
-        <button *ngIf="currentState.type == 2 && userId == organizer.id && issueStatePhotos.length == 0" class="btn" id="proof" type="button" (click)="showStatePhotoModal()">Submit response</button>
+        <button *ngIf="currentState.type == 1 && userId == organizer.id && currentState.type==latestState.type" class="btn" id="proof" type="button" (click)="showStatePhotoModal()">Submit petition</button>
+        <button *ngIf="currentState.type == 2 && userId == organizer.id && currentState.type==latestState.type" class="btn" id="proof" type="button" (click)="showStatePhotoModal()">Submit response</button>
+        <button *ngIf="currentState.type == 3 && userId == organizer.id && currentState.type==latestState.type" class="btn" id="proof" type="button" (click)="showStatePhotoModal()">Submit proof of solution</button>
     </div>
 </div>
 <hr>
