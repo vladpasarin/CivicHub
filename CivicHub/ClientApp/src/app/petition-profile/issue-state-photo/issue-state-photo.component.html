@@ -1,13 +1,14 @@
 <div bsModal class="row modal fade" #issueStatePhoto="bs-modal">
     <div id="modal">
+        <h2 class="text-center" style="font-weight: bold;margin-bottom: 30px;">Add proof photos</h2>
         <div class="form-group col-md-6">
             <input type='file' (change)="onSelectFile($event)" multiple>
         </div>
-        <img *ngFor='let url of urls'  src="{{url}}" height="200"> <br/>
-        <div *ngIf="currentState.type == 2">
-            <span>Response Description: </span>
-            <textarea id="response" [(ngModel)]="authorityResponse" rows="4" cols="30"></textarea>
+        <img *ngFor='let url of urls' style="margin-left: 25px;margin-top: 20px;" src="{{url}}" height="200"> <br/>
+        <div class="response" *ngIf="currentState.type == 2" style="margin-top: 30px;">
+            <p style="font-size: larger;">Autorithy response: </p>
+            <textarea id="response" [(ngModel)]="authorityResponse" rows="4" cols="50"></textarea>
         </div>
-        <button style="margin-top: 20px;" class="btn-primary" (click)="addNextState()">Submit</button>
+        <button style="margin-top: 20px;" class="btn" (click)="addNextState()">Submit</button>
     </div>
 </div>

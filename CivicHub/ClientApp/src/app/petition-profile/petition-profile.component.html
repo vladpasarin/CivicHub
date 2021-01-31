@@ -8,7 +8,11 @@
         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Status
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li *ngFor="let issueState of issueStates; let i = index" class="content" (click)="selectState(issueState);getAllComments()"><a>{{i+1}}. {{issueState.message}}</a></li>
+          <li *ngFor="let issueState of issueStates; let i = index" class="content" (click)="selectState(issueState);getAllComments()"><a>{{i+1}}. {{issueState.message}}
+            <fa-icon *ngIf="issueState.type < latestState.type" id="checkCircle" [icon]="checkCircle"></fa-icon></a>
+            <p>{{issueState.dateStart| date:'longDate'}}</p>
+          <hr>
+        </li>
         </ul>
         <button *ngIf="userId!=null" class="btn" type="button" style="margin-left: 50px;" [ngClass]="{'followup' : activeFollow!=null,
         'unfollow' : activeFollow == null }"
@@ -23,8 +27,9 @@
 <p class="text-center" style="color:red;" *ngIf="userIdInvalid==true">You need to login</p>
 <div class="details">
     <div class="detailsLeft">
-        <p  style="margin-left: 250px; font-size: 22px;font-weight: bold;">State: {{currentState.message}}</p>
-        <p *ngIf="issueStatePhotos.length>0" style="margin-left: 250px; font-size: 22px;font-weight: bold;">Photos:</p>
+        <p  style="margin-left: 250px; font-size: 22px;font-weight: bold;"><fa-icon [icon]="stream"></fa-icon> State: {{currentState.message}}</p>
+        <p *ngIf="issueStatePhotos.length>0" style="margin-left: 250px; font-size: 22px;font-weight: bold;">
+            <fa-icon [icon]="images"></fa-icon> Photos:</p>
         <div class="photoRow">
             <div class="photos" *ngFor="let statePhoto of issueStatePhotos; let ind = index" >
                 <img id="issuePhoto" 
@@ -34,14 +39,16 @@
         
         </div>
 
-        <p *ngIf="currentState.customMessage != null" style="margin-left: 250px; font-size: 22px;font-weight: bold;margin-top: 20px;">Authority response:</p>
+        <p *ngIf="currentState.customMessage != null" style="margin-left: 250px; font-size: 22px;font-weight: bold;margin-top: 20px;">
+            <fa-icon [icon]="reply"></fa-icon> Authority response:</p>
         <div *ngIf="currentState.customMessage != null" class="description">
             <div class="issueDescription">
                 {{currentState.customMessage}}
             </div>
         </div>
 
-        <p style="margin-left: 250px; font-size: 22px;font-weight: bold; margin-top: 20px;">Description:</p>
+        <p style="margin-left: 250px; font-size: 22px;font-weight: bold; margin-top: 20px;">
+            <fa-icon [icon]="commentAlt"></fa-icon> Description:</p>
         <div class="description">
             <div class="issueDescription">
                 {{selectedIssue.description}}
@@ -52,7 +59,7 @@
     <div class="detailsRight">
         <p class="text-center" style="color: green;" *ngIf="voteSuccess != '' ">{{voteSuccess}}</p>
         <div class="signatures" *ngIf="currentState.type==0">
-            <p class="labels">Signatures: {{allSignatures.length}}</p>
+            <p class="labels"><fa-icon [icon]="signature"></fa-icon> Signatures: {{allSignatures.length}}</p>
             <button *ngIf="issueStates[issueStates.length-1].type==0" class="btn" id="sign" type="button" (click)="showSignForm()">Sign petition</button>
         </div>
         <div class="mapContainer">
@@ -61,7 +68,7 @@
             </agm-map>
         </div>
         <div class="comments">
-            <p class="labels">Comments:</p>
+            <p class="labels"><fa-icon [icon]="comments"></fa-icon> Comments:</p>
             <div *ngFor="let comment of allComments | slice:0:showNumber" class="issueComments">
                 <p>{{comment.text}}</p>
                 <p><fa-icon [icon]="faUser"></fa-icon> {{comment.userName}}</p>
@@ -76,7 +83,7 @@
             <div class="issueComments">
                 <div class="newComment">
                     <textarea  [(ngModel)]="commentText" name="newComment" id="newCommentText" cols="50" rows="2" placeholder="New Comment..."></textarea><br>
-                    <button class="btn btn-primary" id="sendComment" type="button" (click)="addComment()">Send</button>
+                    <button class="btn" id="sendComment" type="button" (click)="addComment()">Send</button>
                     <p class="text-center" style="color:red;" *ngIf="invalidComment==true">Invalid action</p>
                     <p class="text-center" style="color: green;" *ngIf="successAdd != '' ">{{successAdd}}</p>
                 </div>

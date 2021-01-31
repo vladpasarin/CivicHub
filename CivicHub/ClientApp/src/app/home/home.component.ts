@@ -1,3 +1,4 @@
+import { AgmInfoWindow } from "@agm/core";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { ApiService } from '../shared/api.service';
@@ -17,12 +18,20 @@ export class HomeComponent implements OnInit{
   zoom = 13.0;
   opened = false;
   activeIssue:Issue;
-    
+  currentIW: AgmInfoWindow;
+  previousIW: AgmInfoWindow;
+  
   issues: Issue[] = [];
-  constructor(private router: Router,private api:ApiService) {}
+  constructor(private router: Router,private api:ApiService) {
+    this.currentIW = null;
+  this.previousIW = null;
+  }
   toggleSidebar(issue:Issue){
     this.activeIssue=issue;
     this.opened = true;
+    // this.previousIssueSelected.selected=false;
+    // this.previousIssueSelected == issue;
+    // issue.selected = true;
   }
   refresh(){
     if(this.opened == true){
@@ -44,5 +53,18 @@ export class HomeComponent implements OnInit{
   }, 1000);
   }
 
+  mapClick() {
+    if (this.previousIW) {
+      this.previousIW.close();
+    }
+}
+
+  markerClick(infoWindow) {
+    if (this.previousIW) {
+      this.currentIW = infoWindow;
+      this.previousIW.close();
+    }
+    this.previousIW = infoWindow;
+  }
  
 }
