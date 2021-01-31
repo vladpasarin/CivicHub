@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
     // });
     this.api.getUserById(this.userId).subscribe((user: User) => {
       this.currentUser = user;
+      console.log(this.currentUser);
       this.api.getBagdeNumber(user.id).subscribe((badgeNr:number)=>{
         this.badgeNumber=badgeNr;
         if(this.badgeNumber==1){

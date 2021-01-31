@@ -18,6 +18,7 @@ namespace CivicHub.Dtos
         public string SerieBuletin { get; set; }
         public string NumarBuletin { get; set; }
         public DateTime DateRegistered { get; set; }
+        public int PointsUsed { get; set; }
         public List<IssueDto> Issues { get; set; }
     }
 }
