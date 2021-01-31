@@ -111,7 +111,7 @@ namespace CivicHub.Services
             foreach(var signedIssue in signedIssues){
 
                var issueState = _issueStateRepository.FindById(signedIssue.IssueStateId);
-               var issue = _issueService.GetById(issueState.Id);
+               var issue = _issueService.GetById(issueState.IssueId);
                if(issue != null)
                   userIssues.Add(issue);
             }

@@ -259,5 +259,13 @@ namespace CivicHub.Services
             }
             return lastIssueStateAfter;
         }
+
+        public IssueStateDto GetById(Guid issueStateId)
+        {
+            var issueStateDto = _mapper.Map<IssueStateDto>(_issueStateRepository.GetById(issueStateId));
+            if (issueStateDto == null)
+                return null;
+            return issueStateDto;
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace CivicHub.IServices
         IssueStateDto AddUngivenResponse(Guid issueId);
         Tuple<int, object> ReopenIssue(Guid issueId);
         IssueStateDto ChangeStateToImplemented(ResponseImplementedDto responseImplementedDto);
+        IssueStateDto GetById(Guid issueStateId);
 
     }
 }
