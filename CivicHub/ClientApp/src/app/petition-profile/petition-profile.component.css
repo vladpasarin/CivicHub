@@ -113,6 +113,7 @@
 
 .photos {
   flex: 0 32%;
+  margin-left: 2em;
 }
 
 .photoRow {
