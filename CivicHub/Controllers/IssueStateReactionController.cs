@@ -97,7 +97,7 @@ namespace CivicHub.Controllers
             }); 
 
             if (response == null)
-                return StatusCode(500, "wtf");
+                return StatusCode(404, "Not found");
 
             return Ok(response);
         }

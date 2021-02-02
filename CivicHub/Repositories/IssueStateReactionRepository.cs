@@ -41,8 +41,8 @@ namespace CivicHub.Repositories
             try
             {
                 result = _context.IssueStateReactions.Where(x => x.UserId == issueStateReaction.UserId &&
-                x.IssueStateId == issueStateReaction.IssueStateId).Single();
-            }catch(InvalidOperationException e)
+                x.IssueStateId == issueStateReaction.IssueStateId).FirstOrDefault();
+            }catch(Exception e)
             { 
                 return null; 
             }

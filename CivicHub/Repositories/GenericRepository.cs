@@ -39,6 +39,11 @@ namespace CivicHub.Repositories
             return _table.Find(id);
         }
 
+        public T FindByProperties(Object[] properties)
+        {
+            return _table.Find(properties);
+        }
+
         public List<T> GetAll()
         {
             return _table.ToList();
