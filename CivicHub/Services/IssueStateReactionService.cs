@@ -32,7 +32,15 @@ namespace CivicHub.Services
         {
             var issueStateReaction = _mapper.Map<IssueStateReaction>(issueStateReactionDto);
             issueStateReaction.dateGiven = DateTime.Now;
-            _issueStateReactionRepository.Create(issueStateReaction);
+            var existingReactionFound = _issueStateReactionRepository.GetUserReactionToIssueState(issueStateReaction);
+            if (existingReactionFound != null)
+            {
+                _issueStateReactionRepository.Delete(existingReactionFound);
+            }
+            else
+            {
+                _issueStateReactionRepository.Create(issueStateReaction);
+            }
             var result =  _issueStateReactionRepository.SaveChanges();
             if (result == true)
             {
