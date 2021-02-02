@@ -63,6 +63,16 @@
     <div *ngIf="selectedOption == 'Signed'">
     
       <p class="listTitle">{{selectedOption}}</p>
+
+      <div *ngFor="let signature of issueSignatures">
+             
+        <div class="issueView" >
+          <div class="content">
+                <p class="issueTitle" (click)="toIssue(signature.id)">{{signature.title}}</p>
+          </div>
+        </div>
+      </div>       
+
      
     </div>
     

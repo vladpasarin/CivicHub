@@ -5,6 +5,7 @@ import { faCircle, faLevelUpAlt, faUser } from '@fortawesome/free-solid-svg-icon
 import { ApiService } from '../shared/api.service';
 import { Follow } from '../shared/follow.model';
 import { Issue } from '../shared/issue.model';
+import { IssueState } from '../shared/issueState.model';
 import { Prize } from '../shared/prize.model';
 import { PrizeGiven } from '../shared/prizeGiven.model';
 import { Signature } from '../shared/signature.model';
@@ -36,10 +37,10 @@ export class ProfileComponent implements OnInit {
         });
       });
     });
-    // this.api.getAllSignaturesByUser(this.userId).subscribe((signatures:Signature[])=>{
-    //   this.signatures=signatures;
-    //   console.log(this.signatures);
-    // });
+    this.api.getAllSignaturesByUser(this.userId).subscribe((issue:Issue[])=>{
+      this.issueSignatures=issue;
+      console.log(this.issueSignatures);
+    });
     this.api.getUserById(this.userId).subscribe((user: User) => {
       this.currentUser = user;
       console.log(this.currentUser);
@@ -82,7 +83,7 @@ export class ProfileComponent implements OnInit {
     });
 
    }
-  signatures:Signature[]=[];
+  issueSignatures:Issue[]=[];
   userId: string;
   currentUser:User;
   options = ['Followed', 'Signed', 'Organized','Prizes'];
