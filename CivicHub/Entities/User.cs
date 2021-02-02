@@ -18,6 +18,10 @@ namespace CivicHub.Entities
         public int Points { get; set; }
         public int PointsUsed { get; set; }
         public DateTime DateRegistered { get; set; }
+        public string Cnp { get; set; }
+        public string Adresa { get; set; }
+        public string SerieBuletin { get; set; }
+        public string NumarBuletin { get; set; }
         public ICollection<Issue> Issues { get; set; }
         public ICollection<IssueStateComment> IssueStateComments { get; set; }
         public ICollection<IssueStateReaction> IssueStateReactions { get; set; }

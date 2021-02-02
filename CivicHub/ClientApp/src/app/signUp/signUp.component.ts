@@ -29,7 +29,11 @@ export class SignUpComponent implements OnInit {
       firstName: [null, Validators.required],
       lastName: [null, Validators.required],
       mail: [null, Validators.required],
-      password: [null, Validators.required]
+      password: [null, Validators.required],
+      cnp: [null, Validators.required],
+      adresa: [null, Validators.required],
+      serieBuletin: [null, Validators.required],
+      numarBuletin: [null, Validators.required],
     });
   }
 

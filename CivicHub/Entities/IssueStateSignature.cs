@@ -12,11 +12,5 @@ namespace CivicHub.Entities
         public Guid UserId { get; set; }
         public User User { get; set; }
         public DateTime DateSigned { get; set; }
-        public string Cnp { get; set; }
-        public string Adresa { get; set; }
-        public string SerieBuletin { get; set; }
-        public string NumarBuletin { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
     }
 }

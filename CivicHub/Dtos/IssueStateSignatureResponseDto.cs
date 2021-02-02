@@ -15,9 +15,11 @@ namespace CivicHub.Dtos
         public string Mail { get; set; }
         public string Name { get; set; }
         public DateTime DateSigned { get; set; }
+        /*
         public string Cnp { get; set; }
         public string Adresa { get; set; }
         public string SerieBuletin { get; set; }
         public string NumarBuletin { get; set; }
+        */
     }
 }

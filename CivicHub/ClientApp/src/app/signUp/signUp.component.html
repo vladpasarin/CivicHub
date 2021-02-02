@@ -80,6 +80,54 @@
         </app-field-error-display>
       </div>
     </div>
+    <div class="form-row">
+      <div class="form-group col-md-12">
+          <label for="inputIssueTitle">CNP:</label>
+          <input type="text" class="form-control"
+          autocomplete="off"
+          pattern="^(\d{13})?$"
+           formControlName="cnp">
+           <app-field-error-display [displayError]="isFieldValid('cnp')"
+                             errorMsg="Please inform your CNP">
+    </app-field-error-display>
+      </div>
+  </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="inputAddress">Address:</label>
+            <input type="text" class="form-control"
+            autocomplete="off"
+            formControlName="adresa">
+            <app-field-error-display [displayError]="isFieldValid('adresa')"
+                               errorMsg="Please inform your address">
+      </app-field-error-display>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="inputIdCardSeries">ID card series:</label>
+            <input type="text" class="form-control"
+            autocomplete="off"
+            pattern="^([A-Z]{2})?$"
+             formControlName="serieBuletin">
+             <app-field-error-display [displayError]="isFieldValid('serieBuletin')"
+                               errorMsg="Please inform your ID card series">
+      </app-field-error-display>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="inputIdCardNumber">ID card number:</label>
+            <input type="text" class="form-control"
+            autocomplete="off"
+            pattern="^(\d{6})?$"
+            formControlName="numarBuletin">
+            <app-field-error-display [displayError]="isFieldValid('numarBuletin')"
+                               errorMsg="Please inform your ID card number">
+      </app-field-error-display>
+        </div>
+    </div>
+
     <div class="form-group">
       <div class="col-sm-12">
     <button class="btn" (click)="onSubmit()">Submit</button>

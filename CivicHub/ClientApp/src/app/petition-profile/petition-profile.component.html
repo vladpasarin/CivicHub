@@ -28,8 +28,8 @@
 <p class="text-center" style="color:red;" *ngIf="userIdInvalid==true">You need to login</p>
 <div class="details">
     <div class="detailsLeft">
-        <p  style="margin-left: 250px; font-size: 22px;font-weight: bold;"><fa-icon [icon]="stream"></fa-icon> State: {{currentState.message}}</p>
-        <p *ngIf="issueStatePhotos.length>0" style="margin-left: 250px; font-size: 22px;font-weight: bold;">
+        <p  style="margin-left: 136.5px; font-size: 22px;font-weight: bold;"><fa-icon [icon]="stream"></fa-icon> State: {{currentState.message}}</p>
+        <p *ngIf="issueStatePhotos.length>0" style="margin-left: 136.5px; font-size: 22px;font-weight: bold;">
             <fa-icon [icon]="images"></fa-icon> Photos:</p>
         <div class="photoRow">
             <div class="photos" *ngFor="let statePhoto of issueStatePhotos; let ind = index" >
@@ -40,7 +40,7 @@
         
         </div>
 
-        <p *ngIf="currentState.customMessage != null" style="margin-left: 250px; font-size: 22px;font-weight: bold;margin-top: 20px;">
+        <p *ngIf="currentState.customMessage != null" style="margin-left: 136.5px; font-size: 22px;font-weight: bold;margin-top: 20px;">
             <fa-icon [icon]="reply"></fa-icon> Authority response:</p>
         <div *ngIf="currentState.customMessage != null" class="description">
             <div class="issueDescription">
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <p style="margin-left: 250px; font-size: 22px;font-weight: bold; margin-top: 20px;">
+        <p style="margin-left: 136.5px; font-size: 22px;font-weight: bold; margin-top: 20px;">
             <fa-icon [icon]="commentAlt"></fa-icon> Description:</p>
         <div class="description">
             <div class="issueDescription">

@@ -3,19 +3,19 @@
         <p id="exit" (click)="exit()">X</p>
         <ul class="menu">
             <div class="text-center">
-            <p style="font-weight: bold;">Title:</p>
-            <p id="title" (click)="toPetition(issue.id)">{{issue.title}}</p>
-            <p style="font-weight: bold;">Description:</p>
+            <p style="font-weight: bold;"><fa-icon [icon]="stream"></fa-icon> &nbsp; Title:</p>
+            <p class="btn" id="title" (click)="toPetition(issue.id)"> {{issue.title}}</p>
+            <p style="font-weight: bold;"><fa-icon [icon]="commentAlt"></fa-icon> &nbsp; Description:</p>
             <p>{{issue.description}}</p>
             <p style="font-weight: bold;">Organizer:</p>
-            <p id="organizer" (click)="toProfile(organizer.id)">{{organizer.firstName}} {{organizer.lastName}}</p>
+            <p class="btn" id="organizer" (click)="toProfile(organizer.id)"><fa-icon [icon]="user"></fa-icon>{{organizer.firstName}} {{organizer.lastName}}</p><br>
             <button *ngIf="userId!=null" class="btn" style="color: white;margin-top: 20px;" [ngClass]="{'unfollow' : activeFollow==null,
                 'followup' : activeFollow != null }"
                                 (click)="changeStyle();addToFavourites()">
                 {{activeFollow==null ? 'Follow' : (activeFollow != null ? 'Unfollow' : '')}}
             </button>
             <img *ngIf="photo0!=null" id="issuePhoto" src="{{photo0.photo}}">
-        </div>
+            </div>
         </ul>
     </ng-sidebar>
 </ng-sidebar-container>

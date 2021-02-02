@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CivicHub.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210127210013_replaced_byte_with_string")]
-    partial class replaced_byte_with_string
+    [Migration("20210131210206_FE")]
+    partial class FE
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -226,29 +226,11 @@ namespace CivicHub.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Adresa")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Cnp")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("DateSigned")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("IssueStateId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NumarBuletin")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SerieBuletin")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -346,7 +328,13 @@ namespace CivicHub.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Adresa")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cnp")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateRegistered")
@@ -362,6 +350,9 @@ namespace CivicHub.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("NumarBuletin")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -374,6 +365,9 @@ namespace CivicHub.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
+
+                    b.Property<string>("SerieBuletin")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

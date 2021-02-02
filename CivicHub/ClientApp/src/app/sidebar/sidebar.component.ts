@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { faCommentAlt, faStream, faUser } from '@fortawesome/free-solid-svg-icons';
 import { HomeComponent } from '../home/home.component';
 import { ApiService } from '../shared/api.service';
 import { Follow } from '../shared/follow.model';
@@ -26,6 +27,9 @@ export class SidebarComponent implements OnInit {
   follow=new Follow();
   state0:IssueState;
   photo0:IssuePhoto;
+  stream = faStream;
+  commentAlt = faCommentAlt;
+  user = faUser;
 
   ngOnInit(): void {
     const side=new SidebarComponent(this.home);

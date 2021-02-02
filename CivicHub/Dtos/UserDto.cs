@@ -13,6 +13,10 @@ namespace CivicHub.Dtos
         public string Mail { get; set; }
         public string Avatar { get; set; }
         public int Points { get; set; }
+        public string Cnp { get; set; }
+        public string Adresa { get; set; }
+        public string SerieBuletin { get; set; }
+        public string NumarBuletin { get; set; }
         public DateTime DateRegistered { get; set; }
         public int PointsUsed { get; set; }
         public List<IssueDto> Issues { get; set; }

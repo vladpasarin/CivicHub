@@ -102,7 +102,7 @@ namespace CivicHub.Services
             {
                 IssueId = issue.Id,
                 Type = 0,
-                Message = "Strangerea de semnaturi a inceput",
+                Message = "Collecting signatures",
                 DateStart = DateTime.Now,
                 DateEnd = DateTime.Now.AddMinutes(1)
 
