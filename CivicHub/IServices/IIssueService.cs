@@ -15,6 +15,6 @@ namespace CivicHub.IServices
         bool Update(IssueDto issueDTO);
         Task<List<IssueDto>> GetAllByUserIdAsync(Guid userId);
         List<IssueResponseDto> GetAllWithUsersDetails();
-        (bool status, string msg) CheckIssueState(Guid issueId);
+        IssueState CheckIssueState(Guid issueId);
     }
 }

@@ -5,6 +5,7 @@ import { Issue } from '../shared/issue.model';
 import { User } from '../shared/user.model';
 import { faUser, faCaretUp, faCaretDown, faStar } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../shared/api.service';
+import { IssueState } from '../shared/issueState.model';
 
 @Component({
   selector: 'petition-list',
@@ -30,6 +31,14 @@ export class PetitonListComponent implements OnInit {
       this.issues.forEach(issue => {
         this.api.getIssueById(issue.id).subscribe((iss:Issue)=>{
           issue.numberOfSignatures=iss.numberOfSignatures;
+        });
+        this.api.getLatestIssueState(issue.id).subscribe((is:IssueState)=>{
+          if(is.type == 5){
+            issue.latestState = "Closed"
+          }
+          else{
+            issue.latestState = "Opened"
+          }
         });
       });
       console.log(this.issues);
