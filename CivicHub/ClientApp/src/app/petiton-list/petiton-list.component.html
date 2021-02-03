@@ -25,6 +25,7 @@
                          <fa-icon *ngIf="issue.userId==userId" [icon]="faStar"></fa-icon></p>
                     <p id="organizer">Opened by: <fa-icon [icon]="faUser"></fa-icon> &nbsp; {{issue.firstName}}</p>
                     <p id="organizer">Number of signatures: {{issue.numberOfSignatures}}</p>
+                    <p id="organizer" *ngIf="issue.latestState == 'Closed' " style="color: red;">Status: {{issue.latestState}}</p>
                 </div>
                 <p>{{issue.description}}</p>
 

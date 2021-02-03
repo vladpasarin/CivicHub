@@ -13,6 +13,7 @@ export class Issue {
     lastName?: string;
     numberOfSignatures?: number;
     selected?:boolean;
+    latestState?:string;
     constructor(input?: any) {
       Object.assign(this, input);
     }

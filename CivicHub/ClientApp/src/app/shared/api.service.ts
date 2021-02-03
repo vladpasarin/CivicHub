@@ -36,6 +36,11 @@ export class ApiService {
         { headers: this.header });
     }
 
+    getLatestIssueState(issueId:string){
+      return this.http.get(this.baseUrl + "/Issue/checkIssueState/"+issueId, 
+        { headers: this.header });
+    }
+
     getIssueState(issueStateId: string){
       return this.http.get(this.baseUrl + "/IssueState/" + issueStateId, 
       { headers: this.header });

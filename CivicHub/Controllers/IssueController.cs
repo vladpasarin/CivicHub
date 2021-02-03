@@ -79,16 +79,16 @@ namespace CivicHub.Controllers
         }
 
         [HttpGet("checkIssueState/{id}")]
-        public IActionResult CheckIssueState(Guid id)
+        public IssueState CheckIssueState(Guid id)
         {
            var response = _issueService.CheckIssueState(id);
 
-           if(!response.status)
+           if(response == null)
            {
-                return StatusCode(404, response.msg);
+                return null;
            }
 
-           return Ok(response.msg);
+           return response;
             
         }
     }
