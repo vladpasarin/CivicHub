@@ -8,7 +8,7 @@
         <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Status
         <span class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li *ngFor="let issueState of issueStates; let i = index" class="content" (click)="selectState(issueState);getAllComments()"><a>{{i+1}}. {{issueState.message}}
+          <li *ngFor="let issueState of issueStates; let i = index" class="content" (click)="selectState(issueState);getAllComments(); getUpvotes(); getDownvotes()"><a>{{i+1}}. {{issueState.message}}
             <fa-icon *ngIf="issueState.type < latestState.type" id="checkCircle" [icon]="checkCircle"></fa-icon></a>
             <p>{{issueState.dateStart| date:'longDate'}}</p>
           <hr>

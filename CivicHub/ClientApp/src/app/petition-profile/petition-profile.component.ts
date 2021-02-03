@@ -92,6 +92,8 @@ export class PetitionProfileComponent implements OnInit {
           });
           });
         this.getStates();
+        this.getDownvotes();
+        this.getUpvotes();
         
     }
 
