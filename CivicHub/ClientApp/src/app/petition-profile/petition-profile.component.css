@@ -26,8 +26,8 @@
 .detailsLeft {
   align-self: flex-start;
   flex-direction: column;
-  width: 50%;
-  max-width: 50%;
+  width: 60%;
+  max-width: 60%;
   margin-right: 30px;
 }
 
@@ -68,7 +68,7 @@
 .issueDescription {
   background-color: rgb(230, 236, 240);
   min-height: 200px;
-  margin: auto;
+  margin-left: 140px;
   width: 60%;
   border-bottom: 5px solid rgb(87, 37, 37);
   border-radius: 10px;
@@ -161,9 +161,9 @@ hr {
 }
 .mapContainer {
   margin: auto;
-  width: 80%;
-  border: 10px solid black;
-  border-radius: 10px;
+  width: 100%;
+  border: 5px solid black;
+  border-radius: 5px;
 }
 agm-map {
   height: 200px;

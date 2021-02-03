@@ -22,7 +22,7 @@
             </a>
             <a class="nav-link" id="dropdown">
                 <p *ngIf="logged == 'false' || logged==null" class="btn"><fa-icon [icon]="faUser"></fa-icon> Profile</p>
-                <p *ngIf="logged == 'true'" class="btn"><fa-icon [icon]="faUser"></fa-icon>{{firstName}} </p>
+                <p *ngIf="logged == 'true'" class="btn"><fa-icon [icon]="faUser"></fa-icon> &nbsp;{{firstName}} </p>
                 <div class="dropdown-content">
                     <div *ngIf="logged == 'true'" class="content" (click)="toProfile()">Profile</div>
                     <div *ngIf="logged == 'true'" class="content" (click)="logout()">Logout</div>

@@ -77,6 +77,7 @@ export class ProfileComponent implements OnInit {
       });
 
       this.getUserPrizes();
+      this.refreshPoints();
     });
 
     });
@@ -96,6 +97,7 @@ export class ProfileComponent implements OnInit {
   redeemedPrize =  new PrizeGiven();
   follows:Follow[]=[];
   loggedUserId = sessionStorage.getItem('userId');
+  availablePoints: number;
 
 
   ngOnInit(): void {
@@ -158,12 +160,20 @@ getUserPrizes() {
   });  
 }
 
+refreshPoints() {
+  this.api.getUserById(this.userId).subscribe((user: User) => {
+    this.currentUser = user;
+    this.availablePoints = this.currentUser.points - this.currentUser.pointsUsed;
+  });
+}
+
 redeemPrize(prize: Prize) {
   console.log(prize);
   this.redeemedPrize.prizeId = prize.id;
   this.redeemedPrize.userId = this.loggedUserId;
   this.api.redeemPrize(this.redeemedPrize).subscribe(() => {
     console.log("Successfuly added!")
+    this.refreshPoints();
     this.getUserPrizes();
   });
 }

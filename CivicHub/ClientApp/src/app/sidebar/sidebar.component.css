@@ -8,7 +8,14 @@ ng-sidebar-container {
   padding-right: 1em;
   box-shadow: 0 0 2.5em rgba(85, 85, 85, 0.5);
 }
+
+.btn {
+  color: white;
+}
+
 .menu {
+  font-family: "Montserrat", sans-serif;
+  font-weight: normal;
   margin-top: 1em;
   display: block;
 }
@@ -43,6 +50,43 @@ ng-sidebar-container {
 }
 #title:hover,
 #organizer:hover {
-  text-decoration: underline;
   cursor: pointer;
+}
+
+#title:after {
+  content: "";
+  display: block;
+  margin-left: 0;
+  height: 3px;
+  width: 0px;
+  background: transparent;
+  transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+#title:hover {
+  color: lightblue;
+}
+
+#title:hover:after {
+  width: 100%;
+  background: lightblue;
+}
+
+#organizer:after {
+  content: "";
+  display: block;
+  margin-left: 0;
+  height: 3px;
+  width: 0px;
+  background: transparent;
+  transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+#organizer:hover {
+  color: lightblue;
+}
+
+#organizer:hover:after {
+  width: 100%;
+  background: lightblue;
 }
