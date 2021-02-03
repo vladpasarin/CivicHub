@@ -11,6 +11,7 @@
         <hr>
       </div>
       <div class="rank"> 
+        <p style="font-size: 18px; margin-bottom: 0px;">Rank: {{badgeNumber}}</p>
         <img id="badge" src="../../assets/images/{{currentUser.badgeType}}" alt="Ranking">
         <!-- <p style="font-size:22px">Total points: {{currentUser.points}}</p>  -->
         <p *ngIf="currentUser.points<1200" style="font-size:18px">Remaining points to next rank: {{punctajNextRank-currentUser.points}}</p>

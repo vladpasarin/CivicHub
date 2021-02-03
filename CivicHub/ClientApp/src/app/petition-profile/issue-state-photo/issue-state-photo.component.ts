@@ -70,8 +70,11 @@ export class IssueStatePhotoComponent implements OnInit {
     console.log(this.signatureSubmitted);
     this.api.addSignatureSubmitted(this.signatureSubmitted).subscribe(()=>{
       this.petitionProfile.getStates();
-      this.addIssueStatePhoto();
+      //this.addIssueStatePhoto();
+      this.petitionProfile.getPhotos();
     });
+    this.exit();
+    this.urls=[];
   }
 
   addIssueStatePhoto() {
@@ -95,8 +98,11 @@ export class IssueStatePhotoComponent implements OnInit {
     console.log(this.responseGiven);
     this.api.addIssueResponse(this.responseGiven).subscribe(() => {
       this.petitionProfile.getStates();
-      this.addIssueStatePhoto();
+      //this.addIssueStatePhoto();
+      this.petitionProfile.getPhotos();
     });
+    this.exit();
+    this.urls=[];
   }
 
   addImplementedResponse(){
@@ -106,8 +112,11 @@ export class IssueStatePhotoComponent implements OnInit {
     console.log(this.responseImplemented);
     this.api.addImplementedResponse(this.responseImplemented).subscribe(() => {
       this.petitionProfile.getStates();
-      this.addIssueStatePhoto();
+      //this.addIssueStatePhoto();
+      this.petitionProfile.getPhotos();
     });
+    this.exit();
+    this.urls=[];
   }
 
   addNextState() {

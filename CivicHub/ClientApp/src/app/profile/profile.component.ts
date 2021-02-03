@@ -161,10 +161,7 @@ getUserPrizes() {
 }
 
 refreshPoints() {
-  this.api.getUserById(this.userId).subscribe((user: User) => {
-    this.currentUser = user;
-    this.availablePoints = this.currentUser.points - this.currentUser.pointsUsed;
-  });
+  this.availablePoints = this.currentUser.points - this.currentUser.pointsUsed;
 }
 
 redeemPrize(prize: Prize) {
@@ -172,7 +169,8 @@ redeemPrize(prize: Prize) {
   this.redeemedPrize.prizeId = prize.id;
   this.redeemedPrize.userId = this.loggedUserId;
   this.api.redeemPrize(this.redeemedPrize).subscribe(() => {
-    console.log("Successfuly added!")
+    console.log("Successfuly added!");
+    this.currentUser.pointsUsed += prize.price;
     this.refreshPoints();
     this.getUserPrizes();
   });

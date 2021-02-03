@@ -141,6 +141,7 @@ namespace CivicHub.Services
                     dateAdded = DateTime.Now
                 });
             }
+            _issueStatePhotoRepository.SaveChanges();
             return lastIssueStateAfter;
         }
 
@@ -173,6 +174,7 @@ namespace CivicHub.Services
                     dateAdded = DateTime.Now
                 });
             }
+            _issueStatePhotoRepository.SaveChanges();
             return lastIssueStateAfter;
         }
 
@@ -257,6 +259,7 @@ namespace CivicHub.Services
                     dateAdded = DateTime.Now
                 });
             }
+            _issueStatePhotoRepository.SaveChanges();
             return lastIssueStateAfter;
         }
 
