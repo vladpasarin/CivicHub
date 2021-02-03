@@ -142,7 +142,7 @@ getUserPrizes() {
   this.api.getAllPrizes().subscribe((prizes: Prize[]) => {
     this.availablePrizes = prizes;
     console.log(prizes);
-    this.api.getPrizeGivenByUser(this.loggedUserId).subscribe((prize: PrizeGiven[]) => {
+    this.api.getPrizeGivenByUser(this.currentUser.id).subscribe((prize: PrizeGiven[]) => {
       this.prizesGiven = prize;
       console.log(prize);
       this.userPrizes=[];
