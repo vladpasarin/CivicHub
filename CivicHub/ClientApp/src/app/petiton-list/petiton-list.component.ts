@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, OnInit, SimpleChanges } from '@angular/co
 import { ActivatedRoute, Router } from '@angular/router';
 import { Issue } from '../shared/issue.model';
 import { User } from '../shared/user.model';
-import { faUser, faCaretUp, faCaretDown, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faCaretUp, faCaretDown, faStar, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../shared/api.service';
 import { IssueState } from '../shared/issueState.model';
 
@@ -17,6 +17,7 @@ export class PetitonListComponent implements OnInit {
     faCaretUp = faCaretUp;
     faCaretDown = faCaretDown;
     faStar=faStar;
+    faSearch = faSearch;
     
 
   issues: Issue[] = [];

@@ -108,7 +108,7 @@ namespace CivicHub.Services
                 Type = 0,
                 Message = "Collecting signatures",
                 DateStart = DateTime.Now,
-                DateEnd = DateTime.Now.AddSeconds(10)
+                DateEnd = DateTime.Now.AddSeconds(20)
 
             };
             _issueStateRepository.Create(issueStateDto);

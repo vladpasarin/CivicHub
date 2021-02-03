@@ -6,7 +6,7 @@
         </div>
         <img *ngFor='let url of urls' style="margin-left: 25px;margin-top: 20px;" src="{{url}}" height="200"> <br/>
         <div class="response" *ngIf="currentState.type == 2" style="margin-top: 30px;">
-            <p style="font-size: larger;">Autorithy response: </p>
+            <p style="font-size: larger;">Authorithy response: </p>
             <textarea id="response" [(ngModel)]="authorityResponse" rows="4" cols="50"></textarea>
         </div>
         <button style="margin-top: 20px;" class="btn" (click)="addNextState()">Submit</button>
